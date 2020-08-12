@@ -1,0 +1,7 @@
+<!--<div #editor id="editor" > </div>-->
+<select class="dropdown" [(ngModel)]="theme">
+    <option value="eclipse">Eclipse</option>
+    <option value="xcode">Xcode</option>
+    <option value="monokai">Monokai</option>
+</select>
+<ace-editor [(text)]="text" [theme]="theme" #editor id="editor"></ace-editor>
