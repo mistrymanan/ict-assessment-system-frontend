@@ -1,7 +1,51 @@
 <!--<div #editor id="editor" > </div>-->
-<select class="dropdown" [(ngModel)]="theme">
-    <option value="eclipse">Eclipse</option>
-    <option value="xcode">Xcode</option>
-    <option value="monokai">Monokai</option>
-</select>
-<ace-editor [(text)]="text" [theme]="theme" #editor id="editor"></ace-editor>
+<div class="card">
+    <div class="card-header" fxLayout fxLayoutGap="8px">
+        <!--        <div >-->
+        <div fxFlex="20">
+            <select class="form-control" [(ngModel)]="currentTheme" tooltip="Select Theme">
+                <option *ngFor="let theme of THEMES" value="{{theme.value}}">{{theme.name}}</option>
+            </select>
+        </div>
+        <div fxFlex="20">
+            <select class="form-control" [(ngModel)]="currentLanguage" tooltip="Select Language">
+                <option *ngFor="let lang of LANGUAGES" value="{{lang.value}}">{{lang.name}}</option>
+            </select>
+        </div>
+        <div fxFlex fxLayoutGap="10px">
+            <button class="btn btn-outline-dark" tooltip="Retrieve last submitted code"><i
+                    class="fa fa-file-code-o"></i></button>
+            <button class="btn btn-outline-dark " tooltip="Reset to default code definition"><i
+                    class="fa fa-refresh"></i></button>
+        </div>
+        <!--        </div>-->
+    </div>
+    <div class="card-body" style="padding:0">
+        <ace-editor [(text)]="text" [theme]="currentTheme" [mode]="currentLanguage" #editor id="editor"></ace-editor>
+    </div>
+    <div class="card-footer">
+        <div fxLayout>
+            <div fxFlex="80">
+                <div class="form-group">
+                    <label class=" col-form-label" ><i class="fa fa-sign-in"></i>&nbsp; <strong>STDIN</strong></label>
+                    <div >
+                        <textarea  name="textarea-input" rows="5" class="form-control"
+                                  placeholder="Enter Your Input Here..."></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-form-label" ><i class="fa fa-sign-out"></i>&nbsp; <strong>STDOUT</strong></label>
+                    <div class="">
+                        <textarea name="textarea-input" rows="5" class="form-control"
+                                  placeholder="Your output will appear here..."></textarea>
+                    </div>
+                </div>
+            </div>
+            <div fxFlex="20" fxLayoutAlign="center start">
+                <button class="btn btn-pill btn-primary" tooltip="Run Code"><i class="fa fa-play-circle"></i> Run Code</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+

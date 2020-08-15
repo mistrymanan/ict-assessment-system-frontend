@@ -13,10 +13,27 @@ export class CodeEditorComponent implements OnInit, AfterViewInit {
 
   @ViewChild('editor') editor;
   private codeEditor;
-  theme: string;
+  currentTheme: string;
+  currentLanguage: string;
   text: string;
+  THEMES = [
+    {name: 'Chrome', value: 'chrome'},
+    {name: 'Eclipse', value: 'eclipse'},
+    {name: 'Github', value: 'github'},
+    {name: 'XCode', value: 'xcode'},
+    {name: 'Dracula', value: 'dracula'},
+    {name: 'Monokai', value: 'monokai'},
+    {name: 'Twilight', value: 'twilight'},
+  ];
+  LANGUAGES = [
+    {name: 'Java', value: 'java'},
+    {name: 'Python 3.8', value: 'python'},
+    {name: 'C', value: 'c_cpp'},
+    {name: 'C++', value: 'c_cpp'},
+  ];
   constructor() {
-    this.theme = 'monokai';
+    this.currentTheme = 'monokai';
+    this.currentLanguage = 'java';
     this.text = 'public class Hello {\n' +
         '    public static void main(String args[]) {\n' +
         '        System.out.println("Hello world");\n' +
@@ -32,8 +49,8 @@ export class CodeEditorComponent implements OnInit, AfterViewInit {
     ace.require('ace/ext-language_tools');
     this.codeEditor.setOption('enableLiveAutocompletion', true);
     this.codeEditor.setOption('showPrintMargin', false);
-    this.codeEditor.session.setMode('ace/mode/java');
-    this.codeEditor.setFontSize(16);
+    // this.codeEditor.session.setMode('ace/mode/java');
+    this.codeEditor.setFontSize(14);
     this.codeEditor.session.on('change', (d) => {
       // this.theme = 'eclipse';
       this.text = this.codeEditor.getValue();

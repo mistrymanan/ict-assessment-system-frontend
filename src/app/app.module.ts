@@ -38,7 +38,10 @@ import { AppRoutingModule } from './app.routing';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ChartsModule } from 'ng2-charts';
+import {MarkdownModule} from 'ngx-markdown';
+import {FlexLayoutModule} from '@angular/flex-layout';
 import { CodeEditorComponent } from './views/code-editor/code-editor.component';
+import {TooltipModule} from 'ngx-bootstrap/tooltip';
 
 @NgModule({
   imports: [
@@ -53,7 +56,8 @@ import { CodeEditorComponent } from './views/code-editor/code-editor.component';
     PerfectScrollbarModule,
     BsDropdownModule.forRoot(),
     TabsModule.forRoot(),
-    ChartsModule
+    ChartsModule,
+    MarkdownModule.forRoot(),
   ],
   declarations: [
     AppComponent,

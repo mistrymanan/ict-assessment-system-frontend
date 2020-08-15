@@ -4,6 +4,8 @@ import {CodeEditorComponent} from './code-editor.component';
 import {CodeEditorRoutingModule} from './code-editor-routing.module';
 import {FormsModule} from '@angular/forms';
 import {AceEditorModule} from 'ng2-ace-editor';
+import {FlexLayoutModule} from '@angular/flex-layout';
+import {TooltipModule} from 'ngx-bootstrap/tooltip';
 
 
 
@@ -14,7 +16,9 @@ import {AceEditorModule} from 'ng2-ace-editor';
     CommonModule,
     CodeEditorRoutingModule,
     FormsModule,
-    AceEditorModule
+    AceEditorModule,
+    FlexLayoutModule,
+    TooltipModule.forRoot()
   ]
 })
 export class CodeEditorModule { }
