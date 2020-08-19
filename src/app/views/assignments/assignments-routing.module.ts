@@ -7,7 +7,7 @@ import {ViewAssignmentsComponent} from './view-assignments/view-assignments.comp
 
 const routes: Routes = [
   {
-    path: 'view',
+    path: '',
     component: ViewAssignmentsComponent,
     data: {
       title: 'View Assignments'
