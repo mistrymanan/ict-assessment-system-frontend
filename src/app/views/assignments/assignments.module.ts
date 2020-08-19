@@ -8,18 +8,20 @@ import {AceEditorModule} from 'ng2-ace-editor';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {MarkdownModule} from 'ngx-markdown';
 import {FormsModule} from '@angular/forms';
+import {AccordionModule} from 'ngx-bootstrap/accordion';
 // import * as ace from 'ace-builds'
 // import 'ace-builds/webpack-resolver';
 
 @NgModule({
   declarations: [CreateAssignmentComponent, AllAssignmentsComponent],
-  imports: [
-    CommonModule,
-    AssignmentsRoutingModule,
-    AceEditorModule,
-    FlexLayoutModule,
-    MarkdownModule,
-      FormsModule
-  ]
+    imports: [
+        CommonModule,
+        AssignmentsRoutingModule,
+        AceEditorModule,
+        FlexLayoutModule,
+        MarkdownModule,
+        FormsModule,
+        AccordionModule
+    ]
 })
 export class AssignmentsModule { }

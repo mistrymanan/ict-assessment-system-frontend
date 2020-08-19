@@ -1,4 +1,4 @@
-import {Component, OnInit, AfterViewInit, ViewChild} from '@angular/core';
+import {Component, OnInit, AfterViewInit, ViewChild, ViewChildren, QueryList, ElementRef} from '@angular/core';
 import {AceEditorComponent} from 'ng2-ace-editor';
 import * as ace from 'ace-builds';
 // import * as ace from 'ace-builds';
@@ -18,8 +18,9 @@ export class CreateAssignmentComponent implements OnInit {
         {name: 'C', value: 'c_cpp'},
         {name: 'C++', value: 'c_cpp'},
     ];
-    @ViewChild('markdownEditor') markdownEditor: AceEditorComponent;
-    @ViewChild('solutionEditor') solutionEditor: AceEditorComponent;
+    @ViewChildren(AceEditorComponent) editors: QueryList<AceEditorComponent>;
+    // @ViewChild('markdownEditor') markdownEditor: AceEditorComponent;
+    // @ViewChild('solutionEditor') solutionEditor: AceEditorComponent;
     constructor() {
         this.solutionLanguage = 'java';
         this.text = `## Fibonacci Series
@@ -42,14 +43,20 @@ __Sample Output__
     }
     ngAfterViewInit(): void {
         ace.require('ace/ext-language_tools');
-        const markdown = this.markdownEditor.getEditor();
-        markdown.setOption('enableLiveAutoCompletion', true);
-        markdown.setOption('showPrintMargin', false);
-        markdown.setFontSize(16);
-        const solution = this.solutionEditor.getEditor();
-        solution.setOption('enableLiveAutoCompletion', true);
-        solution.setOption('showPrintMargin', false);
-        solution.setFontSize(16);
+        this.editors.forEach(editorRef => {
+            const editor = editorRef.getEditor();
+            editor.setOption('enableLiveAutoCompletion', true);
+            editor.setOption('showPrintMargin', false);
+            editor.setFontSize(16);
+        });
+        // const markdown = this.markdownEditor.getEditor();
+        // markdown.setOption('enableLiveAutoCompletion', true);
+        // markdown.setOption('showPrintMargin', false);
+        // markdown.setFontSize(16);
+        // const solution = this.solutionEditor.getEditor();
+        // solution.setOption('enableLiveAutoCompletion', true);
+        // solution.setOption('showPrintMargin', false);
+        // solution.setFontSize(16);
     }
 
 
