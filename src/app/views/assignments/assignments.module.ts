@@ -8,9 +8,7 @@ import {AceEditorModule} from 'ng2-ace-editor';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {MarkdownModule} from 'ngx-markdown';
 import {FormsModule} from '@angular/forms';
-import {AccordionModule} from 'ngx-bootstrap/accordion';
-import {ViewAssignmentsComponent} from './view-assignments/view-assignments.component';
-import { AddQuestionComponent } from './add-question/add-question.component';
+import { ViewAssignmentsComponent } from './view-assignments/view-assignments.component';
 // import * as ace from 'ace-builds'
 // import 'ace-builds/webpack-resolver';
 
@@ -18,8 +16,7 @@ import { AddQuestionComponent } from './add-question/add-question.component';
   declarations: [
       CreateAssignmentComponent,
       AllAssignmentsComponent,
-      ViewAssignmentsComponent,
-      AddQuestionComponent
+      ViewAssignmentsComponent
   ],
   imports: [
     CommonModule,
