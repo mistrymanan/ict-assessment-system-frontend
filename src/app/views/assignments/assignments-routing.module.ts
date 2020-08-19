@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import {CreateAssignmentComponent} from './create-assignment/create-assignment.component';
 import {AllAssignmentsComponent} from './all-assignments/all-assignments.component';
 import {ViewAssignmentsComponent} from './view-assignments/view-assignments.component';
+import {AddQuestionComponent} from './add-question/add-question.component';
 
 
 const routes: Routes = [
@@ -25,6 +26,13 @@ const routes: Routes = [
     component: CreateAssignmentComponent,
     data: {
       title: 'Create Assignment'
+    }
+  },
+  {
+    path: 'add-question',
+    component: AddQuestionComponent,
+    data: {
+      title: 'Add Question'
     }
   }
 ];

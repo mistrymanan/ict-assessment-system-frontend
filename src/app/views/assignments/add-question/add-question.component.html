@@ -1,0 +1,100 @@
+<!--<div #editor id="editor" > </div>-->
+<div class="animated fadeIn">
+    <div class="card">
+        <div class="card-header">
+            Add Question for Assignment 1
+        </div>
+        <div class="card-body">
+                <div class="form-group row">
+                    <label class="col-md-2 col-form-label" for="title">Question Title</label>
+                    <div class="col-md-10">
+                        <input type="text" id="title" name="title" class="form-control"
+                               placeholder="Enter Question Title..">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-md-2 col-form-label" for="languages">Allowed Languages</label>
+                    <div class="col-md-10">
+                        <ng-select
+                                id="languages"
+                                [items]="LANGUAGES"
+                                bindLabel="name"
+                                [multiple]="true"
+                                placeholder="Select Allowed Languages"
+                                clearAllText="Clear">
+                        </ng-select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-md-2 col-form-label" for="points">Total Points</label>
+                    <div class="col-md-10">
+
+                        <input class="form-control" type="number" id="points" placeholder="Enter Total Points..">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-md-2 col-form-label" for="text-input">Show Expected Output</label>
+                    <div class="col-md-2 col-form-label">
+                        <div class="form-check form-check-inline mr-1">
+                            <label class="switch switch-3d switch-primary">
+                                <input type="checkbox" class="switch-input form-check-input" checked>
+                                <span class="switch-slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header">Description</div>
+        <div class="card-body p-0">
+            <div fxLayoutGap="20px">
+                <div fxFlex="50">
+                    <ace-editor [(text)]="text" [theme]="'github'" [mode]="'markdown'" #markdownEditor
+                                class="editor"></ace-editor>
+                </div>
+                <div fxFlex="50" markdown [data]="text" style="padding: 20px">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header">
+            <div fxFlex="30">Solution Code</div>
+            <div fxFlex="20">
+                <select class="form-control" [(ngModel)]="solutionLanguage" tooltip="Select Language">
+                    <option *ngFor="let lang of LANGUAGES" value="{{lang.value}}">{{lang.name}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="card-body p-0">
+            <ace-editor [theme]="'monokai'" [mode]="'java'"  class="editor"></ace-editor>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header">
+            Test Cases
+        </div>
+        <div class="card-body">
+            <div>
+                <div class="form-group">
+                    <label class=" col-form-label"><i class="fa fa-sign-in"></i>&nbsp; <strong>Test Input</strong></label>
+                    <div>
+                        <textarea name="textarea-input" rows="2" class="form-control"
+                                  placeholder="Enter Your Input Here..."></textarea>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <button class="btn btn-primary btn-pill"><i class="fa fa-plus"></i> Add Test</button>
+            </div>
+        </div>
+    </div>
+    <div class="pb-5">
+            <button class="btn btn-secondary btn-pill pull-left"><i class="fa fa-close"></i> Cancel</button>
+            <button class="btn btn-primary btn-pill pull-right"><i class="fa fa-plus"></i> Add Question</button>
+    </div>
+</div>
+
+
