@@ -12,12 +12,7 @@ export class CreateAssignmentComponent implements OnInit {
 
     text: string;
     solutionLanguage: string;
-    LANGUAGES = [
-        {name: 'Java', value: 'java'},
-        {name: 'Python 3.8', value: 'python'},
-        {name: 'C', value: 'c_cpp'},
-        {name: 'C++', value: 'c_cpp'},
-    ];
+
     @ViewChildren(AceEditorComponent) editors: QueryList<AceEditorComponent>;
     // @ViewChild('markdownEditor') markdownEditor: AceEditorComponent;
     // @ViewChild('solutionEditor') solutionEditor: AceEditorComponent;
