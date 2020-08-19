@@ -42,6 +42,10 @@ export const routes: Routes = [
         path: 'code-editor',
         loadChildren: () => import('./views/code-editor/code-editor.module').then(m => m.CodeEditorModule)
       },
+      {
+        path: 'assignments',
+        loadChildren: () => import('./views/assignments/assignments.module').then(m => m.AssignmentsModule)
+      }
     ]
   },
   { path: '**', component: P404Component }

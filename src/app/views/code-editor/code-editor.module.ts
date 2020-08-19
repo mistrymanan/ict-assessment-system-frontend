@@ -3,11 +3,11 @@ import { CommonModule } from '@angular/common';
 import {CodeEditorComponent} from './code-editor.component';
 import {CodeEditorRoutingModule} from './code-editor-routing.module';
 import {FormsModule} from '@angular/forms';
-import {AceEditorModule} from 'ng2-ace-editor';
-import {FlexLayoutModule} from '@angular/flex-layout';
 import {TooltipModule} from 'ngx-bootstrap/tooltip';
+import {FlexLayoutModule} from '@angular/flex-layout';
+import {AceEditorModule} from 'ng2-ace-editor';
 
-
+// import * as ace from 'ace-builds';
 
 
 @NgModule({
@@ -16,9 +16,9 @@ import {TooltipModule} from 'ngx-bootstrap/tooltip';
     CommonModule,
     CodeEditorRoutingModule,
     FormsModule,
-    AceEditorModule,
+    TooltipModule.forRoot(),
     FlexLayoutModule,
-    TooltipModule.forRoot()
+    AceEditorModule
   ]
 })
 export class CodeEditorModule { }

@@ -24,7 +24,8 @@
               "node_modules/flag-icon-css/css/flag-icon.css",
               "node_modules/font-awesome/css/font-awesome.css",
               "node_modules/simple-line-icons/css/simple-line-icons.css",
-              "src/scss/style.scss"
+              "src/scss/style.scss",
+              "node_modules/prismjs/themes/prism-okaidia.css",
             ],
             "stylePreprocessorOptions": {
               "includePaths": [
@@ -33,7 +34,11 @@
             },
             "scripts": [
               "node_modules/chart.js/dist/Chart.min.js",
-              "node_modules/marked/lib/marked.js"
+              "node_modules/marked/lib/marked.js",
+              "node_modules/prismjs/prism.js",
+              "node_modules/prismjs/plugins/autoloader/prism-autoloader.js",
+//              "node_modules/ace-builds/src-noconflict/ace.js",
+//              "node_modules/ace-builds/webpack-resolver.js"
             ]
           },
           "configurations": {

@@ -1,0 +1,61 @@
+<!--<div #editor id="editor" > </div>-->
+<div>
+    <div class="card">
+        <div class="card-header">
+            Assignment Title
+        </div>
+        <div class="card-body">
+            <input id="title" class="form-control" placeholder="Enter Assignment Title..">
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header">
+            Description
+        </div>
+        <div class="card-body" style="padding:0">
+            <div fxLayoutGap="20px">
+                <div fxFlex="50">
+                    <ace-editor [(text)]="text" [theme]="'github'" [mode]="'markdown'" #markdownEditor
+                                class="editor"></ace-editor>
+                </div>
+                <div fxFlex="50" markdown [data]="text" style="padding: 20px">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header">
+            <div fxFlex="30">Solution Code</div>
+            <div fxFlex="20">
+                <select class="form-control" [(ngModel)]="solutionLanguage" tooltip="Select Language">
+                    <option *ngFor="let lang of LANGUAGES" value="{{lang.value}}">{{lang.name}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="card-body">
+            <ace-editor [theme]="'monokai'" [mode]="solutionLanguage" #solutionEditor class="editor"></ace-editor>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header">
+            Test Cases
+        </div>
+        <div class="card-body">
+            <div>
+                <div class="form-group">
+                    <label class=" col-form-label"><i class="fa fa-sign-in"></i>&nbsp; <strong>Test Input</strong></label>
+                    <div>
+                        <textarea name="textarea-input" rows="2" class="form-control"
+                                  placeholder="Enter Your Input Here..."></textarea>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <button class="btn btn-primary btn-pill"><i class="fa fa-plus"></i> Add Test</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+

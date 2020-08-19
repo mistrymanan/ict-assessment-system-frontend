@@ -1,0 +1,9 @@
+.editor{
+    min-height: 350px;
+}
+
+blockquote {
+    border-left: 3px solid rgba(0,0,0,0.21);
+    padding-left: 12px;
+    color: rgba(0,0,0,0.54);
+}

@@ -39,10 +39,11 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ChartsModule } from 'ng2-charts';
 import {MarkdownModule} from 'ngx-markdown';
+import {AceEditorModule} from 'ng2-ace-editor';
 import {FlexLayoutModule} from '@angular/flex-layout';
-import { CodeEditorComponent } from './views/code-editor/code-editor.component';
-import {TooltipModule} from 'ngx-bootstrap/tooltip';
-
+// import "ace-builds/src-noconflict/ace"
+// // import * as ace from 'ace-builds';
+import "ace-builds/webpack-resolver"
 @NgModule({
   imports: [
     BrowserModule,
@@ -58,6 +59,8 @@ import {TooltipModule} from 'ngx-bootstrap/tooltip';
     TabsModule.forRoot(),
     ChartsModule,
     MarkdownModule.forRoot(),
+    AceEditorModule,
+    FlexLayoutModule,
   ],
   declarations: [
     AppComponent,
