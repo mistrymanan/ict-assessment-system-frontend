@@ -8,11 +8,12 @@ import {AceEditorModule} from 'ng2-ace-editor';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {MarkdownModule} from 'ngx-markdown';
 import {FormsModule} from '@angular/forms';
+import { ViewAssignmentsComponent } from './view-assignments/view-assignments.component';
 // import * as ace from 'ace-builds'
 // import 'ace-builds/webpack-resolver';
 
 @NgModule({
-  declarations: [CreateAssignmentComponent, AllAssignmentsComponent],
+  declarations: [CreateAssignmentComponent, AllAssignmentsComponent, ViewAssignmentsComponent],
   imports: [
     CommonModule,
     AssignmentsRoutingModule,
