@@ -3,10 +3,11 @@ import { CommonModule } from '@angular/common';
 
 import { SubmissionsRoutingModule } from './submissions-routing.module';
 import { ViewSubmissionsComponent } from './view-submissions/view-submissions.component';
+import { ViewSubmissionsAnswersComponent } from './view-submissions-answers/view-submissions-answers.component';
 
 
 @NgModule({
-  declarations: [ViewSubmissionsComponent],
+  declarations: [ViewSubmissionsComponent, ViewSubmissionsAnswersComponent],
   imports: [
     CommonModule,
     SubmissionsRoutingModule
