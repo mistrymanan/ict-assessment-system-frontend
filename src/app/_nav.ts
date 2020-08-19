@@ -17,6 +17,11 @@ export const navItems: INavData[] = [
     icon: 'fa fa-book',
     children: [
       {
+        name: 'View Assignment',
+        url: '/assignments',
+        icon: 'fa fa-tasks'
+      },
+      {
         name: 'Create Assignment',
         url: '/assignments/create',
         icon: 'fa fa-plus'
