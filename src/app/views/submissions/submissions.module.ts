@@ -6,10 +6,11 @@ import { ViewSubmissionsComponent } from './view-submissions/view-submissions.co
 import { ViewSubmissionsAnswersComponent } from './view-submissions-answers/view-submissions-answers.component';
 import {CodeEditorModule} from '../code-editor/code-editor.module';
 import {CollapseModule} from 'ngx-bootstrap/collapse';
+import { ViewAnswerComponent } from './view-answer/view-answer.component';
 
 
 @NgModule({
-  declarations: [ViewSubmissionsComponent, ViewSubmissionsAnswersComponent],
+  declarations: [ViewSubmissionsComponent, ViewSubmissionsAnswersComponent, ViewAnswerComponent],
   imports: [
     CommonModule,
     SubmissionsRoutingModule,
