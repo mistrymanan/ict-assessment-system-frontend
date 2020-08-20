@@ -45,7 +45,12 @@ export const routes: Routes = [
       {
         path: 'assignments',
         loadChildren: () => import('./views/assignments/assignments.module').then(m => m.AssignmentsModule)
+      },
+      {
+        path: 'submissions',
+        loadChildren: () => import('./views/submissions/submissions.module').then(m => m.SubmissionsModule)
       }
+
     ]
   },
   { path: '**', component: P404Component }

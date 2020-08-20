@@ -11,14 +11,17 @@ import {AceEditorModule} from 'ng2-ace-editor';
 
 
 @NgModule({
-  declarations: [CodeEditorComponent],
-  imports: [
-    CommonModule,
-    CodeEditorRoutingModule,
-    FormsModule,
-    TooltipModule.forRoot(),
-    FlexLayoutModule,
-    AceEditorModule
-  ]
+    declarations: [CodeEditorComponent],
+    exports: [
+        CodeEditorComponent
+    ],
+    imports: [
+        CommonModule,
+        CodeEditorRoutingModule,
+        FormsModule,
+        TooltipModule.forRoot(),
+        FlexLayoutModule,
+        AceEditorModule
+    ]
 })
 export class CodeEditorModule { }
