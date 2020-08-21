@@ -1,6 +1,5 @@
 import {Component, OnInit, ViewChildren, AfterViewInit, QueryList} from '@angular/core';
 import {AceEditorComponent} from 'ng2-ace-editor';
-import * as ace from 'ace-builds';
 
 @Component({
     selector: 'app-add-question',
@@ -32,12 +31,11 @@ __Sample Input__
 __Sample Output__
 
     1 1 2 3 5 8
-            
+
 `;
     }
 
     ngAfterViewInit(): void {
-        ace.require('ace/ext-language_tools');
         this.editors.forEach(editorRef => {
             const editor = editorRef.getEditor();
             editor.setOption('enableLiveAutoCompletion', true);

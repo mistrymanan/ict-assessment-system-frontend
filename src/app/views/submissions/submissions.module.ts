@@ -12,12 +12,14 @@ import {NgSelectModule} from '@ng-select/ng-select';
 import {AceEditorModule} from 'ng2-ace-editor';
 import {MarkdownModule} from 'ngx-markdown';
 import {FormsModule} from '@angular/forms';
+import {FlexLayoutModule} from '@angular/flex-layout';
+
 
 
 @NgModule({
   declarations: [
-      ViewSubmissionsComponent, 
-      ViewSubmissionsAnswersComponent, 
+      ViewSubmissionsComponent,
+      ViewSubmissionsAnswersComponent,
       ViewAnswerComponent,
       ViewQuestionComponent
     ],
@@ -29,7 +31,8 @@ import {FormsModule} from '@angular/forms';
         NgSelectModule,
         AceEditorModule,
         MarkdownModule,
-        FormsModule
+        FormsModule,
+        FlexLayoutModule
     ]
 })
 export class SubmissionsModule {

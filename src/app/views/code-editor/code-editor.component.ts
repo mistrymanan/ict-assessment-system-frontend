@@ -1,6 +1,5 @@
 import { Component, OnInit, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 import {GlobalConstants} from '../global-constants';
-import * as ace from 'ace-builds';
 // import 'ace-builds/src-noconflict/theme-monokai';
 // import 'ace-builds/src-noconflict/mode-java';
 // import 'ace-builds/src-noconflict/ext-language_tools';
@@ -51,7 +50,6 @@ export class CodeEditorComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.codeEditor = this.editor.getEditor();
-    ace.require('ace/ext-language_tools');
     this.codeEditor.setOption('enableLiveAutoCompletion', true);
     this.codeEditor.setOption('showPrintMargin', false);
     // this.codeEditor.session.setMode('ace/mode/java');

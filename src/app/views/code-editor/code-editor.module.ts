@@ -8,7 +8,8 @@ import {FlexLayoutModule} from '@angular/flex-layout';
 import {AceEditorModule} from 'ng2-ace-editor';
 
 // import * as ace from 'ace-builds';
-
+import * as ace from 'ace-builds';
+// import 'ace-builds/webpack-resolver';
 
 @NgModule({
     declarations: [CodeEditorComponent],
