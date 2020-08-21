@@ -7,7 +7,7 @@ import * as ace from 'ace-builds';
     templateUrl: './add-question.component.html',
     styleUrls: ['./add-question.component.css']
 })
-export class AddQuestionComponent implements OnInit {
+export class AddQuestionComponent implements OnInit, AfterViewInit {
     LANGUAGES = [
         {name: 'Java', value: 'java'},
         {name: 'Python 3.8', value: 'python'},
@@ -32,6 +32,7 @@ __Sample Input__
 __Sample Output__
 
     1 1 2 3 5 8
+            
 `;
     }
 

@@ -1,4 +1,5 @@
 import { Component, OnInit, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
+import {GlobalConstants} from '../global-constants';
 import * as ace from 'ace-builds';
 // import 'ace-builds/src-noconflict/theme-monokai';
 // import 'ace-builds/src-noconflict/mode-java';
@@ -16,22 +17,26 @@ export class CodeEditorComponent implements OnInit, AfterViewInit {
   currentTheme: string;
   currentLanguage: string;
   text: string;
-  THEMES = [
-    {name: 'Chrome', value: 'chrome'},
-    {name: 'Eclipse', value: 'eclipse'},
-    {name: 'Github', value: 'github'},
-    {name: 'XCode', value: 'xcode'},
-    {name: 'Dracula', value: 'dracula'},
-    {name: 'Monokai', value: 'monokai'},
-    {name: 'Twilight', value: 'twilight'},
-  ];
-  LANGUAGES = [
-    {name: 'Java', value: 'java'},
-    {name: 'Python 3.8', value: 'python'},
-    {name: 'C', value: 'c_cpp'},
-    {name: 'C++', value: 'c_cpp'},
-  ];
+  THEMES;
+  LANGUAGES;
+  // THEMES = [
+  //   {name: 'Chrome', value: 'chrome'},
+  //   {name: 'Eclipse', value: 'eclipse'},
+  //   {name: 'Github', value: 'github'},
+  //   {name: 'XCode', value: 'xcode'},
+  //   {name: 'Dracula', value: 'dracula'},
+  //   {name: 'Monokai', value: 'monokai'},
+  //   {name: 'Twilight', value: 'twilight'},
+  // ];
+  // LANGUAGES = [
+  //   {name: 'Java', value: 'java'},
+  //   {name: 'Python 3.8', value: 'python'},
+  //   {name: 'C', value: 'c_cpp'},
+  //   {name: 'C++', value: 'c_cpp'},
+  // ];
   constructor() {
+    this.THEMES = GlobalConstants.THEMES;
+    this.LANGUAGES = GlobalConstants.LANGUAGES;
     this.currentTheme = 'monokai';
     this.currentLanguage = 'java';
     this.text = 'public class Hello {\n' +
