@@ -50,6 +50,7 @@ export const routes: Routes = [
         path: 'submissions',
         loadChildren: () => import('./views/submissions/submissions.module').then(m => m.SubmissionsModule)
       }
+
     ]
   },
   { path: '**', component: P404Component }
