@@ -48,6 +48,7 @@ import 'ace-builds/webpack-resolver';
 import {DashboardModule} from './views/dashboard/dashboard.module';
 import {AssignmentsModule} from './views/assignments/assignments.module';
 import {CodeEditorModule} from './views/code-editor/code-editor.module';
+import {SubmissionsModule} from './views/submissions/submissions.module';
 
 @NgModule({
     imports: [
@@ -67,6 +68,10 @@ import {CodeEditorModule} from './views/code-editor/code-editor.module';
         MarkdownModule.forRoot(),
         AceEditorModule,
         FlexLayoutModule,
+        AssignmentsModule,
+        SubmissionsModule,
+        CodeEditorModule,
+        DashboardModule,
 
     ],
     declarations: [
