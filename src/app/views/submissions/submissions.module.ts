@@ -13,6 +13,7 @@ import {AceEditorModule} from 'ng2-ace-editor';
 import {MarkdownModule} from 'ngx-markdown';
 import {FormsModule} from '@angular/forms';
 import {FlexLayoutModule} from '@angular/flex-layout';
+import {TooltipModule} from 'ngx-bootstrap/tooltip';
 
 
 
@@ -32,7 +33,8 @@ import {FlexLayoutModule} from '@angular/flex-layout';
         AceEditorModule,
         MarkdownModule,
         FormsModule,
-        FlexLayoutModule
+        FlexLayoutModule,
+        TooltipModule
     ]
 })
 export class SubmissionsModule {

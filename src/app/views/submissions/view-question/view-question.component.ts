@@ -17,8 +17,8 @@ export class ViewQuestionComponent implements OnInit, AfterViewInit {
     markdown;
     @ViewChild('editor') editor: AceEditorComponent;
     constructor() {
-        this.hideOutput = true;
-        this.hideInput = true;
+        this.hideOutput = false;
+        this.hideInput = false;
         this.currentLanguage = 'java';
         this.currentTheme = 'monokai';
         this.THEMES = GlobalConstants.THEMES;

@@ -42,6 +42,7 @@ import {MarkdownModule} from 'ngx-markdown';
 import {AceEditorModule} from 'ng2-ace-editor';
 import 'ace-builds/src-noconflict/ace';
 import 'ace-builds/webpack-resolver';
+import {CollapseModule} from 'ngx-bootstrap/collapse';
 @NgModule({
   imports: [
     BrowserModule,
