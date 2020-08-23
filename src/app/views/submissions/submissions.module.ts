@@ -14,6 +14,7 @@ import {MarkdownModule} from 'ngx-markdown';
 import {FormsModule} from '@angular/forms';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {TooltipModule} from 'ngx-bootstrap/tooltip';
+import { UserAssignmentViewComponent } from './user-assignment-view/user-assignment-view.component';
 
 
 
@@ -22,7 +23,8 @@ import {TooltipModule} from 'ngx-bootstrap/tooltip';
       ViewSubmissionsComponent,
       ViewSubmissionsAnswersComponent,
       ViewAnswerComponent,
-      ViewQuestionComponent
+      ViewQuestionComponent,
+      UserAssignmentViewComponent
     ],
     imports: [
         CommonModule,
