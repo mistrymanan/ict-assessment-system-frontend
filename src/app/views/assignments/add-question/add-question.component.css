@@ -1,5 +1,5 @@
 .editor{
     border-right: 1px;
     margin: auto;
-    height: 370px;
+    min-height: 370px;
 }
