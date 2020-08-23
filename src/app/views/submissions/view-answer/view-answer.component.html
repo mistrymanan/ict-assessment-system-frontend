@@ -1,22 +1,58 @@
 <!--<div #editor id="editor" > </div>-->
 <div class="animated fadeIn">
 
-    <div class="card">
-        <div class="card-header">
-            <div class="d-flex flex-row">
-                <div class="d-flex p-1"  > <h3> <strong>Question:{{'question'}}</strong></h3></div>
-                <div class="ml-auto p-1" >
-                    <!--                            <button aria-pressed="true" class="btn btn-block btn-success " type="button"> <i class="fa fa-plus"></i> Create</button>-->
-                </div>
-            </div>
+  <div class="row">
+    <div class="col-6 col-md-3">
+      <div class="card">
+        <div class="card-body p-0 clearfix">
+          <i class="fa fa-lightbulb-o bg-success p-4 font-2xl mr-3 float-left"></i>
+          <div class="h5 text-success mb-0 pt-3">100</div>
+          <div class="text-muted text-uppercase font-weight-bold font-xs">Total Points</div>
         </div>
-        <div class="card-body">
-            <h4>Name : Name of User</h4>
-            <h5>Points &nbsp;&nbsp;: 10/10</h5>
-            <h5>Type:<i class="fa fa-clock-o" ></i>Timed</h5>
-            <h5>Submission On:20/08/2020</h5>
-        </div>
+      </div>
     </div>
+    <div class="col-6 col-md-3">
+      <div class="card">
+        <div class="card-body p-0 clearfix">
+          <i class="fa fa-clock-o bg-danger p-4 font-2xl mr-3 float-left"></i>
+          <div class="h5 text-danger mb-0 pt-3">120 mins</div>
+          <div class="text-muted text-uppercase font-weight-bold font-xs">Duration</div>
+        </div>
+      </div>
+    </div>
+    <div class="col-6 col-md-3">
+      <div class="card">
+        <div class="card-body p-0 clearfix">
+          <i class="fa fa-code bg-primary p-4 font-2xl mr-3 float-left"></i>
+          <div class="h5 text-primary mb-0 pt-3">JAVA</div>
+          <div class="text-muted text-uppercase font-weight-bold font-xs">Language</div>
+        </div>
+      </div>
+    </div>
+    <div class="col-6 col-md-3">
+      <div class="card">
+        <div class="card-body p-0 clearfix">
+          <i class="fa fa-hourglass-2 bg-info p-4 font-2xl mr-3 float-left"></i>
+          <div class="h6 text-info mb-1 pt-3">In Progress</div>
+          <div class="text-muted text-uppercase font-weight-bold font-xs">Status</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      <div class="d-flex flex-row">
+        <div class="d-flex p-1"  > Question</div>
+        <div class="ml-auto p-1" >
+          Name : Name of User
+          <!--                            <button aria-pressed="true" class="btn btn-block btn-success " type="button"> <i class="fa fa-plus"></i> Create</button>-->
+        </div>
+      </div>
+    </div>
+    <!--    <div class="card-body">-->
+    <!--      <p>Name : Name of User</p>-->
+    <!--    </div>-->
+  </div>
 
     <div class="card">
         <div class="card-header">
@@ -28,6 +64,49 @@
             <ace-editor [theme]="'monokai'" [mode]="'java'"  class="editor"></ace-editor>
         </div>
     </div>
+  <div class="card">
+    <div class="card-header assessment-result passed" fxLayout>
+      <div fxFlex="70" >
+        <i class="icon icon-badge"></i>
+        Assessment Passed!
+      </div>
+      <div fxFlex="30">
+        <i class="fa fa-hashtag"></i>
+        Score: 60/100
+      </div>
+    </div>
+    <div class="card-header assessment-result failed" fxLayout>
+      <div fxFlex="70" >
+        <i class="icon icon-badge"></i>
+        Assessment Failed!
+      </div>
+      <div fxFlex="30">
+        <i class="fa fa-hashtag"></i>
+        Score: 60/100
+      </div>
+    </div>
+    <div class="card-header testcase-result" fxLayout>
+      <div fxFlex="70" >
+        Total Test Cases: 10
+      </div>
+      <div fxFlex="30" fxLayoutGap="10px">
+        <div class="badge badge-success badge-pill p-2 pl-3 pr-3"> <i class="fa fa-check"></i> Passed: 6</div>
+        <div class="badge badge-danger badge-pill p-2 pl-3 pr-3"><i class="fa fa-close"></i> Failed: 4</div>
+      </div>
+    </div>
+    <div class="card-body" fxLayout="row wrap">
+      <div class="testcase" fxFlex="33"><i class="fa fa-check mr-2"></i>Test Case 1</div>
+      <div class="testcase" fxFlex="33"><i class="fa fa-check mr-2"></i>Test Case 2</div>
+      <div class="testcase" fxFlex="33"><i class="fa fa-close mr-2"></i>Test Case 3</div>
+      <div class="testcase" fxFlex="33"><i class="fa fa-check mr-2"></i>Test Case 4</div>
+      <div class="testcase" fxFlex="33"><i class="fa fa-close mr-2"></i>Test Case 5</div>
+      <div class="testcase" fxFlex="33"><i class="fa fa-check mr-2"></i>Test Case 6</div>
+      <div class="testcase" fxFlex="33"><i class="fa fa-check mr-2"></i>Test Case 7</div>
+      <div class="testcase" fxFlex="33"><i class="fa fa-close mr-2"></i>Test Case 8</div>
+      <div class="testcase" fxFlex="33"><i class="fa fa-check mr-2"></i>Test Case 9</div>
+      <div class="testcase" fxFlex="33"><i class="fa fa-close mr-2"></i>Test Case 10</div>
+    </div>
+  </div>
     <div class="pb-5">
         <button class="btn btn-secondary btn-pill pull-left"><i class="fa fa-backward"></i> Back</button>
     </div>
