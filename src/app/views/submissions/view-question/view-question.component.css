@@ -1,0 +1,28 @@
+#editor {
+    height:450px;
+}
+.testcase {
+  padding : 10px;
+  font-size: 16px;
+}
+.testcase .fa.fa-check {
+  color: green;
+}
+.testcase .fa.fa-close {
+  color: red;
+}
+.assessment-result {
+  font-size: 20px;
+}
+.testcase-result {
+  font-size: 16px;
+}
+.assessment-result.passed {
+  background-color: rgb(77, 189, 116);
+  color: white;
+}
+.assessment-result.failed {
+  background-color: rgb(248, 108, 107);
+  color: white;
+}
+

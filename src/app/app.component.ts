@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
-
 @Component({
   // tslint:disable-next-line
   selector: 'body',

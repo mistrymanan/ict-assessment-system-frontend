@@ -1,5 +1,5 @@
 import { Component, OnInit, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
-import * as ace from 'ace-builds';
+import {GlobalConstants} from '../global-constants';
 // import 'ace-builds/src-noconflict/theme-monokai';
 // import 'ace-builds/src-noconflict/mode-java';
 // import 'ace-builds/src-noconflict/ext-language_tools';
@@ -16,22 +16,26 @@ export class CodeEditorComponent implements OnInit, AfterViewInit {
   currentTheme: string;
   currentLanguage: string;
   text: string;
-  THEMES = [
-    {name: 'Chrome', value: 'chrome'},
-    {name: 'Eclipse', value: 'eclipse'},
-    {name: 'Github', value: 'github'},
-    {name: 'XCode', value: 'xcode'},
-    {name: 'Dracula', value: 'dracula'},
-    {name: 'Monokai', value: 'monokai'},
-    {name: 'Twilight', value: 'twilight'},
-  ];
-  LANGUAGES = [
-    {name: 'Java', value: 'java'},
-    {name: 'Python 3.8', value: 'python'},
-    {name: 'C', value: 'c_cpp'},
-    {name: 'C++', value: 'c_cpp'},
-  ];
+  THEMES;
+  LANGUAGES;
+  // THEMES = [
+  //   {name: 'Chrome', value: 'chrome'},
+  //   {name: 'Eclipse', value: 'eclipse'},
+  //   {name: 'Github', value: 'github'},
+  //   {name: 'XCode', value: 'xcode'},
+  //   {name: 'Dracula', value: 'dracula'},
+  //   {name: 'Monokai', value: 'monokai'},
+  //   {name: 'Twilight', value: 'twilight'},
+  // ];
+  // LANGUAGES = [
+  //   {name: 'Java', value: 'java'},
+  //   {name: 'Python 3.8', value: 'python'},
+  //   {name: 'C', value: 'c_cpp'},
+  //   {name: 'C++', value: 'c_cpp'},
+  // ];
   constructor() {
+    this.THEMES = GlobalConstants.THEMES;
+    this.LANGUAGES = GlobalConstants.LANGUAGES;
     this.currentTheme = 'monokai';
     this.currentLanguage = 'java';
     this.text = 'public class Hello {\n' +
@@ -46,7 +50,6 @@ export class CodeEditorComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.codeEditor = this.editor.getEditor();
-    ace.require('ace/ext-language_tools');
     this.codeEditor.setOption('enableLiveAutoCompletion', true);
     this.codeEditor.setOption('showPrintMargin', false);
     // this.codeEditor.session.setMode('ace/mode/java');

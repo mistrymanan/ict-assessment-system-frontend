@@ -11,8 +11,6 @@ import {FormsModule} from '@angular/forms';
 import {ViewAssignmentsComponent} from './view-assignments/view-assignments.component';
 import {AddQuestionComponent} from './add-question/add-question.component';
 import {NgSelectModule} from '@ng-select/ng-select';
-// import * as ace from 'ace-builds'
-// import 'ace-builds/webpack-resolver';
 
 @NgModule({
     declarations: [
