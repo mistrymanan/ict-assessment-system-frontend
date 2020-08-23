@@ -31,12 +31,12 @@
         <div class="card-footer" fxLayout="column" fxLayoutGap="20px">
             <div fxLayout>
                 <!--                <div fxFlex="70" *ngIf="true; let hide">-->
-                <div fxFlex="15" fxLayoutAlign="center start">
+                <div fxFlex="15" fxLayoutAlign="stretch start">
                     <button class="btn btn-pill btn-outline-primary" tooltip="Input"
                             (click)="hideInput = !hideInput">Input <i
                             class="fa fa-chevron-circle-{{hideInput?'down':'up'}}"></i></button>
                 </div>
-                <div fxFlex="25" fxLayoutAlign="center start">
+                <div fxFlex="25" fxLayoutAlign="stretch start">
                     <button class="btn btn-pill btn-outline-primary" tooltip="Input"
                             (click)="hideOutput = !hideOutput">Run Code Result <i
                             class="fa fa-chevron-circle-{{hideOutput?'down':'up'}}"></i></button>
@@ -51,18 +51,18 @@
                 <!--                        </div>-->
                 <!--                    </div>-->
                 <!--                </div>-->
-                <div fxFlex="15" fxLayoutAlign="center start">
+                <div fxFlex="15" fxLayoutAlign="stretch start">
                     <button class="btn btn-pill btn-outline-primary" tooltip="Run Code"><i
                             class="fa fa-play-circle"></i> Run Code
                     </button>
                 </div>
-                <div fxFlex="15" fxLayoutAlign="center start">
+                <div fxFlex="15" fxLayoutAlign="stretch start">
                     <button class="btn btn-pill btn-primary" tooltip="Submit Code"><i class="fa fa-cloud-upload"></i>
                         Submit
                     </button>
                 </div>
             </div>
-            <div fxLayout *ngIf="hideInput">
+            <div fxLayout *ngIf="!hideInput">
                 <div fxFlex class="form-group">
                     <label class=" col-form-label"><i class="fa fa-sign-in"></i>&nbsp;
                         <strong>STDIN</strong></label>
@@ -72,7 +72,7 @@
                     </div>
                 </div>
             </div>
-            <div fxLayout *ngIf="hideOutput" class="mt-3">
+            <div fxLayout *ngIf="!hideOutput" class="mt-3">
                 <div fxFlex class="form-horizontal">
                     <div class="form-group row pl-5 pr-5">
                         <div class="alert alert-success col" fxLayoutAlign="center center"><strong>Accepted</strong>
@@ -106,4 +106,43 @@
             </div>
         </div>
     </div>
+  <div class="card">
+    <div class="card-header assessment-result passed" fxLayout>
+        <div fxFlex="70" >
+          Assessment Passed!
+        </div>
+        <div fxFlex="30">
+          Score: 60/100
+        </div>
+    </div>
+    <div class="card-header assessment-result failed" fxLayout>
+        <div fxFlex="70" >
+          Assessment Failed!
+        </div>
+        <div fxFlex="30">
+          Score: 60/100
+        </div>
+    </div>
+    <div class="card-header testcase-result" fxLayout>
+      <div fxFlex="70" >
+        Total Test Cases: 10
+      </div>
+      <div fxFlex="30" fxLayoutGap="10px">
+        <div class="badge badge-success badge-pill p-2 pl-3 pr-3"> <i class="fa fa-check"></i> Passed: 6</div>
+        <div class="badge badge-danger badge-pill p-2 pl-3 pr-3"><i class="fa fa-close"></i> Failed: 4</div>
+      </div>
+    </div>
+    <div class="card-body" fxLayout="row wrap">
+      <div class="testcase" fxFlex="33"><i class="fa fa-check mr-2"></i>Test Case 1</div>
+      <div class="testcase" fxFlex="33"><i class="fa fa-check mr-2"></i>Test Case 2</div>
+      <div class="testcase" fxFlex="33"><i class="fa fa-close mr-2"></i>Test Case 3</div>
+      <div class="testcase" fxFlex="33"><i class="fa fa-check mr-2"></i>Test Case 4</div>
+      <div class="testcase" fxFlex="33"><i class="fa fa-close mr-2"></i>Test Case 5</div>
+      <div class="testcase" fxFlex="33"><i class="fa fa-check mr-2"></i>Test Case 6</div>
+      <div class="testcase" fxFlex="33"><i class="fa fa-check mr-2"></i>Test Case 7</div>
+      <div class="testcase" fxFlex="33"><i class="fa fa-close mr-2"></i>Test Case 8</div>
+      <div class="testcase" fxFlex="33"><i class="fa fa-check mr-2"></i>Test Case 9</div>
+      <div class="testcase" fxFlex="33"><i class="fa fa-close mr-2"></i>Test Case 10</div>
+    </div>
+  </div>
 </div>
