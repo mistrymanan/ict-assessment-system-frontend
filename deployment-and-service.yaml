@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: assessment-system-frontend
+spec:
+  selector:
+    matchLabels:
+      app: assessment-system-frontend
+
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: assessment-system-frontend
+    spec:
+      containers:
+        - name: assessment-system-frontend
+          image: assessment-system-frontend
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 80
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: assessment-system-frontend-service
+  labels:
+    name: assessment-system-frontend-service
+spec:
+  ports:
+    - port: 80
+      targetPort: 80
+      protocol: TCP
+  selector:
+    app: assessment-system-frontend
+  type: LoadBalancer
