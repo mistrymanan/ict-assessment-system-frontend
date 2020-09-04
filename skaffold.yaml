@@ -1,0 +1,11 @@
+apiVersion: skaffold/v2beta7
+kind: Config
+metadata:
+  name: assessment-system-frontend
+build:
+  artifacts:
+  - image: assessment-system-frontend
+deploy:
+  kubectl:
+    manifests:
+    - deployment-and-service.yaml
