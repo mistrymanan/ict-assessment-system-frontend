@@ -1,83 +1,85 @@
 <!--<div #editor id="editor" > </div>-->
-<div class="animated fadeIn">
+<form [formGroup]="assignmentForm" (ngSubmit)="submit()">
+  <div class="animated fadeIn">
     <div class="card">
-        <div class="card-header">
-            Create Assignment
-        </div>
-        <div class="card-body">
-            <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
-                <div class="form-group row">
-                    <label class="col-md-2 col-form-label" for="text-input">Assignment Title</label>
-                    <div class="col-md-10">
-                        <input type="text" id="title" name="title" class="form-control"
-                               placeholder="Enter Assignment Title..">
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label class="col-md-2 col-form-label" for="text-input">Assessment Type</label>
-                    <div class="col-md-2 col-form-label">
-                        <div class="form-check form-check-inline mr-1">
-                            <label class="switch switch-3d switch-primary">
-                                <input type="checkbox" class="switch-input form-check-input" checked>
-                                <span class="switch-slider"></span>
-                            </label>
-                            &nbsp; &nbsp;
-                            <label class="form-check-label type">
-                                <i class="fa fa-clock-o"></i> Timed
-                            </label>
-                        </div>
-                    </div>
-                    <div class="col-md-8">
-                        <input class="form-control" type="number" placeholder="Duration in Minutes"
-                               id="deadline">
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label class="col-md-2 col-form-label" for="text-input">Set Start Time</label>
-                    <div class="col-md-2 col-form-label">
-                        <div class="form-check form-check-inline mr-1">
-                            <label class="switch switch-3d switch-primary">
-                                <input type="checkbox" class="switch-input form-check-input" checked>
-                                <span class="switch-slider"></span>
-                            </label>
-                            &nbsp; &nbsp;
-                            <label class="form-check-label type">
-                                Yes
-                            </label>
-                        </div>
-                    </div>
-                    <div class="col-md-8">
-                        <input class="form-control" type="datetime-local"
-                               id="deadline">
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label class="col-md-2 col-form-label" for="text-input">Set Deadline</label>
-                    <div class="col-md-2 col-form-label">
-                        <div class="form-check form-check-inline mr-1">
-                            <label class="switch switch-3d switch-primary">
-                                <input type="checkbox" class="switch-input form-check-input" checked>
-                                <span class="switch-slider"></span>
-                            </label>
-                            &nbsp; &nbsp;
-                            <label class="form-check-label type">
-                                Yes
-                            </label>
-                        </div>
-                    </div>
-                    <div class="col-md-8">
-                        <input class="form-control" type="datetime-local"
-                               id="deadline">
-                    </div>
+      <div class="card-header">
+        Create Assignment
+      </div>
 
-                </div>
-            </form>
+      <div class="card-body">
+        <div class="form-horizontal">
+          <div class="form-group row">
+            <label class="col-md-2 col-form-label" for="title">Assignment Title</label>
+            <div class="col-md-10">
+              <input type="text" id="title" name="title" class="form-control" formControlName="title"
+                     placeholder="Enter Assignment Title..">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-2 col-form-label" for="type">Assessment Type</label>
+            <div class="col-md-2 col-form-label">
+              <div class="form-check form-check-inline mr-1">
+                <label class="switch switch-3d switch-primary">
+                  <input type="checkbox" class="switch-input form-check-input" formControlName="timed" id="type">
+                  <span class="switch-slider"></span>
+                </label>
+                &nbsp; &nbsp;
+                <label class="form-check-label type">
+                  {{assignmentForm.value.timed ? 'Timed' : 'Anytime'}}
+                </label>
+              </div>
+            </div>
+            <div class="col-md-8">
+              <input class="form-control" type="number" placeholder="Duration in Minutes" formControlName="duration">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-2 col-form-label">Set Start Time</label>
+            <div class="col-md-2 col-form-label">
+              <div class="form-check form-check-inline mr-1">
+                <label class="switch switch-3d switch-primary">
+                  <input type="checkbox" class="switch-input form-check-input" formControlName="hasStartTime">
+                  <span class="switch-slider"></span>
+                </label>
+                &nbsp; &nbsp;
+                <label class="form-check-label type">
+                  {{assignmentForm.value.hasStartTime ? 'Yes' : 'No'}}
+                </label>
+              </div>
+            </div>
+            <div class="col-md-8">
+              <input class="form-control" type="datetime-local" formControlName="startTime">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-2 col-form-label">Set Deadline</label>
+            <div class="col-md-2 col-form-label">
+              <div class="form-check form-check-inline mr-1">
+                <label class="switch switch-3d switch-primary">
+                  <input type="checkbox" class="switch-input form-check-input" formControlName="hasDeadline">
+                  <span class="switch-slider"></span>
+                </label>
+                &nbsp; &nbsp;
+                <label class="form-check-label type">
+                  {{assignmentForm.value.hasDeadline ? 'Yes' : 'No'}}
+                </label>
+              </div>
+            </div>
+            <div class="col-md-8">
+              <input class="form-control" type="datetime-local" formControlName="deadline">
+            </div>
+
+          </div>
         </div>
-        <div class="card-footer">
-            <button class="btn btn-secondary btn-pill pull-left"><i class="fa fa-close"></i> Cancel</button>
-            <button class="btn btn-primary btn-pill pull-right"><i class="fa fa-plus"></i> Create Assignment</button>
-        </div>
+      </div>
+
+      <div class="card-footer">
+        <button class="btn btn-secondary btn-pill pull-left" type=button><i class="fa fa-close"></i> Cancel</button>
+        <button type="submit" class="btn btn-primary btn-pill pull-right"><i class="fa fa-plus"></i> Create Assignment
+        </button>
+      </div>
     </div>
-</div>
+  </div>
+</form>
 
 

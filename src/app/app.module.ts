@@ -43,6 +43,7 @@ import {AceEditorModule} from 'ng2-ace-editor';
 import 'ace-builds/src-noconflict/ace';
 import 'ace-builds/webpack-resolver';
 import {CollapseModule} from 'ngx-bootstrap/collapse';
+import {HttpClientModule} from '@angular/common/http';
 @NgModule({
   imports: [
     BrowserModule,
@@ -58,7 +59,8 @@ import {CollapseModule} from 'ngx-bootstrap/collapse';
     TabsModule.forRoot(),
     ChartsModule,
     MarkdownModule.forRoot(),
-    AceEditorModule
+    AceEditorModule,
+    HttpClientModule
   ],
   declarations: [
     AppComponent,
