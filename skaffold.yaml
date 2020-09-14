@@ -8,4 +8,4 @@ build:
 deploy:
   kubectl:
     manifests:
-    - deployment-and-service.yaml
+    - k8s-assessment-system-frontend.yaml
