@@ -16,7 +16,7 @@ export class ExecutionService {
   runProgram(value: Program) {
     console.log(value);
     return this.http.post<Program>(  
-      'http://${config.host}/${config.endpoints.run}'
+      `http://${config.host}/${config.endpoints.run}`
         , value, {
         headers: new HttpHeaders({
           'Content-Type': 'application/json',
