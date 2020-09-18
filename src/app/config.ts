@@ -6,6 +6,6 @@ export const config = {
     deleteAssignment: 'assignments',
     getAssignmentBySlug: 'assignments/slug',
     addQuestion: 'questions/add-question',
-    run:  'run'
+    run:  'executions/run'
   }
 };
