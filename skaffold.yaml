@@ -4,8 +4,8 @@ metadata:
   name: assessment-system-frontend
 build:
   artifacts:
-  - image: assessment-system-frontend
+  - image: us.gcr.io/classroomict/assessment-system-frontend
 deploy:
   kubectl:
     manifests:
-    - deployment-and-service.yaml
+    - k8s-assessment-system-frontend.yaml

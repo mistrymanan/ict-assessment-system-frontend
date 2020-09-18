@@ -5,7 +5,7 @@ export const config = {
     createAssignment: 'assignments',
     deleteAssignment: 'assignments',
     getAssignmentBySlug: 'assignments/slug',
-    addQuestion: 'questions/add-question',
+    addQuestion: 'assignments/questions/add-question',
     run:  'executions/run'
   }
 };
