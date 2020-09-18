@@ -1,5 +1,7 @@
 import { Component, OnInit, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 import {GlobalConstants} from '../global-constants';
+import {ExecutionService} from '../../services/execution.service';
+import {Program} from '../../models/program';
 // import 'ace-builds/src-noconflict/theme-monokai';
 // import 'ace-builds/src-noconflict/mode-java';
 // import 'ace-builds/src-noconflict/ext-language_tools';
@@ -16,6 +18,11 @@ export class CodeEditorComponent implements OnInit, AfterViewInit {
   currentTheme: string;
   currentLanguage: string;
   text: string;
+  stdout: string;
+  stdin: string;
+  program: Program;
+  processing: boolean;
+  error: boolean;
   THEMES;
   LANGUAGES;
   // THEMES = [
@@ -33,12 +40,16 @@ export class CodeEditorComponent implements OnInit, AfterViewInit {
   //   {name: 'C', value: 'c_cpp'},
   //   {name: 'C++', value: 'c_cpp'},
   // ];
-  constructor() {
+  constructor(private executionService: ExecutionService) {
+    this.program = new Program();
     this.THEMES = GlobalConstants.THEMES;
     this.LANGUAGES = GlobalConstants.LANGUAGES;
     this.currentTheme = 'monokai';
     this.currentLanguage = 'java';
-    this.text = 'public class Hello {\n' +
+    this.processing= false;
+    this.error=false;
+    this.stdin = '';
+    this.text = 'public class Solution {\n' +
         '    public static void main(String args[]) {\n' +
         '        System.out.println("Hello world");\n' +
         '    }\n' +
@@ -46,6 +57,22 @@ export class CodeEditorComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
+    // tslint:disable-next-line:prefer-const
+
+  }
+  run(): void {
+    this.processing=true;
+    this.program.sourceCode = this.text;
+    this.program.input =this.stdin;
+    this.program.language = this.currentLanguage;
+    this.executionService.runProgram(this.program).subscribe(
+      res => {
+        this.stdout = res.output;
+        this.error= res.status === 'SUCCEED' ? false : true
+        this.processing=false; 
+      }
+    );
+  
   }
 
   ngAfterViewInit(): void {
