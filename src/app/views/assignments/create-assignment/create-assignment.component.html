@@ -3,7 +3,7 @@
   <div class="animated fadeIn">
     <div class="card">
       <div class="card-header">
-        Create Assignment
+        {{isUpdateMode ? 'Edit':'Create'}} Assignment
       </div>
 
       <div class="card-body">
@@ -18,7 +18,7 @@
           <div class="form-group row">
             <label class="col-md-2 col-form-label" for="type">Assessment Type</label>
             <div class="col-md-2 col-form-label">
-              <div class="form-check form-check-inline mr-1">
+              <div class="form-check form-check-inline mr-3">
                 <label class="switch switch-3d switch-primary">
                   <input type="checkbox" class="switch-input form-check-input" formControlName="timed" id="type">
                   <span class="switch-slider"></span>
@@ -74,8 +74,9 @@
       </div>
 
       <div class="card-footer">
-        <button class="btn btn-secondary btn-pill pull-left" type=button><i class="fa fa-close"></i> Cancel</button>
-        <button type="submit" class="btn btn-primary btn-pill pull-right"><i class="fa fa-plus"></i> Create Assignment
+
+        <button *ngIf="isUpdateMode" class="btn btn-secondary btn-pill pull-left" type="button" (click)="location.back()"><i class="fa fa-close"></i> Cancel</button>
+        <button type="submit" class="btn btn-primary btn-pill pull-right"><i class="fa fa-{{isUpdateMode ? 'pencil':'plus'}}"></i> {{isUpdateMode ? 'Edit':'Create'}} Assignment
         </button>
       </div>
     </div>
