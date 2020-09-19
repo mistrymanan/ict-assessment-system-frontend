@@ -8,6 +8,7 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class AssignmentsService {
+  
   // private _assignments = new BehaviorSubject<Assignment[]>([]);
   // private assignments: Assignment[] = [];
 
@@ -44,8 +45,21 @@ export class AssignmentsService {
       })
     });
   }
+  updateAssignment(assignmentID: string, assignment: Assignment) {
+    return this.http.put(
+      `http://${config.host}/${config.endpoints.updateAssignment}/${assignmentID}`,
+      assignment, {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+        })
+      }
+    )
+  }
   deleteAssignment(id: string) {
     return this.http.delete(`http://${config.host}/${config.endpoints.deleteAssignment}/${id}`);
+  }
+  toggleAssignmentStatus(id: string) {
+    return this.http.patch(`http://${config.host}/${config.endpoints.toggleAssignmentStatus}/${id}`,null);
   }
   getAssignmentBySlug(slug: string) {
     return this.http.get<Assignment>(`http://${config.host}/${config.endpoints.getAssignmentBySlug}/${slug}`);
