@@ -6,6 +6,8 @@ import { DefaultLayoutComponent } from './containers';
 
 import { P404Component } from './views/error/404.component';
 import { P500Component } from './views/error/500.component';
+import { UserAssignmentViewComponent } from './views/user-assignments/user-assignment-view/user-assignment-view.component';
+import { ViewQuestionComponent } from './views/user-assignments/view-question/view-question.component';
 
 export const routes: Routes = [
   {
@@ -49,8 +51,23 @@ export const routes: Routes = [
       {
         path: 'submissions',
         loadChildren: () => import('./views/submissions/submissions.module').then(m => m.SubmissionsModule)
+      },
+      {
+        path: ':slug',
+        component: UserAssignmentViewComponent,
+        data: {
+          title: 'Assignment'
+        },
+        pathMatch: 'full'
+      },
+      {
+        path: ':assignmentSlug/:questionSlug',
+        component: ViewQuestionComponent,
+        data: {
+          title: 'View Question'
+        },
+        pathMatch: 'full'
       }
-
     ]
   },
   { path: '**', component: P404Component }

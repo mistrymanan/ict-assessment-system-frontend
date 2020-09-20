@@ -1,6 +1,10 @@
 <div class="animated fadeIn">
     <div class="card">
-        <div markdown [data]="markdown" class="card-body"></div>
+        <div class="card-header">
+            <span>Question : </span>
+            <span class="font-weight-bold">{{currentQuestion.title}}</span> 
+        </div>
+        <div markdown [data]="currentQuestion.description" class="card-body"></div>
     </div>
     <div class="card">
         <div class="card-header" fxLayout fxLayoutGap="8px">

@@ -44,6 +44,10 @@ import 'ace-builds/src-noconflict/ace';
 import 'ace-builds/webpack-resolver';
 import {CollapseModule} from 'ngx-bootstrap/collapse';
 import {HttpClientModule} from '@angular/common/http';
+import { UserAssignmentViewComponent } from './views/user-assignments/user-assignment-view/user-assignment-view.component';
+import { ViewQuestionComponent } from './views/user-assignments/view-question/view-question.component';
+import { FormsModule } from '@angular/forms';
+import { FlexLayoutModule } from '@angular/flex-layout';
 @NgModule({
   imports: [
     BrowserModule,
@@ -60,13 +64,17 @@ import {HttpClientModule} from '@angular/common/http';
     ChartsModule,
     MarkdownModule.forRoot(),
     AceEditorModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
+    FlexLayoutModule
   ],
   declarations: [
     AppComponent,
     ...APP_CONTAINERS,
     P404Component,
     P500Component,
+    UserAssignmentViewComponent,
+    ViewQuestionComponent
   ],
   providers: [{
     provide: LocationStrategy,
