@@ -1,6 +1,9 @@
 import {Component, OnInit, AfterViewInit, ViewChild} from '@angular/core';
 import {GlobalConstants} from '../../global-constants';
 import {AceEditorComponent} from 'ng2-ace-editor';
+import { AssignmentsService } from '../../../services/assignments.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { UserQuestion } from '../../../models/user-question';
 @Component({
     selector: 'app-view-question',
     templateUrl: './view-question.component.html',
@@ -15,8 +18,13 @@ export class ViewQuestionComponent implements OnInit, AfterViewInit {
     hideInput: boolean;
     hideOutput: boolean;
     markdown;
+    currentQuestion: UserQuestion = new UserQuestion();
     @ViewChild('editor') editor: AceEditorComponent;
-    constructor() {
+    constructor(
+        private assignmentsService: AssignmentsService,
+        private router: Router,
+        private route: ActivatedRoute
+    ) {
         this.hideOutput = true;
         this.hideInput = true;
         this.currentLanguage = 'java';
@@ -44,13 +52,20 @@ __Sample Output__
     }
     ngAfterViewInit(): void {
         const editor = this.editor.getEditor();
-        editor.setOption('enableBasicAutoCompletion', true);
+        // editor.setOption('enableBasicAutocompletion', true);
         editor.setOption('showPrintMargin', false);
         editor.setOption('wrap', true);
         editor.setFontSize(14);
     }
 
     ngOnInit(): void {
+        const assignmentSlug = this.route.snapshot.params.assignmentSlug;
+        const questionSlug = this.route.snapshot.params.questionSlug;
+        this.assignmentsService.getUserQuestion(assignmentSlug, questionSlug).subscribe(
+            (question) => {
+                this.currentQuestion = question;
+            }
+        );
     }
 
 }

@@ -1,9 +1,12 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
-import { Assignment } from '../models/assignment';
+import {Assignment } from '../models/assignment';
 import { config } from '../config';
 import { map } from 'rxjs/operators';
+import { ActiveAssignment } from '../models/active-assignment';
+import { ActiveAssignmentDetails } from '../models/active-assignment-details';
+import { UserQuestion } from '../models/user-question';
 @Injectable({
   providedIn: 'root'
 })
@@ -18,7 +21,21 @@ export class AssignmentsService {
   constructor(private http: HttpClient) {
 
   }
-
+  getAllActiveAssignments(): Observable<ActiveAssignment[]> {
+    return this.http.get<any>(
+      `http://${config.host}/${config.endpoints.activeAssignments}`
+    ).pipe(map(res => res.activeAssignments));
+  }
+  getActiveAssignmentBySlug(slug: string): Observable<ActiveAssignmentDetails> { 
+    return this.http.get<ActiveAssignmentDetails>(
+      `http://${config.host}/${config.endpoints.activeAssignmentBySlug}/${slug}`
+    );
+  }
+  getUserQuestion(assignmentSlug:string, questionSlug: string){
+    return this.http.get<UserQuestion>(
+      `http://${config.host}/${config.endpoints.getUserQuestion}?assignmentSlug=${assignmentSlug}&questionSlug=${questionSlug}`,
+    );
+  }
   getAllAssignments(): Observable<Assignment[]> {
     return this.http.get<any>(
       `http://${config.host}/${config.endpoints.assignments}`
