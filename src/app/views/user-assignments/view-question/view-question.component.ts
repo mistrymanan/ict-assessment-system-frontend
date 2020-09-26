@@ -1,5 +1,5 @@
 import {Component, OnInit, AfterViewInit, ViewChild} from '@angular/core';
-import {GlobalConstants} from '../../global-constants';
+import {GlobalConstants} from '../../../global-constants';
 import {AceEditorComponent} from 'ng2-ace-editor';
 import { AssignmentsService } from '../../../services/assignments.service';
 import { ActivatedRoute, Router } from '@angular/router';

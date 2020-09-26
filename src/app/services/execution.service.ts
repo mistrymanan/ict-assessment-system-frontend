@@ -10,9 +10,8 @@ import {Assignment} from '../models/assignment';
 })
 export class ExecutionService {
 
-  constructor(private http: HttpClient) { }
-  //'http://35.184.28.10/api/executions/run'
-// `http://${config.host}/${config.endpoints.run}`
+  constructor(private http: HttpClient) { }  
+
   runProgram(value: Program) {
     console.log(value);
     return this.http.post<Program>(  
@@ -22,5 +21,21 @@ export class ExecutionService {
           'Content-Type': 'application/json',
         })
     });
+  }
+
+  runProgramMultipleInputs(sourceCode: string, lang: string, inputs: {id:number|string,input:string}[]){
+    const body = {
+      source_code: sourceCode,
+      inputs: inputs,
+      language: lang
+    }
+    return this.http.post<any>(
+      `http://${config.host}/${config.endpoints.runMultiple}`,
+      body, {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+        })
+      }
+    );
   }
 }

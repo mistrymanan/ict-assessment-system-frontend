@@ -21,7 +21,7 @@
         <!--        </div>-->
     </div>
     <div class="card-body" style="padding:0">
-        <ace-editor [(text)]="text" [theme]="currentTheme" [mode]="currentLanguage" #editor id="editor"></ace-editor>
+        <ace-editor [(text)]="text" [theme]="currentTheme" [mode]="langModes[currentLanguage]" #editor id="editor"></ace-editor>
     </div>
     <div class="card-footer">
         <div fxLayout>
