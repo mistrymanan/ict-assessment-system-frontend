@@ -42,7 +42,7 @@ const routes: Routes = [
         }
       },
       {
-        path: ':slug/add-question',
+        path: ':assignmentSlug/add-question',
         component: AddQuestionComponent,
         data: {
           title: 'Add Question'

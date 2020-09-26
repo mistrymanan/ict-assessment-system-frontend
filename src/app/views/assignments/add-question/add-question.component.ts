@@ -1,12 +1,12 @@
 import {Component, OnInit, ViewChildren, AfterViewInit, QueryList} from '@angular/core';
 import {AceEditorComponent} from 'ng2-ace-editor';
-import { ActivatedRoute, Router } from '@angular/router';
-import { AssignmentsService } from '../../../services/assignments.service';
-import { Assignment } from '../../../models/assignment';
-import { Location } from '@angular/common';
-import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
-import { GlobalConstants } from '../../../global-constants';
-import { ExecutionService } from '../../../services/execution.service';
+import {ActivatedRoute, Router} from '@angular/router';
+import {AssignmentsService} from '../../../services/assignments.service';
+import {Assignment} from '../../../models/assignment';
+import {Location} from '@angular/common';
+import {FormBuilder, FormGroup, FormArray} from '@angular/forms';
+import {GlobalConstants} from '../../../global-constants';
+import {ExecutionService} from '../../../services/execution.service';
 import {DataService} from '../../../services/data.service';
 
 @Component({
@@ -27,6 +27,7 @@ export class AddQuestionComponent implements OnInit, AfterViewInit {
   processing: boolean = false;
   showTestOutputs: boolean = false;
   showCompileError: boolean = false;
+  editModeShowOutput: boolean = false;
   compileErrorMessage: string;
   testOutputs;
   @ViewChildren(AceEditorComponent) editors: QueryList<AceEditorComponent>;
@@ -48,8 +49,7 @@ export class AddQuestionComponent implements OnInit, AfterViewInit {
       'description': [''],
       'solutionLanguage': ['java'],
       'solutionCode': [''],
-      'testCases': fb.array([
-      ])
+      'testCases': fb.array([])
     });
     this.assignment = new Assignment();
     this.solutionLanguage = 'java';
@@ -68,9 +68,11 @@ export class AddQuestionComponent implements OnInit, AfterViewInit {
 
 // `;
   }
+
   get testCases(): FormArray {
     return this.questionForm.get('testCases') as FormArray;
   }
+
   ngAfterViewInit(): void {
     this.editors.forEach(editorRef => {
       const editor = editorRef.getEditor();
@@ -92,35 +94,40 @@ export class AddQuestionComponent implements OnInit, AfterViewInit {
         this.router.navigate(['404']);
       }
     );
-    this.assignmentService.getQuestion(assignmentSlug, questionSlug).subscribe(
-        (question)=>{
-          this.questionID=question.id;
-          this.text= question.description;
-        }
-    );
     if (assignmentSlug && questionSlug) {
       this.isUpdateMode = true;
       this.assignmentService.getQuestion(assignmentSlug, questionSlug).subscribe(
         (question) => {
           this.questionForm.patchValue(question);
+          if (question.testCases) {
+            // question.testCases.sort((a, b) => parseInt(a.id, 10) - parseInt(b.id, 10));
+            question.testCases.forEach((testCase) => {
+              this.testCases.push(
+                this.fb.group({
+                  id: [''],
+                  input: [testCase.input],
+                  output: [testCase.output]
+                })
+              );
+            });
+            this.editModeShowOutput = true;
+          }
+          this.text = question.description;
+          this.solutionCode = question.solutionCode;
+          this.questionID = question.id;
         }
       );
     }
   }
+
   generateOutputsForTests() {
+    this.editModeShowOutput = false;
     const sourceCode = this.questionForm.value.solutionCode;
     const language = this.questionForm.value.solutionLanguage;
     const inputs = this.questionForm.get('testCases').value;
-    inputs.forEach(input => {delete input.output; });
-// <<<<<<< edit-question
-//     this.processing = true;
-//     this.executionService.runProgramMultipleInputs(sourceCode, language, inputs).subscribe(
-//       result => {
-//         console.log(result);
-//         this.testOutputs = new Map<string, any>();
-//         for (const output of result.test_outputs) {
-//           this.testOutputs[output.id] = output;
-// =======
+    inputs.forEach(input => {
+      delete input.output;
+    });
     this.showCompileError = false;
     this.processing = true;
     this.executionService.runProgramMultipleInputs(sourceCode, language, inputs).subscribe(
@@ -136,20 +143,23 @@ export class AddQuestionComponent implements OnInit, AfterViewInit {
           }
           this.processing = false;
           this.showTestOutputs = true;
-// >>>>>>> small-fixes
         }
       }
     );
   }
+
   goBack(): void {
     this.location.back();
   }
+
   updateDescription(e) {
     this.questionForm.controls['description'].setValue(this.text);
   }
+
   updateSolutionCode(e) {
     this.questionForm.controls['solutionCode'].setValue(this.solutionCode);
   }
+
   addTestCase() {
     this.testCases.push(
       this.fb.group({
@@ -160,16 +170,17 @@ export class AddQuestionComponent implements OnInit, AfterViewInit {
     );
     this.showTestOutputs = false;
   }
+
   submitAddQuestionForm() {
 
     if (this.isUpdateMode) {
-this.assignmentService.updateQuestion(this.assignment.id, this.questionID, this.questionForm.value).subscribe(
-(res : any) =>{
-    this.router.navigate(['assignments', this.assignment.slug]);
-}
-,
-  console.error
-);
+      this.assignmentService.updateQuestion(this.assignment.id, this.questionID, this.questionForm.value).subscribe(
+        (res: any) => {
+          this.router.navigate(['assignments', this.assignment.slug]);
+        }
+        ,
+        console.error
+      );
     } else {
       this.assignmentService.addQuestionToAssignment(this.assignment.id, this.questionForm.value).subscribe(
         (res) => {
@@ -179,6 +190,7 @@ this.assignmentService.updateQuestion(this.assignment.id, this.questionID, this.
       );
     }
   }
+
   removeTestCase(i: number) {
     this.testCases.removeAt(i);
   }

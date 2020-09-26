@@ -173,6 +173,21 @@
                 formControlName="input"
               ></textarea>
             </div>
+            <div *ngIf="editModeShowOutput">
+              <label class="col-form-label"
+              ><i class="fa fa-sign-out"></i>&nbsp;
+                <strong>Test Output</strong></label>
+              <div>
+              <textarea
+                name="textarea-input"
+                rows="2"
+                class="form-control"
+                placeholder="Your Output will appear here..."
+                formControlName="output"
+                readonly
+              ></textarea>
+              </div>
+            </div>
             <label class="col-form-label" *ngIf="showTestOutputs" [ngClass]="{'text-danger':testOutputs[i+1+''].status != 'SUCCEED'}"
               ><i class="fa fa-sign-out"></i>&nbsp;
               <strong>Test Output</strong></label>
@@ -211,10 +226,10 @@
         <i class="fa fa-close"></i> Cancel
       </button>
 
-      <button *ngIf="isUpdateMode" class="btn btn-secondary btn-pill pull-left" type="button" (click)="location.back()"><i class="fa fa-close"></i> Cancel</button>
+<!--      <button *ngIf="isUpdateMode" class="btn btn-secondary btn-pill pull-left" type="button" (click)="location.back()"><i class="fa fa-close"></i> Cancel</button>-->
       <button type="submit" class="btn btn-primary btn-pill pull-right"><i class="fa fa-{{isUpdateMode ? 'pencil':'plus'}}"></i> {{isUpdateMode ? 'Edit':'Add'}} Question
       </button>
     </div>
-<!--    {{questionForm.value | json}}-->
+    {{questionForm.value | json}}
   </form>
 </div>

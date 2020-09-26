@@ -87,7 +87,7 @@
           <tbody>
           <tr *ngFor="let question of assignment.questions; let i = index;">
             <th scope="row">{{i+1}}</th>
-            <td><a routerLink="./{{question.slug}}"> {{question.title}}</a></td>
+            <td>{{question.title}}</td>
             <td fxLayoutGap="10px">
               <span *ngFor="let lang of question.allowedLanguages" class="badge badge-primary">{{lang}}</span>
             </td>
