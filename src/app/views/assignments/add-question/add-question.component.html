@@ -3,7 +3,8 @@
   <form [formGroup]="questionForm" (ngSubmit)="submitAddQuestionForm()">
     <div class="card">
       <div class="card-header">
-        Add Question for <strong>{{ assignment.title }}</strong>
+        {{isUpdateMode ? 'Edit':'Add'}}
+        Question for <strong>{{ assignment.title }}</strong>
       </div>
       <div class="card-body">
         <div class="form-group row">
@@ -119,6 +120,7 @@
         ></ace-editor>
       </div>
       <div class="card-footer">
+
         <div class="form-group" *ngIf="showCompileError">
           <label class="col-form-label text-danger"
           ><i class="fa fa-sign-out"></i>&nbsp;
@@ -209,8 +211,8 @@
         <i class="fa fa-close"></i> Cancel
       </button>
 
-      <button class="btn btn-primary btn-pill pull-right" type="submit">
-        <i class="fa fa-plus"></i> Add Question
+      <button *ngIf="isUpdateMode" class="btn btn-secondary btn-pill pull-left" type="button" (click)="location.back()"><i class="fa fa-close"></i> Cancel</button>
+      <button type="submit" class="btn btn-primary btn-pill pull-right"><i class="fa fa-{{isUpdateMode ? 'pencil':'plus'}}"></i> {{isUpdateMode ? 'Edit':'Add'}} Question
       </button>
     </div>
 <!--    {{questionForm.value | json}}-->
