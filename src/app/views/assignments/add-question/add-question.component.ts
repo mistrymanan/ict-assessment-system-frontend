@@ -169,6 +169,7 @@ export class AddQuestionComponent implements OnInit, AfterViewInit {
       })
     );
     this.showTestOutputs = false;
+    this.editModeShowOutput = false;
   }
 
   submitAddQuestionForm() {
