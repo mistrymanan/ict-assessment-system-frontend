@@ -23,6 +23,8 @@ export class AddQuestionComponent implements OnInit, AfterViewInit {
   solutionCode: string;
   processing: boolean = false;
   showTestOutputs: boolean = false;
+  showCompileError: boolean = false;
+  compileErrorMessage: string;
   testOutputs;
   @ViewChildren(AceEditorComponent) editors: QueryList<AceEditorComponent>;
 
@@ -44,7 +46,7 @@ export class AddQuestionComponent implements OnInit, AfterViewInit {
       'solutionCode': [''],
       'testCases': fb.array([
       ])
-    })
+    });
     this.assignment = new Assignment();
     this.solutionLanguage = 'java';
 //     this.text = `## Fibonacci Series
@@ -83,37 +85,42 @@ export class AddQuestionComponent implements OnInit, AfterViewInit {
       error => {
         this.router.navigate(['404']);
       }
-    )
+    );
 
   }
-  generateOutputsForTests(){
-    let sourceCode = this.questionForm.value.solutionCode;
-    let language = this.questionForm.value.solutionLanguage;
-    let inputs = this.questionForm.get('testCases').value;
-    inputs.forEach(input => {delete input.output;});
+  generateOutputsForTests() {
+    const sourceCode = this.questionForm.value.solutionCode;
+    const language = this.questionForm.value.solutionLanguage;
+    const inputs = this.questionForm.get('testCases').value;
+    inputs.forEach(input => {delete input.output; });
     this.processing = true;
     this.executionService.runProgramMultipleInputs(sourceCode, language, inputs).subscribe(
       result => {
-        console.log(result)
-        this.testOutputs = new Map<string,any>();
-        for(let output of result.test_outputs){
-          this.testOutputs[output.id] = output;
+        if (result.status === 'COMPILE_ERROR') {
+          this.showCompileError = true;
+          this.compileErrorMessage = result.message;
+          this.processing = false;
+        } else {
+          this.testOutputs = new Map<string, any>();
+          for (const output of result.test_outputs) {
+            this.testOutputs[output.id] = output;
+          }
+          this.processing = false;
+          this.showTestOutputs = true;
         }
-        this.processing = false;
-        this.showTestOutputs = true;
       }
-    )
+    );
   }
   goBack(): void {
     this.location.back();
   }
-  updateDescription(e){
+  updateDescription(e) {
     this.questionForm.controls['description'].setValue(this.text);
   }
-  updateSolutionCode(e){
+  updateSolutionCode(e) {
     this.questionForm.controls['solutionCode'].setValue(this.solutionCode);
   }
-  addTestCase(){
+  addTestCase() {
     this.testCases.push(
       this.fb.group({
         id: [''],
@@ -123,15 +130,15 @@ export class AddQuestionComponent implements OnInit, AfterViewInit {
     );
     this.showTestOutputs = false;
   }
-  submitAddQuestionForm(){
+  submitAddQuestionForm() {
     this.assignmentService.addQuestionToAssignment(this.assignment.id, this.questionForm.value).subscribe(
       (res) => {
         this.router.navigate(['assignments', this.assignment.slug]);
       },
       console.error
-    )
+    );
   }
-  removeTestCase(i: number){
+  removeTestCase(i: number) {
     this.testCases.removeAt(i);
   }
 
