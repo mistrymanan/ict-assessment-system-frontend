@@ -8,5 +8,5 @@ export class Question {
     description: string;
     solutionLanguage: string;
     solutionCode: string;
-    testCases: {input:string, output: string}[];
+    testCases: {id:number|string, input:string, output: string}[];
 }

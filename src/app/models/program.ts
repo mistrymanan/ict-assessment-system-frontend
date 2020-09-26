@@ -1,6 +1,6 @@
 export class Program {
   id: string;
-  sourceCode: string;
+  source_code: string;
   language: string;
   input: string;
   output: string;

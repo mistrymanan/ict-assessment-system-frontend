@@ -1,5 +1,5 @@
 import { Component, OnInit, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
-import {GlobalConstants} from '../global-constants';
+import {GlobalConstants} from '../../global-constants';
 import {ExecutionService} from '../../services/execution.service';
 import {Program} from '../../models/program';
 // import 'ace-builds/src-noconflict/theme-monokai';
@@ -25,6 +25,7 @@ export class CodeEditorComponent implements OnInit, AfterViewInit {
   error: boolean;
   THEMES;
   LANGUAGES;
+  langModes: Map<string, string>;
   // THEMES = [
   //   {name: 'Chrome', value: 'chrome'},
   //   {name: 'Eclipse', value: 'eclipse'},
@@ -44,6 +45,7 @@ export class CodeEditorComponent implements OnInit, AfterViewInit {
     this.program = new Program();
     this.THEMES = GlobalConstants.THEMES;
     this.LANGUAGES = GlobalConstants.LANGUAGES;
+    this.langModes = GlobalConstants.langModes;
     this.currentTheme = 'monokai';
     this.currentLanguage = 'java';
     this.processing= false;
@@ -62,7 +64,7 @@ export class CodeEditorComponent implements OnInit, AfterViewInit {
   }
   run(): void {
     this.processing=true;
-    this.program.sourceCode = this.text;
+    this.program.source_code = this.text;
     this.program.input =this.stdin;
     this.program.language = this.currentLanguage;
     this.executionService.runProgram(this.program).subscribe(

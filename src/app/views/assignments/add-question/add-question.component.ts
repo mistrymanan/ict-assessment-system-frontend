@@ -5,6 +5,8 @@ import { AssignmentsService } from '../../../services/assignments.service';
 import { Assignment } from '../../../models/assignment';
 import { Location } from '@angular/common';
 import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
+import { GlobalConstants } from '../../../global-constants';
+import { ExecutionService } from '../../../services/execution.service';
 
 @Component({
   selector: 'app-add-question',
@@ -12,23 +14,23 @@ import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
   styleUrls: ['./add-question.component.css']
 })
 export class AddQuestionComponent implements OnInit, AfterViewInit {
-  LANGUAGES = [
-    {name: 'Java', value: 'java'},
-    {name: 'Python 3.8', value: 'python'},
-    {name: 'C', value: 'c_cpp'},
-    {name: 'C++', value: 'c_cpp'},
-  ];
+  LANGUAGES = GlobalConstants.LANGUAGES;
+  langModes = GlobalConstants.langModes;
   assignment: Assignment;
   questionForm: FormGroup;
   solutionLanguage: string;
   text: string;
   solutionCode: string;
+  processing: boolean = false;
+  showTestOutputs: boolean = false;
+  testOutputs;
   @ViewChildren(AceEditorComponent) editors: QueryList<AceEditorComponent>;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private assignmentService: AssignmentsService,
+    private executionService: ExecutionService,
     private location: Location,
     private fb: FormBuilder
   ) {
@@ -84,6 +86,24 @@ export class AddQuestionComponent implements OnInit, AfterViewInit {
     )
 
   }
+  generateOutputsForTests(){
+    let sourceCode = this.questionForm.value.solutionCode;
+    let language = this.questionForm.value.solutionLanguage;
+    let inputs = this.questionForm.get('testCases').value;
+    inputs.forEach(input => {delete input.output;});
+    this.processing = true;
+    this.executionService.runProgramMultipleInputs(sourceCode, language, inputs).subscribe(
+      result => {
+        console.log(result)
+        this.testOutputs = new Map<string,any>();
+        for(let output of result.test_outputs){
+          this.testOutputs[output.id] = output;
+        }
+        this.processing = false;
+        this.showTestOutputs = true;
+      }
+    )
+  }
   goBack(): void {
     this.location.back();
   }
@@ -96,9 +116,12 @@ export class AddQuestionComponent implements OnInit, AfterViewInit {
   addTestCase(){
     this.testCases.push(
       this.fb.group({
-        input: ['']
+        id: [''],
+        input: [''],
+        output: ['']
       })
     );
+    this.showTestOutputs = false;
   }
   submitAddQuestionForm(){
     this.assignmentService.addQuestionToAssignment(this.assignment.id, this.questionForm.value).subscribe(
