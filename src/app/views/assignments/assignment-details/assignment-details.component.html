@@ -64,15 +64,15 @@
                               <span>No Deadline</span>
                             </ng-template></td>
                     </tr>
-                    
+
                 </tbody>
             </table>
         </div>
     </div>
-    
+
     <div class="card">
       <div class="card-header">Questions</div>
-  
+
       <div class="card-body">
         <table class="table table-bordered table-striped">
           <thead>
@@ -81,6 +81,7 @@
             <th scope="col" class="w-50">Question</th>
             <th scope="col" class="w-auto">Allowed Languages</th>
             <th scope="col" class="w-auto"> Points</th>
+            <th scope="col" class="w-auto" style="text-align: center" >Actions</th>
           </tr>
           </thead>
           <tbody>
@@ -91,6 +92,18 @@
               <span *ngFor="let lang of question.allowedLanguages" class="badge badge-primary">{{lang}}</span>
             </td>
             <td>{{question.totalPoints}}</td>
+            <td  fxLayoutAlign="space-around center" >
+              <button class=" btn btn-warning btn-sm btn-pill" (click)="editQuestion(i)">
+                <i class="fa fa-pencil"></i>
+                Edit
+              </button>
+
+              <button class=" btn btn-danger btn-sm btn-pill" (click)="deleteQuestion(i)">
+              <i class="fa fa-close"></i>
+              Delete
+            </button>
+
+            </td>
           </tr>
           <tr *ngIf="!assignment.questions">
             <td scope="row" colspan="4" class="text-center"> No Questions</td>
@@ -110,4 +123,3 @@
       </div>
     </div>
   </div>
-  

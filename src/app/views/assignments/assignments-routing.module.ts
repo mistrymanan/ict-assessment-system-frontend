@@ -28,7 +28,7 @@ const routes: Routes = [
         }
       },
       {
-        path: ':slug',       
+        path: ':slug',
         component: AssignmentDetailsComponent,
         data: {
           title: 'Assignment Details'
@@ -46,6 +46,13 @@ const routes: Routes = [
         component: AddQuestionComponent,
         data: {
           title: 'Add Question'
+        }
+      },
+      {
+        path: ':assignmentSlug/:questionSlug/edit',
+        component: AddQuestionComponent,
+        data: {
+          title: 'Edit Question'
         }
       }
     ]

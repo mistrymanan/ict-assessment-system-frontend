@@ -7,6 +7,7 @@ import { Location } from '@angular/common';
 import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
 import { GlobalConstants } from '../../../global-constants';
 import { ExecutionService } from '../../../services/execution.service';
+import {DataService} from '../../../services/data.service';
 
 @Component({
   selector: 'app-add-question',
@@ -14,9 +15,11 @@ import { ExecutionService } from '../../../services/execution.service';
   styleUrls: ['./add-question.component.css']
 })
 export class AddQuestionComponent implements OnInit, AfterViewInit {
+  isUpdateMode: boolean = false;
   LANGUAGES = GlobalConstants.LANGUAGES;
   langModes = GlobalConstants.langModes;
   assignment: Assignment;
+  questionID: string;
   questionForm: FormGroup;
   solutionLanguage: string;
   text: string;
@@ -32,7 +35,8 @@ export class AddQuestionComponent implements OnInit, AfterViewInit {
     private assignmentService: AssignmentsService,
     private executionService: ExecutionService,
     private location: Location,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private dataService: DataService
   ) {
     this.questionForm = fb.group({
       'title': [''],
@@ -44,7 +48,7 @@ export class AddQuestionComponent implements OnInit, AfterViewInit {
       'solutionCode': [''],
       'testCases': fb.array([
       ])
-    })
+    });
     this.assignment = new Assignment();
     this.solutionLanguage = 'java';
 //     this.text = `## Fibonacci Series
@@ -75,45 +79,62 @@ export class AddQuestionComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    const assignmemtSLug = this.route.snapshot.params.slug;
-    this.assignmentService.getAssignmentBySlug(assignmemtSLug).subscribe(
+    const assignmentSlug = this.route.snapshot.params.assignmentSlug;
+    const questionSlug = this.route.snapshot.params.questionSlug;
+
+    this.assignmentService.getAssignmentBySlug(assignmentSlug).subscribe(
       assignment => {
         this.assignment = assignment;
       },
       error => {
         this.router.navigate(['404']);
       }
-    )
-
+    );
+    this.assignmentService.getQuestion(assignmentSlug, questionSlug).subscribe(
+        (question)=>{
+          this.questionID=question.id;
+          this.text= question.description;
+        }
+    );
+   // const assignmentSlug = this.route.snapshot.paramMap.get(':assignmentSlug');
+    // const questionSlug = this.route.snapshot.paramMap.get(':questionSlug');
+    if (assignmentSlug && questionSlug) {
+      this.isUpdateMode = true;
+      this.assignmentService.getQuestion(assignmentSlug, questionSlug).subscribe(
+        (question) => {
+          this.questionForm.patchValue(question);
+        }
+      );
+    }
   }
-  generateOutputsForTests(){
-    let sourceCode = this.questionForm.value.solutionCode;
-    let language = this.questionForm.value.solutionLanguage;
-    let inputs = this.questionForm.get('testCases').value;
-    inputs.forEach(input => {delete input.output;});
+  generateOutputsForTests() {
+    const sourceCode = this.questionForm.value.solutionCode;
+    const language = this.questionForm.value.solutionLanguage;
+    const inputs = this.questionForm.get('testCases').value;
+    inputs.forEach(input => {delete input.output; });
     this.processing = true;
     this.executionService.runProgramMultipleInputs(sourceCode, language, inputs).subscribe(
       result => {
-        console.log(result)
-        this.testOutputs = new Map<string,any>();
-        for(let output of result.test_outputs){
+        console.log(result);
+        this.testOutputs = new Map<string, any>();
+        for (const output of result.test_outputs) {
           this.testOutputs[output.id] = output;
         }
         this.processing = false;
         this.showTestOutputs = true;
       }
-    )
+    );
   }
   goBack(): void {
     this.location.back();
   }
-  updateDescription(e){
+  updateDescription(e) {
     this.questionForm.controls['description'].setValue(this.text);
   }
-  updateSolutionCode(e){
+  updateSolutionCode(e) {
     this.questionForm.controls['solutionCode'].setValue(this.solutionCode);
   }
-  addTestCase(){
+  addTestCase() {
     this.testCases.push(
       this.fb.group({
         id: [''],
@@ -123,15 +144,19 @@ export class AddQuestionComponent implements OnInit, AfterViewInit {
     );
     this.showTestOutputs = false;
   }
-  submitAddQuestionForm(){
-    this.assignmentService.addQuestionToAssignment(this.assignment.id, this.questionForm.value).subscribe(
-      (res) => {
-        this.router.navigate(['assignments', this.assignment.slug]);
-      },
-      console.error
-    )
+  submitAddQuestionForm() {
+    if (this.isUpdateMode) {
+this.assignmentService.updateQuestion(this.assignment.id, this.questionID, this.questionForm.value).subscribe();
+    } else {
+      this.assignmentService.addQuestionToAssignment(this.assignment.id, this.questionForm.value).subscribe(
+        (res) => {
+          this.router.navigate(['assignments', this.assignment.slug]);
+        },
+        console.error
+      );
+    }
   }
-  removeTestCase(i: number){
+  removeTestCase(i: number) {
     this.testCases.removeAt(i);
   }
 

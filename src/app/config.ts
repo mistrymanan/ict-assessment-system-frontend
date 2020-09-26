@@ -11,7 +11,10 @@ export const config = {
     toggleAssignmentStatus: 'assignments/id',
     getAssignmentBySlug: 'assignments/slug',
     addQuestion: 'assignments/questions/add-question',
+    deleteQuestion: 'assignments/questions',
     run:  'executions/run',
-    runMultiple: 'executions/run-multiple'
+    runMultiple: 'executions/run-multiple',
+    questions : 'assignments/questions',
+    updateQuestion : 'assignments/questions/update-question'
   }
 };
