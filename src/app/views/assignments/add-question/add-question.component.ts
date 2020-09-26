@@ -26,6 +26,8 @@ export class AddQuestionComponent implements OnInit, AfterViewInit {
   solutionCode: string;
   processing: boolean = false;
   showTestOutputs: boolean = false;
+  showCompileError: boolean = false;
+  compileErrorMessage: string;
   testOutputs;
   @ViewChildren(AceEditorComponent) editors: QueryList<AceEditorComponent>;
 
@@ -96,8 +98,6 @@ export class AddQuestionComponent implements OnInit, AfterViewInit {
           this.text= question.description;
         }
     );
-   // const assignmentSlug = this.route.snapshot.paramMap.get(':assignmentSlug');
-    // const questionSlug = this.route.snapshot.paramMap.get(':questionSlug');
     if (assignmentSlug && questionSlug) {
       this.isUpdateMode = true;
       this.assignmentService.getQuestion(assignmentSlug, questionSlug).subscribe(
@@ -112,16 +112,32 @@ export class AddQuestionComponent implements OnInit, AfterViewInit {
     const language = this.questionForm.value.solutionLanguage;
     const inputs = this.questionForm.get('testCases').value;
     inputs.forEach(input => {delete input.output; });
+// <<<<<<< edit-question
+//     this.processing = true;
+//     this.executionService.runProgramMultipleInputs(sourceCode, language, inputs).subscribe(
+//       result => {
+//         console.log(result);
+//         this.testOutputs = new Map<string, any>();
+//         for (const output of result.test_outputs) {
+//           this.testOutputs[output.id] = output;
+// =======
+    this.showCompileError = false;
     this.processing = true;
     this.executionService.runProgramMultipleInputs(sourceCode, language, inputs).subscribe(
       result => {
-        console.log(result);
-        this.testOutputs = new Map<string, any>();
-        for (const output of result.test_outputs) {
-          this.testOutputs[output.id] = output;
+        if (result.status === 'COMPILE_ERROR') {
+          this.showCompileError = true;
+          this.compileErrorMessage = result.message;
+          this.processing = false;
+        } else {
+          this.testOutputs = new Map<string, any>();
+          for (const output of result.test_outputs) {
+            this.testOutputs[output.id] = output;
+          }
+          this.processing = false;
+          this.showTestOutputs = true;
+// >>>>>>> small-fixes
         }
-        this.processing = false;
-        this.showTestOutputs = true;
       }
     );
   }
@@ -145,8 +161,15 @@ export class AddQuestionComponent implements OnInit, AfterViewInit {
     this.showTestOutputs = false;
   }
   submitAddQuestionForm() {
+
     if (this.isUpdateMode) {
-this.assignmentService.updateQuestion(this.assignment.id, this.questionID, this.questionForm.value).subscribe();
+this.assignmentService.updateQuestion(this.assignment.id, this.questionID, this.questionForm.value).subscribe(
+(res : any) =>{
+    this.router.navigate(['assignments', this.assignment.slug]);
+}
+,
+  console.error
+);
     } else {
       this.assignmentService.addQuestionToAssignment(this.assignment.id, this.questionForm.value).subscribe(
         (res) => {
