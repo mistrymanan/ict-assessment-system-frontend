@@ -3,7 +3,8 @@
   <form [formGroup]="questionForm" (ngSubmit)="submitAddQuestionForm()">
     <div class="card">
       <div class="card-header">
-        Add Question for <strong>{{ assignment.title }}</strong>
+        {{isUpdateMode ? 'Edit':'Add'}}
+        Question for <strong>{{ assignment.title }}</strong>
       </div>
       <div class="card-body">
         <div class="form-group row">
@@ -119,13 +120,30 @@
         ></ace-editor>
       </div>
       <div class="card-footer">
-        <button 
-          class="btn btn-primary btn-pill pull-right mr-2" 
-          type="button" 
+
+        <div class="form-group" *ngIf="showCompileError">
+          <label class="col-form-label text-danger"
+          ><i class="fa fa-sign-out"></i>&nbsp;
+            <strong >COMPILE ERROR</strong></label>
+          <div>
+              <textarea
+                name="textarea-input"
+                rows="5"
+                class="form-control border-danger text-danger"
+                placeholder="Enter Your Input Here..."
+                [ngModel]="compileErrorMessage"
+                [ngModelOptions]="{standalone:true}"
+                readonly
+              ></textarea>
+          </div>
+        </div>
+        <button
+          class="btn btn-primary btn-pill pull-right mr-2"
+          type="button"
           (click)="generateOutputsForTests()"
           [disabled]="processing"
         >
-        <i *ngIf="processing" class="fa fa-circle-o-notch fa-spin"></i>
+          <i *ngIf="processing" class="fa fa-circle-o-notch fa-spin"></i>
           {{processing?'Processing':'Generate Output For Input Tests'}}
         </button>
       </div>
@@ -155,15 +173,16 @@
                 formControlName="input"
               ></textarea>
             </div>
-            <label class="col-form-label" *ngIf="showTestOutputs"
+            <label class="col-form-label" *ngIf="showTestOutputs" [ngClass]="{'text-danger':testOutputs[i+1+''].status != 'SUCCEED'}"
               ><i class="fa fa-sign-out"></i>&nbsp;
               <strong>Test Output</strong></label>
             <div>
               <textarea
                 *ngIf="showTestOutputs"
                 name="textarea-input"
-                rows="2"
+                rows="3"
                 class="form-control"
+                [ngClass]="{'text-danger':testOutputs[i+1+''].status != 'SUCCEED'}"
                 placeholder="Your Output will appear here..."
                 formControlName="output"
                 readonly
@@ -191,11 +210,11 @@
       >
         <i class="fa fa-close"></i> Cancel
       </button>
-      
-      <button class="btn btn-primary btn-pill pull-right" type="submit">
-        <i class="fa fa-plus"></i> Add Question
+
+      <button *ngIf="isUpdateMode" class="btn btn-secondary btn-pill pull-left" type="button" (click)="location.back()"><i class="fa fa-close"></i> Cancel</button>
+      <button type="submit" class="btn btn-primary btn-pill pull-right"><i class="fa fa-{{isUpdateMode ? 'pencil':'plus'}}"></i> {{isUpdateMode ? 'Edit':'Add'}} Question
       </button>
     </div>
-    {{questionForm.value | json}}
+<!--    {{questionForm.value | json}}-->
   </form>
 </div>
