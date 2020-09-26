@@ -93,6 +93,7 @@ export class AddQuestionComponent implements OnInit, AfterViewInit {
     const language = this.questionForm.value.solutionLanguage;
     const inputs = this.questionForm.get('testCases').value;
     inputs.forEach(input => {delete input.output; });
+    this.showCompileError = false;
     this.processing = true;
     this.executionService.runProgramMultipleInputs(sourceCode, language, inputs).subscribe(
       result => {
