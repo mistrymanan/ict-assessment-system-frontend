@@ -15,6 +15,8 @@ export const config = {
     run:  'executions/run',
     runMultiple: 'executions/run-multiple',
     questions : 'assignments/questions',
-    updateQuestion : 'assignments/questions/update-question'
+    updateQuestion : 'assignments/questions/update-question',
+    runCode: 'submissions/run-code',
+    submit: 'submissions/submit'
   }
 };

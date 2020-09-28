@@ -1,42 +1,61 @@
 import {Component, OnInit, AfterViewInit, ViewChild} from '@angular/core';
 import {GlobalConstants} from '../../../global-constants';
 import {AceEditorComponent} from 'ng2-ace-editor';
-import { AssignmentsService } from '../../../services/assignments.service';
-import { ActivatedRoute, Router } from '@angular/router';
-import { UserQuestion } from '../../../models/user-question';
+import {AssignmentsService} from '../../../services/assignments.service';
+import {ActivatedRoute, Router} from '@angular/router';
+import {UserQuestion} from '../../../models/user-question';
+import {SubmissionService} from '../../../services/submission.service';
+import {RunCodeRequest} from '../../../models/run-code-request';
+import {RunCodeResponse} from '../../../models/run-code-response';
+import {SubmitCodeRequest} from '../../../models/submit-code-request';
+import {SubmitCodeResponse} from '../../../models/submit-code-response';
+
 @Component({
-    selector: 'app-view-question',
-    templateUrl: './view-question.component.html',
-    styleUrls: ['./view-question.component.css']
+  selector: 'app-view-question',
+  templateUrl: './view-question.component.html',
+  styleUrls: ['./view-question.component.css']
 })
 export class ViewQuestionComponent implements OnInit, AfterViewInit {
-    THEMES;
-    LANGUAGES;
-    currentLanguage;
-    text;
-    currentTheme;
-    hideInput: boolean;
-    hideOutput: boolean;
-    markdown;
-    currentQuestion: UserQuestion = new UserQuestion();
-    @ViewChild('editor') editor: AceEditorComponent;
-    constructor(
-        private assignmentsService: AssignmentsService,
-        private router: Router,
-        private route: ActivatedRoute
-    ) {
-        this.hideOutput = true;
-        this.hideInput = true;
-        this.currentLanguage = 'java';
-        this.currentTheme = 'monokai';
-        this.THEMES = GlobalConstants.THEMES;
-        this.LANGUAGES = GlobalConstants.LANGUAGES;
-        this.text = 'public class Hello {\n' +
-            '    public static void main(String args[]) {\n' +
-            '        System.out.println("Hello world");\n' +
-            '    }\n' +
-            '}';
-        this.markdown = `## Fibonacci Series
+  THEMES;
+  LANGUAGES;
+  currentLanguage;
+  sourceCode;
+  currentTheme;
+  hideInput: boolean;
+  hideOutput: boolean;
+  markdown;
+  allowedLanguages;
+  assignmentId: string;
+  input: string;
+  runRodeResponse: RunCodeResponse = new RunCodeResponse();
+  submitCodeResponse: SubmitCodeResponse;
+  showAssessmentResults: boolean = false;
+  currentQuestion: UserQuestion = new UserQuestion();
+  runCodeProcess: boolean = false;
+  submitProcess: boolean = false;
+  totalPassed: number;
+  totalFailed: number;
+  allowViewResult: boolean = false;
+  @ViewChild('editor') editor: AceEditorComponent;
+
+  constructor(
+    private assignmentsService: AssignmentsService,
+    private submissionService: SubmissionService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {
+    this.hideOutput = true;
+    this.hideInput = true;
+    this.currentLanguage = 'java';
+    this.currentTheme = 'monokai';
+    this.THEMES = GlobalConstants.THEMES;
+    this.LANGUAGES = GlobalConstants.LANGUAGES;
+    this.sourceCode = 'public class Hello {\n' +
+      '    public static void main(String args[]) {\n' +
+      '        System.out.println("Hello world");\n' +
+      '    }\n' +
+      '}';
+    this.markdown = `## Fibonacci Series
 ---
 Write a Program to Print Fibonacci Series upto Nth Fibonacci Number.
 
@@ -49,23 +68,82 @@ __Sample Output__
 
     1 1 2 3 5 8
 `;
-    }
-    ngAfterViewInit(): void {
-        const editor = this.editor.getEditor();
-        // editor.setOption('enableBasicAutocompletion', true);
-        editor.setOption('showPrintMargin', false);
-        editor.setOption('wrap', true);
-        editor.setFontSize(14);
-    }
+  }
 
-    ngOnInit(): void {
-        const assignmentSlug = this.route.snapshot.params.assignmentSlug;
-        const questionSlug = this.route.snapshot.params.questionSlug;
-        this.assignmentsService.getUserQuestion(assignmentSlug, questionSlug).subscribe(
-            (question) => {
-                this.currentQuestion = question;
-            }
-        );
-    }
+  ngAfterViewInit(): void {
+    const editor = this.editor.getEditor();
+    editor.setOption('enableLiveAutocompletion', true);
+    editor.setOption('showPrintMargin', false);
+    editor.setOption('wrap', true);
+    editor.setFontSize(14);
+  }
+
+  ngOnInit(): void {
+    const assignmentSlug = this.route.snapshot.params.assignmentSlug;
+    const questionSlug = this.route.snapshot.params.questionSlug;
+    this.assignmentsService.getUserQuestion(assignmentSlug, questionSlug).subscribe(
+      (question) => {
+        this.allowedLanguages = [];
+        this.currentQuestion = question;
+        for (const lang of question.allowedLanguages) {
+          this.allowedLanguages.push({
+            'name': lang,
+            'value': this.LANGUAGES.find(a => a.name === lang).value
+          });
+        }
+        this.currentLanguage = this.allowedLanguages[0].value;
+      }
+    );
+    this.assignmentsService.getAssignmentBySlug(assignmentSlug)
+      .subscribe((assignment) => {
+        this.assignmentId = assignment.id;
+      });
+    // this.runRodeResponse = {
+    //   input: '2',
+    //   output: '4',
+    //   executionTime: 14,
+    //   expectedOutput: '4',
+    //   status: 'ACCEPTED'
+    // };
+  }
+
+  runCode() {
+    const request = new RunCodeRequest();
+    request.assignmentId = this.assignmentId;
+    request.questionId = this.currentQuestion.id;
+    request.language = this.currentLanguage;
+    request.input = this.input;
+    request.sourceCode = this.sourceCode;
+    this.runCodeProcess = true;
+    this.submissionService.runCode(request)
+      .subscribe((response) => {
+        this.runRodeResponse = response;
+        this.hideOutput = false;
+        this.runCodeProcess = false;
+        this.allowViewResult = true;
+      });
+  }
+
+  submitCode() {
+    const request = new SubmitCodeRequest();
+    request.assignmentId = this.assignmentId;
+    request.questionId = this.currentQuestion.id;
+    request.sourceCode = this.sourceCode;
+    request.language = this.currentLanguage;
+    this.submitProcess = true;
+    this.submissionService.submitCode(request)
+      .subscribe((response) => {
+        this.submitCodeResponse = response;
+        console.log(response);
+        this.totalPassed = response.testCases.map(this.statusToInt).reduce((a, b) => a + b);
+        this.totalFailed = response.testCases.length - this.totalPassed;
+        this.submitProcess = false;
+        this.showAssessmentResults = true;
+      });
+  }
+
+  statusToInt(test): number {
+    return test.status === 'PASSED' ? 1 : 0;
+  }
 
 }
