@@ -29,7 +29,7 @@
       <!--        </div>-->
     </div>
     <div class="card-body" style="padding:0">
-      <ace-editor [(text)]="sourceCode" [theme]="currentTheme" [mode]="currentLanguage" #editor
+      <ace-editor [(text)]="sourceCode" [theme]="currentTheme" [mode]="langMap[currentLanguage]" #editor
                   id="editor"></ace-editor>
     </div>
     <div class="card-footer" fxLayout="column" fxLayoutGap="20px">
@@ -84,7 +84,7 @@
           <div class="form-group row pl-5 pr-5">
             <div class="alert alert-{{runRodeResponse.status == 'ACCEPTED' ? 'success': 'danger'}} col"
                  fxLayoutAlign="center center">
-              <strong>{{runRodeResponse.status.split('_').join(' ') | titlecase }}</strong>
+              <strong>{{removeUnderScore(runRodeResponse.status) | titlecase }}</strong>
             </div>
           </div>
           <div class="form-group row" *ngIf="runRodeResponse.status != 'COMPILE_ERROR'">
@@ -103,7 +103,7 @@
                             <textarea name="textarea-input"
                                       class="form-control alert alert-{{runRodeResponse.status == 'ACCEPTED'?'success':'danger'}}"
                                       placeholder="Your output will appear here..." readonly
-                                      [ngModel]="runRodeResponse.output"></textarea>
+                                      [ngModel]="runRodeResponse.output?runRodeResponse.output:runRodeResponse.message"></textarea>
             </div>
           </div>
           <div class="form-group row"
@@ -125,10 +125,10 @@
     </div>
   </div>
   <div class="card" *ngIf="showAssessmentResults">
-    <div class="card-header assessment-result {{submitCodeResponse.status == 'SUCCEED'?'passed':'failed'}}" fxLayout>
+    <div class="card-header assessment-result {{submitCodeResponse.status == 'PASSED'?'passed':'failed'}}" fxLayout>
       <div fxFlex="70">
         <i class="icon icon-badge"></i>
-        Assessment {{submitCodeResponse.status == 'SUCCEED' ? 'Passed!' : 'Failed!'}}
+        Assessment {{submitCodeResponse.status == 'PASSED' ? 'Passed!' : 'Failed!'}}
       </div>
       <div fxFlex="30">
         <i class="fa fa-hashtag"></i>
@@ -137,7 +137,7 @@
     </div>
     <div class="card-header testcase-result" fxLayout>
       <div fxFlex="70">
-        Total Test Cases: {{submitCodeResponse.testCases.length}}
+        Total Test Cases: {{submitCodeResponse.testResults.length}}
       </div>
       <div fxFlex="30" fxLayoutGap="10px">
         <div class="badge badge-success badge-pill p-2 pl-3 pr-3"><i class="fa fa-check"></i> Passed: {{totalPassed}}
@@ -147,9 +147,11 @@
       </div>
     </div>
     <div class="card-body" fxLayout="row wrap">
-      <div *ngFor="let testCase of submitCodeResponse.testCases" class="testcase" fxFlex="33"><i
-        class="fa fa-{{testCase.status == 'PASSED' ? 'check' : 'close'}} mr-2"></i>Test Case {{testCase.id}}
+      <div *ngFor="let testCase of submitCodeResponse.testResults" class="testcase" fxFlex="33">
+        <div [tooltip]="removeUnderScore(testCase.reason) | titlecase" fxFlex="nogrow"><i
+          class="fa fa-{{testCase.status == 'PASSED' ? 'check' : 'close'}} mr-2"></i> Test Case {{testCase.id}}</div>
       </div>
     </div>
   </div>
 </div>
+

@@ -25,6 +25,7 @@ export class ViewQuestionComponent implements OnInit, AfterViewInit {
   hideOutput: boolean;
   markdown;
   allowedLanguages;
+  langMap;
   assignmentId: string;
   input: string;
   runRodeResponse: RunCodeResponse = new RunCodeResponse();
@@ -36,6 +37,8 @@ export class ViewQuestionComponent implements OnInit, AfterViewInit {
   totalPassed: number;
   totalFailed: number;
   allowViewResult: boolean = false;
+  submitCompileError: boolean = false;
+  errorResponse: any;
   @ViewChild('editor') editor: AceEditorComponent;
 
   constructor(
@@ -50,6 +53,7 @@ export class ViewQuestionComponent implements OnInit, AfterViewInit {
     this.currentTheme = 'monokai';
     this.THEMES = GlobalConstants.THEMES;
     this.LANGUAGES = GlobalConstants.LANGUAGES;
+    this.langMap = GlobalConstants.langModes;
     this.sourceCode = 'public class Hello {\n' +
       '    public static void main(String args[]) {\n' +
       '        System.out.println("Hello world");\n' +
@@ -117,11 +121,19 @@ __Sample Output__
     this.runCodeProcess = true;
     this.submissionService.runCode(request)
       .subscribe((response) => {
-        this.runRodeResponse = response;
-        this.hideOutput = false;
-        this.runCodeProcess = false;
-        this.allowViewResult = true;
-      });
+          this.runRodeResponse = response;
+          this.hideOutput = false;
+          this.runCodeProcess = false;
+          this.allowViewResult = true;
+          console.log(response);
+        },
+        (error) => {
+          // console.error(error);
+          this.runRodeResponse = error.error;
+          this.hideOutput = false;
+          this.runCodeProcess = false;
+          this.allowViewResult = true;
+        });
   }
 
   submitCode() {
@@ -133,13 +145,25 @@ __Sample Output__
     this.submitProcess = true;
     this.submissionService.submitCode(request)
       .subscribe((response) => {
-        this.submitCodeResponse = response;
-        console.log(response);
-        this.totalPassed = response.testCases.map(this.statusToInt).reduce((a, b) => a + b);
-        this.totalFailed = response.testCases.length - this.totalPassed;
-        this.submitProcess = false;
-        this.showAssessmentResults = true;
-      });
+          this.submitCodeResponse = response;
+          console.log(response);
+          this.totalPassed = response.testResults.map(this.statusToInt).reduce((a, b) => a + b);
+          this.totalFailed = response.testResults.length - this.totalPassed;
+          this.submitProcess = false;
+          this.showAssessmentResults = true;
+        },
+        (error) => {
+          console.log(error);
+          this.submitProcess = false;
+        });
+  }
+
+  removeUnderScore(str: string) {
+    if (str) {
+      return str.split('_').join(' ');
+    }
+    return '';
+
   }
 
   statusToInt(test): number {
