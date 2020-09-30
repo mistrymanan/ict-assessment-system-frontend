@@ -10,49 +10,68 @@
                         <thead>
                         <tr>
                             <th scope="col" class=" text-center w-auto  "><i class="fa fa-hashtag"></i></th>
-                            <th scope="col" class=" text-center w-50 " >User</th>
+                            <th scope="col" class=" text-center w-25 " >User</th>
                             <th scope="col" class="text-center w-auto ">Submission On</th>
                             <th scope="col" class="text-center w-auto ">Status</th>
-                            <th scope="col" class="text-center w-auto ">Points</th>
+                            <th scope="col" class="text-center w-auto ">Submission Status</th>
+                            <th scope="col" class="text-center w-auto ">Score</th>
                             <th scope="col" class="text-center w-auto " >View</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
+                        <tr *ngFor="let submission of submissions; let i=index">
                             <th scope="row" class="text-center">
                                 <div class="small text-value">
 <!--                                                           <span class="number">1</span>-->
-                                    1
+                                    {{i+1}}
                                 </div>
                             </th>
                             <td>
-                                <div> Useriduserid </div>
-                                                                                            <div class="small text-muted">
-                                                                                                <span>Submitted On</span> |Jan 1, 2015
-                                                                                            </div>
+                                <div> {{submission.email}} </div>
+                              Manan Mistry
+<!--                                                                                            <div class="small text-muted">-->
+<!--                                                                                                <span>Submitted On</span> |Jan 1, 2015-->
+<!--                                                                                            </div>-->
                                 <div class="small text-muted">
-                                    <span>On</span> | Registered: Jan 1, 2015
+                                    <span>On</span> | Submitted: {{submission.time|date:'short'}}
                                 </div>
                             </td>
-                            <td class="text-center">23/08/2020</td>
+                            <td class="text-center">
+                              {{submission.time|date:'short'}}
+                            </td>
                             <td class="text-center" >
-                                     <span [class.badge]="true"
-                                           [class.badge-success]="true"
-                                           [hidden]="false">
-                                    On Time
-                                </span>
-
+                                <span *ngIf="submission.submissionStatus==='LATE'; else late" [class.badge]="true"
+                                      [class.badge-success]="true"
+                                      [hidden]="false">
+                                  On Time
+                                  </span>
+                              <ng-template #late >
                                 <span [class.badge]="true"
                                       [class.badge-danger]="true"
-                                      [hidden]="true"
-                                >
+                                      [hidden]="false">
                                     Late
                                 </span>
+                              </ng-template>
                             </td>
+                          <td class="text-center" >
+                                <span *ngIf="submission.status==='PASSED'; else failed" [class.badge]="true"
+                                      [class.badge-success]="true"
+                                      [hidden]="false">
+                                  PASSED
+                                  </span>
+                            <ng-template #failed >
+                                <span [class.badge]="true"
+                                      [class.badge-danger]="true"
+                                      [hidden]="false">
+                                    FAILED
+                                </span>
+                            </ng-template>
+                          </td>
                             <td class="text-center" >
                                 <div class="small text-value">
-                                    10/10
+
                                 </div>
+                              {{submission.score}}/{{totalPoints}}
                             </td>
                             <td class="text-center" >
                                 <button aria-pressed="true" class="btn btn-pill btn-sm btn-primary" type="button"><i class="fa fa-eye"></i> View</button>

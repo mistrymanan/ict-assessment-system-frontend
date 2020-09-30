@@ -17,11 +17,11 @@ export class GlobalConstants {
         {name: 'C', value: 'c'},
         {name: 'C++', value: 'cpp'},
     ];
-    static get langModes(){
-        if(this.langMap != null){
-            return this.langMap; 
+    static get langModes() {
+        if (this.langMap != null) {
+            return this.langMap;
         }
-        const langMap = new Map<string,string>();
+        const langMap = new Map<string, string>();
         langMap['java'] = 'java';
         langMap['python'] = 'python';
         langMap['c'] = 'c_cpp';

@@ -47,7 +47,7 @@
                 </ng-template>
               </td>
               <td class="text-center">
-                {{assignment.duration?assignment.duration + ' mins.': 'No Time Limit'}} 
+                {{assignment.duration?assignment.duration + ' mins.': 'No Time Limit'}}
               </td>
               <td class="text-center">
                 <span *ngIf="assignment.hasStartTime; else noStartTime">{{assignment.startTime|date:'short'}}</span>
