@@ -4,6 +4,7 @@ import {AssignmentsService} from '../../../services/assignments.service';
 import {SubmissionService} from '../../../services/submission.service';
 import {SubmissionDetailsResponse} from '../../../models/submissionDetails-response';
 import {Observable} from 'rxjs';
+import {Assignment} from '../../../models/assignment';
 
 @Component({
   selector: 'app-view-submissions',
@@ -13,8 +14,12 @@ import {Observable} from 'rxjs';
 export class ViewSubmissionsComponent implements OnInit {
   submissions: SubmissionDetailsResponse[] = [];
   totalPoints: number;
-  assignmentId;
-  questionId;
+  assignment: Assignment;
+  assignmentId: string;
+  assignmentName: string;
+  questionId: string;
+  assignmentSlug;
+  questionSlug;
   constructor(
     private route: ActivatedRoute,
     private submissionService: SubmissionService,
@@ -24,17 +29,36 @@ export class ViewSubmissionsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.assignmentId = this.route.snapshot.paramMap.get('assignmentId');
-    this.questionId = this.route.snapshot.paramMap.get('questionId');
-    this.assignmentsService.getAssignmentById(this.assignmentId).subscribe(
+    this.assignmentSlug = this.route.snapshot.paramMap.get('assignmentSlug');
+    this.questionSlug = this.route.snapshot.paramMap.get('questionSlug');
+
+    this.assignmentsService.getAssignmentBySlug(this.assignmentSlug).subscribe(
       assignment => {
-        this.totalPoints = assignment.questions.find(question => question.id === this.questionId).totalPoints;
+        this.assignmentName = assignment.title;
+        this.assignmentId = assignment.id;
+        const question = assignment.questions.find(res => res.slug === this.questionSlug);
+        this.questionId = question.id;
+        this.totalPoints = question.totalPoints;
+        this.submissionService
+          .submissionDetails(this.assignmentId, this.questionId)
+          .subscribe(submissions => {
+            console.log(submissions);
+            this.submissions = submissions;
+          } );
       }
     );
-    this.submissionService
-      .submissionDetails(this.assignmentId, this.questionId)
-      .subscribe(submissions => {
-        this.submissions = submissions;
-      } );
+
+    // this.assignmentsService.getQuestion(this.assignmentSlug, this.questionSlug).subscribe(
+    //   question => {
+    //     this.questionId = question.id;
+    //     this.totalPoints = question.totalPoints;
+    //   }
+    // );
+    // this.assignmentsService.getAssignmentById(this.assignmentId).subscribe(
+    //   assignment => {
+    //     this.totalPoints = assignment.questions.find(question => question.id === this.questionId).totalPoints;
+    //   }
+    // );
+
   }
 }
