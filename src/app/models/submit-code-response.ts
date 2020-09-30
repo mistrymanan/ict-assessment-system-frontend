@@ -1,6 +1,7 @@
 class TestCaseResult {
   id: string;
   status: string;
+  reason: string;
 }
 
 export class SubmitCodeResponse {
@@ -11,5 +12,5 @@ export class SubmitCodeResponse {
   submissionStatus: string;
   status: string;
   score: number;
-  testCases: TestCaseResult[];
+  testResults: TestCaseResult[];
 }

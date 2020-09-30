@@ -4,4 +4,5 @@ export class RunCodeResponse {
   executionTime: number;
   expectedOutput: string;
   status: string;
+  message: string;
 }
