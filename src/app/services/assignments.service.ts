@@ -41,6 +41,7 @@ export class AssignmentsService {
     return this.http.get<Question>(`http://${config.host}/${config.endpoints.questions}?assignmentSlug=${assignmentSlug}&questionSlug=${questionSlug}`,
     );
   }
+
   updateQuestion(assignmentID: string, questionId: string, question: Question) {
     question.id = questionId;
     const data = {assignmentId: assignmentID, question: question};
@@ -64,6 +65,10 @@ export class AssignmentsService {
     return this.http.get<any>(
       `http://${config.host}/${config.endpoints.assignments}`
     ).pipe(map(res => res.assignments));
+  }
+  getAssignmentById(assignmentId: String): Observable<Assignment> {
+    return this.http.get<Assignment>(
+      `http://${config.host}/${config.endpoints.getAssignment}/${assignmentId}`);
   }
   // loadAllAssignments(): void {
   //   console.log('Assignments loaded');

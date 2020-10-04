@@ -6,6 +6,7 @@ export const config = {
     activeAssignmentBySlug: 'assignments/active-assignments/slug',
     getUserQuestion: 'assignments/active-assignments/get-question',
     createAssignment: 'assignments',
+    getAssignment: 'assignments/id',
     deleteAssignment: 'assignments/id',
     updateAssignment: 'assignments/id',
     toggleAssignmentStatus: 'assignments/id',
@@ -15,6 +16,9 @@ export const config = {
     run:  'executions/run',
     runMultiple: 'executions/run-multiple',
     questions : 'assignments/questions',
-    updateQuestion : 'assignments/questions/update-question'
+    updateQuestion : 'assignments/questions/update-question',
+    runCode: 'submissions/run-code',
+    submit: 'submissions/submit',
+    submission: 'submissions'
   }
 };

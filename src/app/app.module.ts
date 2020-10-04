@@ -48,26 +48,28 @@ import { UserAssignmentViewComponent } from './views/user-assignments/user-assig
 import { ViewQuestionComponent } from './views/user-assignments/view-question/view-question.component';
 import { FormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import {TooltipModule} from 'ngx-bootstrap/tooltip';
 @NgModule({
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    AppRoutingModule,
-    AppAsideModule,
-    AppBreadcrumbModule.forRoot(),
-    AppFooterModule,
-    AppHeaderModule,
-    AppSidebarModule,
-    PerfectScrollbarModule,
-    BsDropdownModule.forRoot(),
-    TabsModule.forRoot(),
-    ChartsModule,
-    MarkdownModule.forRoot(),
-    AceEditorModule,
-    HttpClientModule,
-    FormsModule,
-    FlexLayoutModule
-  ],
+    imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        AppRoutingModule,
+        AppAsideModule,
+        AppBreadcrumbModule.forRoot(),
+        AppFooterModule,
+        AppHeaderModule,
+        AppSidebarModule,
+        PerfectScrollbarModule,
+        BsDropdownModule.forRoot(),
+        TabsModule.forRoot(),
+        ChartsModule,
+        MarkdownModule.forRoot(),
+        AceEditorModule,
+        HttpClientModule,
+        FormsModule,
+        FlexLayoutModule,
+        TooltipModule.forRoot(),
+    ],
   declarations: [
     AppComponent,
     ...APP_CONTAINERS,
