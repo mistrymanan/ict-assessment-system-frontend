@@ -65,5 +65,4 @@ export class ViewSubmissionsComponent implements OnInit {
   openAnswers(email: string) {
     this.router.navigate(['/submissions', this.assignmentSlug, 'answers'], {relativeTo: this.route, queryParams : {'email': email}});
   }
-
 }
