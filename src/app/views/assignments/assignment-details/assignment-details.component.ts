@@ -20,9 +20,14 @@ export class AssignmentDetailsComponent implements OnInit {
     this.assignment = new Assignment();
   }
 
-  async ngOnInit() {
+  ngOnInit() {
     const slug  = this.route.snapshot.params.slug;
-    this.assignment = await this.assignmentService.getAssignmentBySlug(slug).toPromise();
+    console.log(slug);
+    this.assignmentService.getAssignmentBySlug(slug).subscribe(
+      (assignment) => {
+        this.assignment = assignment;
+      }
+    )    
   }
   toggleStatus(): void {
     this.assignmentService.toggleAssignmentStatus(this.assignment.id).subscribe(

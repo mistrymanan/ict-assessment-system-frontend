@@ -1,19 +1,26 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {Routes, RouterModule} from '@angular/router';
 
 // Import Containers
-import { DefaultLayoutComponent } from './containers';
+import {DefaultLayoutComponent} from './containers';
 
-import { P404Component } from './views/error/404.component';
-import { P500Component } from './views/error/500.component';
-import { UserAssignmentViewComponent } from './views/user-assignments/user-assignment-view/user-assignment-view.component';
-import { ViewQuestionComponent } from './views/user-assignments/view-question/view-question.component';
-
+import {P404Component} from './views/error/404.component';
+import {P500Component} from './views/error/500.component';
+import {UserAssignmentViewComponent} from './views/user-assignments/user-assignment-view/user-assignment-view.component';
+import {ViewQuestionComponent} from './views/user-assignments/view-question/view-question.component';
+import {AuthComponent} from './views/auth/auth.component';
+import {AngularFireAuthGuard, redirectUnauthorizedTo} from '@angular/fire/auth-guard';
+const redirectToLogin = () => redirectUnauthorizedTo(['login'])
 export const routes: Routes = [
   {
     path: '',
     redirectTo: 'dashboard',
     pathMatch: 'full',
+  },
+  {
+    path: 'login',
+    component: AuthComponent,
+    pathMatch: 'full'
   },
   {
     path: '404',
@@ -32,8 +39,10 @@ export const routes: Routes = [
   {
     path: '',
     component: DefaultLayoutComponent,
+    canActivate: [AngularFireAuthGuard],
     data: {
-      title: 'Home'
+      title: 'Home',
+      authGuardPipe: redirectToLogin
     },
     children: [
       {
@@ -70,11 +79,12 @@ export const routes: Routes = [
       }
     ]
   },
-  { path: '**', component: P404Component }
+  {path: '**', component: P404Component}
 ];
 
 @NgModule({
-  imports: [ RouterModule.forRoot(routes) ],
-  exports: [ RouterModule ]
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule {
+}

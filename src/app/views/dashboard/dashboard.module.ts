@@ -3,12 +3,15 @@ import { DashboardComponent } from './dashboard.component';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { CommonModule } from '@angular/common';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { environment } from '../../../environments/environment';
 
 @NgModule({
   imports: [
     CommonModule,
     DashboardRoutingModule,
-    FlexLayoutModule
+    FlexLayoutModule,
   ],
   declarations: [ DashboardComponent ]
 })
