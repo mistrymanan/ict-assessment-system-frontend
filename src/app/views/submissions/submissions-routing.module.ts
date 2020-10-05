@@ -7,21 +7,21 @@ import {ViewAnswerComponent} from './view-answer/view-answer.component';
 
 const routes: Routes = [
   {
-    path: ':assignmentSlug/question/:questionSlug',
+    path: ':assignmentSlug',
     component: ViewSubmissionsComponent,
     data: {
       title: 'View Submissions'
     }
   },
   {
-    path: ':id/answers',
+    path: ':assignmentSlug/answers',
     component: ViewSubmissionsAnswersComponent,
     data: {
       title: 'View Submission Answers'
     }
   },
   {
-    path: ':id/answers/:answer_id',
+    path: ':assignmentSlug/answers/user',
     component: ViewAnswerComponent,
     data: {
       title: 'View Submission Answer'

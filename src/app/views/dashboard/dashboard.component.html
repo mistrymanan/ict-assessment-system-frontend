@@ -2,25 +2,25 @@
   <div fxLayout="row wrap" fxLayoutGap="25px">
       <div class="card" fxFlex="31" *ngFor="let assignment of activeAssignments" (click)="openAssignment(assignment.slug)">
         <div class="card-body p-0 clearfix">
-          <i 
+          <i
             class="fa fa-book bg-primary pt-5 pb-5 pl-4 pr-4 font-5xl mr-3 float-left h-100"
           ></i>
           <div class="h6 text-primary mb-1 pt-3">{{ assignment.title}}</div>
           <div class="col mt-3">
             <div class="row">
               <div class="text-muted text-uppercase font-weight-bold font-xs m-1 " fxFlex>
-                Status : 
+                Status :
               </div>
-              <div class="m-1" fxFlex> 
+              <div class="m-1" fxFlex>
                 <span class="badge badge-{{assignment.currentStatus?'success':'secondary'}}">{{assignment.currentStatus?assignment.currentStatus:'Not Started'}}</span>
               </div>
             </div>
             <div>
               <div class="row">
                 <div class="text-muted text-uppercase font-weight-bold font-xs m-1 " fxFlex>
-                  Deadline : 
+                  Deadline :
                 </div>
-                <div class="m-1 mb-3" fxFlex> 
+                <div class="m-1 mb-3" fxFlex>
                   <span class="">9/20/20, 1:25 PM</span>
                 </div>
               </div>
@@ -30,25 +30,25 @@
       </div>
     <!-- <div class="card" fxFlex="32">
       <div class="card-body p-0 clearfix">
-        <i 
+        <i
           class="fa fa-book bg-primary pt-5 pb-5 pl-4 pr-4 font-5xl mr-3 float-left h-100"
         ></i>
         <div class="h6 text-primary mb-1 pt-3">Spring Boot Master Class</div>
         <div class="col mt-3">
           <div class="row">
             <div class="text-muted text-uppercase font-weight-bold font-xs m-1 " fxFlex>
-              Status : 
+              Status :
             </div>
-            <div class="m-1" fxFlex> 
+            <div class="m-1" fxFlex>
               <span class="badge badge-success">Completed</span>
             </div>
           </div>
           <div>
             <div class="row">
               <div class="text-muted text-uppercase font-weight-bold font-xs m-1 " fxFlex>
-                Deadline : 
+                Deadline :
               </div>
-              <div class="m-1 mb-3" fxFlex> 
+              <div class="m-1 mb-3" fxFlex>
                 <span class="">9/20/20, 1:25 PM</span>
               </div>
             </div>
@@ -58,25 +58,25 @@
     </div>
     <div class="card" fxFlex="32">
       <div class="card-body p-0 clearfix">
-        <i 
+        <i
           class="fa fa-book bg-primary pt-5 pb-5 pl-4 pr-4 font-5xl mr-3 float-left h-100"
         ></i>
         <div class="h5 text-primary mb-1 pt-3">Spring Boot Master Class</div>
         <div class="col mt-3">
           <div class="row">
             <div class="text-muted text-uppercase font-weight-bold font-xs m-1 " fxFlex>
-              Status : 
+              Status :
             </div>
-            <div class="m-1" fxFlex> 
+            <div class="m-1" fxFlex>
               <span class="badge badge-secondary">Not Completed</span>
             </div>
           </div>
           <div>
             <div class="row">
               <div class="text-muted text-uppercase font-weight-bold font-xs m-1 " fxFlex>
-                Deadline : 
+                Deadline :
               </div>
-              <div class="m-1 mb-3" fxFlex> 
+              <div class="m-1 mb-3" fxFlex>
                 <span class="">9/20/20, 1:25 PM</span>
               </div>
             </div>
@@ -86,25 +86,25 @@
     </div>
     <div class="card" fxFlex="32">
       <div class="card-body p-0 clearfix">
-        <i 
+        <i
           class="fa fa-book bg-primary pt-5 pb-5 pl-4 pr-4 font-5xl mr-3 float-left h-100"
         ></i>
         <div class="h6 text-primary mb-1 pt-3">Spring Boot Master Class</div>
         <div class="col mt-3">
           <div class="row">
             <div class="text-muted text-uppercase font-weight-bold font-xs m-1 " fxFlex>
-              Status : 
+              Status :
             </div>
-            <div class="m-1" fxFlex> 
+            <div class="m-1" fxFlex>
               <span class="badge badge-secondary">Not Completed</span>
             </div>
           </div>
           <div>
             <div class="row">
               <div class="text-muted text-uppercase font-weight-bold font-xs m-1 " fxFlex>
-                Deadline : 
+                Deadline :
               </div>
-              <div class="m-1 mb-3" fxFlex> 
+              <div class="m-1 mb-3" fxFlex>
                 <span class="">9/20/20, 1:25 PM</span>
               </div>
             </div>

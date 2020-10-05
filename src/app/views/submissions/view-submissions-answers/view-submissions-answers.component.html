@@ -3,8 +3,8 @@
     <div class="col-6 col-md-3">
       <div class="card">
         <div class="card-body p-0 clearfix">
-          <i class="fa fa-lightbulb-o bg-success p-4 font-2xl mr-3 float-left"></i>
-          <div class="h5 text-success mb-0 pt-3">100</div>
+          <i class="fa fa-lightbulb-o bg-primary p-4 font-2xl mr-3 float-left"></i>
+          <div class="h5 text-primary mb-0 pt-3">{{submissions.assignmentScore}}</div>
           <div class="text-muted text-uppercase font-weight-bold font-xs">Total Points</div>
         </div>
       </div>
@@ -12,9 +12,9 @@
     <div class="col-6 col-md-3">
       <div class="card">
         <div class="card-body p-0 clearfix">
-          <i class="fa fa-clock-o bg-danger p-4 font-2xl mr-3 float-left"></i>
-          <div class="h5 text-danger mb-0 pt-3">120 mins</div>
-          <div class="text-muted text-uppercase font-weight-bold font-xs">Duration</div>
+          <i class="fa fa-trophy  bg-success p-4 font-2xl mr-3 float-left"></i>
+          <div class="h5 text-success mb-0 pt-3">{{submissions.currentScore}}</div>
+          <div class="text-muted text-uppercase font-weight-bold font-xs">Achieved Points</div>
         </div>
       </div>
     </div>
@@ -22,20 +22,50 @@
       <div class="card">
         <div class="card-body p-0 clearfix">
           <i class="fa fa-hashtag bg-primary p-4 font-2xl mr-3 float-left"></i>
-          <div class="h5 text-primary mb-0 pt-3">2</div>
+          <div class="h5 text-primary mb-0 pt-3">{{submissions.questionEntities.length}}</div>
           <div class="text-muted text-uppercase font-weight-bold font-xs">Questions</div>
         </div>
       </div>
     </div>
+    <ng-template [ngIf]="submissions.submissionStatus==='COMPLETED'"]>
     <div class="col-6 col-md-3">
       <div class="card">
         <div class="card-body p-0 clearfix">
-          <i class="fa fa-hourglass-2 bg-info p-4 font-2xl mr-3 float-left"></i>
-          <div class="h6 text-info mb-1 pt-3">In Progress</div>
+          <i class="fa fa-check-circle bg-success p-4 font-2xl mr-3 float-left"></i>
+          <div class="h6 text-success mb-1 pt-3">
+              Completed
+          </div>
           <div class="text-muted text-uppercase font-weight-bold font-xs">Status</div>
         </div>
       </div>
     </div>
+    </ng-template>
+    <ng-template [ngIf]="submissions.submissionStatus==='IN_PROGRESS'"]>
+      <div class="col-6 col-md-3">
+        <div class="card">
+          <div class="card-body p-0 clearfix">
+            <i class="fa fa-hourglass-half bg-info p-4 font-2xl mr-3 float-left"></i>
+            <div class="h6 text-info mb-1 pt-3">
+              In Progress
+            </div>
+            <div class="text-muted text-uppercase font-weight-bold font-xs">Status</div>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+    <ng-template [ngIf]="submissions.submissionStatus==='LATE_SUBMITTED'"]>
+      <div class="col-6 col-md-3">
+        <div class="card">
+          <div class="card-body p-0 clearfix">
+            <i class="fa fa-clock-o bg-danger p-4 font-2xl mr-3 float-left"></i>
+            <div class="h6 text-danger mb-1 pt-3">
+              Completed
+            </div>
+            <div class="text-muted text-uppercase font-weight-bold font-xs">Status</div>
+          </div>
+        </div>
+      </div>
+    </ng-template>
   </div>
 
     <div class="row">
@@ -57,7 +87,7 @@
 <!--            </div>-->
             <div class="card">
                 <div class="card-header">
-                    John wick
+                    Submission Of {{submissions.email}}
                 </div>
                 <div class="card-body">
                     <table class="table table-bordered table-striped">
@@ -66,48 +96,73 @@
                             <th  scope="col" class=" text-center w-auto "><i class="fa fa-hashtag"></i></th>
                             <th  scope="col"  class=" text-center w-100 " >Question Title </th>
                             <th scope="col" class="text-center w-auto ">Submission On</th>
-                            <th scope="col" class="text-center w-auto ">Status</th>
-                            <th scope="col" class="text-center w-auto ">Points</th>
+<!--                            <th scope="col" class="text-center w-auto ">Question Status</th>-->
+                            <th scope="col" class="text-center w-auto ">Result</th>
+                            <th scope="col" class="text-center w-auto ">Score</th>
                             <th scope="col" class="text-center w-auto " >View</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <th  scope="row" class="text-center">
-                                <div class="small text-value">
-                                1
-                                </div>
-                            </th>
-                            <td>
-                                <div> Question 1 </div>
-                            </td>
-                          <td class="text-center">23/08/2020</td>
-                          <td class="text-center" >
-                                     <span [class.badge]="true"
-                                           [class.badge-success]="true"
-                                           [hidden]="false">
-                                            On Time
-                                      </span>
-                                      <span [class.badge]="true"
-                                  [class.badge-danger]="true"
-                                  [hidden]="true">
-                                    Late
-                                </span>
+                        <tr *ngFor="let response of submissions.questionEntities; let i=index" >
+                          <th  scope="row" class="text-center">
+                            <div class="small text-value">
+                              {{i+1}}
+                            </div>
+                          </th>
+                          <td>
+                            <div> {{response.title}} </div>
                           </td>
-                            <td class="text-center" >10/10</td>
-                            <td class="text-center" >
-                                <button aria-pressed="true" class="btn btn-pill btn-sm btn-primary" type="button">View</button>
-                            </td>
+                          <td class="text-center">
+                            04/10/2020
+<!--                            {{response.time|date:'short'}}-->
+                          </td>
+<!--                          <td class="text-center" >-->
+<!--                            <ng-template [ngIf]="response.questionStatus==='IN_PROGRESS'" ] >-->
+<!--                                                          <span [class.badge]="true"-->
+<!--                                                                [class.badge-primary]="true"-->
+<!--                                                                [hidden]="false">-->
+<!--                                                              In Progress-->
+<!--                                                          </span>-->
+<!--                            </ng-template>-->
+<!--                            <ng-template [ngIf]="response.questionStatus==='COMPLETED'" ] >-->
+<!--                                                          <span [class.badge]="true"-->
+<!--                                                                [class.badge-success]="true"-->
+<!--                                                                [hidden]="false">-->
+<!--                                                              Completed-->
+<!--                                                          </span>-->
+<!--                            </ng-template>-->
+<!--                          </td>-->
+                          <td class="text-center" >
+                            <ng-template [ngIf]="response.resultStatus==='FAILED'" ] >
+                                                          <span [class.badge]="true"
+                                                                [class.badge-danger]="true"
+                                                                [hidden]="false">
+                                                              FAILED
+                                                          </span>
+                            </ng-template>
+                            <ng-template [ngIf]="response.resultStatus==='PASSED'" ] >
+                                                          <span [class.badge]="true"
+                                                                [class.badge-success]="true"
+                                                                [hidden]="false">
+                                                              PASSED
+                                                          </span>
+                            </ng-template>
+                          </td>
+                          <td class="text-center" >{{response.score}}/{{response.totalPoints}}</td>
+                          <td class="text-center" >
+                            <button aria-pressed="true" class="btn btn-pill btn-sm btn-primary" (click)="viewBuild(assignmentId,response.questionId,submissions.email,response.buildId)" type="button">View</button>
+                          </td>
                         </tr>
-                        <tr>
+<!--                        <tr>-->
 
-                          <th scope="row" colspan="1"></th>
-                          <td></td>
-                            <td></td>
-                          <td class="font-weight-bold"> Total Score</td>
-                          <td>50/100</td>
+<!--                          <th scope="row" colspan="1"></th>-->
+<!--                          <td></td>-->
+<!--                            <td></td>-->
+<!--                          <td></td>-->
+<!--                          <td class="font-weight-bold"> Total Score</td>-->
+<!--                          <td>{{submissions.currentScore}}/{{submissions.assignmentScore}}</td>-->
 
-                        </tr>
+<!--                        </tr>-->
                         </tbody>
                     </table>
                 </div>

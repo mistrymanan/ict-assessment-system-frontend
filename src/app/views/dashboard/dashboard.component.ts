@@ -1,9 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { getStyle, hexToRgba } from '@coreui/coreui/dist/js/coreui-utilities';
-import { CustomTooltips } from '@coreui/coreui-plugin-chartjs-custom-tooltips';
-import { AssignmentsService } from '../../services/assignments.service';
-import { ActiveAssignment } from '../../models/active-assignment';
-import { Router } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {AssignmentsService} from '../../services/assignments.service';
+import {ActiveAssignment} from '../../models/active-assignment';
+import {Router} from '@angular/router';
 
 @Component({
   templateUrl: 'dashboard.component.html',
@@ -12,17 +10,23 @@ import { Router } from '@angular/router';
 export class DashboardComponent implements OnInit {
   constructor(
     private assignmentsService: AssignmentsService,
-    private router: Router
-    ){}
+    private router: Router,
+  ) {
+  }
+
   activeAssignments: ActiveAssignment[];
+
   ngOnInit(): void {
     this.assignmentsService.getAllActiveAssignments().subscribe(
       (assignments) => {
         this.activeAssignments = assignments;
       }
-    )
-   }
-   openAssignment(slug: string){
+    );
+  }
+
+  openAssignment(slug: string) {
     this.router.navigate([slug]);
-   }
+  }
+
+
 }

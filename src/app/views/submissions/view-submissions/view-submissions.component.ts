@@ -17,9 +17,7 @@ export class ViewSubmissionsComponent implements OnInit {
   assignment: Assignment;
   assignmentId: string;
   assignmentName: string;
-  questionId: string;
   assignmentSlug;
-  questionSlug;
   constructor(
     private route: ActivatedRoute,
     private submissionService: SubmissionService,
@@ -30,23 +28,26 @@ export class ViewSubmissionsComponent implements OnInit {
 
   ngOnInit(): void {
     this.assignmentSlug = this.route.snapshot.paramMap.get('assignmentSlug');
-    this.questionSlug = this.route.snapshot.paramMap.get('questionSlug');
+    // this.questionSlug = this.route.snapshot.paramMap.get('questionSlug');
+
 
     this.assignmentsService.getAssignmentBySlug(this.assignmentSlug).subscribe(
       assignment => {
         this.assignmentName = assignment.title;
         this.assignmentId = assignment.id;
-        const question = assignment.questions.find(res => res.slug === this.questionSlug);
-        this.questionId = question.id;
-        this.totalPoints = question.totalPoints;
+        // const question = assignment.questions.find(res => res.slug === this.questionSlug);
+        // this.questionId = question.id;
+        // this.totalPoints = question.totalPoints;
         this.submissionService
-          .submissionDetails(this.assignmentId, this.questionId)
+          .submissionDetails(this.assignmentId)
           .subscribe(submissions => {
             console.log(submissions);
             this.submissions = submissions;
           } );
       }
     );
+
+
 
     // this.assignmentsService.getQuestion(this.assignmentSlug, this.questionSlug).subscribe(
     //   question => {
@@ -60,5 +61,8 @@ export class ViewSubmissionsComponent implements OnInit {
     //   }
     // );
 
+  }
+  openAnswers(email: string) {
+    this.router.navigate(['/submissions', this.assignmentSlug, 'answers'], {relativeTo: this.route, queryParams : {'email': email}});
   }
 }
