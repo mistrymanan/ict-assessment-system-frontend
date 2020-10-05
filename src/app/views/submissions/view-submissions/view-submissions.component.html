@@ -3,59 +3,75 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    Assignment Name
+                    Submissions for {{assignmentName}}
                 </div>
                 <div class="card-body">
                     <table class="table table-bordered table-striped">
                         <thead>
                         <tr>
                             <th scope="col" class=" text-center w-auto  "><i class="fa fa-hashtag"></i></th>
-                            <th scope="col" class=" text-center w-50 " >User</th>
-                            <th scope="col" class="text-center w-auto ">Submission On</th>
-                            <th scope="col" class="text-center w-auto ">Status</th>
-                            <th scope="col" class="text-center w-auto ">Points</th>
+                            <th scope="col" class=" text-center w-25 " >User</th>
+                            <th scope="col" class="text-center w-auto ">Started At</th>
+                            <th scope="col" class="text-center w-auto ">Completed At</th>
+                            <th scope="col" class="text-center w-auto ">Submission Status</th>
+                            <th scope="col" class="text-center w-auto ">Score</th>
                             <th scope="col" class="text-center w-auto " >View</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
+                        <tr *ngFor="let submission of submissions; let i=index">
                             <th scope="row" class="text-center">
                                 <div class="small text-value">
 <!--                                                           <span class="number">1</span>-->
-                                    1
+                                    {{i+1}}
                                 </div>
                             </th>
                             <td>
-                                <div> Useriduserid </div>
-                                                                                            <div class="small text-muted">
-                                                                                                <span>Submitted On</span> |Jan 1, 2015
-                                                                                            </div>
-                                <div class="small text-muted">
-                                    <span>On</span> | Registered: Jan 1, 2015
-                                </div>
+                                <div> {{submission.email}} </div>
+<!--                              Manan Mistry-->
+<!--                                                                                            <div class="small text-muted">-->
+<!--                                                                                                <span>Submitted On</span> |Jan 1, 2015-->
+<!--                                                                                            </div>-->
+<!--                                <div class="small text-muted">-->
+<!--                                    <span>On</span> | Submitted: {{submission.startOn|date:'short'}}-->
+<!--                                </div>-->
                             </td>
-                            <td class="text-center">23/08/2020</td>
-                            <td class="text-center" >
-                                     <span [class.badge]="true"
-                                           [class.badge-success]="true"
-                                           [hidden]="false">
-                                    On Time
-                                </span>
-
-                                <span [class.badge]="true"
-                                      [class.badge-danger]="true"
-                                      [hidden]="true"
-                                >
-                                    Late
-                                </span>
+                            <td class="text-center">
+                              {{submission.startOn|date:'short'}}
+                            </td>
+                          <td class="text-center">
+                            {{submission.completedOn|date:'short'}}
+                          </td>
+                          <td  class="text-center" >
+                                                        <ng-template [ngIf]="submission.submissionStatus==='LATE_SUBMITTED'" ] >
+                                                          <span [class.badge]="true"
+                                                                [class.badge-danger]="true"
+                                                                [hidden]="false">
+                                                              Late
+                                                          </span>
+                                                        </ng-template>
+                                                        <ng-template [ngIf]="submission.submissionStatus==='IN_PROGRESS'" ] >
+                                                          <span [class.badge]="true"
+                                                                [class.badge-primary]="true"
+                                                                [hidden]="false">
+                                                              In Progress
+                                                          </span>
+                                                        </ng-template>
+                                                        <ng-template [ngIf]="submission.submissionStatus==='COMPLETED'" ] >
+                                                          <span [class.badge]="true"
+                                                                [class.badge-success]="true"
+                                                                [hidden]="false">
+                                                              Completed
+                                                          </span>
+                                                        </ng-template>
                             </td>
                             <td class="text-center" >
                                 <div class="small text-value">
-                                    10/10
                                 </div>
+                              {{submission.currentScore}}/{{submission.assignmentScore}}
                             </td>
                             <td class="text-center" >
-                                <button aria-pressed="true" class="btn btn-pill btn-sm btn-primary" type="button"><i class="fa fa-eye"></i> View</button>
+                                <button aria-pressed="true" class="btn btn-pill btn-sm btn-primary" type="button" (click)="openAnswers(submission.email)" ><i class="fa fa-eye"></i> View</button>
                             </td>
                         </tr>
                         <!--                        <tbody>-->
