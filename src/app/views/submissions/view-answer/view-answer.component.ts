@@ -28,6 +28,8 @@ export class ViewAnswerComponent implements OnInit {
   question: SubmissionQuestionDetailsResponse;
   email: string;
   assignmentSlug;
+  totalPassed: number;
+  totalFailed: number;
   @ViewChildren(AceEditorComponent) editors: QueryList<AceEditorComponent>;
   constructor(
     private route: ActivatedRoute,
@@ -56,14 +58,23 @@ __Sample Output__
      this.email = this.route.snapshot.queryParamMap.get('email');
      this.buildId = this.route.snapshot.queryParamMap.get('buildId');
      this.questionId = this.route.snapshot.queryParamMap.get('questionId');
-    this.submissionService
-      .submissionUserDetails(this.assignmentId, this.email)
-      .subscribe(submissions => {
-        this.submission = submissions;
-          this.question = this.submission.questionEntities.find(
-            q => q.questionId === this.questionId
-          );
-      });
+    // this.submissionService
+    //   .submissionUserDetails(this.assignmentId, this.email)
+    //   .subscribe(submissions => {
+    //     this.submission = submissions;
+    //       this.question = this.submission.questionEntities.find(
+    //         q => q.questionId === this.questionId
+    //       );
+    //   });
+    this.submissionService.getUserResponse(this.assignmentId, this.questionId, this.email)
+      .subscribe(
+        res => {
+          this.question = res;
+          this.totalPassed = res.testResults.map(this.statusToInt).reduce((a, b) => a + b);
+          this.totalFailed = res.testResults.length - this.totalPassed;
+          console.log(this.question);
+        }
+      );
     this.buildService
       .getBuild(this.buildId)
       .subscribe(
@@ -71,7 +82,6 @@ __Sample Output__
           // console.log(build);
           this.build = build;
           this.solutionLanguage = this.build.language;
-          console.log(this.build);
         }
       );
 
@@ -86,5 +96,16 @@ __Sample Output__
     // });
 
   }
+  removeUnderScore(str: string) {
+    if (str) {
+      return str.split('_').join(' ');
+    }
+    return '';
+
+  }
+  statusToInt(test): number {
+    return test.status === 'PASSED' ? 1 : 0;
+  }
+
 
 }

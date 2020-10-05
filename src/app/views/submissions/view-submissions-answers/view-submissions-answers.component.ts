@@ -44,7 +44,10 @@ export class ViewSubmissionsAnswersComponent implements OnInit {
       }
     );
   }
-  openBuild(assignmentId: string, email: string, buildId: string) {
-    this.router.navigate(['/submissions', this.assignmentSlug, 'answers', buildId], {relativeTo: this.route, queryParams : {'email': email , 'assignmentId': assignmentId}});
+  viewBuild(assignmentId: string, questionId: string, email: string, buildId: string) {
+    this.router.navigate(['/submissions', this.assignmentSlug, 'answers', 'user'],
+      {
+        relativeTo: this.route,
+        queryParams : {'email': email , 'assignmentId': assignmentId, 'questionId': questionId, 'buildId': buildId}});
   }
 }

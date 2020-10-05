@@ -5,8 +5,8 @@
     <div class="col-6 col-md-3">
       <div class="card">
         <div class="card-body p-0 clearfix">
-          <i class="fa fa-lightbulb-o bg-success p-4 font-2xl mr-3 float-left"></i>
-          <div class="h5 text-success mb-0 pt-3">100</div>
+          <i class="fa fa-lightbulb-o bg-primary p-4 font-2xl mr-3 float-left"></i>
+          <div class="h5 text-primary mb-0 pt-3">{{question.totalPoints}}</div>
           <div class="text-muted text-uppercase font-weight-bold font-xs">Total Points</div>
         </div>
       </div>
@@ -14,9 +14,9 @@
     <div class="col-6 col-md-3">
       <div class="card">
         <div class="card-body p-0 clearfix">
-          <i class="fa fa-clock-o bg-danger p-4 font-2xl mr-3 float-left"></i>
-          <div class="h5 text-danger mb-0 pt-3">120 mins</div>
-          <div class="text-muted text-uppercase font-weight-bold font-xs">Duration</div>
+          <i class="fa fa-trophy  bg-success p-4 font-2xl mr-3 float-left"></i>
+          <div class="h5 text-success mb-0 pt-3">{{question.score}}</div>
+          <div class="text-muted text-uppercase font-weight-bold font-xs">Achieved Points</div>
         </div>
       </div>
     </div>
@@ -24,26 +24,45 @@
       <div class="card">
         <div class="card-body p-0 clearfix">
           <i class="fa fa-code bg-primary p-4 font-2xl mr-3 float-left"></i>
-          <div class="h5 text-primary mb-0 pt-3">JAVA</div>
+          <div class="h5 text-primary mb-0 pt-3">{{build.language | titlecase}}</div>
           <div class="text-muted text-uppercase font-weight-bold font-xs">Language</div>
         </div>
       </div>
     </div>
-    <div class="col-6 col-md-3">
-      <div class="card">
-        <div class="card-body p-0 clearfix">
-          <i class="fa fa-hourglass-2 bg-info p-4 font-2xl mr-3 float-left"></i>
-          <div class="h6 text-info mb-1 pt-3">In Progress</div>
-          <div class="text-muted text-uppercase font-weight-bold font-xs">Status</div>
+    <ng-template [ngIf]="question.resultStatus==='PASSED'"]>
+      <div class="col-6 col-md-3">
+        <div class="card">
+          <div class="card-body p-0 clearfix">
+            <i class="fa fa-check-circle bg-success p-4 font-2xl mr-3 float-left"></i>
+            <div class="h6 text-success mb-1 pt-3">
+              PASSED
+            </div>
+            <div class="text-muted text-uppercase font-weight-bold font-xs">Result</div>
+          </div>
         </div>
       </div>
-    </div>
+    </ng-template>
+    <ng-template [ngIf]="question.resultStatus==='FAILED'"]>
+      <div class="col-6 col-md-3">
+        <div class="card">
+          <div class="card-body p-0 clearfix">
+            <i class="fa fa-close bg-danger p-4 font-2xl mr-3 float-left"></i>
+            <div class="h6 text-danger mb-1 pt-3">
+              FAILED
+            </div>
+            <div class="text-muted text-uppercase font-weight-bold font-xs">Result</div>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+
   </div>
   <div class="card">
     <div class="card-header">
       <div class="d-flex flex-row">
-        <div class="d-flex p-1"  > Question:</div>
+        <div class="d-flex p-1"  > Question: {{question.title}}</div>
         <div class="ml-auto p-1" >
+          Name: {{email}}
 <!--          Name : {{submissions.email}}-->
           <!--                            <button aria-pressed="true" class="btn btn-block btn-success " type="button"> <i class="fa fa-plus"></i> Create</button>-->
         </div>
@@ -61,51 +80,49 @@
             </div>
         </div>
         <div class="card-body p-0">
-<!--            <ace-editor [theme]="'monokai'" [(text)]="build.sourceCode" [mode]="build.language"  class="editor"></ace-editor>-->
+            <ace-editor [theme]="'monokai'" [(text)]="build.sourceCode" [mode]="build.language"  class="editor"></ace-editor>
         </div>
     </div>
   <div class="card">
-    <div class="card-header assessment-result passed" fxLayout>
-      <div fxFlex="70" >
+    <div class="card-header assessment-result {{question.resultStatus == 'PASSED'?'passed':'failed'}}" fxLayout>
+      <div fxFlex="70">
         <i class="icon icon-badge"></i>
-        Assessment Passed!
+        Assessment {{question.resultStatus == 'PASSED' ? 'Passed!' : 'Failed!'}}
       </div>
       <div fxFlex="30">
         <i class="fa fa-hashtag"></i>
-        Score: 60/100
+        Score: {{question.score |number}}/{{question.totalPoints}}
       </div>
     </div>
-    <div class="card-header assessment-result failed" fxLayout>
-      <div fxFlex="70" >
-        <i class="icon icon-badge"></i>
-        Assessment Failed!
-      </div>
-      <div fxFlex="30">
-        <i class="fa fa-hashtag"></i>
-        Score: 60/100
-      </div>
-    </div>
+
+
     <div class="card-header testcase-result" fxLayout>
       <div fxFlex="70" >
-        Total Test Cases: 10
+        Total Test Cases: {{question.testResults.length}}
       </div>
       <div fxFlex="30" fxLayoutGap="10px">
-        <div class="badge badge-success badge-pill p-2 pl-3 pr-3"> <i class="fa fa-check"></i> Passed: 6</div>
-        <div class="badge badge-danger badge-pill p-2 pl-3 pr-3"><i class="fa fa-close"></i> Failed: 4</div>
+        <div class="badge badge-success badge-pill p-2 pl-3 pr-3"> <i class="fa fa-check"></i> Passed: {{totalPassed}}</div>
+        <div class="badge badge-danger badge-pill p-2 pl-3 pr-3"><i class="fa fa-close"></i> Failed: {{totalFailed}}</div>
       </div>
     </div>
     <div class="card-body" fxLayout="row wrap">
-      <div class="testcase" fxFlex="33"><i class="fa fa-check mr-2"></i>Test Case 1</div>
-      <div class="testcase" fxFlex="33"><i class="fa fa-check mr-2"></i>Test Case 2</div>
-      <div class="testcase" fxFlex="33"><i class="fa fa-close mr-2"></i>Test Case 3</div>
-      <div class="testcase" fxFlex="33"><i class="fa fa-check mr-2"></i>Test Case 4</div>
-      <div class="testcase" fxFlex="33"><i class="fa fa-close mr-2"></i>Test Case 5</div>
-      <div class="testcase" fxFlex="33"><i class="fa fa-check mr-2"></i>Test Case 6</div>
-      <div class="testcase" fxFlex="33"><i class="fa fa-check mr-2"></i>Test Case 7</div>
-      <div class="testcase" fxFlex="33"><i class="fa fa-close mr-2"></i>Test Case 8</div>
-      <div class="testcase" fxFlex="33"><i class="fa fa-check mr-2"></i>Test Case 9</div>
-      <div class="testcase" fxFlex="33"><i class="fa fa-close mr-2"></i>Test Case 10</div>
+      <div *ngFor="let testCase of question.testResults" class="testcase" fxFlex="33">
+        <div [tooltip]="removeUnderScore(testCase.reason) | titlecase" fxFlex="nogrow"><i
+          class="fa fa-{{testCase.status == 'PASSED' ? 'check' : 'close'}} mr-2"></i> Test Case {{testCase.id}}</div>
+      </div>
     </div>
+<!--    <div class="card-body" fxLayout="row wrap">-->
+<!--      <div class="testcase" fxFlex="33"><i class="fa fa-check mr-2"></i>Test Case 1</div>-->
+<!--      <div class="testcase" fxFlex="33"><i class="fa fa-check mr-2"></i>Test Case 2</div>-->
+<!--      <div class="testcase" fxFlex="33"><i class="fa fa-close mr-2"></i>Test Case 3</div>-->
+<!--      <div class="testcase" fxFlex="33"><i class="fa fa-check mr-2"></i>Test Case 4</div>-->
+<!--      <div class="testcase" fxFlex="33"><i class="fa fa-close mr-2"></i>Test Case 5</div>-->
+<!--      <div class="testcase" fxFlex="33"><i class="fa fa-check mr-2"></i>Test Case 6</div>-->
+<!--      <div class="testcase" fxFlex="33"><i class="fa fa-check mr-2"></i>Test Case 7</div>-->
+<!--      <div class="testcase" fxFlex="33"><i class="fa fa-close mr-2"></i>Test Case 8</div>-->
+<!--      <div class="testcase" fxFlex="33"><i class="fa fa-check mr-2"></i>Test Case 9</div>-->
+<!--      <div class="testcase" fxFlex="33"><i class="fa fa-close mr-2"></i>Test Case 10</div>-->
+<!--    </div>-->
   </div>
     <div class="pb-5">
         <button class="btn btn-secondary btn-pill pull-left"><i class="fa fa-backward"></i> Back</button>

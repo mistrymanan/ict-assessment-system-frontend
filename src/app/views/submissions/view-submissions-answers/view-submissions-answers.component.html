@@ -150,7 +150,7 @@
                           </td>
                           <td class="text-center" >{{response.score}}/{{response.totalPoints}}</td>
                           <td class="text-center" >
-                            <button aria-pressed="true" class="btn btn-pill btn-sm btn-primary" type="button">View</button>
+                            <button aria-pressed="true" class="btn btn-pill btn-sm btn-primary" (click)="viewBuild(assignmentId,response.questionId,submissions.email,response.buildId)" type="button">View</button>
                           </td>
                         </tr>
 <!--                        <tr>-->
