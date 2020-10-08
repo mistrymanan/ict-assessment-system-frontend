@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { ActiveAssignment } from '../../../models/active-assignment';
-import { ActiveAssignmentDetails } from '../../../models/active-assignment-details';
-import { AssignmentsService } from '../../../services/assignments.service';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {ActiveAssignmentDetails} from '../../../models/active-assignment-details';
+import {AssignmentsService} from '../../../services/assignments.service';
+import {GlobalConstants} from '../../../global-constants';
 
 @Component({
   selector: 'app-user-assignment-view',
@@ -11,23 +11,28 @@ import { AssignmentsService } from '../../../services/assignments.service';
 })
 export class UserAssignmentViewComponent implements OnInit {
   assignment: ActiveAssignmentDetails = new ActiveAssignmentDetails();
-  totalPoints: number = 0;
-  totalCurrentScore: number = 0;
+  statusBadge: Map<string, string>;
+
   constructor(
     private assignmentService: AssignmentsService,
     private router: Router,
-    private route: ActivatedRoute
-  ) { }
+    private route: ActivatedRoute,
+  ) {
+  }
 
-  ngOnInit(): void {  
+  ngOnInit(): void {
     const slug = this.route.snapshot.params.slug;
+
+    this.statusBadge = GlobalConstants.statusBadge;
     this.assignmentService.getActiveAssignmentBySlug(slug).subscribe(
       (assignment) => {
         this.assignment = assignment;
-        this.totalPoints = assignment.questions.map(question => question.totalPoints).reduce((a,b) => a + b);
-        this.totalCurrentScore = assignment.questions.map(question => question.currentScore).reduce((a,b) => a + b);
       }
-    )
+    );
+  }
+
+  removeUnderScore(str: string) {
+    return str.split('_').join(' ');
   }
 
 }

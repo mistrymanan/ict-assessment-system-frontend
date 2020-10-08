@@ -98,7 +98,7 @@ __Sample Output__
         this.currentLanguage = this.allowedLanguages[0].value;
       }
     );
-    this.assignmentsService.getAssignmentBySlug(assignmentSlug)
+    this.assignmentsService.getActiveAssignmentBySlug(assignmentSlug)
       .subscribe((assignment) => {
         this.assignmentId = assignment.id;
       });

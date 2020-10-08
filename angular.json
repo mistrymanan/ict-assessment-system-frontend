@@ -33,7 +33,6 @@
               ]
             },
             "scripts": [
-              "node_modules/chart.js/dist/Chart.min.js",
               "node_modules/marked/lib/marked.js",
               "node_modules/prismjs/prism.js",
               "node_modules/prismjs/plugins/autoloader/prism-autoloader.js"

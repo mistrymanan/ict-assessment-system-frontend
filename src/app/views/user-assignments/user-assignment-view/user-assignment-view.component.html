@@ -4,7 +4,7 @@
       <div class="card">
         <div class="card-body p-0 clearfix">
           <i class="fa fa-lightbulb-o bg-success p-4 font-2xl mr-3 float-left"></i>
-          <div class="h5 text-success mb-0 pt-3">{{totalPoints}}</div>
+          <div class="h5 text-success mb-0 pt-3">{{assignment.totalPoints}}</div>
           <div class="text-muted text-uppercase font-weight-bold font-xs">Total Points</div>
         </div>
       </div>
@@ -13,7 +13,8 @@
       <div class="card">
         <div class="card-body p-0 clearfix">
           <i class="fa fa-clock-o bg-danger p-4 font-2xl mr-3 float-left"></i>
-          <div class="h5 text-danger mb-0 pt-3">{{assignment.timed?assignment.duration +' mins.':'No Time Limit'}}</div>
+          <div
+            class="h5 text-danger mb-0 pt-3">{{assignment.timed ? assignment.duration + ' mins.' : 'No Time Limit'}}</div>
           <div class="text-muted text-uppercase font-weight-bold font-xs">Duration</div>
         </div>
       </div>
@@ -30,8 +31,9 @@
     <div class="col-6 col-md-3">
       <div class="card">
         <div class="card-body p-0 clearfix">
-          <i class="fa fa-hourglass-2 bg-info p-4 font-2xl mr-3 float-left"></i>
-          <div class="h6 text-info mb-1 pt-3">{{assignment.currentStatus?assignment.currentStatus:'Not Started'}}</div>
+          <i class="fa fa-hourglass-2 bg-{{statusBadge[assignment.submissionStatus]}} p-4 font-2xl mr-3 float-left"></i>
+          <div
+            class="h6 text-{{statusBadge[assignment.submissionStatus]}} mb-1 pt-3">{{removeUnderScore(assignment.submissionStatus) | uppercase}}</div>
           <div class="text-muted text-uppercase font-weight-bold font-xs">Status</div>
         </div>
       </div>
@@ -53,13 +55,13 @@
         </thead>
         <tbody>
         <tr *ngFor="let question of assignment.questions; let i=index">
-          <th scope="row">{{i+1}}</th>
+          <th scope="row">{{i + 1}}</th>
           <td><a routerLink="./{{question.slug}}"> {{question.title}}</a></td>
           <td fxLayoutGap="10px">
             <span class="badge badge-primary" *ngFor="let lang of question.allowedLanguages">{{lang}}</span>
           </td>
-          <td><span class="badge badge-{{question.currentStatus?'success':'secondary'}}">
-            {{question.currentStatus?question.currentStatus:'Not Started'}}
+          <td><span class="badge badge-{{statusBadge[question.currentStatus]}}">
+            {{removeUnderScore(question.currentStatus) | titlecase}}
           </span></td>
           <td>{{question.currentScore}}/{{question.totalPoints}}</td>
         </tr>
@@ -72,10 +74,11 @@
         <tr>
           <th scope="row" colspan="3"></th>
           <td class="font-weight-bold"> Total Score</td>
-          <td>{{totalCurrentScore}}/{{totalPoints}}</td>
+          <td>{{assignment.currentScore}}/{{assignment.totalPoints}}</td>
         </tr>
         </tbody>
       </table>
     </div>
   </div>
 </div>
+

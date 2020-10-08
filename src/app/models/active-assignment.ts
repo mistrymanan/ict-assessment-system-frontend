@@ -3,7 +3,8 @@ export class ActiveAssignment {
     title: string;
     slug: string;
     currentStatus: string;
+    totalPoints: number;
     hasDeadline: boolean;
-    deadline: string;    
+    deadline: string;
   }
-  
+

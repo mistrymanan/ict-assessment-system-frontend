@@ -54,6 +54,7 @@ import {AngularFireAuthModule} from '@angular/fire/auth';
 import {environment} from '../environments/environment';
 import {AuthComponent} from './views/auth/auth.component';
 import {authInterceptorProviders} from './views/auth/token.interceptor';
+import {ModalModule} from 'ngx-bootstrap/modal';
 
 @NgModule({
   imports: [
@@ -67,6 +68,7 @@ import {authInterceptorProviders} from './views/auth/token.interceptor';
     AppSidebarModule,
     PerfectScrollbarModule,
     BsDropdownModule.forRoot(),
+    ModalModule.forRoot(),
     TabsModule.forRoot(),
     ChartsModule,
     MarkdownModule.forRoot(),

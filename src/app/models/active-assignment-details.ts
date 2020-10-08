@@ -4,12 +4,14 @@ export class ActiveAssignmentDetails {
     id: string;
     title: string;
     slug: string;
-    currentStatus: string;
+    submissionStatus: string;
     duration: number;
     hasStartTime: boolean;
+    totalPoints: number;
+    currentScore: number;
     hasDeadline: boolean;
     startTime: string;
     deadline: string;
     timed: boolean;
     questions: UserQuestion[];
-} 
+}

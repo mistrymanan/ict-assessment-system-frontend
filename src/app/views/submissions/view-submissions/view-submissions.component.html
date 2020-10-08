@@ -43,21 +43,21 @@
                             {{submission.completedOn|date:'short'}}
                           </td>
                           <td  class="text-center" >
-                                                        <ng-template [ngIf]="submission.submissionStatus==='LATE_SUBMITTED'" ] >
+                                                        <ng-template [ngIf]="submission.submissionStatus==='LATE_SUBMITTED'">
                                                           <span [class.badge]="true"
                                                                 [class.badge-danger]="true"
                                                                 [hidden]="false">
                                                               Late
                                                           </span>
                                                         </ng-template>
-                                                        <ng-template [ngIf]="submission.submissionStatus==='IN_PROGRESS'" ] >
+                                                        <ng-template [ngIf]="submission.submissionStatus==='IN_PROGRESS'">
                                                           <span [class.badge]="true"
                                                                 [class.badge-primary]="true"
                                                                 [hidden]="false">
                                                               In Progress
                                                           </span>
                                                         </ng-template>
-                                                        <ng-template [ngIf]="submission.submissionStatus==='COMPLETED'" ] >
+                                                        <ng-template [ngIf]="submission.submissionStatus==='COMPLETED'">
                                                           <span [class.badge]="true"
                                                                 [class.badge-success]="true"
                                                                 [hidden]="false">

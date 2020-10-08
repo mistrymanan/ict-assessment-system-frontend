@@ -18,6 +18,7 @@ export const config = {
     questions : 'assignments/questions',
     updateQuestion : 'assignments/questions/update-question',
     runCode: 'submissions/run-code',
+    startAssignment: 'submissions/start-submission',
     submit: 'submissions/submit',
     submission: 'submissions',
     builds: 'executions/builds'
