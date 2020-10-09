@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {SubmissionDetailsResponse} from '../../../models/submissionDetails-response';
 import {Assignment} from '../../../models/assignment';
 import {ActivatedRoute, Router} from '@angular/router';
 import {SubmissionService} from '../../../services/submission.service';
 import {AssignmentsService} from '../../../services/assignments.service';
+import {GlobalConstants} from '../../../global-constants';
 
 @Component({
   selector: 'app-view-submissions-answers',
@@ -17,16 +18,20 @@ export class ViewSubmissionsAnswersComponent implements OnInit {
   assignmentName: string;
   email: string;
   assignmentSlug;
+  statusBadge;
+
   constructor(
     private route: ActivatedRoute,
     private submissionService: SubmissionService,
     private assignmentsService: AssignmentsService,
     private router: Router
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
     this.assignmentSlug = this.route.snapshot.paramMap.get('assignmentSlug');
     this.email = this.route.snapshot.queryParamMap.get('email');
+    this.statusBadge = GlobalConstants.statusBadge;
     // this.questionSlug = this.route.snapshot.paramMap.get('questionSlug');
     this.assignmentsService.getAssignmentBySlug(this.assignmentSlug).subscribe(
       assignment => {
@@ -40,14 +45,28 @@ export class ViewSubmissionsAnswersComponent implements OnInit {
           .subscribe(submissions => {
             console.log(submissions);
             this.submissions = submissions;
-          } );
+          });
       }
     );
   }
+
   viewBuild(assignmentId: string, questionId: string, email: string, buildId: string) {
     this.router.navigate(['/submissions', this.assignmentSlug, 'answers', 'user'],
       {
         relativeTo: this.route,
-        queryParams : {'email': email , 'assignmentId': assignmentId, 'questionId': questionId, 'buildId': buildId}});
+        queryParams: {'email': email, 'assignmentId': assignmentId, 'questionId': questionId, 'buildId': buildId}
+      });
+  }
+
+  get statusIconMap() {
+    const map = new Map<string, string>();
+    map['IN_PROGRESS'] = 'hourglass-2';
+    map['COMPLETED'] = 'check-circle';
+    map['LATE_SUBMITTED'] = 'clock-o';
+    return map;
+  }
+
+  removeUnderScore(str: string) {
+    return str.split('-').join(' ');
   }
 }

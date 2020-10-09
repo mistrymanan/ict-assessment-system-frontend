@@ -13,4 +13,5 @@ export class SubmitCodeResponse {
   status: string;
   score: number;
   testResults: TestCaseResult[];
+  message: string;
 }

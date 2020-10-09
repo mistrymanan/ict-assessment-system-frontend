@@ -31,6 +31,14 @@ export class UserAssignmentViewComponent implements OnInit {
     );
   }
 
+  get statusIconMap() {
+    const map = new Map<string, string>();
+    map['IN_PROGRESS'] = 'hourglass-2';
+    map['COMPLETED'] = 'check-circle';
+    map['LATE_SUBMITTED'] = 'clock-o';
+    return map;
+  }
+
   removeUnderScore(str: string) {
     return str.split('_').join(' ');
   }

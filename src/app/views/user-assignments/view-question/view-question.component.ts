@@ -38,7 +38,6 @@ export class ViewQuestionComponent implements OnInit, AfterViewInit {
   totalFailed: number;
   allowViewResult: boolean = false;
   submitCompileError: boolean = false;
-  errorResponse: any;
   @ViewChild('editor') editor: AceEditorComponent;
 
   constructor(
@@ -128,11 +127,7 @@ __Sample Output__
           console.log(response);
         },
         (error) => {
-          // console.error(error);
-          this.runRodeResponse = error.error;
-          this.hideOutput = false;
-          this.runCodeProcess = false;
-          this.allowViewResult = true;
+          console.error(error);
         });
   }
 
@@ -143,12 +138,17 @@ __Sample Output__
     request.sourceCode = this.sourceCode;
     request.language = this.currentLanguage;
     this.submitProcess = true;
+    this.submitCompileError = false;
     this.submissionService.submitCode(request)
       .subscribe((response) => {
           this.submitCodeResponse = response;
           console.log(response);
-          this.totalPassed = response.testResults.map(this.statusToInt).reduce((a, b) => a + b);
-          this.totalFailed = response.testResults.length - this.totalPassed;
+          if (response.status === 'COMPILE_ERROR') {
+            this.submitCompileError = true;
+          } else {
+            this.totalPassed = response.testResults.map(this.statusToInt).reduce((a, b) => a + b);
+            this.totalFailed = response.testResults.length - this.totalPassed;
+          }
           this.submitProcess = false;
           this.showAssessmentResults = true;
         },

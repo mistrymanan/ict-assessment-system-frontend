@@ -12,6 +12,15 @@
     <div class="col-6 col-md-3">
       <div class="card">
         <div class="card-body p-0 clearfix">
+          <i class="fa fa-trophy bg-primary p-4 font-2xl mr-3 float-left"></i>
+          <div class="h5 text-primary mb-0 pt-3">{{assignment.currentScore}}</div>
+          <div class="text-muted text-uppercase font-weight-bold font-xs">Current Score</div>
+        </div>
+      </div>
+    </div>
+    <div class="col-6 col-md-3">
+      <div class="card">
+        <div class="card-body p-0 clearfix">
           <i class="fa fa-clock-o bg-danger p-4 font-2xl mr-3 float-left"></i>
           <div
             class="h5 text-danger mb-0 pt-3">{{assignment.timed ? assignment.duration + ' mins.' : 'No Time Limit'}}</div>
@@ -22,16 +31,8 @@
     <div class="col-6 col-md-3">
       <div class="card">
         <div class="card-body p-0 clearfix">
-          <i class="fa fa-hashtag bg-primary p-4 font-2xl mr-3 float-left"></i>
-          <div class="h5 text-primary mb-0 pt-3">{{assignment.questions.length}}</div>
-          <div class="text-muted text-uppercase font-weight-bold font-xs">Questions</div>
-        </div>
-      </div>
-    </div>
-    <div class="col-6 col-md-3">
-      <div class="card">
-        <div class="card-body p-0 clearfix">
-          <i class="fa fa-hourglass-2 bg-{{statusBadge[assignment.submissionStatus]}} p-4 font-2xl mr-3 float-left"></i>
+          <i
+            class="fa fa-{{statusIconMap[assignment.submissionStatus]}} bg-{{statusBadge[assignment.submissionStatus]}} p-4 font-2xl mr-3 float-left"></i>
           <div
             class="h6 text-{{statusBadge[assignment.submissionStatus]}} mb-1 pt-3">{{removeUnderScore(assignment.submissionStatus) | uppercase}}</div>
           <div class="text-muted text-uppercase font-weight-bold font-xs">Status</div>
