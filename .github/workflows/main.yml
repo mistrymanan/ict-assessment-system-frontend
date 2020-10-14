@@ -1,0 +1,37 @@
+name: Build and Deploy
+on:
+  push:
+     branches: [ master ]
+#   pull_request:
+#     branches: [ master ]
+
+jobs:
+  build_deploy:
+    runs-on: ubuntu-latest
+    steps: 
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2-beta
+        with:
+          node-version: '12'
+
+      - name: Install dependencies 
+        run: npm install
+      - name: Install angular cli
+        run: npm install -g @angular/cli
+      - name: Build
+        run: ng build --prod --aot --buildOptimizer --commonChunk --vendorChunk --optimization --progress
+      - uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
+        with:
+          version: '290.0.1'
+          project_id: ${{ secrets.GCP_PROJECT_ID }}
+          service_account_key: ${{ secrets.GCP_SA_KEY }}
+          export_default_credentials: true
+#       - run: gcloud info
+      - name: Configure GCR
+        run: gcloud auth configure-docker
+      - name: Configure GKS Cluster
+        run: gcloud container clusters get-credentials my-cluster --project classroomict --region us-central1-c  
+      - name: Install Skaffold
+        run: curl -Lo skaffold https://storage.googleapis.com/skaffold/releases/latest/skaffold-linux-amd64 && sudo install skaffold /usr/local/bin/
+      - name: Deploy
+        run: skaffold run
