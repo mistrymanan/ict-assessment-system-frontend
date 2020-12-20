@@ -10,6 +10,8 @@
     "experimentalDecorators": true,
     "module": "esnext",
     "target": "es5",
+ "esModuleInterop": true,
+   "allowSyntheticDefaultImports": true,
     "typeRoots": [
       "node_modules/@types"
     ],
