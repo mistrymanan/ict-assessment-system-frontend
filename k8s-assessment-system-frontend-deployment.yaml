@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: assessment-system-frontend
+spec:
+  selector:
+    matchLabels:
+      app: assessment-system-frontend
+
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: assessment-system-frontend
+    spec:
+      containers:
+        - name: assessment-system-frontend
+          image: mananmistry/assessment-system-frontend:latest
+          ports:
+            - containerPort: 80
