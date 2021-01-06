@@ -1,5 +1,5 @@
 export const config = {
-  host: 'www.assessment-system.tech/api',
+  host: 'ict.assessment-system.tech/api',
   endpoints: {
     assignments: 'assignments/all',
     activeAssignments: 'assignments/active-assignments/all',
