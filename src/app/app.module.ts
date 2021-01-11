@@ -55,6 +55,7 @@ import {environment} from '../environments/environment';
 import {AuthComponent} from './views/auth/auth.component';
 import {authInterceptorProviders} from './views/auth/token.interceptor';
 import {ModalModule} from 'ngx-bootstrap/modal';
+import { AddClassroomComponent } from './views/classroom/add-classroom/add-classroom.component';
 
 @NgModule({
   imports: [
@@ -87,7 +88,8 @@ import {ModalModule} from 'ngx-bootstrap/modal';
     P500Component,
     UserAssignmentViewComponent,
     ViewQuestionComponent,
-    AuthComponent
+    AuthComponent,
+    AddClassroomComponent
   ],
   providers: [{
     provide: LocationStrategy,
