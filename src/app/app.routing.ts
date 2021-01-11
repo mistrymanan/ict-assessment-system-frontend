@@ -10,6 +10,7 @@ import {UserAssignmentViewComponent} from './views/user-assignments/user-assignm
 import {ViewQuestionComponent} from './views/user-assignments/view-question/view-question.component';
 import {AuthComponent} from './views/auth/auth.component';
 import {AngularFireAuthGuard, redirectUnauthorizedTo} from '@angular/fire/auth-guard';
+import { AddClassroomComponent } from './views/classroom/add-classroom/add-classroom.component';
 const redirectToLogin = () => redirectUnauthorizedTo(['login'])
 export const routes: Routes = [
   {
@@ -61,6 +62,18 @@ export const routes: Routes = [
         path: 'submissions',
         loadChildren: () => import('./views/submissions/submissions.module').then(m => m.SubmissionsModule)
       },
+      // {
+      //   path: 'classrooms',
+      //   loadChildren: () => import('./views/classroom/classroom.module').then(m => m.ClassroomModule)
+      // },
+      {
+        path: 'classrooms/add',
+        component: AddClassroomComponent,
+        data: {
+          title: 'Add Classroom'
+        },
+        pathMatch: 'full'
+      },
       {
         path: ':slug',
         component: UserAssignmentViewComponent,
@@ -77,6 +90,7 @@ export const routes: Routes = [
         },
         pathMatch: 'full'
       }
+
     ]
   },
   {path: '**', component: P404Component}
