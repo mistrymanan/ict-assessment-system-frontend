@@ -9,6 +9,7 @@ import {P500Component} from './views/error/500.component';
 import {UserAssignmentViewComponent} from './views/user-assignments/user-assignment-view/user-assignment-view.component';
 import {ViewQuestionComponent} from './views/user-assignments/view-question/view-question.component';
 import {AuthComponent} from './views/auth/auth.component';
+import {DashboardComponent} from './views/classroom/dashboard/dashboard.component';
 import {AngularFireAuthGuard, redirectUnauthorizedTo} from '@angular/fire/auth-guard';
 const redirectToLogin = () => redirectUnauthorizedTo(['login'])
 export const routes: Routes = [
@@ -60,6 +61,14 @@ export const routes: Routes = [
       {
         path: 'submissions',
         loadChildren: () => import('./views/submissions/submissions.module').then(m => m.SubmissionsModule)
+      },
+      {
+        path: 'classroom/dashboard',
+        component: DashboardComponent,
+        data: {
+          title: 'View Question'
+        },
+        pathMatch: 'full'
       },
       {
         path: ':slug',
