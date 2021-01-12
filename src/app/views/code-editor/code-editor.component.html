@@ -13,15 +13,19 @@
             </select>
         </div>
         <div fxFlex fxLayoutGap="10px">
-            <button class="btn btn-outline-dark" tooltip="Retrieve last submitted code"><i
-                    class="fa fa-file-code-o"></i></button>
-            <button class="btn btn-outline-dark " tooltip="Reset to default code definition"><i
-                    class="fa fa-refresh"></i></button>
+           <!--- <button class="btn btn-outline-dark" tooltip="Retrieve last submitted code"><i
+                    class="fa fa-file-code-o"></i></button> -->
+                    <button class="btn btn-outline-dark" tooltip="Save Your Code" (click)="save()"><i
+                        class="fa fa-file-code-o"></i></button>
+                        <button class="btn btn-outline-dark" tooltip="Retrive Your Old Code" (click)="load()"><i
+                            class="fa fa-refresh"></i></button>
+           <!-- <button class="btn btn-outline-dark " tooltip="Reset to default code definition"><i
+                    class="fa fa-refresh"></i></button> --> 
         </div>
         <!--        </div>-->
     </div>
     <div class="card-body" style="padding:0">
-        <ace-editor [(text)]="text" [theme]="currentTheme" [mode]="langModes[currentLanguage]" #editor id="editor"></ace-editor>
+        <ace-editor [(text)]="text" [theme]="currentTheme" [mode]="langModes[currentLanguage]" #editor id="editor" ></ace-editor>
     </div>
     <div class="card-footer">
         <div fxLayout>

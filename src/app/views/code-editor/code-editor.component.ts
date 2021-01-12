@@ -60,8 +60,19 @@ export class CodeEditorComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     // tslint:disable-next-line:prefer-const
-
   }
+
+  load(): void{
+    if (localStorage.getItem('code')){
+      this.text= localStorage.getItem('code');
+    }
+  }
+
+  save(): void{
+    console.log(this.text);
+    localStorage.setItem('code', this.text);
+  }
+
   run(): void {
     this.processing=true;
     this.program.source_code = this.text;
