@@ -55,6 +55,7 @@ import {environment} from '../environments/environment';
 import {AuthComponent} from './views/auth/auth.component';
 import {authInterceptorProviders} from './views/auth/token.interceptor';
 import {ModalModule} from 'ngx-bootstrap/modal';
+import { DashboardComponent } from './views/classroom/dashboard/dashboard.component';
 import { AddClassroomComponent } from './views/classroom/add-classroom/add-classroom.component';
 import { ReactiveFormsModule } from '@angular/forms';
 
@@ -91,6 +92,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     UserAssignmentViewComponent,
     ViewQuestionComponent,
     AuthComponent,
+classroom-dashboard,
+    DashboardComponent,
     AddClassroomComponent
   ],
   providers: [{
