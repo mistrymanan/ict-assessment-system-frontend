@@ -56,6 +56,8 @@ import {AuthComponent} from './views/auth/auth.component';
 import {authInterceptorProviders} from './views/auth/token.interceptor';
 import {ModalModule} from 'ngx-bootstrap/modal';
 import { DashboardComponent } from './views/classroom/dashboard/dashboard.component';
+import { AddClassroomComponent } from './views/classroom/add-classroom/add-classroom.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
@@ -79,6 +81,7 @@ import { DashboardComponent } from './views/classroom/dashboard/dashboard.compon
     FlexLayoutModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
+    ReactiveFormsModule,
     TooltipModule.forRoot(),
   ],
   declarations: [
@@ -89,7 +92,9 @@ import { DashboardComponent } from './views/classroom/dashboard/dashboard.compon
     UserAssignmentViewComponent,
     ViewQuestionComponent,
     AuthComponent,
-    DashboardComponent
+classroom-dashboard,
+    DashboardComponent,
+    AddClassroomComponent
   ],
   providers: [{
     provide: LocationStrategy,

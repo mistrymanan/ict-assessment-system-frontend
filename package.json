@@ -13,6 +13,7 @@
   },
   "private": true,
   "dependencies": {
+    "@angular-devkit/build-webpack": "^0.901.13",
     "@angular/animations": "^9.1.13",
     "@angular/cdk": "^10.2.7",
     "@angular/common": "^9.1.13",
