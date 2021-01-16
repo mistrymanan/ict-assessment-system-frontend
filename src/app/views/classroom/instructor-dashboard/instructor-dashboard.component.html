@@ -1,0 +1,161 @@
+<!-- 
+<div class="container">
+     <ul class="nav nav-tabs">
+      <li class="nav-item">
+        <a class="nav-link" id="classwork-tab" data-toggle="tab" href="#classwork" role="tab" aria-controls="classwork" aria-selected="true">Classwork</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link active" id="people-tab" data-toggle="tab" href="#people" role="tab" aria-controls="people" aria-selected="false">People</a>
+      </li>
+    </ul>
+    <div class="tab-content">
+      <div class="tab-pane fade show active" id="classwork" role="tabpanel" aria-labelledby="classwork-tab">
+        <div class="animated fadeIn">
+          <div fxLayout="row wrap" fxLayoutGap="25px">
+            <div class="card" fxFlex="31" *ngFor="let assignment of activeAssignments"
+                 (click)="assignment.currentStatus === 'NOT_STARTED'?openModal(modal,assignment):openAssignment(assignment.slug)">
+              <div class="card-body p-0 clearfix">
+                <i
+                  class="fa fa-book bg-primary pt-5 pb-5 pl-4 pr-4 font-5xl mr-3 float-left h-100"
+                ></i>
+                <div class="h6 text-primary mb-1 pt-3">{{ assignment.title}}</div>
+                <div class="col mt-3">
+                  <div class="row">
+                    <div class="text-muted text-uppercase font-weight-bold font-xs m-1 " fxFlex>
+                      Status :
+                    </div>
+                    <div class="m-1" fxFlex>
+                      <span
+                        class="badge badge-{{statusBadge[assignment.currentStatus]}}">{{removeUnderScore(assignment.currentStatus) | titlecase}}</span>
+                    </div>
+                  </div>
+                  <div>
+                    <div class="row">
+                      <div class="text-muted text-uppercase font-weight-bold font-xs m-1 " fxFlex>
+                        Total Points :
+                      </div>
+                      <div class="m-1" fxFlex>
+                        <span class="">{{assignment.totalPoints}}</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div>
+                    <div class="row">
+                      <div class="text-muted text-uppercase font-weight-bold font-xs m-1 " fxFlex>
+                        Deadline :
+                      </div>
+                      <div class="m-1 mb-3" fxFlex>
+                        <span *ngIf="assignment.hasDeadline; else noDeadline">{{assignment.deadline|date:'short'}}</span>
+                        <ng-template #noDeadline>
+                          <span>No Deadline</span>
+                        </ng-template>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <ng-template #modal>
+          <div class="modal-header">
+            <h4 class="modal-title pull-left">Do You want to start this Assignment ?</h4>
+          </div>
+          <div class="modal-body" fxLayout fxLayoutAlign="space-around">
+            <button type="button" class="btn btn-primary" (click)="startAssignment()" fxFlex="35"
+                    [disabled]="startAssignmentProcess">
+              <i class="fa fa-{{startAssignmentProcess?'circle-o-notch fa-spin':'check'}}"></i>
+              Confirm
+            </button>
+            <button type="button" class="btn btn-secondary" (click)="this.modalRef.hide()" fxFlex="35"
+                    [disabled]="startAssignmentProcess"><i
+              class="fa fa-close"></i> Cancel
+            </button>
+          </div>
+        </ng-template>
+        
+      </div>
+      <div class="tab-pane fade" id="people" role="tabpanel" aria-labelledby="people-tab">...</div>
+    </div>
+  </div> -->
+
+  <div class="col-md-12 mb-4">
+    <!-- Nav tabs -->
+    <tabset>
+      <tab>
+        <ng-template tabHeading><i class="icon-note"></i> Classwork</ng-template>
+        <div class="animated fadeIn">
+          <div fxLayout="row wrap" fxLayoutGap="25px">
+            <div class="card" fxFlex="31" *ngFor="let assignment of activeAssignments"
+                 (click)="assignment.currentStatus === 'NOT_STARTED'?openModal(modal,assignment):openAssignment(assignment.slug)">
+              <div class="card-body p-0 clearfix">
+                <i
+                  class="fa fa-book bg-primary pt-5 pb-5 pl-4 pr-4 font-5xl mr-3 float-left h-100"
+                ></i>
+                <div class="h6 text-primary mb-1 pt-3">{{ assignment.title}}</div>
+                <div class="col mt-3">
+                  <div class="row">
+                    <div class="text-muted text-uppercase font-weight-bold font-xs m-1 " fxFlex>
+                      Status :
+                    </div>
+                    <div class="m-1" fxFlex>
+                      <span
+                        class="badge badge-{{statusBadge[assignment.currentStatus]}}">{{removeUnderScore(assignment.currentStatus) | titlecase}}</span>
+                    </div>
+                  </div>
+                  <div>
+                    <div class="row">
+                      <div class="text-muted text-uppercase font-weight-bold font-xs m-1 " fxFlex>
+                        Total Points :
+                      </div>
+                      <div class="m-1" fxFlex>
+                        <span class="">{{assignment.totalPoints}}</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div>
+                    <div class="row">
+                      <div class="text-muted text-uppercase font-weight-bold font-xs m-1 " fxFlex>
+                        Deadline :
+                      </div>
+                      <div class="m-1 mb-3" fxFlex>
+                        <span *ngIf="assignment.hasDeadline; else noDeadline">{{assignment.deadline|date:'short'}}</span>
+                        <ng-template #noDeadline>
+                          <span>No Deadline</span>
+                        </ng-template>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <ng-template #modal>
+          <div class="modal-header">
+            <h4 class="modal-title pull-left">Do You want to start this Assignment ?</h4>
+          </div>
+          <div class="modal-body" fxLayout fxLayoutAlign="space-around">
+            <button type="button" class="btn btn-primary" (click)="startAssignment()" fxFlex="35"
+                    [disabled]="startAssignmentProcess">
+              <i class="fa fa-{{startAssignmentProcess?'circle-o-notch fa-spin':'check'}}"></i>
+              Confirm
+            </button>
+            <button type="button" class="btn btn-secondary" (click)="this.modalRef.hide()" fxFlex="35"
+                    [disabled]="startAssignmentProcess"><i
+              class="fa fa-close"></i> Cancel
+            </button>
+          </div>
+        </ng-template>
+              </tab>
+      <tab>
+        <ng-template tabHeading><i class="icon-people"></i> People</ng-template>
+        .....
+      </tab>
+      <!-- <tab>
+        <ng-template tabHeading><i class="icon-pie-chart"></i> Charts</ng-template>
+        4. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+      </tab> -->
+    </tabset>
+  </div><!--/.col-->
+  
