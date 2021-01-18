@@ -12,6 +12,7 @@ import {AuthComponent} from './views/auth/auth.component';
 import {DashboardComponent} from './views/classroom/dashboard/dashboard.component';
 import {AngularFireAuthGuard, redirectUnauthorizedTo} from '@angular/fire/auth-guard';
 import { AddClassroomComponent } from './views/classroom/add-classroom/add-classroom.component';
+import { InstructorDashboardComponent } from './views/classroom/instructor-dashboard/instructor-dashboard.component';
 const redirectToLogin = () => redirectUnauthorizedTo(['login'])
 export const routes: Routes = [
   {
@@ -68,6 +69,14 @@ export const routes: Routes = [
       //   loadChildren: () => import('./views/classroom/classroom.module').then(m => m.ClassroomModule)
       // },
       {
+        path: 'classrooms/instructor-dashboard',
+        component: InstructorDashboardComponent,
+        data: {
+          title: 'Instructor Dashboard'
+        },
+        pathMatch: 'full'
+      },
+      {
         path: 'classrooms/add',
         component: AddClassroomComponent,
         data: {
@@ -98,7 +107,8 @@ export const routes: Routes = [
           title: 'View Question'
         },
         pathMatch: 'full'
-      }
+      },
+      
 
     ]
   },

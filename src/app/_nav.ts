@@ -15,9 +15,12 @@ export const navItems: INavData[] = [
     name: 'Add Classroom',
     url: '/classrooms/add',
     icon: 'fa fa-code',
-  }
-
-  ,
+  },
+  {
+    name: 'Instructor Dashboard',
+    url: '/classrooms/instructor-dashboard',
+    icon: 'fa fa-code',
+  },
   {
     name: 'Assignments',
     url: '',

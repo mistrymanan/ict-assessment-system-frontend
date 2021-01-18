@@ -31,6 +31,7 @@
     "@coreui/icons": "0.3.0",
     "@ng-select/ng-select": "^5.0.9",
     "ace-builds": "^1.4.12",
+    "angular-material": "^1.2.2",
     "bootstrap": "^4.5.3",
     "chart.js": "^2.9.4",
     "core-js": "^3.8.1",
