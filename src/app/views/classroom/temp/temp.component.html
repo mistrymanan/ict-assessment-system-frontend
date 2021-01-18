@@ -17,10 +17,9 @@
                                 <th>Activity</th>
                                 <th>
                                     <div class="col-6 col-sm-4 col-md-3">
-                                          <button class=" btn btn-danger btn-sm btn-pill" (click)="myModal.show()">
-                                            <i class="fa fa-user fa-fw"></i>
-                                            Add
-                                          </button>
+                                        <button class="btn btn-outline-dark" tooltip="Add Instructors" (click)="myModal.show()"><i
+                                            class="fa fa-user-plus" aria-hidden="true"></i></button>
+
                                           </div>
                                 </th>
                             </tr>
@@ -71,10 +70,8 @@
                                 <th>Activity</th>
                                 <th>
                                     <div class="col-6 col-sm-4 col-md-3">
-                                        <button class=" btn btn-danger btn-sm btn-pill" (click)="myModal.show()">
-                                            <i class="fa fa-user fa-fw"></i>
-                                            Add
-                                          </button>
+                                          <button class="btn btn-outline-dark" tooltip="Add Students" (click)="myModal1.show()"><i
+                                            class="fa fa-user-plus" aria-hidden="true"></i></button>
 
                                          </div>
                                 </th>
@@ -116,7 +113,7 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title">Send Invitation </h4>
+          <h4 class="modal-title">Invite Teachers</h4>
           <button type="button" class="close" (click)="myModal.hide()" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -135,6 +132,31 @@
       </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
   </div>
+
+  <div bsModal #myModal1="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Invite Students </h4>
+          <button type="button" class="close" (click)="myModal1.hide()" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <form action="" class="form-horizontal ng-untouched ng-pristine ng-valid" method="post" novalidate="">
+                <div class="form-group row"><label class="col-md-3 col-form-label" for="hf-email">Email</label>
+                    <div class="col-md-9"><input autocomplete="email" class="form-control" id="hf-email" name="hf-email" placeholder="Enter Email.." type="email">
+                        <span class="help-block">Please enter your email</span></div></div>
+                </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="myModal1.hide()">Cancle</button>
+          <button type="button" class="btn btn-primary">Send</button>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div>
+
 
  
  
