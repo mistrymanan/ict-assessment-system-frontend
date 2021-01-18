@@ -3,10 +3,11 @@ import { CommonModule } from '@angular/common';
 
 import { ClassroomRoutingModule } from './classroom-routing.module';
 import { AddClassroomComponent } from './add-classroom/add-classroom.component';
+import { TempComponent } from './temp/temp.component';
 
 
 @NgModule({
-  declarations: [AddClassroomComponent],
+  declarations: [AddClassroomComponent, TempComponent],
   imports: [
     CommonModule,
     ClassroomRoutingModule

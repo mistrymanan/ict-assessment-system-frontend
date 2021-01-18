@@ -58,6 +58,8 @@ import {ModalModule} from 'ngx-bootstrap/modal';
 import { DashboardComponent } from './views/classroom/dashboard/dashboard.component';
 import { AddClassroomComponent } from './views/classroom/add-classroom/add-classroom.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { TempComponent } from './views/classroom/temp/temp.component';
+import { from } from 'rxjs';
 
 @NgModule({
   imports: [
@@ -92,7 +94,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     UserAssignmentViewComponent,
     ViewQuestionComponent,
     AuthComponent,
-classroom-dashboard,
+    TempComponent,
     DashboardComponent,
     AddClassroomComponent
   ],
