@@ -12,7 +12,11 @@ import {AuthComponent} from './views/auth/auth.component';
 import {DashboardComponent} from './views/classroom/dashboard/dashboard.component';
 import {AngularFireAuthGuard, redirectUnauthorizedTo} from '@angular/fire/auth-guard';
 import { AddClassroomComponent } from './views/classroom/add-classroom/add-classroom.component';
+
+import { TempComponent } from './views/classroom/temp/temp.component';
+
 import { InstructorDashboardComponent } from './views/classroom/instructor-dashboard/instructor-dashboard.component';
+
 const redirectToLogin = () => redirectUnauthorizedTo(['login'])
 export const routes: Routes = [
   {
@@ -81,6 +85,14 @@ export const routes: Routes = [
         component: AddClassroomComponent,
         data: {
           title: 'Add Classroom'
+        },
+        pathMatch: 'full'
+      },
+      {
+        path: 'classroom/temp',
+        component: TempComponent,
+        data: {
+          title: 'add people'
         },
         pathMatch: 'full'
       },
