@@ -60,6 +60,7 @@ import { AddClassroomComponent } from './views/classroom/add-classroom/add-class
 import { ReactiveFormsModule } from '@angular/forms';
 import { TempComponent } from './views/classroom/temp/temp.component';
 import { from } from 'rxjs';
+import { InstructorDashboardComponent} from './views/classroom/instructor-dashboard/instructor-dashboard.component';
 
 @NgModule({
   imports: [
@@ -84,6 +85,7 @@ import { from } from 'rxjs';
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
     ReactiveFormsModule,
+    
     TooltipModule.forRoot(),
   ],
   declarations: [
@@ -95,6 +97,9 @@ import { from } from 'rxjs';
     ViewQuestionComponent,
     AuthComponent,
     TempComponent,
+instructor_dashboard
+    InstructorDashboardComponent,
+//classroom-dashboard,
     DashboardComponent,
     AddClassroomComponent
   ],
