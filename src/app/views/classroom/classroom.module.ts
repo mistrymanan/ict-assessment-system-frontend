@@ -3,16 +3,16 @@ import { CommonModule } from '@angular/common';
 
 import { ClassroomRoutingModule } from './classroom-routing.module';
 import { AddClassroomComponent } from './add-classroom/add-classroom.component';
-import { TempComponent } from './temp/temp.component';
-
-
-@NgModule({
-  declarations: [AddClassroomComponent, TempComponent],
+//import { TempComponent } from './temp/temp.component';
 import { InstructorDashboardComponent } from './instructor-dashboard/instructor-dashboard.component';
 
 
+// @NgModule({
+//   declarations: [AddClassroomComponent, TempComponent],
+
+
 @NgModule({
-  declarations: [AddClassroomComponent, InstructorDashboardComponent],
+  declarations: [AddClassroomComponent, InstructorDashboardComponent,TempComponent],
   imports: [
     CommonModule,
     ClassroomRoutingModule
