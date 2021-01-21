@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-//import { AddClassComponent } from './add-class/add-class.component';
+import { AddClassroomComponent } from './add-classroom/add-classroom.component';
+import { InstructorDashboardComponent } from './instructor-dashboard/instructor-dashboard.component';
 
 
 const routes: Routes = [
-  //{path: 'add',component:AddClassComponent} in this way you just have to add your components eg this commponent will be accessible at cl/add
+  {path:'add',component:AddClassroomComponent},
+  {path: 'instructor-dashboard', component:InstructorDashboardComponent}
 ];
 
 @NgModule({

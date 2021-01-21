@@ -2,14 +2,17 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { ClassroomsRoutingModule } from './classrooms-routing.module';
-//import { AddClassComponent } from './add-class/add-class.component';
-
-
+import { AddClassroomComponent } from './add-classroom/add-classroom.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { InstructorDashboardComponent } from './instructor-dashboard/instructor-dashboard.component';
+import { TabsModule } from 'ngx-bootstrap/tabs'
+import { ModalModule } from 'ngx-bootstrap/modal';
 @NgModule({
-  declarations: [],
+  declarations: [AddClassroomComponent, InstructorDashboardComponent],
   imports: [
     CommonModule,
-    ClassroomsRoutingModule
+    ClassroomsRoutingModule,
+    FormsModule,ReactiveFormsModule,TabsModule,ModalModule
   ]
 })
 export class ClassroomsModule { }
