@@ -61,6 +61,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 //import { TempComponent } from './views/classroom/temp/temp.component';
 import { from } from 'rxjs';
 import { InstructorDashboardComponent} from './views/classroom/instructor-dashboard/instructor-dashboard.component';
+import { ClassroomModule } from './views/classroom/classroom.module';
+import { ClassroomsModule } from './views/classrooms/classrooms.module';
 
 @NgModule({
   imports: [
@@ -82,10 +84,10 @@ import { InstructorDashboardComponent} from './views/classroom/instructor-dashbo
     HttpClientModule,
     FormsModule,
     FlexLayoutModule,
+    ClassroomsModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
     ReactiveFormsModule,
-    
     TooltipModule.forRoot(),
   ],
   declarations: [
@@ -100,7 +102,7 @@ import { InstructorDashboardComponent} from './views/classroom/instructor-dashbo
     InstructorDashboardComponent,
 //classroom-dashboard,
     DashboardComponent,
-    AddClassroomComponent
+    AddClassroomComponent,
   ],
   providers: [{
     provide: LocationStrategy,

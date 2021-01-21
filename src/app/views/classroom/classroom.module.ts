@@ -12,7 +12,8 @@ import { InstructorDashboardComponent } from './instructor-dashboard/instructor-
 
 
 @NgModule({
-  declarations: [AddClassroomComponent, InstructorDashboardComponent,TempComponent],
+  //declarations: [AddClassroomComponent, InstructorDashboardComponent,TempComponent],
+  declarations: [AddClassroomComponent, InstructorDashboardComponent],
   imports: [
     CommonModule,
     ClassroomRoutingModule

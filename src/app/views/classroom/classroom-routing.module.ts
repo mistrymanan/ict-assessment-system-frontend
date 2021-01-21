@@ -5,19 +5,19 @@ import { AddClassroomComponent } from './add-classroom/add-classroom.component';
 
 const routes: Routes = [
   {
-    path: '/add',
+    path: 'add',
     component: AddClassroomComponent,
     data: {
       title: 'Add Classroom'
     }
   },
-  {
-    path: '/temp',
-    component: AddClassroomComponent,
-    data: {
-      title: 'Temp Classroom'
-    }
-  }
+  // {
+  //   path: '/temp',
+  //   component: AddClassroomComponent,
+  //   data: {
+  //     title: 'Temp Classroom'
+  //   }
+  // }
 
 ];
 

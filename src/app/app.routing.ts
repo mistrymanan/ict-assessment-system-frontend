@@ -65,12 +65,21 @@ export const routes: Routes = [
         loadChildren: () => import('./views/assignments/assignments.module').then(m => m.AssignmentsModule)
       },
       {
+        path: 'cl',
+        loadChildren: () => import('./views/classrooms/classrooms.module').then(m => m.ClassroomsModule)
+      },
+      {
         path: 'submissions',
         loadChildren: () => import('./views/submissions/submissions.module').then(m => m.SubmissionsModule)
       },
-      // {
-      //   path: 'classrooms',
-      //   loadChildren: () => import('./views/classroom/classroom.module').then(m => m.ClassroomModule)
+    
+      //{
+      //   path: 'classroom/temp',
+      //   component: TempComponent,
+      //   data: {
+      //     title: 'add people'
+      //   },
+      //   pathMatch: 'full'
       // },
       {
         path: 'classrooms/instructor-dashboard',
