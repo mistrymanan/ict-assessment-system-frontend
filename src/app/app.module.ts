@@ -46,7 +46,7 @@ import {CollapseModule} from 'ngx-bootstrap/collapse';
 import {HttpClientModule} from '@angular/common/http';
 import {UserAssignmentViewComponent} from './views/user-assignments/user-assignment-view/user-assignment-view.component';
 import {ViewQuestionComponent} from './views/user-assignments/view-question/view-question.component';
-import {FormsModule} from '@angular/forms';
+import {FormsModule,ReactiveFormsModule} from '@angular/forms';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {TooltipModule} from 'ngx-bootstrap/tooltip';
 import {AngularFireModule} from '@angular/fire';
@@ -55,14 +55,8 @@ import {environment} from '../environments/environment';
 import {AuthComponent} from './views/auth/auth.component';
 import {authInterceptorProviders} from './views/auth/token.interceptor';
 import {ModalModule} from 'ngx-bootstrap/modal';
-import { DashboardComponent } from './views/classroom/dashboard/dashboard.component';
-import { AddClassroomComponent } from './views/classroom/add-classroom/add-classroom.component';
-import { ReactiveFormsModule } from '@angular/forms';
+
 //import { TempComponent } from './views/classroom/temp/temp.component';
-import { from } from 'rxjs';
-import { InstructorDashboardComponent} from './views/classroom/instructor-dashboard/instructor-dashboard.component';
-import { ClassroomModule } from './views/classroom/classroom.module';
-import { ClassroomsModule } from './views/classrooms/classrooms.module';
 
 @NgModule({
   imports: [
@@ -84,7 +78,6 @@ import { ClassroomsModule } from './views/classrooms/classrooms.module';
     HttpClientModule,
     FormsModule,
     FlexLayoutModule,
-    ClassroomsModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
     ReactiveFormsModule,
@@ -99,10 +92,9 @@ import { ClassroomsModule } from './views/classrooms/classrooms.module';
     ViewQuestionComponent,
     AuthComponent,
     //TempComponent,
-    InstructorDashboardComponent,
-//classroom-dashboard,
-    DashboardComponent,
-    AddClassroomComponent,
+    //InstructorDashboardComponent,
+
+    //AddClassroomComponent,
   ],
   providers: [{
     provide: LocationStrategy,
@@ -110,7 +102,7 @@ import { ClassroomsModule } from './views/classrooms/classrooms.module';
   },
     authInterceptorProviders
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {
 }

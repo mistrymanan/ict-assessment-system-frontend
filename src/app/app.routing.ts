@@ -9,13 +9,8 @@ import {P500Component} from './views/error/500.component';
 import {UserAssignmentViewComponent} from './views/user-assignments/user-assignment-view/user-assignment-view.component';
 import {ViewQuestionComponent} from './views/user-assignments/view-question/view-question.component';
 import {AuthComponent} from './views/auth/auth.component';
-import {DashboardComponent} from './views/classroom/dashboard/dashboard.component';
 import {AngularFireAuthGuard, redirectUnauthorizedTo} from '@angular/fire/auth-guard';
-import { AddClassroomComponent } from './views/classroom/add-classroom/add-classroom.component';
-
 //import { TempComponent } from './views/classroom/temp/temp.component';
-
-import { InstructorDashboardComponent } from './views/classroom/instructor-dashboard/instructor-dashboard.component';
 
 const redirectToLogin = () => redirectUnauthorizedTo(['login'])
 export const routes: Routes = [
@@ -65,12 +60,12 @@ export const routes: Routes = [
         loadChildren: () => import('./views/assignments/assignments.module').then(m => m.AssignmentsModule)
       },
       {
-        path: 'cl',
-        loadChildren: () => import('./views/classrooms/classrooms.module').then(m => m.ClassroomsModule)
-      },
-      {
         path: 'submissions',
         loadChildren: () => import('./views/submissions/submissions.module').then(m => m.SubmissionsModule)
+      },
+      {
+        path: 'classrooms',
+        loadChildren: () => import('./views/classrooms/classrooms.module').then(m => m.ClassroomsModule)
       },
     
       //{
@@ -81,22 +76,6 @@ export const routes: Routes = [
       //   },
       //   pathMatch: 'full'
       // },
-      {
-        path: 'classrooms/instructor-dashboard',
-        component: InstructorDashboardComponent,
-        data: {
-          title: 'Instructor Dashboard'
-        },
-        pathMatch: 'full'
-      },
-      {
-        path: 'classrooms/add',
-        component: AddClassroomComponent,
-        data: {
-          title: 'Add Classroom'
-        },
-        pathMatch: 'full'
-      },
       // {
       //   path: 'classroom/temp',
       //   component: TempComponent,
@@ -105,14 +84,6 @@ export const routes: Routes = [
       //   },
       //   pathMatch: 'full'
       // },
-      {
-        path: 'classroom/dashboard',
-        component: DashboardComponent,
-        data: {
-          title: 'View Question'
-        },
-        pathMatch: 'full'
-      },
       {
         path: ':slug',
         component: UserAssignmentViewComponent,
