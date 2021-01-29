@@ -21,6 +21,7 @@ export const config = {
     startAssignment: 'submissions/start-submission',
     submit: 'submissions/submit',
     submission: 'submissions',
-    builds: 'executions/builds'
+    builds: 'executions/builds',
+    users: 'users'
   }
 };
