@@ -22,6 +22,7 @@ export const config = {
     submit: 'submissions/submit',
     submission: 'submissions',
     builds: 'executions/builds',
-    users: 'users'
+    users: 'users',
+    classroom: 'classrooms'
   }
 };
