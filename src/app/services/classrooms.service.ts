@@ -6,7 +6,7 @@ import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
-export class ClassroomRequestService {
+export class ClassroomsService {
 
   constructor(private http:HttpClient) { }
 
@@ -58,4 +58,5 @@ export class ClassroomRequestService {
       );
 }
 }
+
 
