@@ -6,7 +6,7 @@ import { InstructorDashboardComponent } from './instructor-dashboard/instructor-
 
 const routes: Routes = [
   {path:'add',component:AddClassroomComponent},
-  {path: 'instructor-dashboard', component:InstructorDashboardComponent}
+  {path: ':classroomSlug/instructor-dashboard', component:InstructorDashboardComponent}
 ];
 
 @NgModule({

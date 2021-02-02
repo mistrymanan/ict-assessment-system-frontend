@@ -41,8 +41,8 @@ export class ClassroomsService {
     );
   }
   
-  addInstructor(ClassroomSlug:String, email:String){
-    const data={slug:ClassroomSlug, emailId:email}
+  addInstructor(ClassroomSlug:String, emails:String[]){
+    const data={instructors:emails}
     return this.http.post(
       `http://${config.host}/${config.endpoints.classroom}/${ClassroomSlug}/instructors`,
        data,{

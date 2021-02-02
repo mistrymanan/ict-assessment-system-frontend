@@ -18,7 +18,8 @@ import { Assignment } from '../../../models/assignment';
   styleUrls: ['./instructor-dashboard.component.css']
 })
 export class InstructorDashboardComponent implements OnInit {
-  inviteForm: FormGroup;
+  addInstructorForm: FormGroup;
+  userEnrollForm: FormGroup;
   viewMode='classwork';
   modalRef: BsModalRef;
   startAssignmentProcess: boolean = false;
@@ -27,7 +28,7 @@ export class InstructorDashboardComponent implements OnInit {
   @ViewChild('myModal') public myModal: ModalDirective;
   @ViewChild('myModal1') public myModal1: ModalDirective;
   assignments: Assignment[] = [];
-  
+  classroomSlug: String;
   constructor(
     private fb: FormBuilder,
     private assignmentsService: AssignmentsService,
@@ -39,7 +40,8 @@ export class InstructorDashboardComponent implements OnInit {
   activeAssignments: ActiveAssignment[];
  
   ngOnInit(): void {
-    this.inviteForm = this.fb.group({
+    this.classroomSlug = this.route.snapshot.params.classroomSlug;
+    this.addInstructorForm = this.fb.group({
       name: ['', Validators.required ],
       email:['',Validators.pattern("^([a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4},?)+$")],
     });
@@ -102,17 +104,21 @@ export class InstructorDashboardComponent implements OnInit {
       console.error
     );
   }
-  onSubmit():void{  
-    
-    const invitesend = this.inviteForm.get('email').value;
-    console.log(invitesend.split(','))
-    // this.classroomsService.inviteInstructor(invitesend).subscribe(
-    //   res => {
-    //     console.log('Classroom created');
-    //     // this.router.navigate(['instructor-dashboard', res.slug]);
-    // }
-    // );
-    
+  onAddInstructor():void{
+    const invitesend = this.addInstructorForm.get('email').value;
+    console.log(invitesend);
+    console.log(invitesend.split(','));
+    const instructorEmails=invitesend.split(',');
+    this.classroomsService.addInstructor(this.classroomSlug,instructorEmails).subscribe(res=>{ 
+      this.myModal.hide();
+    },err=>{
+      console.log(err);
+    });
   }
+  onEnrollUser():void{
+    const enrollUsers= this.userEnrollForm.get('email').value;
+    console.log(enrollUsers.split(','));
+  }
+ 
 
 }
