@@ -1,11 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {AceEditorComponent} from 'ng2-ace-editor';
 import {FormBuilder, FormGroup} from '@angular/forms';
-import {Assignment} from '../../../models/assignment';
-import {AssignmentsService} from '../../../services/assignments.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import { Location } from '@angular/common';
+import { AssignmentsService } from '../../../services/assignments.service';
 import { DataService } from '../../../services/data.service';
+import { Assignment } from '../../../models/assignment';
 // import * as ace from 'ace-builds';
 // import 'ace-builds/webpack-resolver';
 @Component({
