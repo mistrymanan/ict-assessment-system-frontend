@@ -191,11 +191,20 @@
                   </button>
                 </div>
                 <div class="modal-body">
-                    <form action="" class="form-horizontal ng-untouched ng-pristine ng-valid" method="post" novalidate="">
-                        <div class="form-group row"><label class="col-md-3 col-form-label" for="hf-email">Email</label>
-                            <div class="col-md-9"><input autocomplete="email" class="form-control" id="hf-email" name="hf-email" placeholder="Enter Email.." type="email">
-                                <span class="help-block">Please enter your email</span></div></div>
-                        </form>
+                  <form [formGroup]="inviteForm" (ngSubmit)="onSubmit()">
+                    <div class="form-group row"><label class="col-md-3 col-form-label" for="hf-email">Email</label>
+                      <div class="col-md-9">
+                    <input type="text" id="email" name="email" class="form-control" placeholder="Invite Teachers"  formControlName="email" [class.is-valid]= "inviteForm.controls['email'].valid && inviteForm.controls['email'].dirty" [class.is-invalid]= "inviteForm.controls['email'].invalid && inviteForm.controls['email'].dirty">
+                    <div *ngIf="inviteForm.controls['email'].invalid && (inviteForm.controls['email'].dirty || inviteForm.controls['email'].touched)" class="text-danger">
+                      <div *ngIf="inviteForm.controls['email'].errors.pattern">
+                        Please provide a valid email address, You can add more co-instructors by giving the comma separated emails.
+                      </div>
+                    </div> 
+                    <span class="help-block">Please enter your email</span>   
+                  </div>
+                    </div>
+                    
+                  </form>
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" (click)="myModal.hide()">Cancle</button>
@@ -215,11 +224,20 @@
                   </button>
                 </div>
                 <div class="modal-body">
-                    <form action="" class="form-horizontal ng-untouched ng-pristine ng-valid" method="post" novalidate="">
-                        <div class="form-group row"><label class="col-md-3 col-form-label" for="hf-email">Email</label>
-                            <div class="col-md-9"><input autocomplete="email" class="form-control" id="hf-email" name="hf-email" placeholder="Enter Email.." type="email">
-                                <span class="help-block">Please enter your email</span></div></div>
-                        </form>
+                  <form [formGroup]="InviteForm" (ngSubmit)="onSubmit()">
+                    <div class="form-group row"><label class="col-md-3 col-form-label" for="hf-email">Email</label>
+                      <div class="col-md-9">
+                    <input type="text" id="email" name="email" class="form-control" placeholder="Invite students"  formControlName="email" [class.is-valid]= "inviteForm.controls['email'].valid && inviteForm.controls['email'].dirty" [class.is-invalid]= "inviteForm.controls['email'].invalid && inviteForm.controls['email'].dirty">
+                    <div *ngIf="inviteForm.controls['email'].invalid && (inviteForm.controls['email'].dirty || inviteForm.controls['email'].touched)" class="text-danger">
+                      <div *ngIf="inviteForm.controls['email'].errors.pattern">
+                        Please provide a valid email address, You can add more students by giving the comma separated emails.
+                      </div>
+                    </div> 
+                    <span class="help-block">Please enter your email</span>   
+                  </div>
+                    </div>
+                    
+                  </form>
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" (click)="myModal1.hide()">Cancle</button>
