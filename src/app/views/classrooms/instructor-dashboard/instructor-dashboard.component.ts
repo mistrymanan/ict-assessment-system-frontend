@@ -1,14 +1,17 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import {AssignmentsService} from '../../../services/assignments.service';
 import {ActiveAssignment} from '../../../models/active-assignment';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {GlobalConstants} from '../../../global-constants';
 import {BsModalRef, BsModalService, ModalDirective} from 'ngx-bootstrap/modal';
 import { TemplateRef } from '@angular/core';
 import { NgForm } from '@angular/forms';  
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ClassroomsService } from '../../../services/classrooms.service';
 
+
+import { Assignment } from '../../../models/assignment';
 @Component({
   selector: 'app-instructor-dashboard',
   templateUrl: './instructor-dashboard.component.html',
@@ -23,11 +26,15 @@ export class InstructorDashboardComponent implements OnInit {
   statusBadge: any;
   @ViewChild('myModal') public myModal: ModalDirective;
   @ViewChild('myModal1') public myModal1: ModalDirective;
+  assignments: Assignment[] = [];
+  
   constructor(
     private fb: FormBuilder,
     private assignmentsService: AssignmentsService,
     private modalService: BsModalService,
     private router: Router,
+    private route: ActivatedRoute,
+    private classroomsService: ClassroomsService,
   ) { this.statusBadge = GlobalConstants.statusBadge; }
   activeAssignments: ActiveAssignment[];
  
@@ -41,6 +48,12 @@ export class InstructorDashboardComponent implements OnInit {
       (assignments) => {
         this.activeAssignments = assignments;
       }
+    );
+    this.assignmentsService.getAllAssignments()
+    .subscribe(assignments => {
+      this.assignments = assignments;
+    },
+    console.error
     );
   }
 
@@ -71,6 +84,35 @@ export class InstructorDashboardComponent implements OnInit {
 
   openAssignment(slug: string) {
     this.router.navigate([slug]);
+  }
+
+  viewAssignment(slug: string){
+    console.log('clicked')
+    this.router.navigate([slug],{relativeTo: this.route});
+  }
+  deleteAssignment(id: string) {
+    this.assignmentsService.deleteAssignment(id).subscribe(
+      res => {
+        this.assignments.forEach((a,i) => {
+          if(a.id === id){
+            this.assignments.splice(i,1);
+          }
+        });
+      },
+      console.error
+    );
+  }
+  onSubmit():void{  
+    
+    const invitesend = this.inviteForm.get('email').value;
+    console.log(invitesend.split(','))
+    // this.classroomsService.inviteInstructor(invitesend).subscribe(
+    //   res => {
+    //     console.log('Classroom created');
+    //     // this.router.navigate(['instructor-dashboard', res.slug]);
+    // }
+    // );
+    
   }
 
 }

@@ -58,5 +58,16 @@ export class ClassroomsService {
         `http://${config.host}/${config.endpoints.classroom}/${ClassroomSlug}/instructors?ClassroomSlug=${ClassroomSlug}&email=${email}`,
       );
 }
+
+inviteInstructor(ClassroomSlug:string, email:String){
+  const data={slug:ClassroomSlug, emailId:email}
+    return this.http.post(`http://${config.host}/${config.endpoints.classroom}/${ClassroomSlug}/instructors`,
+    data,{
+     headers: new HttpHeaders({
+       'Content-Type': 'application/json',
+     })
+    }
+    );
 }
 
+}
