@@ -5,8 +5,32 @@ import { InstructorDashboardComponent } from './instructor-dashboard/instructor-
 
 
 const routes: Routes = [
-  {path:'add',component:AddClassroomComponent},
-  {path: 'instructor-dashboard', component:InstructorDashboardComponent}
+  {
+    path: '',
+    data: {
+      title: 'Classroom'
+    },
+    children:[
+      {path:'add',
+      component:AddClassroomComponent,
+      data: {
+        title: 'Add'
+      }},
+      {path:'instructor-dashboard',
+      component:InstructorDashboardComponent,
+      data: {
+        title: 'Instructor-Dashboard'
+      }},
+      {path:'assignments',
+      loadChildren: () => import('./classroom-assignments/classroom-assignments.module').then(m=>m.ClassroomAssignmentsModule),
+      // data: {
+      //   title: 'Assignments'
+      // }
+    },
+      //{path: 'assignments',loadChildren: () => import('./classroom-assignments/classroom-assignments.module').then(m=>m.ClassroomAssignmentsModule)}
+    ]
+  },
+  
 ];
 
 @NgModule({
