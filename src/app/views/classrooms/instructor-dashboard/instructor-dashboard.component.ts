@@ -45,6 +45,12 @@ export class InstructorDashboardComponent implements OnInit {
       name: ['', Validators.required ],
       email:['',Validators.pattern("^([a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4},?)+$")],
     });
+    this.userEnrollForm = this.fb.group({
+      name: ['', Validators.required ],
+      email:['',Validators.pattern("^([a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4},?)+$")],
+    });
+
+
 
     this.assignmentsService.getAllActiveAssignments().subscribe(
       (assignments) => {
@@ -118,6 +124,7 @@ export class InstructorDashboardComponent implements OnInit {
   onEnrollUser():void{
     const enrollUsers= this.userEnrollForm.get('email').value;
     console.log(enrollUsers.split(','));
+    
   }
  
 

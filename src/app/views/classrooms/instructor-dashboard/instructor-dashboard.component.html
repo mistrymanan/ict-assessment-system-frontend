@@ -185,16 +185,16 @@
             <div class="modal-dialog" role="document">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h4 class="modal-title">Invite Teachers</h4>
+                  <h4 class="modal-title">Invite Instructors</h4>
                   <button type="button" class="close" (click)="myModal.hide()" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
-                <div class="modal-body">
+                 <div class="modal-body">
                   <form [formGroup]="addInstructorForm" (ngSubmit)="onAddInstructor()">
                     <div class="form-group row"><label class="col-md-3 col-form-label" for="hf-email">Email</label>
                       <div class="col-md-9">
-                    <input type="text" id="email" name="email" class="form-control" placeholder="Invite Teachers"  formControlName="email" [class.is-valid]= "addInstructorForm.controls['email'].valid && addInstructorForm.controls['email'].dirty" [class.is-invalid]= "addInstructorForm.controls['email'].invalid && addInstructorForm.controls['email'].dirty">
+                    <input type="text" id="email" name="email" class="form-control" placeholder="Invite Instructors"  formControlName="email" [class.is-valid]= "addInstructorForm.controls['email'].valid && addInstructorForm.controls['email'].dirty" [class.is-invalid]= "addInstructorForm.controls['email'].invalid && addInstructorForm.controls['email'].dirty">
                     <div *ngIf="addInstructorForm.controls['email'].invalid && (addInstructorForm.controls['email'].dirty || addInstructorForm.controls['email'].touched)" class="text-danger">
                       <div *ngIf="addInstructorForm.controls['email'].errors.pattern">
                         Please provide a valid email address, You can add more co-instructors by giving the comma separated emails.
@@ -203,17 +203,52 @@
                     <span class="help-block">Please enter your email</span>   
                   </div>
                     </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" (click)="myModal.hide()">Cancle</button>
-                      <button type="submit" class="btn btn-primary">Send</button>
-                    </div>
+                    
                   </form>
                 </div>
-                
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" (click)="myModal.hide()">Cancle</button>
+                  <button type="button" class="btn btn-primary">Send</button>
+                </div>
+              </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+          </div>
+
+          <div bsModal #myModal1="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title">Invite Students</h4>
+                  <button type="button" class="close" (click)="myModal1.hide()" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                 <div class="modal-body">
+                  <form [formGroup]="userEnrollForm" (ngSubmit)="onEnrollUser()">
+                    <div class="form-group row"><label class="col-md-3 col-form-label" for="hf-email">Email</label>
+                      <div class="col-md-9">
+                    <input type="text" id="email" name="email" class="form-control" placeholder="Invite Students"  formControlName="email" [class.is-valid]= "userEnrollForm.controls['email'].valid && userEnrollForm.controls['email'].dirty" [class.is-invalid]= "userEnrollForm.controls['email'].invalid && userEnrollForm.controls['email'].dirty">
+                    <div *ngIf="userEnrollForm.controls['email'].invalid && (userEnrollForm.controls['email'].dirty || userEnrollForm.controls['email'].touched)" class="text-danger">
+                      <div *ngIf="userEnrollForm.controls['email'].errors.pattern">
+                        Please provide a valid email address, You can add more co-instructors by giving the comma separated emails.
+                      </div>
+                    </div> 
+                    <span class="help-block">Please enter your email</span>   
+                  </div>
+                    </div>
+                    
+                  </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" (click)="myModal1.hide()">Cancle</button>
+                  <button type="button" class="btn btn-primary">Send</button>
+                </div>
               </div><!-- /.modal-content -->
             </div><!-- /.modal-dialog -->
           </div>
         
+           
+
          
         
         

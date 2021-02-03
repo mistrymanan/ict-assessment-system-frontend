@@ -7,12 +7,15 @@ import {BsModalRef, BsModalService} from 'ngx-bootstrap/modal';
 import { AuthService } from '../../services/auth.service';
 import { User } from 'firebase';
 import { UserService } from '../../services/user.service';
+import {ModalDirective} from 'ngx-bootstrap/modal';
+import {ViewChild} from '@angular/core';
 
 @Component({
   templateUrl: 'dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
+  @ViewChild('myModal') public myModal: ModalDirective;
   statusBadge: Map<string, string>;
   modalRef: BsModalRef;
   startAssignmentProcess: boolean = false;

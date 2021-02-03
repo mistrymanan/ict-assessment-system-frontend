@@ -23,8 +23,8 @@ export class ClassroomsService {
     );
   }
    
-  enrollUser(ClassroomSlug:String, email:String){
-    const data={slug:ClassroomSlug, emailId:email}
+  enrollUser(ClassroomSlug:String, email:String[]){
+    const data={users:email}
     return this.http.post(
       `http://${config.host}/${config.endpoints.classroom}/${ClassroomSlug}/enroll`,
        data,{
