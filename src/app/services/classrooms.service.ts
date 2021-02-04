@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {config} from '../config';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import { Title } from '@angular/platform-browser';
+import { ClassroomUserResponse } from '../models/ClassroomUserResponse';
 
 
 @Injectable({
@@ -10,6 +11,14 @@ import { Title } from '@angular/platform-browser';
 export class ClassroomsService {
 
   constructor(private http:HttpClient) { }
+
+  getUserClassrooms(){
+    return this.http.get<ClassroomUserResponse>
+    (
+      `http://${config.host}/${config.endpoints.classroom}`
+    );
+  }
+
 
   createClassroom(titleValue:string){
     const data={title:titleValue}

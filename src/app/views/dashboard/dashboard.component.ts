@@ -4,7 +4,10 @@ import {ActiveAssignment} from '../../models/active-assignment';
 import {Router} from '@angular/router';
 import {GlobalConstants} from '../../global-constants';
 import {BsModalRef, BsModalService} from 'ngx-bootstrap/modal';
-
+import { AuthService } from '../../services/auth.service';
+import {User} from 'firebase';
+import { ClassroomsService } from '../../services/classrooms.service';
+import { ClassroomUserResponse } from '../../models/ClassroomUserResponse';
 @Component({
   templateUrl: 'dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
@@ -14,11 +17,16 @@ export class DashboardComponent implements OnInit {
   modalRef: BsModalRef;
   startAssignmentProcess: boolean = false;
   currentAssignment: ActiveAssignment;
+  user: any={};
+  userClassroomsDetails: ClassroomUserResponse;
+ 
 
   constructor(
+    private authService: AuthService,
     private assignmentsService: AssignmentsService,
     private modalService: BsModalService,
     private router: Router,
+    private  classroomService: ClassroomsService,
   ) {
     this.statusBadge = GlobalConstants.statusBadge;
   }
@@ -26,11 +34,28 @@ export class DashboardComponent implements OnInit {
   activeAssignments: ActiveAssignment[];
 
   ngOnInit(): void {
+    this.authService.user$.subscribe((user: User) => {
+      this.user = user;
+      
+    }
+    );
+    this.getUserClassrooms();
+
     this.assignmentsService.getAllActiveAssignments().subscribe(
       (assignments) => {
         this.activeAssignments = assignments;
       }
     );
+  }
+
+  getUserClassrooms(){
+    this.classroomService.getUserClassrooms().subscribe(
+        (response) =>{
+          this.userClassroomsDetails=response;
+         console.log(this.userClassroomsDetails);
+        }
+    )
+    
   }
 
   openModal(template: TemplateRef<any>, assignment: ActiveAssignment) {
