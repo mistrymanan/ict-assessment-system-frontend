@@ -7,6 +7,7 @@ import {BsModalRef, BsModalService} from 'ngx-bootstrap/modal';
 import { AuthService } from '../../services/auth.service';
 import {User} from 'firebase';
 import { ClassroomsService } from '../../services/classrooms.service';
+import { ClassroomUserResponse } from '../../models/ClassroomUserResponse';
 @Component({
   templateUrl: 'dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
@@ -17,6 +18,7 @@ export class DashboardComponent implements OnInit {
   startAssignmentProcess: boolean = false;
   currentAssignment: ActiveAssignment;
   user: any={};
+  userClassroomsDetails: ClassroomUserResponse;
  
 
   constructor(
@@ -37,7 +39,8 @@ export class DashboardComponent implements OnInit {
       
     }
     );
-    console.log("from dashboard component" + this.user.email);
+    this.getUserClassrooms();
+
     this.assignmentsService.getAllActiveAssignments().subscribe(
       (assignments) => {
         this.activeAssignments = assignments;
@@ -45,11 +48,12 @@ export class DashboardComponent implements OnInit {
     );
   }
 
-  userClassroom(){
+  getUserClassrooms(){
     this.classroomService.getUserClassrooms().subscribe(
-(response) =>{
-  console.log(this.user.email);
-}
+        (response) =>{
+          this.userClassroomsDetails=response;
+         console.log(this.userClassroomsDetails);
+        }
     )
     
   }
