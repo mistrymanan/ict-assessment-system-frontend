@@ -5,8 +5,6 @@ import { InstructorDashboardComponent } from './instructor-dashboard/instructor-
 
 
 const routes: Routes = [
-  {path:'add',component:AddClassroomComponent},
-  {path: ':classroomSlug/instructor-dashboard', component:InstructorDashboardComponent},
   {
     path: '',
     data: {
@@ -28,7 +26,13 @@ const routes: Routes = [
       // data: {
       //   title: 'Assignments'
       // }
-    },
+    },{path:'submissions',
+    loadChildren: () => import('./classroom-submissions/classroom-submissions.module').then(m=>m.ClassroomSubmissionsModule),
+    // data: {
+    //   title: 'Assignments'
+    // }
+  },
+
       //{path: 'assignments',loadChildren: () => import('./classroom-assignments/classroom-assignments.module').then(m=>m.ClassroomAssignmentsModule)}
     ]
   },
