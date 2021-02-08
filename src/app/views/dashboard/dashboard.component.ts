@@ -5,10 +5,7 @@ import {Router} from '@angular/router';
 import {GlobalConstants} from '../../global-constants';
 import {BsModalRef, BsModalService} from 'ngx-bootstrap/modal';
 import { AuthService } from '../../services/auth.service';
-import { User } from 'firebase';
-import { UserService } from '../../services/user.service';
-import {ModalDirective} from 'ngx-bootstrap/modal';
-import {ViewChild} from '@angular/core';
+import {User} from 'firebase';
 import { ClassroomsService } from '../../services/classrooms.service';
 import { ClassroomUserResponse } from '../../models/ClassroomUserResponse';
 @Component({
@@ -16,33 +13,22 @@ import { ClassroomUserResponse } from '../../models/ClassroomUserResponse';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-  @ViewChild('myModal') public myModal: ModalDirective;
   statusBadge: Map<string, string>;
   modalRef: BsModalRef;
   startAssignmentProcess: boolean = false;
   currentAssignment: ActiveAssignment;
-  user:any={};
-  userEmail:String;
+  user: any={};
   userClassroomsDetails: ClassroomUserResponse;
-  //getUserClassrooms: any;
  
+
   constructor(
     private authService: AuthService,
     private assignmentsService: AssignmentsService,
     private modalService: BsModalService,
     private router: Router,
-    private userService: UserService,
     private  classroomService: ClassroomsService,
   ) {
     this.statusBadge = GlobalConstants.statusBadge;
-    authService.user$.subscribe((user: User) => {
-      this.user = user;
-      this.userEmail=this.user.email;
-      this.userClassroom();
-      // console.log("I am User From Dashboard"+this.user.email);
-    });
-    //console.log(this.user.email);
-    //console.log(userService.getRequest().subscribe());
   }
 
   activeAssignments: ActiveAssignment[];
@@ -53,26 +39,24 @@ export class DashboardComponent implements OnInit {
       
     }
     );
-    
+    this.getUserClassrooms();
 
     this.assignmentsService.getAllActiveAssignments().subscribe(
       (assignments) => {
         this.activeAssignments = assignments;
       }
     );
-    
-    // console.log("hello World"+this.userEmail);
-    // console.log(this.userService.getRequest(this.userEmail).subscribe());
-  }
-  userClassroom(){
-    this.classroomService.getUserClassrooms().subscribe(
-      (response)=>{
-        console.log(response)
-      }
-    );
   }
 
-  
+  getUserClassrooms(){
+    this.classroomService.getUserClassrooms().subscribe(
+        (response) =>{
+          this.userClassroomsDetails=response;
+         console.log(this.userClassroomsDetails);
+        }
+    )
+    
+  }
 
   openModal(template: TemplateRef<any>, assignment: ActiveAssignment) {
     this.currentAssignment = assignment;

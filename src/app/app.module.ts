@@ -55,6 +55,7 @@ import {environment} from '../environments/environment';
 import {AuthComponent} from './views/auth/auth.component';
 import {authInterceptorProviders} from './views/auth/token.interceptor';
 import {ModalModule} from 'ngx-bootstrap/modal';
+import { ViewAnswerComponent } from './views/classroom/classroom-submissions/view-answer/view-answer.component';
 
 //import { TempComponent } from './views/classroom/temp/temp.component';
 
@@ -91,6 +92,7 @@ import {ModalModule} from 'ngx-bootstrap/modal';
     UserAssignmentViewComponent,
     ViewQuestionComponent,
     AuthComponent,
+    ViewAnswerComponent,
     //TempComponent,
     //InstructorDashboardComponent,
 
