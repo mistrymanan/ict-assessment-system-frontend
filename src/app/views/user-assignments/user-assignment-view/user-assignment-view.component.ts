@@ -12,7 +12,7 @@ import {GlobalConstants} from '../../../global-constants';
 export class UserAssignmentViewComponent implements OnInit {
   assignment: ActiveAssignmentDetails = new ActiveAssignmentDetails();
   statusBadge: Map<string, string>;
-
+classroomSlug:string;
   constructor(
     private assignmentService: AssignmentsService,
     private router: Router,
@@ -21,10 +21,10 @@ export class UserAssignmentViewComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.classroomSlug=this.route.snapshot.params.classroomSlug;
     const slug = this.route.snapshot.params.slug;
-
     this.statusBadge = GlobalConstants.statusBadge;
-    this.assignmentService.getActiveAssignmentBySlug(slug).subscribe(
+    this.assignmentService.getActiveAssignmentBySlug(slug,this.classroomSlug).subscribe(
       (assignment) => {
         this.assignment = assignment;
       }

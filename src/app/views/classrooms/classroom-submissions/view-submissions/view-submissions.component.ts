@@ -18,6 +18,7 @@ export class ViewSubmissionsComponent implements OnInit {
   assignmentId: string;
   assignmentName: string;
   assignmentSlug;
+  classroomSlug:string;
   constructor(
     private route: ActivatedRoute,
     private submissionService: SubmissionService,
@@ -27,11 +28,12 @@ export class ViewSubmissionsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.classroomSlug=this.route.snapshot.params.classroomSlug;
     this.assignmentSlug = this.route.snapshot.paramMap.get('assignmentSlug');
     // this.questionSlug = this.route.snapshot.paramMap.get('questionSlug');
 
 
-    this.assignmentsService.getAssignmentBySlug(this.assignmentSlug).subscribe(
+    this.assignmentsService.getAssignmentBySlug(this.assignmentSlug,this.classroomSlug).subscribe(
       assignment => {
         this.assignmentName = assignment.title;
         this.assignmentId = assignment.id;

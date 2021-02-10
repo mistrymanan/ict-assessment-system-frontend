@@ -82,9 +82,10 @@ __Sample Output__
   }
 
   ngOnInit(): void {
+    const classroomSlug=this.route.snapshot.params.classroomSlug;
     const assignmentSlug = this.route.snapshot.params.assignmentSlug;
     const questionSlug = this.route.snapshot.params.questionSlug;
-    this.assignmentsService.getUserQuestion(assignmentSlug, questionSlug).subscribe(
+    this.assignmentsService.getUserQuestion(assignmentSlug, questionSlug,classroomSlug).subscribe(
       (question) => {
         this.allowedLanguages = [];
         this.currentQuestion = question;
@@ -97,7 +98,7 @@ __Sample Output__
         this.currentLanguage = this.allowedLanguages[0].value;
       }
     );
-    this.assignmentsService.getActiveAssignmentBySlug(assignmentSlug)
+    this.assignmentsService.getActiveAssignmentBySlug(assignmentSlug,classroomSlug)
       .subscribe((assignment) => {
         this.assignmentId = assignment.id;
       });

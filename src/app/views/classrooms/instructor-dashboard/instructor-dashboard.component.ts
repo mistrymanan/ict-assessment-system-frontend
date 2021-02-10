@@ -28,7 +28,7 @@ export class InstructorDashboardComponent implements OnInit {
   @ViewChild('myModal') public myModal: ModalDirective;
   @ViewChild('myModal1') public myModal1: ModalDirective;
   assignments: Assignment[] = [];
-  classroomSlug: String;
+  classroomSlug: string;
   constructor(
     private fb: FormBuilder,
     private assignmentsService: AssignmentsService,
@@ -52,12 +52,12 @@ export class InstructorDashboardComponent implements OnInit {
 
 
 
-    this.assignmentsService.getAllActiveAssignments().subscribe(
+    this.assignmentsService.getAllActiveAssignments(this.classroomSlug).subscribe(
       (assignments) => {
         this.activeAssignments = assignments;
       }
     );
-    this.assignmentsService.getAllAssignments()
+    this.assignmentsService.getAllAssignments(this.classroomSlug)
     .subscribe(assignments => {
       this.assignments = assignments;
     },
@@ -72,7 +72,7 @@ export class InstructorDashboardComponent implements OnInit {
 
   startAssignment() {
     this.startAssignmentProcess = true;
-    this.assignmentsService.startAssignment(this.currentAssignment.id).subscribe(
+    this.assignmentsService.startAssignment(this.currentAssignment.id,this.classroomSlug).subscribe(
       () => {
         this.startAssignmentProcess = false;
         this.modalRef.hide();
@@ -99,7 +99,7 @@ export class InstructorDashboardComponent implements OnInit {
     this.router.navigate([slug],{relativeTo: this.route});
   }
   deleteAssignment(id: string) {
-    this.assignmentsService.deleteAssignment(id).subscribe(
+    this.assignmentsService.deleteAssignment(id,this.classroomSlug).subscribe(
       res => {
         this.assignments.forEach((a,i) => {
           if(a.id === id){
