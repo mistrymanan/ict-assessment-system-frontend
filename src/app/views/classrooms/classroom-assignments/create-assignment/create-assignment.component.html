@@ -12,7 +12,12 @@
               <label class="col-md-2 col-form-label" for="title">Assignment Title</label>
               <div class="col-md-10">
                 <input type="text" id="title" name="title" class="form-control" formControlName="title"
-                       placeholder="Enter Assignment Title..">
+                       placeholder="Enter Assignment Title.." [class.is-valid]= "assignmentForm.controls['title'].valid && assignmentForm.controls['title'].dirty" [class.is-invalid]= "assignmentForm.controls['title'].invalid && assignmentForm.controls['title'].dirty" required>
+                <div *ngIf="assignmentForm.controls['title'].invalid && (assignmentForm.controls['title'].dirty || assignmentForm.controls['title'].touched)" class="text-danger">
+                <div *ngIf="assignmentForm.controls['title'].errors.required">
+                  Title is required.
+               </div>
+              </div>        
               </div>
             </div>
             <div class="form-group row">
@@ -56,7 +61,7 @@
               <div class="col-md-2 col-form-label">
                 <div class="form-check form-check-inline mr-1">
                   <label class="switch switch-3d switch-primary">
-                    <input type="checkbox" class="switch-input form-check-input" formControlName="hasDeadline">
+                    <input type="checkbox" class="switch-input form-check-input" formControlName="hasDeadline" >
                     <span class="switch-slider"></span>
                   </label>
                   &nbsp; &nbsp;
@@ -66,9 +71,11 @@
                 </div>
               </div>
               <div class="col-md-8">
-                <input class="form-control" type="datetime-local" formControlName="deadline">
-              </div>
-  
+                <input class="form-control" type="datetime-local" formControlName="deadline" [class.is-valid]="assignmentForm.hasError('notValid')" [class.is-invalid]= "assignmentForm.hasError('notValid')">
+                <div *ngIf="assignmentForm.hasError('notValid')" class="text-danger">
+                  Deadline should be greater than start time.
+                </div>          
+              </div>  
             </div>
           </div>
         </div>
@@ -76,7 +83,7 @@
         <div class="card-footer">
   
           <button *ngIf="isUpdateMode" class="btn btn-secondary btn-pill pull-left" type="button" (click)="location.back()"><i class="fa fa-close"></i> Cancel</button>
-          <button type="submit" class="btn btn-primary btn-pill pull-right"><i class="fa fa-{{isUpdateMode ? 'pencil':'plus'}}"></i> {{isUpdateMode ? 'Edit':'Create'}} Assignment
+          <button type="submit" class="btn btn-primary btn-pill pull-right" [disabled]="!assignmentForm.valid"><i class="fa fa-{{isUpdateMode ? 'pencil':'plus'}}"></i> {{isUpdateMode ? 'Edit':'Create'}} Assignment
           </button>
         </div>
       </div>

@@ -4,7 +4,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {AssignmentsService} from '../../../../services/assignments.service';
 import {Assignment} from '../../../../models/assignment';
 import {Location} from '@angular/common';
-import {FormBuilder, FormGroup, FormArray} from '@angular/forms';
+import {FormBuilder, FormGroup, FormArray, Validators} from '@angular/forms';
 import {GlobalConstants} from '../../../../global-constants';
 import {ExecutionService} from '../../../../services/execution.service';
 import {DataService} from '../../../../services/data.service';
@@ -43,13 +43,13 @@ export class AddQuestionComponent implements OnInit, AfterViewInit {
     private dataService: DataService
   ) {
     this.questionForm = fb.group({
-      'title': [''],
-      'allowedLanguages': [''],
-      'totalPoints': [''],
+      'title': ['',Validators.required],
+      'allowedLanguages': ['',Validators.required],
+      'totalPoints': ['',Validators.required],
       'showExpectedOutput': [false],
       'description': [''],
-      'solutionLanguage': ['java'],
-      'solutionCode': [''],
+      'solutionLanguage': [''],
+      'solutionCode': ['',Validators.required],
       'testCases': fb.array([])
     });
     this.assignment = new Assignment();
