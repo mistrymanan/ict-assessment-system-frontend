@@ -51,7 +51,7 @@ export class AssignmentsService {
     question.id = questionId;
     const data = {assignmentId: assignmentID, question: question};
     return this.http.put(
-      `http://${config.host}//${config.apiVersion.assignmentsServiceVersion}/${classroomSlug}/${config.endpoints.updateQuestion}`,
+      `http://${config.host}/${config.apiVersion.assignmentsServiceVersion}/${classroomSlug}/${config.endpoints.updateQuestion}`,
       data, {
         headers: new HttpHeaders({
           'Content-Type': 'application/json',

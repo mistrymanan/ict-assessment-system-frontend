@@ -41,11 +41,11 @@ export class DashboardComponent implements OnInit {
     );
     this.getUserClassrooms();
 
-    this.assignmentsService.getAllActiveAssignments().subscribe(
-      (assignments) => {
-        this.activeAssignments = assignments;
-      }
-    );
+    // this.assignmentsService.getAllActiveAssignments().subscribe(
+    //   (assignments) => {
+    //     this.activeAssignments = assignments;
+    //   }
+    // );
   }
 
   getUserClassrooms(){
@@ -63,21 +63,21 @@ export class DashboardComponent implements OnInit {
     this.modalRef = this.modalService.show(template);
   }
 
-  startAssignment() {
-    this.startAssignmentProcess = true;
-    this.assignmentsService.startAssignment(this.currentAssignment.id).subscribe(
-      () => {
-        this.startAssignmentProcess = false;
-        this.modalRef.hide();
-        this.openAssignment(this.currentAssignment.slug);
-      },
-      () => {
-        this.startAssignmentProcess = false;
-        console.log('assignment cannot be started');
-        this.modalRef.hide();
-      }
-    );
-  }
+  // startAssignment() {
+  //   this.startAssignmentProcess = true;
+  //   this.assignmentsService.startAssignment(this.currentAssignment.id).subscribe(
+  //     () => {
+  //       this.startAssignmentProcess = false;
+  //       this.modalRef.hide();
+  //       this.openAssignment(this.currentAssignment.slug);
+  //     },
+  //     () => {
+  //       this.startAssignmentProcess = false;
+  //       console.log('assignment cannot be started');
+  //       this.modalRef.hide();
+  //     }
+  //   );
+  // }
 
   removeUnderScore(str: string) {
     return str.split('_').join(' ');
