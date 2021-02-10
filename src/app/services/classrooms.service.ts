@@ -3,6 +3,7 @@ import {config} from '../config';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import { Title } from '@angular/platform-browser';
 import { ClassroomUserResponse } from '../models/ClassroomUserResponse';
+import { Classroom } from '../models/Classroom';
 
 
 @Injectable({
@@ -66,5 +67,10 @@ export class ClassroomsService {
       return this.http.delete(
         `http://${config.host}/${config.endpoints.classroom}/${ClassroomSlug}/instructors?ClassroomSlug=${ClassroomSlug}&email=${email}`,
       );
+}
+    getClassroomDetails(ClassroomSlug: string){
+      return this.http.get<Classroom>(
+    `http://${config.host}/${config.endpoints.classroom}/${ClassroomSlug}`
+    );
 }
 }
