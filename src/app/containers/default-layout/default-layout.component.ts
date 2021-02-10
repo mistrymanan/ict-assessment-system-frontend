@@ -17,6 +17,7 @@ export class DefaultLayoutComponent {
     private router: Router) {
     authService.user$.subscribe((user: User) => {
       this.user = user;
+      console.log("User:"+this.user.email);
     });
   }
 

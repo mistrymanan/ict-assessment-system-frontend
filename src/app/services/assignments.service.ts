@@ -24,34 +24,34 @@ export class AssignmentsService {
 
   }
 
-  getAllActiveAssignments(): Observable<ActiveAssignment[]> {
+  getAllActiveAssignments(classroomSlug:string): Observable<ActiveAssignment[]> {
     return this.http.get<any>(
-      `http://${config.host}/${config.endpoints.activeAssignments}`
+      `http://${config.host}/${config.apiVersion.assignmentsServiceVersion}/${classroomSlug}/${config.endpoints.activeAssignments}`
     ).pipe(map(res => res.activeAssignments));
   }
 
-  getActiveAssignmentBySlug(slug: string): Observable<ActiveAssignmentDetails> {
+  getActiveAssignmentBySlug(slug: string,classroomSlug:string): Observable<ActiveAssignmentDetails> {
     return this.http.get<ActiveAssignmentDetails>(
-      `http://${config.host}/${config.endpoints.activeAssignmentBySlug}/${slug}`
+      `http://${config.host}/${config.apiVersion.assignmentsServiceVersion}/${classroomSlug}/${config.endpoints.activeAssignmentBySlug}/${slug}`
     );
   }
 
-  getUserQuestion(assignmentSlug: string, questionSlug: string) {
+  getUserQuestion(assignmentSlug: string, questionSlug: string, classroomSlug:string) {
     return this.http.get<UserQuestion>(
-      `http://${config.host}/${config.endpoints.getUserQuestion}?assignmentSlug=${assignmentSlug}&questionSlug=${questionSlug}`,
+      `http://${config.host}/${config.apiVersion.assignmentsServiceVersion}/${classroomSlug}/${config.endpoints.getUserQuestion}?assignmentSlug=${assignmentSlug}&questionSlug=${questionSlug}`,
     );
   }
 
-  getQuestion(assignmentSlug: string, questionSlug: string) {
-    return this.http.get<Question>(`http://${config.host}/${config.endpoints.questions}?assignmentSlug=${assignmentSlug}&questionSlug=${questionSlug}`,
+  getQuestion(assignmentSlug: string, questionSlug: string,classroomSlug: string) {
+    return this.http.get<Question>(`http://${config.host}/${config.apiVersion.assignmentsServiceVersion}/${classroomSlug}/${config.endpoints.questions}?assignmentSlug=${assignmentSlug}&questionSlug=${questionSlug}`,
     );
   }
 
-  updateQuestion(assignmentID: string, questionId: string, question: Question) {
+  updateQuestion(assignmentID: string, questionId: string, question: Question,classroomSlug: string) {
     question.id = questionId;
     const data = {assignmentId: assignmentID, question: question};
     return this.http.put(
-      `http://${config.host}/${config.endpoints.updateQuestion}`,
+      `http://${config.host}/${config.apiVersion.assignmentsServiceVersion}/${classroomSlug}/${config.endpoints.updateQuestion}`,
       data, {
         headers: new HttpHeaders({
           'Content-Type': 'application/json',
@@ -60,27 +60,27 @@ export class AssignmentsService {
     );
   }
 
-  startAssignment(assignmentId: string) {
+  startAssignment(assignmentId: string,classroomSlug: string) {
     return this.http.patch(
-      `http://${config.host}/${config.endpoints.startAssignment}/${assignmentId}`, null
+      `http://${config.host}/${config.apiVersion.assignmentsServiceVersion}/${classroomSlug}/${config.endpoints.startAssignment}/${assignmentId}`, null
     );
   }
 
-  deleteQuestion(assignmentId: string, questionId: string) {
+  deleteQuestion(assignmentId: string, questionId: string,classroomSlug: string) {
     return this.http.delete(
-      `http://${config.host}/${config.endpoints.deleteQuestion}?assignmentId=${assignmentId}&questionId=${questionId}`,
+      `http://${config.host}/${config.apiVersion.assignmentsServiceVersion}/${classroomSlug}/${config.endpoints.deleteQuestion}?assignmentId=${assignmentId}&questionId=${questionId}`,
     );
   }
 
-  getAllAssignments(): Observable<Assignment[]> {
+  getAllAssignments(classroomSlug: string): Observable<Assignment[]> {
     return this.http.get<any>(
-      `http://${config.host}/${config.endpoints.assignments}`
+      `http://${config.host}/${config.apiVersion.assignmentsServiceVersion}/${classroomSlug}/${config.endpoints.assignments}`
     ).pipe(map(res => res.assignments));
   }
 
-  getAssignmentById(assignmentId: String): Observable<Assignment> {
+  getAssignmentById(assignmentId: String,classroomSlug: string): Observable<Assignment> {
     return this.http.get<Assignment>(
-      `http://${config.host}/${config.endpoints.getAssignment}/${assignmentId}`);
+      `http://${config.host}/${config.apiVersion.assignmentsServiceVersion}/${classroomSlug}/${config.endpoints.getAssignment}/${assignmentId}`);
   }
 
   // loadAllAssignments(): void {
@@ -95,9 +95,9 @@ export class AssignmentsService {
   //       error => console.log("Cannot load assignments"));
   // }
 
-  createAssignment(value: Assignment) {
+  createAssignment(value: Assignment,classroomSlug:string) {
     return this.http.post<Assignment>(
-      `http://${config.host}/${config.endpoints.createAssignment}`,
+      `http://${config.host}/${config.apiVersion.assignmentsServiceVersion}/${classroomSlug}/${config.endpoints.createAssignment}`,
       value, {
         headers: new HttpHeaders({
           'Content-Type': 'application/json',
@@ -105,9 +105,9 @@ export class AssignmentsService {
       });
   }
 
-  updateAssignment(assignmentID: string, assignment: Assignment) {
+  updateAssignment(assignmentID: string, assignment: Assignment,classroomSlug:string) {
     return this.http.put(
-      `http://${config.host}/${config.endpoints.updateAssignment}/${assignmentID}`,
+      `http://${config.host}/${config.apiVersion.assignmentsServiceVersion}/${classroomSlug}/${config.endpoints.updateAssignment}/${assignmentID}`,
       assignment, {
         headers: new HttpHeaders({
           'Content-Type': 'application/json',
@@ -116,21 +116,21 @@ export class AssignmentsService {
     );
   }
 
-  deleteAssignment(id: string) {
-    return this.http.delete(`http://${config.host}/${config.endpoints.deleteAssignment}/${id}`);
+  deleteAssignment(id: string,classroomSlug:string) {
+    return this.http.delete(`http://${config.host}/${config.apiVersion.assignmentsServiceVersion}/${classroomSlug}/${config.endpoints.deleteAssignment}/${id}`);
   }
 
-  toggleAssignmentStatus(id: string) {
-    return this.http.patch(`http://${config.host}/${config.endpoints.toggleAssignmentStatus}/${id}`, null);
+  toggleAssignmentStatus(id: string,classroomSlug:string) {
+    return this.http.patch(`http://${config.host}/${config.apiVersion.assignmentsServiceVersion}/${classroomSlug}/${config.endpoints.toggleAssignmentStatus}/${id}`, null);
   }
 
-  getAssignmentBySlug(slug: string) {
-    return this.http.get<Assignment>(`http://${config.host}/${config.endpoints.getAssignmentBySlug}/${slug}`);
+  getAssignmentBySlug(slug: string,classroomSlug: string) {
+    return this.http.get<Assignment>(`http://${config.host}/${config.apiVersion.assignmentsServiceVersion}/${classroomSlug}/${config.endpoints.getAssignmentBySlug}/${slug}`);
   }
 
-  addQuestionToAssignment(id, question) {
+  addQuestionToAssignment(id, question,classroomSlug:string) {
     return this.http.post<any>(
-      `http://${config.host}/${config.endpoints.addQuestion}`,
+      `http://${config.host}/${config.apiVersion.assignmentsServiceVersion}/${classroomSlug}/${config.endpoints.addQuestion}`,
       Object.assign({assignmentId: id}, question),
       {
         headers: new HttpHeaders(

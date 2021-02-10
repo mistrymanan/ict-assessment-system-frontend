@@ -10,6 +10,10 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { AceEditorModule } from 'ng2-ace-editor';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MarkdownModule } from 'ngx-markdown';
+import { SubmissionsRoutingModule } from '../../submissions/submissions-routing.module';
+import { CodeEditorModule } from '../../code-editor/code-editor.module';
+import { CollapseModule } from 'ngx-bootstrap/collapse';
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
 
 
 @NgModule({
@@ -23,6 +27,11 @@ import { MarkdownModule } from 'ngx-markdown';
     AceEditorModule,
     FlexLayoutModule,
     MarkdownModule,
+    CommonModule,
+    SubmissionsRoutingModule,
+    CodeEditorModule,
+    CollapseModule,
+    TooltipModule
   ]
 })
 export class ClassroomAssignmentsModule { }
