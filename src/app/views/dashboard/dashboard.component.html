@@ -1,126 +1,49 @@
-<div class="animated fadeIn">
-  <div class="card" fxLayout="row wrap" fxLayoutGap="25px" *ngFor="let classroom of userClassroomsDetails.instructClassrooms">
-    <div class="courses-container">
-      <div class="course">
-        <div class="course-preview">
-          
-         
-          <a href="#">{{ classroom.ownerName}} <i class="fas fa-chevron-right"></i></a>
-        </div>
-        <div class="course-info">
-          <!-- <div class="h6 text-primary mb-1 pt-3"><h2>  {{ClassroomUserResponse.ClassroomDetails}}</h2></div> -->
-          <div class="h6 text-primary mb-1 pt-3"><h2> {{ classroom.classroomTitle}}</h2></div>
-                
-                <div class="row">
-                  <span>
-                    <button type="button" class="btn" data-toggle="modal" (click)="myModal.show()">
-                      Continue
-                    </button>
-                  </span>
-         
-          </div>
-
-        </div>
-      </div>
-    </div>
-      </div>
-    </div>
-    
-    <div bsModal #myModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h4 class="modal-title">Do you want to start this Assignment?</h4>
-            <button type="button" class="close" (click)="myModal.hide()" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <button type="button" class="btn btn-primary" (click)="startAssignment()"
+<section>
+  <div class="container">
+    <div class="row">
+        <div class="col-md-4" fxLayout="row wrap" fxLayoutGap="25px" *ngFor="let classroom of userClassroomsDetails.instructClassrooms">
+          <div class="card profile-card-2">
+                  <div class="card-img-block">
+                      <img class="img-fluid"  src="assets/img/avatars/9.jpg" alt="Card image cap">
+                  </div>
+                  <div class="card-body pt-5">
+                      <img src="https://randomuser.me/api/portraits/men/64.jpg" alt="profile-image" class="profile"/>
+                      <h5 class="card-title">{{ classroom.classroomTitle}}</h5>
+                      <p class="card-text">{{ classroom.ownerName}}</p>
+                      <button type="button" class="btn btn-primary" (click)="openClassroom(classroom.classroomSlug)"
                     [disabled]="startAssignmentProcess">
-              Confirm
+              Open
             </button>
-            <!-- <button type="button" class="btn btn-secondary" (click)="myModal.hide()" fxFlex="35"
-                    [disabled]="startAssignmentProcess"><i
-              class="fa fa-close"></i> Cancel
-            </button> -->
-          </div>
-          <div class="modal-footer">
-            <!-- <button class="btn btn-secondary" (click)="myModal.hide()">Close</button> -->
-            <!-- <button type="button" class="btn btn-primary">Continue</button> -->
-          </div>
-        </div><!-- /.modal-content -->
-      </div><!-- /.modal-dialog -->
-    </div><!-- /.modal -->
+                  </div>
 
-
-
-
-
-    <!-- <ng-template #modal>
-      <div class="modal-header">
-        <h4 class="modal-title pull-left">Do You want to start this Assignment ?</h4>
+                  
+              </div>
+              
       </div>
-      <div class="modal-body" fxLayout fxLayoutAlign="space-around">
-        <button type="button" class="btn btn-primary" (click)="startAssignment()" fxFlex="35"
-                [disabled]="startAssignmentProcess">
-          <i class="fa fa-{{startAssignmentProcess?'circle-o-notch fa-spin':'check'}}"></i>
-          Confirm
-        </button>
-        <button type="button" class="btn btn-secondary" (click)="this.modalRef.hide()" fxFlex="35"
-                [disabled]="startAssignmentProcess"><i
-          class="fa fa-close"></i> Cancel
-        </button>
+            
+                <div class="col-md-4" fxLayout="row wrap" fxLayoutGap="25px" *ngFor="let classroom of userClassroomsDetails.enrolledClassrooms">
+                  <div class="card profile-card-2">
+                          <div class="card-img-block">
+                              <img class="img-fluid"  src="assets/img/avatars/9.jpg" alt="Card image cap">
+                          </div>
+                          <div class="card-body pt-5">
+                              <img src="https://randomuser.me/api/portraits/men/64.jpg" alt="profile-image" class="profile"/>
+                              <h5 class="card-title">{{ classroom.classroomTitle}}</h5>
+                              <p class="card-text">{{ classroom.ownerName}}</p>
+                              <button type="button" class="btn btn-primary" (click)="openClassroom(classroom.classroomSlug)"
+                              [disabled]="startAssignmentProcess">
+                        Open
+                      </button>
+                          </div>
+                          
+                      </div>
+                      
+              </div>
+                      </div>
+
+
+
+
+
       </div>
-    </ng-template> 
-     -->
-   
-
-
-
-
-    <!-- <div class="card" fxFlex="31" *ngFor="let assignment of activeAssignments"
-         (click)="assignment.currentStatus === 'NOT_STARTED'?openModal(modal,assignment):openAssignment(assignment.slug)">
-      <div class="card-body p-0 clearfix">
-        <i
-          class="fa fa-book bg-primary pt-5 pb-5 pl-4 pr-4 font-5xl mr-3 float-left h-100"
-        ></i>
-        <div class="h6 text-primary mb-1 pt-3">{{ assignment.title}}</div>
-        <div class="col mt-3">
-          <div class="row">
-            <div class="text-muted text-uppercase font-weight-bold font-xs m-1 " fxFlex>
-              Status :
-            </div>
-            <div class="m-1" fxFlex>
-              <span
-                class="badge badge-{{statusBadge[assignment.currentStatus]}}">{{removeUnderScore(assignment.currentStatus) | titlecase}}</span>
-            </div>
-          </div>
-          <div>
-            <div class="row">
-              <div class="text-muted text-uppercase font-weight-bold font-xs m-1 " fxFlex>
-                Total Points :
-              </div>
-              <div class="m-1" fxFlex>
-                <span class="">{{assignment.totalPoints}}</span>
-              </div>
-            </div>
-          </div>
-          <div>
-            <div class="row">
-              <div class="text-muted text-uppercase font-weight-bold font-xs m-1 " fxFlex>
-                Deadline :
-              </div>
-              <div class="m-1 mb-3" fxFlex>
-                <span *ngIf="assignment.hasDeadline; else noDeadline">{{assignment.deadline|date:'short'}}</span>
-                <ng-template #noDeadline>
-                  <span>No Deadline</span>
-                </ng-template>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div> -->
-
- 
+      </section>

@@ -63,29 +63,36 @@ export class DashboardComponent implements OnInit {
     this.modalRef = this.modalService.show(template);
   }
 
-  startAssignment() {
-    this.startAssignmentProcess = true;
-    this.assignmentsService.startAssignment(this.currentAssignment.id).subscribe(
-      () => {
-        this.startAssignmentProcess = false;
-        this.modalRef.hide();
-        this.openAssignment(this.currentAssignment.slug);
-      },
-      () => {
-        this.startAssignmentProcess = false;
-        console.log('assignment cannot be started');
-        this.modalRef.hide();
-      }
-    );
-  }
+  // startAssignment() {
+  //   this.startAssignmentProcess = true;
+  //   this.assignmentsService.startAssignment(this.currentAssignment.id).subscribe(
+  //     () => {
+  //       this.startAssignmentProcess = false;
+  //       this.modalRef.hide();
+  //       this.openAssignment(this.currentAssignment.slug);
+  //     },
+  //     () => {
+  //       this.startAssignmentProcess = false;
+  //       console.log('assignment cannot be started');
+  //       this.modalRef.hide();
+  //     }
+  //   );
+  // }
 
   removeUnderScore(str: string) {
     return str.split('_').join(' ');
   }
 
-  openAssignment(slug: string) {
-    this.router.navigate([slug]);
+  // openAssignment(slug: string) {
+  //   this.router.navigate([slug]);
+  // }
+
+  openClassroom(slug: string){
+    this.router.navigate(['/classrooms',slug,'instructor-dashboard']);
   }
+
+
+
 
 
 }

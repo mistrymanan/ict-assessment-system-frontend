@@ -16,7 +16,7 @@ const routes: Routes = [
       data: {
         title: 'Add'
       }},
-      {path:'instructor-dashboard',
+      {path:':classroomSlug/instructor-dashboard',
       component:InstructorDashboardComponent,
       data: {
         title: 'Instructor-Dashboard'
