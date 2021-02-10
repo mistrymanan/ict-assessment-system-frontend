@@ -16,7 +16,7 @@ const routes: Routes = [
       data: {
         title: 'Add'
       }},
-      {path:'instructor-dashboard',
+      {path:':classroomSlug/instructor-dashboard',
       component:InstructorDashboardComponent,
       data: {
         title: 'Instructor-Dashboard'
@@ -26,7 +26,13 @@ const routes: Routes = [
       // data: {
       //   title: 'Assignments'
       // }
-    },
+    },{path:'submissions',
+    loadChildren: () => import('./classroom-submissions/classroom-submissions.module').then(m=>m.ClassroomSubmissionsModule),
+    // data: {
+    //   title: 'Assignments'
+    // }
+  },
+
       //{path: 'assignments',loadChildren: () => import('./classroom-assignments/classroom-assignments.module').then(m=>m.ClassroomAssignmentsModule)}
     ]
   },

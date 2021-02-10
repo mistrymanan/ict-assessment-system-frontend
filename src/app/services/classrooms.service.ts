@@ -32,8 +32,8 @@ export class ClassroomsService {
     );
   }
    
-  enrollUser(ClassroomSlug:String, email:String){
-    const data={slug:ClassroomSlug, emailId:email}
+  enrollUser(ClassroomSlug:String, email:String[]){
+    const data={users:email}
     return this.http.post(
       `http://${config.host}/${config.endpoints.classroom}/${ClassroomSlug}/enroll`,
        data,{
@@ -50,8 +50,8 @@ export class ClassroomsService {
     );
   }
   
-  addInstructor(ClassroomSlug:String, email:String){
-    const data={slug:ClassroomSlug, emailId:email}
+  addInstructor(ClassroomSlug:String, emails:String[]){
+    const data={instructors:emails}
     return this.http.post(
       `http://${config.host}/${config.endpoints.classroom}/${ClassroomSlug}/instructors`,
        data,{
@@ -67,4 +67,16 @@ export class ClassroomsService {
         `http://${config.host}/${config.endpoints.classroom}/${ClassroomSlug}/instructors?ClassroomSlug=${ClassroomSlug}&email=${email}`,
       );
 }
+
+inviteInstructor(ClassroomSlug:string, email:String){
+  const data={slug:ClassroomSlug, emailId:email}
+    return this.http.post(`http://${config.host}/${config.endpoints.classroom}/${ClassroomSlug}/instructors`,
+    data,{
+     headers: new HttpHeaders({
+       'Content-Type': 'application/json',
+     })
+    }
+    );
+}
+
 }

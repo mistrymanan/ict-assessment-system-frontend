@@ -1,63 +1,59 @@
-<div class="animated fadeIn">
-  <div fxLayout="row wrap" fxLayoutGap="25px">
-    <div class="card" fxFlex="31" *ngFor="let assignment of activeAssignments"
-         (click)="assignment.currentStatus === 'NOT_STARTED'?openModal(modal,assignment):openAssignment(assignment.slug)">
-      <div class="card-body p-0 clearfix">
-        <i
-          class="fa fa-book bg-primary pt-5 pb-5 pl-4 pr-4 font-5xl mr-3 float-left h-100"
-        ></i>
-        <div class="h6 text-primary mb-1 pt-3">{{ assignment.title}}</div>
-        <div class="col mt-3">
-          <div class="row">
-            <div class="text-muted text-uppercase font-weight-bold font-xs m-1 " fxFlex>
-              Status :
-            </div>
-            <div class="m-1" fxFlex>
-              <span
-                class="badge badge-{{statusBadge[assignment.currentStatus]}}">{{removeUnderScore(assignment.currentStatus) | titlecase}}</span>
-            </div>
-          </div>
-          <div>
-            <div class="row">
-              <div class="text-muted text-uppercase font-weight-bold font-xs m-1 " fxFlex>
-                Total Points :
+<section>
+  
+  <div class="container">
+    <button class=" btn btn-primary btn-sm btn-pill pull-right" (click)="addClassroom()">
+      <i class="fa fa-plus mr-1"></i>
+      Add Classroom &nbsp;
+    </button>
+    <br>
+    <br>
+    <div class="row">
+        <div class="col-md-4" fxLayout="row wrap" fxLayoutGap="25px" *ngFor="let classroom of userClassroomsDetails.instructClassrooms">
+          <div class="card profile-card-2">
+            
+                  <div class="card-img-block">
+                      <img class="img-fluid"  src="assets/img/avatars/9.jpg" alt="Card image cap">
+                      
+                  </div>
+                  
+                  <div class="card-body pt-5">
+                      <img src="https://randomuser.me/api/portraits/men/64.jpg" alt="profile-image" class="profile"/>
+                      <h5 class="card-title">{{ classroom.classroomTitle}}</h5>
+                      <p class="card-text">{{ classroom.ownerName}}</p>
+                      <button type="button" class="btn btn-primary" (click)="openClassroom(classroom.classroomSlug)"
+                    [disabled]="startAssignmentProcess">
+              Open
+            </button>
+                  </div>
+
+                  
               </div>
-              <div class="m-1" fxFlex>
-                <span class="">{{assignment.totalPoints}}</span>
-              </div>
-            </div>
-          </div>
-          <div>
-            <div class="row">
-              <div class="text-muted text-uppercase font-weight-bold font-xs m-1 " fxFlex>
-                Deadline :
-              </div>
-              <div class="m-1 mb-3" fxFlex>
-                <span *ngIf="assignment.hasDeadline; else noDeadline">{{assignment.deadline|date:'short'}}</span>
-                <ng-template #noDeadline>
-                  <span>No Deadline</span>
-                </ng-template>
-              </div>
-            </div>
-          </div>
-        </div>
+              
       </div>
-    </div>
-  </div>
-</div>
-<ng-template #modal>
-  <div class="modal-header">
-    <h4 class="modal-title pull-left">Do You want to start this Assignment ?</h4>
-  </div>
-  <div class="modal-body" fxLayout fxLayoutAlign="space-around">
-    <button type="button" class="btn btn-primary" (click)="startAssignment()" fxFlex="35"
-            [disabled]="startAssignmentProcess">
-      <i class="fa fa-{{startAssignmentProcess?'circle-o-notch fa-spin':'check'}}"></i>
-      Confirm
-    </button>
-    <button type="button" class="btn btn-secondary" (click)="this.modalRef.hide()" fxFlex="35"
-            [disabled]="startAssignmentProcess"><i
-      class="fa fa-close"></i> Cancel
-    </button>
-  </div>
-</ng-template>
+            
+                <div class="col-md-4" fxLayout="row wrap" fxLayoutGap="25px" *ngFor="let classroom of userClassroomsDetails.enrolledClassrooms">
+                  <div class="card profile-card-2">
+                          <div class="card-img-block">
+                              <img class="img-fluid"  src="assets/img/avatars/9.jpg" alt="Card image cap">
+                          </div>
+                          <div class="card-body pt-5">
+                              <img src="https://randomuser.me/api/portraits/men/64.jpg" alt="profile-image" class="profile"/>
+                              <h5 class="card-title">{{ classroom.classroomTitle}}</h5>
+                              <p class="card-text">{{ classroom.ownerName}}</p>
+                              <button type="button" class="btn btn-primary" (click)="openClassroom(classroom.classroomSlug)"
+                              [disabled]="startAssignmentProcess">
+                        Open
+                      </button>
+                          </div>
+                          
+                      </div>
+                      
+              </div>
+                      </div>
+
+
+
+
+
+      </div>
+      </section>

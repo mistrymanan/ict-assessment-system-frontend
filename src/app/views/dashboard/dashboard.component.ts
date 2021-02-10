@@ -83,9 +83,20 @@ export class DashboardComponent implements OnInit {
     return str.split('_').join(' ');
   }
 
-  openAssignment(slug: string) {
-    this.router.navigate([slug]);
+  // openAssignment(slug: string) {
+  //   this.router.navigate([slug]);
+  // }
+
+  openClassroom(slug: string){
+    this.router.navigate(['/classrooms',slug,'instructor-dashboard']);
   }
+
+  addClassroom(slug: string){
+    this.router.navigate(['/classrooms','add']);
+  }
+
+
+
 
 
 }
