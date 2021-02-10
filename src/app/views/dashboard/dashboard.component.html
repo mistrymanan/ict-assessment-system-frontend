@@ -1,11 +1,21 @@
 <section>
+  
   <div class="container">
+    <button class=" btn btn-primary btn-sm btn-pill pull-right" (click)="addClassroom()">
+      <i class="fa fa-plus mr-1"></i>
+      Add Classroom &nbsp;
+    </button>
+    <br>
+    <br>
     <div class="row">
         <div class="col-md-4" fxLayout="row wrap" fxLayoutGap="25px" *ngFor="let classroom of userClassroomsDetails.instructClassrooms">
           <div class="card profile-card-2">
+            
                   <div class="card-img-block">
                       <img class="img-fluid"  src="assets/img/avatars/9.jpg" alt="Card image cap">
+                      
                   </div>
+                  
                   <div class="card-body pt-5">
                       <img src="https://randomuser.me/api/portraits/men/64.jpg" alt="profile-image" class="profile"/>
                       <h5 class="card-title">{{ classroom.classroomTitle}}</h5>

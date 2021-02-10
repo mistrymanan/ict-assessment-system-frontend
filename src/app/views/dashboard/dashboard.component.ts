@@ -91,6 +91,10 @@ export class DashboardComponent implements OnInit {
     this.router.navigate(['/classrooms',slug,'instructor-dashboard']);
   }
 
+  addClassroom(slug: string){
+    this.router.navigate(['/classrooms','add']);
+  }
+
 
 
 
