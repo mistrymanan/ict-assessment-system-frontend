@@ -29,6 +29,7 @@ export class AddQuestionComponent implements OnInit, AfterViewInit {
   showCompileError: boolean = false;
   editModeShowOutput: boolean = false;
   compileErrorMessage: string;
+  classroomSlug: string;
   testOutputs;
   @ViewChildren(AceEditorComponent) editors: QueryList<AceEditorComponent>;
 
@@ -83,10 +84,11 @@ export class AddQuestionComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
+    this.classroomSlug = this.route.snapshot.params.classroomSlug;
     const assignmentSlug = this.route.snapshot.params.assignmentSlug;
     const questionSlug = this.route.snapshot.params.questionSlug;
 
-    this.assignmentService.getAssignmentBySlug(assignmentSlug).subscribe(
+    this.assignmentService.getAssignmentBySlug(assignmentSlug,this.classroomSlug).subscribe(
       assignment => {
         this.assignment = assignment;
       },
@@ -94,9 +96,9 @@ export class AddQuestionComponent implements OnInit, AfterViewInit {
         this.router.navigate(['404']);
       }
     );
-    if (assignmentSlug && questionSlug) {
+    if (assignmentSlug && questionSlug && this.classroomSlug) {
       this.isUpdateMode = true;
-      this.assignmentService.getQuestion(assignmentSlug, questionSlug).subscribe(
+      this.assignmentService.getQuestion(assignmentSlug, questionSlug,this.classroomSlug).subscribe(
         (question) => {
           this.questionForm.patchValue(question);
           if (question.testCases) {
@@ -175,7 +177,7 @@ export class AddQuestionComponent implements OnInit, AfterViewInit {
   submitAddQuestionForm() {
 
     if (this.isUpdateMode) {
-      this.assignmentService.updateQuestion(this.assignment.id, this.questionID, this.questionForm.value).subscribe(
+      this.assignmentService.updateQuestion(this.assignment.id, this.questionID, this.questionForm.value,this.classroomSlug).subscribe(
         (res: any) => {
           this.router.navigate(['assignments', this.assignment.slug]);
         }
@@ -183,7 +185,7 @@ export class AddQuestionComponent implements OnInit, AfterViewInit {
         console.error
       );
     } else {
-      this.assignmentService.addQuestionToAssignment(this.assignment.id, this.questionForm.value).subscribe(
+      this.assignmentService.addQuestionToAssignment(this.assignment.id, this.questionForm.value,this.classroomSlug).subscribe(
         (res) => {
           this.router.navigate(['assignments', this.assignment.slug]);
         },

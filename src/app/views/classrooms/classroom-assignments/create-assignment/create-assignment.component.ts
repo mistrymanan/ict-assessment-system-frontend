@@ -17,6 +17,7 @@ export class CreateAssignmentComponent implements OnInit {
   assignmentForm: FormGroup;
   isUpdateMode: boolean = false;
   assignmentID: string;
+  classroomSlug: string
   // @ViewChild('markdownEditor') markdownEditor: AceEditorComponent;
   // @ViewChild('solutionEditor') solutionEditor: AceEditorComponent;
   constructor(private fb: FormBuilder,
@@ -62,10 +63,11 @@ export class CreateAssignmentComponent implements OnInit {
         this.assignmentForm.controls['deadline'].reset();
       }
     });
+    this.classroomSlug=this.route.snapshot.params.classroomSlug;
     const slug = this.route.snapshot.paramMap.get('slug');
     if(slug){
       this.isUpdateMode = true;
-      this.assignmentsService.getAssignmentBySlug(slug).subscribe(
+      this.assignmentsService.getAssignmentBySlug(slug,this.classroomSlug).subscribe(
         (assignment)=>{
           this.assignmentID = assignment.id;
         this.assignmentForm.patchValue(assignment);
@@ -76,7 +78,7 @@ export class CreateAssignmentComponent implements OnInit {
   submit(): void {
     if(this.isUpdateMode){
       const assignment: Assignment = this.assignmentForm.value;
-      this.assignmentsService.updateAssignment(this.assignmentID, assignment).subscribe(
+      this.assignmentsService.updateAssignment(this.assignmentID, assignment,this.classroomSlug).subscribe(
         (res: any) => {
           this.router.navigate(['assignments', res.slug]);
         }
@@ -84,7 +86,7 @@ export class CreateAssignmentComponent implements OnInit {
     }
     else{
       const newAssignment: Assignment = this.assignmentForm.value;
-      this.assignmentsService.createAssignment(newAssignment).subscribe(
+      this.assignmentsService.createAssignment(newAssignment,this.classroomSlug).subscribe(
       res => {
         console.log('Assignment created');
         this.router.navigate(['assignments', res.slug]);
