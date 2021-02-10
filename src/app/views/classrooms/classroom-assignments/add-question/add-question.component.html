@@ -19,7 +19,13 @@
                 class="form-control"
                 placeholder="Enter Question Title.."
                 formControlName="title"
+                [class.is-valid]= "questionForm.controls['title'].valid && questionForm.controls['title'].dirty" [class.is-invalid]= "questionForm.controls['title'].invalid && questionForm.controls['title'].dirty"
               />
+              <div *ngIf="questionForm.controls['title'].invalid && (questionForm.controls['title'].dirty || questionForm.controls['title'].touched)" class="text-danger">
+                <div *ngIf="questionForm.controls['title'].errors.required">
+                  Question title is required.
+               </div>
+              </div>      
             </div>
           </div>
           <div class="form-group row">
@@ -37,8 +43,15 @@
                 placeholder="Select Allowed Languages"
                 clearAllText="Clear"
                 formControlName="allowedLanguages"
-              >
+                [class.ng-touched]="true"
+                required
+                > 
               </ng-select>
+              <div *ngIf="questionForm.controls['allowedLanguages'].invalid && (questionForm.controls['allowedLanguages'].dirty || questionForm.controls['allowedLanguages'].touched)" class="text-danger">
+                <div *ngIf="questionForm.controls['allowedLanguages'].errors.required">
+                  Language is required.
+               </div>
+              </div>   
             </div>
           </div>
           <div class="form-group row">
@@ -52,7 +65,13 @@
                 id="points"
                 placeholder="Enter Total Points.."
                 formControlName="totalPoints"
+                [class.is-valid]= "questionForm.controls['totalPoints'].valid && questionForm.controls['totalPoints'].dirty" [class.is-invalid]= "questionForm.controls['totalPoints'].invalid && questionForm.controls['totalPoints'].dirty"
               />
+              <div *ngIf="questionForm.controls['totalPoints'].invalid && (questionForm.controls['totalPoints'].dirty || questionForm.controls['totalPoints'].touched)" class="text-danger">
+                <div *ngIf="questionForm.controls['totalPoints'].errors.required">
+                  Add Points.
+               </div>
+              </div>
             </div>
           </div>
           <div class="form-group row">
@@ -85,6 +104,11 @@
                 #markdownEditor
                 class="editor"
               ></ace-editor>
+              <!-- <div *ngIf="questionForm.controls['totalPoints'].invalid && (questionForm.controls['totalPoints'].dirty || questionForm.controls['totalPoints'].touched)" class="text-danger">
+                <div *ngIf="questionForm.controls['totalPoints'].errors.required">
+                  Language is required.
+               </div>
+              </div> -->
             </div>
             <div
               fxFlex="50"
@@ -108,6 +132,7 @@
                 {{ lang.name }}
               </option>
             </select>
+            
           </div>
         </div>
         <div class="card-body p-0">
@@ -117,10 +142,11 @@
             (textChanged)="updateSolutionCode($event)"
             [mode]="langModes[questionForm.value.solutionLanguage]"
             class="editor"
+            required
           ></ace-editor>
         </div>
         <div class="card-footer">
-  
+          
           <div class="form-group" *ngIf="showCompileError">
             <label class="col-form-label text-danger"
             ><i class="fa fa-sign-out"></i>&nbsp;
@@ -155,8 +181,7 @@
             formArrayName="testCases"
             *ngFor="
               let testCase of testCases.controls;
-              let i = index
-            "
+              let i = index"             
           >
           <div [formGroupName]="i" fxFlex="90">
             <input type="hidden" formControlName="id" [ngModel]="i+1+''"/>
@@ -227,7 +252,7 @@
         </button>
   
   <!--      <button *ngIf="isUpdateMode" class="btn btn-secondary btn-pill pull-left" type="button" (click)="location.back()"><i class="fa fa-close"></i> Cancel</button>-->
-        <button type="submit" class="btn btn-primary btn-pill pull-right"><i class="fa fa-{{isUpdateMode ? 'pencil':'plus'}}"></i> {{isUpdateMode ? 'Edit':'Add'}} Question
+        <button type="submit" class="btn btn-primary btn-pill pull-right" [disabled]="!questionForm.valid"><i class="fa fa-{{isUpdateMode ? 'pencil':'plus'}}"></i> {{isUpdateMode ? 'Edit':'Add'}} Question
         </button>
       </div>
   <!--    {{questionForm.value | json}}-->

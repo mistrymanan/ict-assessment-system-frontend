@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {AceEditorComponent} from 'ng2-ace-editor';
-import {FormBuilder, FormGroup} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Assignment} from '../../../../models/assignment';
 import {AssignmentsService} from '../../../../services/assignments.service';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -17,7 +17,8 @@ export class CreateAssignmentComponent implements OnInit {
   assignmentForm: FormGroup;
   isUpdateMode: boolean = false;
   assignmentID: string;
-  // @ViewChild('markdownEditor') markdownEditor: AceEditorComponent;
+  error:any={isError:false,errorMessage:''};
+    // @ViewChild('markdownEditor') markdownEditor: AceEditorComponent;
   // @ViewChild('solutionEditor') solutionEditor: AceEditorComponent;
   constructor(private fb: FormBuilder,
               private assignmentsService: AssignmentsService,
@@ -30,14 +31,14 @@ export class CreateAssignmentComponent implements OnInit {
 
   ngOnInit(): void {
     this.assignmentForm = this.fb.group({
-      title: [''],
+      title: ['',Validators.required],
       timed: [false],
       duration: [{value: '', disabled: true}],
       hasStartTime: [false],
       startTime: [{value: '', disabled: true}],
       hasDeadline: [false],
       deadline: [{value: '', disabled: true}]
-    });
+    },{validator: this.checkDates});
     this.assignmentForm.controls['timed'].valueChanges.subscribe(v => {
       if (v) {
         this.assignmentForm.controls['duration'].enable();
@@ -62,6 +63,10 @@ export class CreateAssignmentComponent implements OnInit {
         this.assignmentForm.controls['deadline'].reset();
       }
     });
+    // if(this.assignmentForm.controls['deadline'].value>this.assignmentForm.controls['startTime'].value){
+    //   this.error={isError:true,errorMessage:"End Date can't before start date"};      
+    // }
+
     const slug = this.route.snapshot.paramMap.get('slug');
     if(slug){
       this.isUpdateMode = true;
@@ -93,4 +98,10 @@ export class CreateAssignmentComponent implements OnInit {
     );
     }
   }
+  checkDates(group: FormGroup) {
+    if(group.controls.hasDeadline.value && (group.controls.deadline.value < group.controls.startTime.value)) {
+    return { notValid:true }
+    }
+    return null;
+ }
 }
