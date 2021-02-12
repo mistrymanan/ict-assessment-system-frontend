@@ -91,7 +91,7 @@ export class DefaultLayoutComponent {
             temp.name=value.classroomTitle
             temp.url='/classrooms/'+value.classroomSlug+'/instructor-dashboard'
             temp.icon='fa fa-tasks'
-            instructClass.push(temp);
+            enrolledClass.push(temp);
         }
         teaching.children=instructClass;
         enrolled.children=enrolledClass;
