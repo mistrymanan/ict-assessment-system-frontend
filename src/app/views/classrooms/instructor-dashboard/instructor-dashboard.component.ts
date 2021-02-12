@@ -12,6 +12,9 @@ import { ClassroomsService } from '../../../services/classrooms.service';
 
 
 import { Assignment } from '../../../models/assignment';
+import { ClassroomsService } from '../../../services/classrooms.service';
+import { AuthService } from '../../../services/auth.service';
+import { User } from 'firebase';
 @Component({
   selector: 'app-instructor-dashboard',
   templateUrl: './instructor-dashboard.component.html',
@@ -23,21 +26,31 @@ export class InstructorDashboardComponent implements OnInit {
   viewMode='classwork';
   modalRef: BsModalRef;
   startAssignmentProcess: boolean = false;
+  isInstructor : boolean = false;
   currentAssignment: ActiveAssignment;
   statusBadge: any;
+  userEmail : string;
+  activeAssignments: ActiveAssignment[];
+
   @ViewChild('myModal') public myModal: ModalDirective;
   @ViewChild('myModal1') public myModal1: ModalDirective;
   assignments: Assignment[] = [];
+  
+  
+  
   classroomSlug: string;
   constructor(
     private fb: FormBuilder,
     private assignmentsService: AssignmentsService,
     private modalService: BsModalService,
     private router: Router,
+    private authService: AuthService,
     private route: ActivatedRoute,
+    private classroomservice: ClassroomsService,
     private classroomsService: ClassroomsService,
+     
   ) { this.statusBadge = GlobalConstants.statusBadge; }
-  activeAssignments: ActiveAssignment[];
+
  
   ngOnInit(): void {
     this.classroomSlug = this.route.snapshot.params.classroomSlug;
@@ -63,6 +76,12 @@ export class InstructorDashboardComponent implements OnInit {
     },
     console.error
     );
+    this.authService.user$.subscribe((user: User) => {
+      this.userEmail = user.email;
+    }
+    );
+    
+    this.getClassroomDetails();
   }
 
   openModal(template: TemplateRef<any>, assignment: ActiveAssignment) {
@@ -110,6 +129,17 @@ export class InstructorDashboardComponent implements OnInit {
       console.error
     );
   }
+  getClassroomDetails(){
+    const slug = this.route.snapshot.params.classroomSlug
+    this.classroomservice.getClassroomDetails(slug).subscribe(
+      res=>{
+        if(res.ownerEmail===this.userEmail||res.instructors.includes(this.userEmail)){
+          this.isInstructor=true
+        }
+        console.log(res)
+      }
+    )
+  }
   onAddInstructor():void{
     const invitesend = this.addInstructorForm.get('email').value;
     console.log(invitesend);
@@ -126,6 +156,5 @@ export class InstructorDashboardComponent implements OnInit {
     console.log(enrollUsers.split(','));
     
   }
- 
 
 }
