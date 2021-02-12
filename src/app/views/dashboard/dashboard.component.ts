@@ -8,6 +8,7 @@ import { AuthService } from '../../services/auth.service';
 import {User} from 'firebase';
 import { ClassroomsService } from '../../services/classrooms.service';
 import { ClassroomUserResponse } from '../../models/ClassroomUserResponse';
+import { DataService } from '../../services/data.service';
 @Component({
   templateUrl: 'dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
@@ -27,6 +28,7 @@ export class DashboardComponent implements OnInit {
     private modalService: BsModalService,
     private router: Router,
     private  classroomService: ClassroomsService,
+    private dataService: DataService
   ) {
     this.statusBadge = GlobalConstants.statusBadge;
   }
@@ -36,7 +38,6 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
     this.authService.user$.subscribe((user: User) => {
       this.user = user;
-      
     }
     );
     this.getUserClassrooms();
@@ -52,10 +53,10 @@ export class DashboardComponent implements OnInit {
     this.classroomService.getUserClassrooms().subscribe(
         (response) =>{
           this.userClassroomsDetails=response;
-         console.log(this.userClassroomsDetails);
+        //  console.log(this.userClassroomsDetails);
         }
     )
-    
+    // this.userClassroomsDetails=this.dataService.classrooms;
   }
 
   openModal(template: TemplateRef<any>, assignment: ActiveAssignment) {

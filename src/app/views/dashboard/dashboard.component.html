@@ -1,13 +1,18 @@
-<section>
-  
-  <div class="container">
-    <button class=" btn btn-primary btn-sm btn-pill pull-right" (click)="addClassroom()">
-      <i class="fa fa-plus mr-1"></i>
-      Add Classroom &nbsp;
-    </button>
-    <br>
-    <br>
-    <div class="row">
+
+<!-- <section> -->
+  <div class="card">
+    <!-- <div class="card-header"> 
+      your Classrooms
+      <div class="card-header-actions mr-md-5" fxLayoutGap="20px" fxLayoutAlign="center center">
+        <button class=" btn btn-primary btn-sm btn-pill pull-right" (click)="addClassroom()">
+          <i class="fa fa-plus mr-1"></i>
+          Add Classroom &nbsp;
+        </button>
+      </div>
+     
+    </div> -->
+    <div class="card-body">
+      <div class="row">
         <div class="col-md-4" fxLayout="row wrap" fxLayoutGap="25px" *ngFor="let classroom of userClassroomsDetails.instructClassrooms">
           <div class="card profile-card-2">
             
@@ -51,9 +56,13 @@
               </div>
                       </div>
 
+    </div>
+  </div>
+  <div class="container">
+   
 
 
 
 
       </div>
-      </section>
+      <!-- </section> -->
