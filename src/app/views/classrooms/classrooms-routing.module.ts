@@ -21,7 +21,7 @@ const routes: Routes = [
       data: {
         title: 'Instructor-Dashboard'
       }},
-      {path:'assignments',
+      {path:':classroomSlug/assignments',
       loadChildren: () => import('./classroom-assignments/classroom-assignments.module').then(m=>m.ClassroomAssignmentsModule),
       // data: {
       //   title: 'Assignments'

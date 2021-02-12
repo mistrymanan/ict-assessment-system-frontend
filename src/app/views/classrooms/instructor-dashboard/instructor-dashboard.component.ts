@@ -12,7 +12,6 @@ import { ClassroomsService } from '../../../services/classrooms.service';
 
 
 import { Assignment } from '../../../models/assignment';
-import { ClassroomsService } from '../../../services/classrooms.service';
 import { AuthService } from '../../../services/auth.service';
 import { User } from 'firebase';
 @Component({

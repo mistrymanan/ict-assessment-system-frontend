@@ -28,7 +28,6 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
     FlexLayoutModule,
     MarkdownModule,
     CommonModule,
-    SubmissionsRoutingModule,
     CodeEditorModule,
     CollapseModule,
     TooltipModule
