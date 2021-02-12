@@ -71,7 +71,7 @@
                 </div>
               </div>
               <div class="col-md-8">
-                <input class="form-control" type="datetime-local" formControlName="deadline" [class.is-valid]="assignmentForm.hasError('notValid')" [class.is-invalid]= "assignmentForm.hasError('notValid')">
+                <input class="form-control" type="datetime" formControlName="deadline" [class.is-valid]="assignmentForm.hasError('notValid')" [class.is-invalid]= "assignmentForm.hasError('notValid')">
                 <div *ngIf="assignmentForm.hasError('notValid')" class="text-danger">
                   Deadline should be greater than start time.
                 </div>          

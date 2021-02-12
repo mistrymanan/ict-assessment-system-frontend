@@ -5,6 +5,12 @@
       <tab>
         <ng-template tabHeading><i class="icon-note"></i> Classwork</ng-template>
         <div class="animated fadeIn">
+          <div [hidden]="!isInstructor"> 
+            <button class=" btn btn-primary btn-sm btn-pill">
+              <i class="fa fa-plus"></i>
+              Create Assignment
+            </button>
+          </div><br>
           <div fxLayout="row wrap" fxLayoutGap="25px">
             <div class="card" fxFlex="31" *ngFor="let assignment of activeAssignments"
                  (click)="assignment.currentStatus === 'NOT_STARTED'?openModal(modal,assignment):openAssignment(assignment.slug)">
@@ -88,9 +94,9 @@
                                         <th>Teachers</th>
                                         <th>Activity</th>
                                         <th>
-                                            <div class="col-6 col-sm-4 col-md-3">
+                                            <div class="col-6 col-sm-4 col-md-3"  [hidden]="!isInstructor">
                                                 <button class="btn btn-outline-dark" tooltip="Add Instructors" (click)="myModal.show()"><i
-                                                    class="fa fa-user-plus" aria-hidden="true"></i></button>
+                                                    class="fa fa-user-plus" aria-hidden="true"  ></i></button>
         
                                                   </div>
                                         </th>
@@ -141,7 +147,7 @@
                                         <th>Students</th>
                                         <th>Activity</th>
                                         <th>
-                                            <div class="col-6 col-sm-4 col-md-3">
+                                            <div class="col-6 col-sm-4 col-md-3" [hidden]="!isInstructor">
                                                   <button class="btn btn-outline-dark" tooltip="Add Students" (click)="myModal1.show()"><i
                                                     class="fa fa-user-plus" aria-hidden="true"></i></button>
         

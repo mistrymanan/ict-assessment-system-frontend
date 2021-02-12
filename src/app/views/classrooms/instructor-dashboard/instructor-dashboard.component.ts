@@ -19,8 +19,12 @@ export class InstructorDashboardComponent implements OnInit {
   viewMode='classwork';
   modalRef: BsModalRef;
   startAssignmentProcess: boolean = false;
+  isInstructor : boolean = false;
   currentAssignment: ActiveAssignment;
   statusBadge: any;
+  userEmail : string;
+  activeAssignments: ActiveAssignment[];
+
   @ViewChild('myModal') public myModal: ModalDirective;
   @ViewChild('myModal1') public myModal1: ModalDirective;
   assignments: Assignment[] = [];
@@ -35,8 +39,7 @@ export class InstructorDashboardComponent implements OnInit {
     private route: ActivatedRoute,
     private classroomservice: ClassroomsService,
   ) { this.statusBadge = GlobalConstants.statusBadge; }
-  activeAssignments: ActiveAssignment[];
-  email : string;
+
  
   ngOnInit(): void {
     this.assignmentsService.getAllActiveAssignments().subscribe(
@@ -51,11 +54,10 @@ export class InstructorDashboardComponent implements OnInit {
     console.error
     );
     this.authService.user$.subscribe((user: User) => {
-      this.email = user.email;
-      console.log(this.email)
-      
+      this.userEmail = user.email;
     }
     );
+    
     this.getClassroomDetails();
   }
 
@@ -108,6 +110,9 @@ export class InstructorDashboardComponent implements OnInit {
     const slug = this.route.snapshot.params.classroomSlug
     this.classroomservice.getClassroomDetails(slug).subscribe(
       res=>{
+        if(res.ownerEmail===this.userEmail||res.instructors.includes(this.userEmail)){
+          this.isInstructor=true
+        }
         console.log(res)
       }
     )
