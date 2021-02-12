@@ -42,9 +42,11 @@
 <div class="app-body">
   <app-sidebar #appSidebar [fixed]="true" [display]="'lg'" [minimized]="sidebarMinimized"
                (minimizedChange)="toggleMinimize($event)">
-    <app-sidebar-nav [navItems]="navItems" [perfectScrollbar] [disabled]="appSidebar.minimized"></app-sidebar-nav>
+    <!-- <app-sidebar-nav [navItems]="navItems" [perfectScrollbar] [disabled]="appSidebar.minimized"></app-sidebar-nav> -->
+    <app-custom-side-bar  [navItems]="navItems" [perfectScrollbar] [disabled]="appSidebar.minimized" > </app-custom-side-bar>
     <app-sidebar-minimizer></app-sidebar-minimizer>
   </app-sidebar>
+ 
   <!-- Main content -->
   <main class="main">
     <!-- Breadcrumb -->
@@ -66,10 +68,11 @@
     <!--</li>-->
     <!--</ol>-->
     <div class="container-fluid">
-      <router-outlet></router-outlet>
+      <router-outlet ></router-outlet>
     </div><!-- /.container-fluid -->
   </main>
 </div>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
 <app-footer>
   <span><a href="">Autonomous Assessment System</a> &copy; 2020 </span>
 </app-footer>

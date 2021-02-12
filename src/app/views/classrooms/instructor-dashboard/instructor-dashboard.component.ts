@@ -6,6 +6,11 @@ import {GlobalConstants} from '../../../global-constants';
 import {BsModalRef, BsModalService, ModalDirective} from 'ngx-bootstrap/modal';
 import { TemplateRef } from '@angular/core';
 import { NgForm } from '@angular/forms';  
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ClassroomsService } from '../../../services/classrooms.service';
+
+
 import { Assignment } from '../../../models/assignment';
 import { ClassroomsService } from '../../../services/classrooms.service';
 import { AuthService } from '../../../services/auth.service';
@@ -16,6 +21,8 @@ import { User } from 'firebase';
   styleUrls: ['./instructor-dashboard.component.css']
 })
 export class InstructorDashboardComponent implements OnInit {
+  addInstructorForm: FormGroup;
+  userEnrollForm: FormGroup;
   viewMode='classwork';
   modalRef: BsModalRef;
   startAssignmentProcess: boolean = false;
@@ -31,23 +38,39 @@ export class InstructorDashboardComponent implements OnInit {
   
   
   
+  classroomSlug: string;
   constructor(
+    private fb: FormBuilder,
     private assignmentsService: AssignmentsService,
     private modalService: BsModalService,
     private router: Router,
     private authService: AuthService,
     private route: ActivatedRoute,
     private classroomservice: ClassroomsService,
+    private classroomsService: ClassroomsService,
+     
   ) { this.statusBadge = GlobalConstants.statusBadge; }
 
  
   ngOnInit(): void {
-    this.assignmentsService.getAllActiveAssignments().subscribe(
+    this.classroomSlug = this.route.snapshot.params.classroomSlug;
+    this.addInstructorForm = this.fb.group({
+      name: ['', Validators.required ],
+      email:['',Validators.pattern("^([a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4},?)+$")],
+    });
+    this.userEnrollForm = this.fb.group({
+      name: ['', Validators.required ],
+      email:['',Validators.pattern("^([a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4},?)+$")],
+    });
+
+
+
+    this.assignmentsService.getAllActiveAssignments(this.classroomSlug).subscribe(
       (assignments) => {
         this.activeAssignments = assignments;
       }
     );
-    this.assignmentsService.getAllAssignments()
+    this.assignmentsService.getAllAssignments(this.classroomSlug)
     .subscribe(assignments => {
       this.assignments = assignments;
     },
@@ -68,7 +91,7 @@ export class InstructorDashboardComponent implements OnInit {
 
   startAssignment() {
     this.startAssignmentProcess = true;
-    this.assignmentsService.startAssignment(this.currentAssignment.id).subscribe(
+    this.assignmentsService.startAssignment(this.currentAssignment.id,this.classroomSlug).subscribe(
       () => {
         this.startAssignmentProcess = false;
         this.modalRef.hide();
@@ -95,7 +118,7 @@ export class InstructorDashboardComponent implements OnInit {
     this.router.navigate([slug],{relativeTo: this.route});
   }
   deleteAssignment(id: string) {
-    this.assignmentsService.deleteAssignment(id).subscribe(
+    this.assignmentsService.deleteAssignment(id,this.classroomSlug).subscribe(
       res => {
         this.assignments.forEach((a,i) => {
           if(a.id === id){
@@ -117,4 +140,21 @@ export class InstructorDashboardComponent implements OnInit {
       }
     )
   }
+  onAddInstructor():void{
+    const invitesend = this.addInstructorForm.get('email').value;
+    console.log(invitesend);
+    console.log(invitesend.split(','));
+    const instructorEmails=invitesend.split(',');
+    this.classroomsService.addInstructor(this.classroomSlug,instructorEmails).subscribe(res=>{ 
+      this.myModal.hide();
+    },err=>{
+      console.log(err);
+    });
+  }
+  onEnrollUser():void{
+    const enrollUsers= this.userEnrollForm.get('email').value;
+    console.log(enrollUsers.split(','));
+    
+  }
+
 }

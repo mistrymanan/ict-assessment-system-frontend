@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ClassroomsService } from '../../../services/classrooms.service';
 
 @Component({
@@ -14,7 +14,8 @@ export class AddClassroomComponent implements OnInit {
   is409: boolean;
   ;
   constructor(private fb: FormBuilder,
-              private classroomsService: ClassroomsService) { this.is409=false }
+              private classroomsService: ClassroomsService,
+              private router: Router,) { this.is409=false }
 
   ngOnInit(): void {
     this.classroomForm = this.fb.group({
@@ -37,4 +38,8 @@ export class AddClassroomComponent implements OnInit {
     );
     
   }
+
+   openInstructordashboard(slug: string){
+     this.router.navigate(['/classrooms',slug,'instructor-dashboard']);
+   }
 }

@@ -55,10 +55,10 @@ export const routes: Routes = [
         path: 'code-editor',
         loadChildren: () => import('./views/code-editor/code-editor.module').then(m => m.CodeEditorModule)
       },
-      {
-        path: 'assignments',
-        loadChildren: () => import('./views/assignments/assignments.module').then(m => m.AssignmentsModule)
-      },
+      // {
+      //   path: 'assignments',
+      //   loadChildren: () => import('./views/assignments/assignments.module').then(m => m.AssignmentsModule)
+      // },
       {
         path: 'submissions',
         loadChildren: () => import('./views/submissions/submissions.module').then(m => m.SubmissionsModule)

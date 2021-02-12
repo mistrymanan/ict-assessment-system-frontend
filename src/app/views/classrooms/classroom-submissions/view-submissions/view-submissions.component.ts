@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {AssignmentsService} from '../../../services/assignments.service';
-import {SubmissionService} from '../../../services/submission.service';
-import {SubmissionDetailsResponse} from '../../../models/submissionDetails-response';
+import {AssignmentsService} from '../../../../services/assignments.service';
+import {SubmissionService} from '../../../../services/submission.service';
+import {SubmissionDetailsResponse} from '../../../../models/submissionDetails-response';
 import {Observable} from 'rxjs';
-import {Assignment} from '../../../models/assignment';
+import {Assignment} from '../../../../models/assignment';
 
 @Component({
   selector: 'app-view-submissions',

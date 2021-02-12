@@ -1,5 +1,6 @@
 export const config = {
   host: 'ict.assessment-system.tech/api',
+  apiVersion: {assignmentsServiceVersion:'v2'},
   endpoints: {
     assignments: 'assignments/all',
     activeAssignments: 'assignments/active-assignments/all',

@@ -11,7 +11,7 @@ import {Question} from '../../../../models/question';
 })
 export class AssignmentDetailsComponent implements OnInit {
   assignment: Assignment;
-
+  classroomSlug: string
   constructor(
     private route: ActivatedRoute,
     private assignmentService: AssignmentsService,
@@ -22,9 +22,10 @@ export class AssignmentDetailsComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.classroomSlug=this.route.snapshot.params.classroomSlug;
     const slug = this.route.snapshot.params.slug;
     console.log(slug);
-    this.assignmentService.getAssignmentBySlug(slug).subscribe(
+    this.assignmentService.getAssignmentBySlug(slug,this.classroomSlug).subscribe(
       (assignment) => {
         this.assignment = assignment;
       }
@@ -32,7 +33,7 @@ export class AssignmentDetailsComponent implements OnInit {
   }
 
   toggleStatus(): void {
-    this.assignmentService.toggleAssignmentStatus(this.assignment.id).subscribe(
+    this.assignmentService.toggleAssignmentStatus(this.assignment.id,this.classroomSlug).subscribe(
       () => {
         const current = this.assignment.status;
         this.assignment.status = current === 'ACTIVE' ? 'INACTIVE' : 'ACTIVE';
@@ -46,7 +47,7 @@ export class AssignmentDetailsComponent implements OnInit {
   }
 
   deleteAssignment(): void {
-    this.assignmentService.deleteAssignment(this.assignment.id).subscribe(
+    this.assignmentService.deleteAssignment(this.assignment.id,this.classroomSlug).subscribe(
       () => {
         this.router.navigate(['assignments']);
       },
@@ -58,7 +59,7 @@ export class AssignmentDetailsComponent implements OnInit {
     console.log(index);
     const selectedQuestion: Question = this.assignment.questions[index];
     console.log(selectedQuestion);
-    this.assignmentService.deleteQuestion(this.assignment.id, selectedQuestion.id)
+    this.assignmentService.deleteQuestion(this.assignment.id, selectedQuestion.id,this.classroomSlug)
       .subscribe(
         () => {
           this.assignment.questions.splice(index, 1);

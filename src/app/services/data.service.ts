@@ -7,4 +7,5 @@ export class DataService {
 
   constructor() { }
   public data: any;
+  public classrooms: any;
 }

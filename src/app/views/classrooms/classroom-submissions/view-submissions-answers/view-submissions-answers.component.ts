@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {SubmissionDetailsResponse} from '../../../models/submissionDetails-response';
-import {Assignment} from '../../../models/assignment';
+import {SubmissionDetailsResponse} from '../../../../models/submissionDetails-response';
+import {Assignment} from '../../../../models/assignment';
 import {ActivatedRoute, Router} from '@angular/router';
-import {SubmissionService} from '../../../services/submission.service';
-import {AssignmentsService} from '../../../services/assignments.service';
-import {GlobalConstants} from '../../../global-constants';
+import {SubmissionService} from '../../../../services/submission.service';
+import {AssignmentsService} from '../../../../services/assignments.service';
+import {GlobalConstants} from '../../../../global-constants';
 
 @Component({
   selector: 'app-view-submissions-answers',
@@ -18,8 +18,9 @@ export class ViewSubmissionsAnswersComponent implements OnInit {
   assignmentName: string;
   email: string;
   assignmentSlug;
-  statusBadge;
   classroomSlug:string;
+  statusBadge;
+
   constructor(
     private route: ActivatedRoute,
     private submissionService: SubmissionService,
