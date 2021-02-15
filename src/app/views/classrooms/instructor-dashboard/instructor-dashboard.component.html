@@ -6,7 +6,7 @@
         <ng-template tabHeading><i class="icon-note"></i> Classwork</ng-template>
         <div class="animated fadeIn">
           <div [hidden]="!isInstructor"> 
-            <button class=" btn btn-primary btn-sm btn-pill">
+            <button class=" btn btn-primary btn-sm btn-pill" (click)="createAssignment()" >
               <i class="fa fa-plus"></i>
               Create Assignment
             </button>
@@ -295,7 +295,7 @@
                           {{i+1}}
                       </th>
                       <td>
-                        <div> <a [routerLink]="['./'+assignment.slug]" [state]="{title: assignment.title}">{{assignment.title}}</a></div>
+                        <div> <a [routerLink]="['../'+'assignments/'+assignment.slug]" [state]="{title: assignment.title}">{{assignment.title}}</a></div>
                       </td>
                       <td class="text-center"><span
                         class="badge badge-{{assignment.status == 'ACTIVE'?'success':'danger'}}">{{assignment.status}}</span>
