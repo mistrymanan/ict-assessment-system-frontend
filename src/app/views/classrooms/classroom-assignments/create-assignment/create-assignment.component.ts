@@ -34,6 +34,7 @@ export class CreateAssignmentComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.classroomSlug=this.route.snapshot.params.classroomSlug;
     this.assignmentForm = this.fb.group({
       title: ['',Validators.required],
       timed: [false],
@@ -43,6 +44,7 @@ export class CreateAssignmentComponent implements OnInit {
       hasDeadline: [false],
       deadline: [{value: '', disabled: true}]
     },{validator: this.checkDates});
+
     this.assignmentForm.controls['timed'].valueChanges.subscribe(v => {
       if (v) {
         this.assignmentForm.controls['duration'].enable();
@@ -72,7 +74,7 @@ export class CreateAssignmentComponent implements OnInit {
     //   this.error={isError:true,errorMessage:"End Date can't before start date"};      
     // }
 
-    this.classroomSlug=this.route.snapshot.params.classroomSlug;
+ 
 
     const slug = this.route.snapshot.paramMap.get('slug');
     if(slug){
@@ -85,12 +87,13 @@ export class CreateAssignmentComponent implements OnInit {
     }
   }
 
+
   submit(): void {
     if(this.isUpdateMode){
       const assignment: Assignment = this.assignmentForm.value;
       this.assignmentsService.updateAssignment(this.assignmentID, assignment,this.classroomSlug).subscribe(
         (res: any) => {
-          this.router.navigate(['assignments', res.slug]);
+          this.router.navigate(['classrooms',this.classroomSlug,'assignments', res.slug]);
         }
       )
     }
@@ -99,7 +102,7 @@ export class CreateAssignmentComponent implements OnInit {
       this.assignmentsService.createAssignment(newAssignment,this.classroomSlug).subscribe(
       res => {
         console.log('Assignment created');
-        this.router.navigate(['assignments', res.slug]);
+        this.router.navigate(['classrooms',this.classroomSlug,'assignments', res.slug]);
     },
     console.error
     );

@@ -117,11 +117,11 @@ export class AddQuestionComponent implements OnInit, AfterViewInit {
           this.text = question.description;
           this.solutionCode = question.solutionCode;
           this.questionID = question.id;
+         
         }
       );
     }
   }
-
   generateOutputsForTests() {
     this.editModeShowOutput = false;
     const sourceCode = this.questionForm.value.solutionCode;
@@ -177,17 +177,18 @@ export class AddQuestionComponent implements OnInit, AfterViewInit {
   submitAddQuestionForm() {
 
     if (this.isUpdateMode) {
+      this.generateOutputsForTests();
       this.assignmentService.updateQuestion(this.assignment.id, this.questionID, this.questionForm.value,this.classroomSlug).subscribe(
         (res: any) => {
-          this.router.navigate(['assignments', this.assignment.slug]);
+          this.router.navigate(['classrooms',this.classroomSlug,'assignments', this.assignment.slug]);
         }
         ,
         console.error
       );
     } else {
-      this.assignmentService.addQuestionToAssignment(this.assignment.id, this.questionForm.value,this.classroomSlug).subscribe(
+      this.assignmentService.addQuestionToAssignment(this.assignment.slug, this.questionForm.value,this.classroomSlug).subscribe(
         (res) => {
-          this.router.navigate(['assignments', this.assignment.slug]);
+          this.router.navigate(['classrooms',this.classroomSlug,'assignments', this.assignment.slug]);
         },
         console.error
       );
