@@ -55,7 +55,7 @@ import {environment} from '../environments/environment';
 import {AuthComponent} from './views/auth/auth.component';
 import {authInterceptorProviders} from './views/auth/token.interceptor';
 import {ModalModule} from 'ngx-bootstrap/modal';
-import { ViewAnswerComponent } from './views/classrooms/classroom-submissions/view-answer/view-answer.component';
+// import { ViewAnswerComponent } from './views/classrooms/classroom-submissions/view-answer/view-answer.component';
 import { CustomSideBarComponent } from './containers/custom-side-bar/custom-side-bar.component';
 
 //import { TempComponent } from './views/classroom/temp/temp.component';
@@ -93,7 +93,7 @@ import { CustomSideBarComponent } from './containers/custom-side-bar/custom-side
     UserAssignmentViewComponent,
     ViewQuestionComponent,
     AuthComponent,
-    ViewAnswerComponent,
+    // ViewAnswerComponent,
     CustomSideBarComponent,
     //TempComponent,
     //InstructorDashboardComponent,
