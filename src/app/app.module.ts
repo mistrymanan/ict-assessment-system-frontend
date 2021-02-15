@@ -93,7 +93,6 @@ import { CustomSideBarComponent } from './containers/custom-side-bar/custom-side
     UserAssignmentViewComponent,
     ViewQuestionComponent,
     AuthComponent,
-    ViewAnswerComponent,
     CustomSideBarComponent,
     //TempComponent,
     //InstructorDashboardComponent,
