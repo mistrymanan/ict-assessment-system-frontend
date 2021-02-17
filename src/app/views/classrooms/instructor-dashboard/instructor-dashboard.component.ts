@@ -14,6 +14,7 @@ import { ClassroomsService } from '../../../services/classrooms.service';
 import { Assignment } from '../../../models/assignment';
 import { AuthService } from '../../../services/auth.service';
 import { User } from 'firebase';
+import { Classroom } from '../../../models/Classroom';
 @Component({
   selector: 'app-instructor-dashboard',
   templateUrl: './instructor-dashboard.component.html',
@@ -30,6 +31,7 @@ export class InstructorDashboardComponent implements OnInit {
   statusBadge: any;
   userEmail : string;
   activeAssignments: ActiveAssignment[];
+  
 
   @ViewChild('myModal') public myModal: ModalDirective;
   @ViewChild('myModal1') public myModal1: ModalDirective;
@@ -38,6 +40,10 @@ export class InstructorDashboardComponent implements OnInit {
   
   
   classroomSlug: string;
+  classroom: Classroom;
+  
+  //classroom: import("e:/sem-8/ict-assessment-system-frontend/src/app/models/Classroom").Classroom;
+  
   constructor(
     private fb: FormBuilder,
     private assignmentsService: AssignmentsService,
@@ -132,9 +138,11 @@ export class InstructorDashboardComponent implements OnInit {
     const slug = this.route.snapshot.params.classroomSlug
     this.classroomservice.getClassroomDetails(slug).subscribe(
       res=>{
-        if(res.ownerEmail===this.userEmail||res.instructors.includes(this.userEmail)){
-          this.isInstructor=true
-        }
+        this.classroom=res
+        // if(res.ownerEmail===this.userEmail||res.instructors.includes(this.userEmail)){
+        //   this.isInstructor=true
+        // }
+        this.isInstructor=true;
         console.log(res)
       }
     )
