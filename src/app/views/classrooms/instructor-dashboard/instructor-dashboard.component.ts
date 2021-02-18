@@ -42,7 +42,7 @@ export class InstructorDashboardComponent implements OnInit {
   classroomSlug: string;
   classroom: Classroom;
   
-  //classroom: import("e:/sem-8/ict-assessment-system-frontend/src/app/models/Classroom").Classroom;
+ 
   
   constructor(
     private fb: FormBuilder,

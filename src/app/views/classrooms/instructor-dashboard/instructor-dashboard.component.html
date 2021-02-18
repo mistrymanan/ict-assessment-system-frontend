@@ -93,7 +93,7 @@
                                             <i class="icon-people"></i>
                                         </th>
                                         <th>Teachers</th>
-                                        <th>Activity</th>
+                                        
                                         <th>
                                             <div class="col-6 col-sm-4 col-md-3"  [hidden]="!isInstructor">
                                                 <button class="btn btn-outline-dark" tooltip="Add Instructors" (click)="myModal.show()"><i
@@ -120,10 +120,7 @@
                                                 <span>New</span> 
                                                 | Registered: Jan 1, 2015 </div>
                                             </td>   
-                                                <td>
-                                                    <div class="small text-muted">Last login</div>
-                                                    <strong>10 sec ago</strong>
-                                                </td>
+                                                
                                             <td></td></tr>
                                 </tbody></table>
                                 </div>
@@ -146,7 +143,7 @@
                                             <i class="icon-people"></i>
                                         </th>
                                         <th>Students</th>
-                                        <th>Activity</th>
+                                        
                                         <th>
                                             <div class="col-6 col-sm-4 col-md-3" [hidden]="!isInstructor">
                                                   <button class="btn btn-outline-dark" tooltip="Add Students" (click)="myModal1.show()"><i
@@ -173,11 +170,13 @@
                                                 <span>New</span> 
                                                 | Registered: Jan 1, 2015 </div>
                                             </td>   
-                                                <td>
-                                                    <div class="small text-muted">Last login</div>
-                                                    <strong>10 sec ago</strong>
-                                                </td>
-                                            <td></td></tr>
+                                                
+                                            <td>
+                                              <button class=" btn btn-primary btn-sm btn-pill">
+                                                <i class="fa fa-book"></i>
+                                                View Submissions
+                                              </button>
+                                            </td></tr>
                                 </tbody></table>
                                 </div>
                           </div>
