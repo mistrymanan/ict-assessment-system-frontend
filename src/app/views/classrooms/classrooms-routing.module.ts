@@ -32,6 +32,10 @@ const routes: Routes = [
     //   title: 'Assignments'
     // }
   },
+  {
+  path:'',
+  loadChildren: () => import('./classroom-user-assignments/classroom-user-assignments.module').then(m=>m.ClassroomUserAssignmentsModule),
+  },
 
       //{path: 'assignments',loadChildren: () => import('./classroom-assignments/classroom-assignments.module').then(m=>m.ClassroomAssignmentsModule)}
     ]
