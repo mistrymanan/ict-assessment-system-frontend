@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import {AssignmentsService} from '../../../services/assignments.service';
 import {ActiveAssignment} from '../../../models/active-assignment';
-import {ActivatedRoute, Router} from '@angular/router';
+import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
 import {GlobalConstants} from '../../../global-constants';
 import {BsModalRef, BsModalService, ModalDirective} from 'ngx-bootstrap/modal';
 import { TemplateRef } from '@angular/core';
@@ -17,6 +17,7 @@ import { User } from 'firebase';
 import { ClassroomDetails } from '../../../models/classroom-details';
 
 import { Classroom } from '../../../models/Classroom';
+import { filter } from 'rxjs/operators';
 @Component({
   selector: 'app-instructor-dashboard',
   templateUrl: './instructor-dashboard.component.html',
@@ -54,38 +55,58 @@ export class InstructorDashboardComponent implements OnInit {
     private route: ActivatedRoute,
     private classroomservice: ClassroomsService,
     private classroomsService: ClassroomsService,
-  ) { this.statusBadge = GlobalConstants.statusBadge; }
+  ) { this.statusBadge = GlobalConstants.statusBadge;
+  
+   this.router.events
+   .pipe(
+    filter(event => event instanceof NavigationEnd)
+  )
+   .subscribe(
+     event=>{
+      this.updateData();
+     }
+   )
+  // this.route.data.subscribe(data=>{
+  //   console.log(data);
+  // })
+
+  }
 
  
   ngOnInit(): void {
-    this.classroomSlug = this.route.snapshot.params.classroomSlug;
-    this.addInstructorForm = this.fb.group({
-      name: ['', Validators.required ],
-      email:['',Validators.pattern("^([a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4},?)+$")],
-    });
-    this.userEnrollForm = this.fb.group({
-      name: ['', Validators.required ],
-      email:['',Validators.pattern("^([a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4},?)+$")],
-    });
-
-
-    this.assignmentsService.getAllActiveAssignments(this.classroomSlug).subscribe(
-      (assignments) => {
-        this.activeAssignments = assignments;
-      }
-    );
-    this.assignmentsService.getAllAssignments(this.classroomSlug)
-    .subscribe(assignments => {
-      this.assignments = assignments;
-    },
-    console.error
-    );
-    this.authService.user$.subscribe((user: User) => {
-      this.userEmail = user.email;
-    }
-    );
     
-    this.getClassroomDetails();
+  }
+
+
+  updateData(){
+      this.classroomSlug = this.route.snapshot.params.classroomSlug;
+      this.addInstructorForm = this.fb.group({
+        name: ['', Validators.required ],
+        email:['',Validators.pattern("^([a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4},?)+$")],
+      });
+      this.userEnrollForm = this.fb.group({
+        name: ['', Validators.required ],
+        email:['',Validators.pattern("^([a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4},?)+$")],
+      });
+  
+  
+      this.assignmentsService.getAllActiveAssignments(this.classroomSlug).subscribe(
+        (assignments) => {
+          this.activeAssignments = assignments;
+        }
+      );
+      this.assignmentsService.getAllAssignments(this.classroomSlug)
+      .subscribe(assignments => {
+        this.assignments = assignments;
+      },
+      console.error
+      );
+      this.authService.user$.subscribe((user: User) => {
+        this.userEmail = user.email;
+      }
+      );
+      
+      this.getClassroomDetails();
   }
   createAssignment():void{
     this.router.navigate(['classrooms',this.classroomSlug,'assignments','create-assignment'])
