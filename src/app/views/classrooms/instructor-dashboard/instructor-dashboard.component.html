@@ -79,20 +79,21 @@
         <div class="animated fadeIn">
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="card">
+                    <div class="card" >
                         <div class="card-header">
                             <i class="fa fa-align-justify"></i> Co-Instructors
                           </div>
+                          
                           <div class="card-body">
-                              <div>
-                            <table class="table table-responsive-sm table-hover table-outline mb-0">
+                              <div >
+                            <table class="table table-responsive-sm table-hover table-outline mb-0" >
                                 <thead class="thead-light">
                                     <tr>
                                         <th class="text-center">
                                             <i class="icon-people"></i>
                                         </th>
                                         <th>Teachers</th>
-                                        <th>Activity</th>
+                                        
                                         <th>
                                             <div class="col-6 col-sm-4 col-md-3"  [hidden]="!isInstructor">
                                                 <button class="btn btn-outline-dark" tooltip="Add Instructors" (click)="myModal.show()"><i
@@ -104,31 +105,28 @@
                                 </thead>
                                 
                                 <tbody>
-                                    <tr>
+                                    <tr *ngFor="let instructor of classroom.instructors">
                                         <td class="text-center">
                                             <div class="avatar">
-                                                <img alt="admin@bootstrapmaster.com" class="img-avatar" src="assets/img/avatars/1.jpg">
+                                                <img alt="admin@bootstrapmaster.com" class="img-avatar" src="{{instructor.picture}}">
                                                 <span class="avatar-status badge-success">
                                 
                                                 </span>
                                             </div>
                                         </td>
-                                        <td>
-                                            <div>Yiorgos Avraamu</div>
+                                        <td >
+                                            <div>{{instructor.name}}</div>
                                             <div class="small text-muted">
                                                 <span>New</span> 
                                                 | Registered: Jan 1, 2015 </div>
                                             </td>   
-                                                <td>
-                                                    <div class="small text-muted">Last login</div>
-                                                    <strong>10 sec ago</strong>
-                                                </td>
+                                                
                                             <td></td></tr>
                                 </tbody></table>
                                 </div>
+                                </div>
                           </div>
                         </div>
-                </div>
             </div>
          <div class="row">
                 <div class="col-lg-12">
@@ -145,7 +143,7 @@
                                             <i class="icon-people"></i>
                                         </th>
                                         <th>Students</th>
-                                        <th>Activity</th>
+                                        
                                         <th>
                                             <div class="col-6 col-sm-4 col-md-3" [hidden]="!isInstructor">
                                                   <button class="btn btn-outline-dark" tooltip="Add Students" (click)="myModal1.show()"><i
@@ -157,26 +155,28 @@
                                 </thead>
                                 
                                 <tbody>
-                                    <tr>
+                                    <tr *ngFor="let students of classroom.enrolledUsers">
                                         <td class="text-center">
                                             <div class="avatar">
-                                                <img alt="admin@bootstrapmaster.com" class="img-avatar" src="assets/img/avatars/1.jpg">
+                                                <img alt="admin@bootstrapmaster.com" class="img-avatar" src="{{students.picture}}">
                                                 <span class="avatar-status badge-success">
                                 
                                                 </span>
                                             </div>
                                         </td>
                                         <td>
-                                            <div>Yiorgos Avraamu</div>
+                                            <div>{{students.name}}</div>
                                             <div class="small text-muted">
                                                 <span>New</span> 
                                                 | Registered: Jan 1, 2015 </div>
                                             </td>   
-                                                <td>
-                                                    <div class="small text-muted">Last login</div>
-                                                    <strong>10 sec ago</strong>
-                                                </td>
-                                            <td></td></tr>
+                                                
+                                            <td>
+                                              <button class=" btn btn-primary btn-sm btn-pill">
+                                                <i class="fa fa-book"></i>
+                                                View Submissions
+                                              </button>
+                                            </td></tr>
                                 </tbody></table>
                                 </div>
                           </div>

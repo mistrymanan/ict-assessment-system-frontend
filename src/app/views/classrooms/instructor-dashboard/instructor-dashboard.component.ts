@@ -15,6 +15,7 @@ import { Assignment } from '../../../models/assignment';
 import { AuthService } from '../../../services/auth.service';
 import { User } from 'firebase';
 import { ClassroomDetails } from '../../../models/classroom-details';
+
 import { Classroom } from '../../../models/Classroom';
 @Component({
   selector: 'app-instructor-dashboard',
@@ -33,6 +34,7 @@ export class InstructorDashboardComponent implements OnInit {
   userEmail : string;
   activeAssignments: ActiveAssignment[];
   classroom:Classroom;
+  
   @ViewChild('myModal') public myModal: ModalDirective;
   @ViewChild('myModal1') public myModal1: ModalDirective;
   assignments: Assignment[] = [];
@@ -40,6 +42,9 @@ export class InstructorDashboardComponent implements OnInit {
   
   
   classroomSlug: string;
+  
+ 
+  
   constructor(
     private fb: FormBuilder,
     private assignmentsService: AssignmentsService,
@@ -135,9 +140,10 @@ export class InstructorDashboardComponent implements OnInit {
     this.classroomservice.getClassroomDetails(slug).subscribe(
       res=>{
         this.classroom=res
-        if(res.ownerEmail===this.userEmail||res.instructors.includes(this.userEmail)){
-          this.isInstructor=true
-        }
+        // if(res.ownerEmail===this.userEmail||res.instructors.includes(this.userEmail)){
+        //   this.isInstructor=true
+        // }
+        this.isInstructor=true;
         console.log(res)
       }
     )
