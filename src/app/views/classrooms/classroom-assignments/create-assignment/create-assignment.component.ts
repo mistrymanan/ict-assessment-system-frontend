@@ -114,4 +114,7 @@ export class CreateAssignmentComponent implements OnInit {
     }
     return null;
  }
+ backButton(){
+    this.location.back()
+}
 }

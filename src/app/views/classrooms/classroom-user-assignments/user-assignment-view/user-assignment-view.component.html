@@ -1,0 +1,86 @@
+<div class="animated fadeIn">
+    <div class="row">
+      <div class="col-6 col-md-3">
+        <div class="card">
+          <div class="card-body p-0 clearfix">
+            <i class="fa fa-lightbulb-o bg-success p-4 font-2xl mr-3 float-left"></i>
+            <div class="h5 text-success mb-0 pt-3">{{assignment.totalPoints}}</div>
+            <div class="text-muted text-uppercase font-weight-bold font-xs">Total Points</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="card">
+          <div class="card-body p-0 clearfix">
+            <i class="fa fa-trophy bg-primary p-4 font-2xl mr-3 float-left"></i>
+            <div class="h5 text-primary mb-0 pt-3">{{assignment.currentScore}}</div>
+            <div class="text-muted text-uppercase font-weight-bold font-xs">Current Score</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="card">
+          <div class="card-body p-0 clearfix">
+            <i class="fa fa-clock-o bg-danger p-4 font-2xl mr-3 float-left"></i>
+            <div
+              class="h5 text-danger mb-0 pt-3">{{assignment.timed ? assignment.duration + ' mins.' : 'No Time Limit'}}</div>
+            <div class="text-muted text-uppercase font-weight-bold font-xs">Duration</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="card">
+          <div class="card-body p-0 clearfix">
+            <i
+              class="fa fa-{{statusIconMap[assignment.submissionStatus]}} bg-{{statusBadge[assignment.submissionStatus]}} p-4 font-2xl mr-3 float-left"></i>
+            <div
+              class="h6 text-{{statusBadge[assignment.submissionStatus]}} mb-1 pt-3">{{removeUnderScore(assignment.submissionStatus) | uppercase}}</div>
+            <div class="text-muted text-uppercase font-weight-bold font-xs">Status</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">Questions</div>
+  
+      <div class="card-body">
+        <table class="table table-bordered table-striped">
+          <thead>
+          <tr>
+            <th scope="col" class="w-auto"><i class="fa fa-hashtag"></i></th>
+            <th scope="col" class="w-50">Question</th>
+            <th scope="col" class="w-auto">Allowed Languages</th>
+            <th scope="col" class="w-auto">Status</th>
+            <th scope="col" class="w-auto">Score</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let question of assignment.questions; let i=index">
+            <th scope="row">{{i + 1}}</th>
+            <td><a routerLink="./{{question.slug}}"> {{question.title}}</a></td>
+            <td fxLayoutGap="10px">
+              <span class="badge badge-primary" *ngFor="let lang of question.allowedLanguages">{{lang}}</span>
+            </td>
+            <td><span class="badge badge-{{statusBadge[question.currentStatus]}}">
+              {{removeUnderScore(question.currentStatus) | titlecase}}
+            </span></td>
+            <td>{{question.currentScore}}/{{question.totalPoints}}</td>
+          </tr>
+          <!-- <tr>
+            <th scope="row">2</th>
+            <td>Write to program for Bubble Sort</td>
+            <td><span class="badge badge-secondary">Not Completed</span></td>
+            <td>0/50</td>
+          </tr> -->
+          <tr>
+            <th scope="row" colspan="3"></th>
+            <td class="font-weight-bold"> Total Score</td>
+            <td>{{assignment.currentScore}}/{{assignment.totalPoints}}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  
+  
