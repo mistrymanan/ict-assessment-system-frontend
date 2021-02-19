@@ -14,6 +14,8 @@ import { ClassroomsService } from '../../../services/classrooms.service';
 import { Assignment } from '../../../models/assignment';
 import { AuthService } from '../../../services/auth.service';
 import { User } from 'firebase';
+import { ClassroomDetails } from '../../../models/classroom-details';
+
 import { Classroom } from '../../../models/Classroom';
 @Component({
   selector: 'app-instructor-dashboard',
@@ -31,8 +33,8 @@ export class InstructorDashboardComponent implements OnInit {
   statusBadge: any;
   userEmail : string;
   activeAssignments: ActiveAssignment[];
+  classroom:Classroom;
   
-
   @ViewChild('myModal') public myModal: ModalDirective;
   @ViewChild('myModal1') public myModal1: ModalDirective;
   assignments: Assignment[] = [];
@@ -40,7 +42,6 @@ export class InstructorDashboardComponent implements OnInit {
   
   
   classroomSlug: string;
-  classroom: Classroom;
   
  
   
@@ -53,7 +54,6 @@ export class InstructorDashboardComponent implements OnInit {
     private route: ActivatedRoute,
     private classroomservice: ClassroomsService,
     private classroomsService: ClassroomsService,
-     
   ) { this.statusBadge = GlobalConstants.statusBadge; }
 
  
@@ -67,7 +67,6 @@ export class InstructorDashboardComponent implements OnInit {
       name: ['', Validators.required ],
       email:['',Validators.pattern("^([a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4},?)+$")],
     });
-
 
 
     this.assignmentsService.getAllActiveAssignments(this.classroomSlug).subscribe(
@@ -88,7 +87,9 @@ export class InstructorDashboardComponent implements OnInit {
     
     this.getClassroomDetails();
   }
-
+  createAssignment():void{
+    this.router.navigate(['classrooms',this.classroomSlug,'assignments','create-assignment'])
+  }
   openModal(template: TemplateRef<any>, assignment: ActiveAssignment) {
     this.currentAssignment = assignment;
     this.modalRef = this.modalService.show(template);

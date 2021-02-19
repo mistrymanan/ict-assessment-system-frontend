@@ -26,7 +26,7 @@ const routes: Routes = [
       // data: {
       //   title: 'Assignments'
       // }
-    },{path:'submissions',
+    },{path:':classroomSlug/submissions',
     loadChildren: () => import('./classroom-submissions/classroom-submissions.module').then(m=>m.ClassroomSubmissionsModule),
     // data: {
     //   title: 'Assignments'

@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ViewSubmissionsAnswersComponent } from './view-submissions-answers/view-submissions-answers.component';
 import { ViewSubmissionsComponent } from './view-submissions/view-submissions.component';
-import { ViewAnswerComponent } from '../../submissions/view-answer/view-answer.component';
+import { ViewAnswerComponent } from './view-answer/view-answer.component';
 import { ClassroomSubmissionsRoutingModule } from './classroom-submissions-routing.module';
 import { CodeEditorModule } from '../../code-editor/code-editor.module';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
