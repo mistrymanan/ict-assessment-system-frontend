@@ -19,16 +19,13 @@
                 class="form-control"
                 placeholder="Enter Question Title.."
                 formControlName="title"
-                [class.is-valid]= "questionForm.controls['title'].valid && questionForm.controls['title'].dirty" [class.is-invalid]= "questionForm.controls['title'].invalid && questionForm.controls['title'].dirty || is409" required
+                [class.is-valid]= "questionForm.controls['title'].valid && questionForm.controls['title'].dirty" [class.is-invalid]= "questionForm.controls['title'].invalid && questionForm.controls['title'].dirty"
               />
               <div *ngIf="questionForm.controls['title'].invalid && (questionForm.controls['title'].dirty || questionForm.controls['title'].touched)" class="text-danger">
                 <div *ngIf="questionForm.controls['title'].errors.required">
                   Question title is required.
                </div>
-              </div>
-              <div *ngIf="is409" class="text-danger">
-                Question title is already exists...
-            </div>      
+              </div>      
             </div>
           </div>
           <div class="form-group row">
