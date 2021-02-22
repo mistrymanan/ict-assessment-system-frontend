@@ -12,14 +12,17 @@
               <label class="col-md-2 col-form-label" for="title">Assignment Title</label>
               <div class="col-md-10">
                 <input type="text" id="title" name="title" class="form-control" formControlName="title"
-                       placeholder="Enter Assignment Title.." [class.is-valid]= "assignmentForm.controls['title'].valid && assignmentForm.controls['title'].dirty" [class.is-invalid]= "assignmentForm.controls['title'].invalid && assignmentForm.controls['title'].dirty" 
+                       placeholder="Enter Assignment Title.." [class.is-valid]= "assignmentForm.controls['title'].valid && assignmentForm.controls['title'].dirty" [class.is-invalid]= "assignmentForm.controls['title'].invalid && assignmentForm.controls['title'].dirty || is409" required
                       [readonly]="isUpdateMode"
                       required>
                 <div *ngIf="assignmentForm.controls['title'].invalid && (assignmentForm.controls['title'].dirty || assignmentForm.controls['title'].touched)" class="text-danger">
                 <div *ngIf="assignmentForm.controls['title'].errors.required">
                   Title is required.
                </div>
-              </div>        
+              </div> 
+              <div *ngIf="is409" class="text-danger" >
+                Assignment with this name already exists...
+            </div>        
               </div>
             </div>
             <div class="form-group row">
