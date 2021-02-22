@@ -137,7 +137,7 @@ export class InstructorDashboardComponent implements OnInit {
   }
 
   openAssignment(slug: string) {
-    this.router.navigate([slug]);
+    this.router.navigate(["classrooms",this.classroomSlug,"user-submissions",slug]);
   }
 
   viewAssignment(slug: string){

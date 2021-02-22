@@ -60,6 +60,9 @@ export class DefaultLayoutComponent {
     this.sidebarMinimized = e;
   }
   getUserNavData(){
+//     this.navItems.forEach((navItem)=>{
+// console.log(navItem);
+//     })
     const teaching= {
       name:'Teaching',
       url:'',

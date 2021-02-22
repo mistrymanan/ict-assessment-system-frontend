@@ -117,7 +117,7 @@ export class AddQuestionComponent implements OnInit, AfterViewInit {
           this.text = question.description;
           this.solutionCode = question.solutionCode;
           this.questionID = question.id;
-         
+         console.log("it's an edit mode"+this.editModeShowOutput);
         }
       );
     }
@@ -177,9 +177,11 @@ export class AddQuestionComponent implements OnInit, AfterViewInit {
   submitAddQuestionForm() {
 
     if (this.isUpdateMode) {
-      this.generateOutputsForTests();
+      //this.generateOutputsForTests();
       this.assignmentService.updateQuestion(this.assignment.id, this.questionID, this.questionForm.value,this.classroomSlug).subscribe(
         (res: any) => {
+          console.log(res);
+          console.log(this.questionForm.value);
           this.router.navigate(['classrooms',this.classroomSlug,'assignments', this.assignment.slug]);
         }
         ,

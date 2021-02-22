@@ -41,7 +41,7 @@ export class ViewSubmissionsComponent implements OnInit {
         // this.questionId = question.id;
         // this.totalPoints = question.totalPoints;
         this.submissionService
-          .submissionDetails(this.assignmentId)
+          .submissionDetails(this.assignmentId,this.classroomSlug)
           .subscribe(submissions => {
             console.log(submissions);
             this.submissions = submissions;
@@ -65,6 +65,6 @@ export class ViewSubmissionsComponent implements OnInit {
 
   }
   openAnswers(email: string) {
-    this.router.navigate(['/submissions', this.assignmentSlug, 'answers'], {relativeTo: this.route, queryParams : {'email': email}});
+    this.router.navigate(['classrooms',this.classroomSlug,'submissions', this.assignmentSlug, 'answers'], {queryParams : {'email': email}});
   }
 }

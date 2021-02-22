@@ -6,8 +6,6 @@ import {DefaultLayoutComponent} from './containers';
 
 import {P404Component} from './views/error/404.component';
 import {P500Component} from './views/error/500.component';
-import {UserAssignmentViewComponent} from './views/user-assignments/user-assignment-view/user-assignment-view.component';
-import {ViewQuestionComponent} from './views/user-assignments/view-question/view-question.component';
 import {AuthComponent} from './views/auth/auth.component';
 import {AngularFireAuthGuard, redirectUnauthorizedTo} from '@angular/fire/auth-guard';
 //import { TempComponent } from './views/classroom/temp/temp.component';
@@ -59,10 +57,10 @@ export const routes: Routes = [
       //   path: 'assignments',
       //   loadChildren: () => import('./views/assignments/assignments.module').then(m => m.AssignmentsModule)
       // },
-      {
-        path: 'submissions',
-        loadChildren: () => import('./views/submissions/submissions.module').then(m => m.SubmissionsModule)
-      },
+      // {
+      //   path: 'submissions',
+      //   loadChildren: () => import('./views/submissions/submissions.module').then(m => m.SubmissionsModule)
+      // },
       {
         path: 'classrooms',
         loadChildren: () => import('./views/classrooms/classrooms.module').then(m => m.ClassroomsModule)
@@ -84,22 +82,22 @@ export const routes: Routes = [
       //   },
       //   pathMatch: 'full'
       // },
-      {
-        path: ':slug',
-        component: UserAssignmentViewComponent,
-        data: {
-          title: 'Assignment'
-        },
-        pathMatch: 'full'
-      },
-      {
-        path: ':assignmentSlug/:questionSlug',
-        component: ViewQuestionComponent,
-        data: {
-          title: 'View Question'
-        },
-        pathMatch: 'full'
-      },
+      // {
+      //   path: ':slug',
+      //   component: UserAssignmentViewComponent,
+      //   data: {
+      //     title: 'Assignment'
+      //   },
+      //   pathMatch: 'full'
+      // },
+      // {
+      //   path: ':assignmentSlug/:questionSlug',
+      //   component: ViewQuestionComponent,
+      //   data: {
+      //     title: 'View Question'
+      //   },
+      //   pathMatch: 'full'
+      // },
       
 
     ]

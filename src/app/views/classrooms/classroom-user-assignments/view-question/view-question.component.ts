@@ -38,6 +38,7 @@ export class ViewQuestionComponent implements OnInit, AfterViewInit {
   totalFailed: number;
   allowViewResult: boolean = false;
   submitCompileError: boolean = false;
+  classroomSlug:string;
   @ViewChild('editor') editor: AceEditorComponent;
 
   constructor(
@@ -82,10 +83,10 @@ __Sample Output__
   }
 
   ngOnInit(): void {
-    const classroomSlug=this.route.snapshot.params.classroomSlug;
+    this.classroomSlug=this.route.snapshot.params.classroomSlug;
     const assignmentSlug = this.route.snapshot.params.assignmentSlug;
     const questionSlug = this.route.snapshot.params.questionSlug;
-    this.assignmentsService.getUserQuestion(assignmentSlug, questionSlug,classroomSlug).subscribe(
+    this.assignmentsService.getUserQuestion(assignmentSlug, questionSlug,this.classroomSlug).subscribe(
       (question) => {
         this.allowedLanguages = [];
         this.currentQuestion = question;
@@ -98,7 +99,7 @@ __Sample Output__
         this.currentLanguage = this.allowedLanguages[0].value;
       }
     );
-    this.assignmentsService.getActiveAssignmentBySlug(assignmentSlug,classroomSlug)
+    this.assignmentsService.getActiveAssignmentBySlug(assignmentSlug,this.classroomSlug)
       .subscribe((assignment) => {
         this.assignmentId = assignment.id;
       });
@@ -119,7 +120,7 @@ __Sample Output__
     request.input = this.input;
     request.sourceCode = this.sourceCode;
     this.runCodeProcess = true;
-    this.submissionService.runCode(request)
+    this.submissionService.runCode(request,this.classroomSlug)
       .subscribe((response) => {
           this.runRodeResponse = response;
           this.hideOutput = false;
@@ -140,7 +141,7 @@ __Sample Output__
     request.language = this.currentLanguage;
     this.submitProcess = true;
     this.submitCompileError = false;
-    this.submissionService.submitCode(request)
+    this.submissionService.submitCode(request,this.classroomSlug)
       .subscribe((response) => {
           this.submitCodeResponse = response;
           console.log(response);

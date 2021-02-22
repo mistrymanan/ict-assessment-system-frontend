@@ -33,7 +33,7 @@ const routes: Routes = [
     // }
   },
   {
-  path:'',
+  path:':classroomSlug/user-submissions',
   loadChildren: () => import('./classroom-user-assignments/classroom-user-assignments.module').then(m=>m.ClassroomUserAssignmentsModule),
   },
 

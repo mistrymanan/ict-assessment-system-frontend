@@ -30,7 +30,7 @@ export class ViewSubmissionsAnswersComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.classroomSlug=this.route.snapshot.params.classroomSlug;
+    this.classroomSlug=this.route.snapshot.paramMap.get('classroomSlug');
     this.assignmentSlug = this.route.snapshot.paramMap.get('assignmentSlug');
     this.email = this.route.snapshot.queryParamMap.get('email');
     this.statusBadge = GlobalConstants.statusBadge;
@@ -43,7 +43,7 @@ export class ViewSubmissionsAnswersComponent implements OnInit {
         // this.questionId = question.id;
         // this.totalPoints = question.totalPoints;
         this.submissionService
-          .submissionUserDetails(this.assignmentId, this.email)
+          .submissionUserDetails(this.assignmentId, this.email,this.classroomSlug)
           .subscribe(submissions => {
             console.log(submissions);
             this.submissions = submissions;
@@ -53,9 +53,8 @@ export class ViewSubmissionsAnswersComponent implements OnInit {
   }
 
   viewBuild(assignmentId: string, questionId: string, email: string, buildId: string) {
-    this.router.navigate(['/submissions', this.assignmentSlug, 'answers', 'user'],
+    this.router.navigate(['classrooms',this.classroomSlug,'submissions', this.assignmentSlug, 'answers', 'user'],
       {
-        relativeTo: this.route,
         queryParams: {'email': email, 'assignmentId': assignmentId, 'questionId': questionId, 'buildId': buildId}
       });
   }

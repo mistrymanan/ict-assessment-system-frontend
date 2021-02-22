@@ -49,7 +49,7 @@ export class AssignmentDetailsComponent implements OnInit {
   deleteAssignment(): void {
     this.assignmentService.deleteAssignment(this.assignment.id,this.classroomSlug).subscribe(
       () => {
-        this.router.navigate(['assignments']);
+        this.router.navigate(["classrooms",this.classroomSlug,"instructor-dashboard"])
       },
       console.error
     );

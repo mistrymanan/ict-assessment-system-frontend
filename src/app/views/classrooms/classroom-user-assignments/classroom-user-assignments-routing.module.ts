@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { UserAssignmentViewComponent } from '../../user-assignments/user-assignment-view/user-assignment-view.component';
-import { ViewQuestionComponent } from '../../user-assignments/view-question/view-question.component';
+import { UserAssignmentViewComponent } from './user-assignment-view/user-assignment-view.component';
+import { ViewQuestionComponent } from './view-question/view-question.component';
 
 
 const routes: Routes = [ 

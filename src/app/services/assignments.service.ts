@@ -59,10 +59,9 @@ export class AssignmentsService {
       }
     );
   }
-
   startAssignment(assignmentId: string,classroomSlug: string) {
     return this.http.patch(
-      `http://${config.host}/${config.apiVersion.assignmentsServiceVersion}/assignments/${classroomSlug}/${config.endpoints.startAssignment}/${assignmentId}`, null
+      `http://${config.host}/${config.apiVersion.submissionServiceVersion}/submissions/${classroomSlug}/${config.endpoints.startAssignment}/${assignmentId}`, null
     );
   }
 

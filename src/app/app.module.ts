@@ -44,8 +44,6 @@ import 'ace-builds/src-noconflict/ace';
 import 'ace-builds/webpack-resolver';
 import {CollapseModule} from 'ngx-bootstrap/collapse';
 import {HttpClientModule} from '@angular/common/http';
-import {UserAssignmentViewComponent} from './views/user-assignments/user-assignment-view/user-assignment-view.component';
-import {ViewQuestionComponent} from './views/user-assignments/view-question/view-question.component';
 import {FormsModule,ReactiveFormsModule} from '@angular/forms';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {TooltipModule} from 'ngx-bootstrap/tooltip';
@@ -90,8 +88,6 @@ import { CustomSideBarComponent } from './containers/custom-side-bar/custom-side
     ...APP_CONTAINERS,
     P404Component,
     P500Component,
-    UserAssignmentViewComponent,
-    ViewQuestionComponent,
     AuthComponent,
     CustomSideBarComponent,
     //TempComponent,

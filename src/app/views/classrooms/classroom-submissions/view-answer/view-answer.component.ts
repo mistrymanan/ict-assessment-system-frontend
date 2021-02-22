@@ -30,6 +30,7 @@ export class ViewAnswerComponent implements OnInit {
   assignmentSlug;
   totalPassed: number;
   totalFailed: number;
+  classroomSlug: string;
   @ViewChildren(AceEditorComponent) editors: QueryList<AceEditorComponent>;
   constructor(
     private route: ActivatedRoute,
@@ -55,6 +56,7 @@ __Sample Output__
 
   ngOnInit(): void {
      this.assignmentId = this.route.snapshot.queryParamMap.get('assignmentId');
+     this.classroomSlug=this.route.snapshot.params.classroomSlug;
      this.email = this.route.snapshot.queryParamMap.get('email');
      this.buildId = this.route.snapshot.queryParamMap.get('buildId');
      this.questionId = this.route.snapshot.queryParamMap.get('questionId');
@@ -66,7 +68,7 @@ __Sample Output__
     //         q => q.questionId === this.questionId
     //       );
     //   });
-    this.submissionService.getUserResponse(this.assignmentId, this.questionId, this.email)
+    this.submissionService.getUserResponse(this.assignmentId, this.questionId, this.email,this.classroomSlug)
       .subscribe(
         res => {
           this.question = res;

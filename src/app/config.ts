@@ -1,6 +1,9 @@
 export const config = {
   host: 'ict.assessment-system.tech/api',
-  apiVersion: {assignmentsServiceVersion:'v2'},
+  apiVersion: {
+    assignmentsServiceVersion:'v2',
+    submissionServiceVersion:'v2'
+},
   endpoints: {
     assignments: 'all',
     activeAssignments: 'active-assignments/all',
@@ -18,10 +21,10 @@ export const config = {
     runMultiple: 'executions/run-multiple',
     questions : 'questions',
     updateQuestion : 'questions/update-question',
-    runCode: 'submissions/run-code',
-    startAssignment: 'submissions/start-submission',
-    submit: 'submissions/submit',
-    submission: 'submissions',
+    runCode: 'run-code',
+    startAssignment: 'start-submission',
+    submit: 'submit',
+    submission: '',
     builds: 'executions/builds',
     users: 'users',
     classroom: 'classrooms'

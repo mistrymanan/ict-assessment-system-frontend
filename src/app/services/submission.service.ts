@@ -21,9 +21,9 @@ export class SubmissionService {
   ) {
   }
 
-  runCode(request: RunCodeRequest): Observable<RunCodeResponse> {
+  runCode(request: RunCodeRequest,classroomSlug:string): Observable<RunCodeResponse> {
     return this.http.post<RunCodeResponse>(
-      `http://${config.host}/${config.endpoints.runCode}`,
+      `http://${config.host}/${config.apiVersion.submissionServiceVersion}/submissions/${classroomSlug}/${config.endpoints.runCode}`,
       request, {
         headers: new HttpHeaders({
           'Content-Type': 'application/json',
@@ -32,9 +32,9 @@ export class SubmissionService {
     );
   }
 
-  submitCode(request: SubmitCodeRequest): Observable<SubmitCodeResponse> {
+  submitCode(request: SubmitCodeRequest,classroomSlug:string): Observable<SubmitCodeResponse> {
     return this.http.post<SubmitCodeResponse>(
-      `http://${config.host}/${config.endpoints.submit}`,
+      `http://${config.host}/${config.apiVersion.submissionServiceVersion}/submissions/${classroomSlug}/${config.endpoints.submit}`,
       request, {
         headers: new HttpHeaders({
           'Content-Type': 'application/json',
@@ -44,18 +44,18 @@ export class SubmissionService {
   }
 
 
-  submissionDetails(assignmentId: string): Observable<SubmissionDetailsResponse []> {
+  submissionDetails(assignmentId: string,classroomSlug:string): Observable<SubmissionDetailsResponse []> {
 return this.http.get<any>(
-  `http://${config.host}/${config.endpoints.submission}/${assignmentId}/`);
+  `http://${config.host}/${config.apiVersion.submissionServiceVersion}/submissions/${classroomSlug}/${assignmentId}/`);
   }
-  submissionUserDetails(assignmentId: string, email: string): Observable<SubmissionDetailsResponse> {
+  submissionUserDetails(assignmentId: string, email: string,classroomSlug:string): Observable<SubmissionDetailsResponse> {
     return  this.http.get<SubmissionDetailsResponse>(
-      `http://${config.host}/${config.endpoints.submission}/${assignmentId}/user?email=${email}`
+      `http://${config.host}/${config.apiVersion.submissionServiceVersion}/submissions/${classroomSlug}/${assignmentId}/user?email=${email}`
     );
   }
-  getUserResponse(assignmentId: string, questionId: string, email: string): Observable<SubmissionQuestionDetailsResponse>{
+  getUserResponse(assignmentId: string, questionId: string, email: string,classroomSlug:string): Observable<SubmissionQuestionDetailsResponse>{
 return this.http.get<SubmissionQuestionDetailsResponse>(
-  `http://${config.host}/${config.endpoints.submission}/${assignmentId}/${questionId}?email=${email}`
+  `http://${config.host}/${config.apiVersion.submissionServiceVersion}/submissions/${classroomSlug}/${assignmentId}/${questionId}?email=${email}`
 );
 }
 
