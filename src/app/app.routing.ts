@@ -10,6 +10,7 @@ import {UserAssignmentViewComponent} from './views/user-assignments/user-assignm
 import {ViewQuestionComponent} from './views/user-assignments/view-question/view-question.component';
 import {AuthComponent} from './views/auth/auth.component';
 import {AngularFireAuthGuard, redirectUnauthorizedTo} from '@angular/fire/auth-guard';
+import { SpinnerComponent } from './views/spinner/spinner.component';
 //import { TempComponent } from './views/classroom/temp/temp.component';
 
 const redirectToLogin = () => redirectUnauthorizedTo(['login'])
@@ -36,6 +37,13 @@ export const routes: Routes = [
     component: P500Component,
     data: {
       title: 'Page 500'
+    }
+  },
+  {
+    path: 'spinner',
+    component: SpinnerComponent,
+    data: {
+      title: 'Spinner'
     }
   },
   {
