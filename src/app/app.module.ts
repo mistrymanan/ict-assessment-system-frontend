@@ -55,6 +55,7 @@ import {authInterceptorProviders} from './views/auth/token.interceptor';
 import {ModalModule} from 'ngx-bootstrap/modal';
 import { ViewAnswerComponent } from './views/classrooms/classroom-submissions/view-answer/view-answer.component';
 import { CustomSideBarComponent } from './containers/custom-side-bar/custom-side-bar.component';
+import { SpinnerComponent } from './views/spinner/spinner.component';
 
 //import { TempComponent } from './views/classroom/temp/temp.component';
 
@@ -90,6 +91,7 @@ import { CustomSideBarComponent } from './containers/custom-side-bar/custom-side
     P500Component,
     AuthComponent,
     CustomSideBarComponent,
+    SpinnerComponent,
     //TempComponent,
     //InstructorDashboardComponent,
 
