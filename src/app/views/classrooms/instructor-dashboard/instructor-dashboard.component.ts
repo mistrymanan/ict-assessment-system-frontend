@@ -18,6 +18,8 @@ import { ClassroomDetails } from '../../../models/classroom-details';
 
 import { Classroom } from '../../../models/Classroom';
 import { filter } from 'rxjs/operators';
+import { ClassroomUserDetails } from '../../../models/classroom-user-details';
+import { error } from 'protractor';
 @Component({
   selector: 'app-instructor-dashboard',
   templateUrl: './instructor-dashboard.component.html',
@@ -34,7 +36,7 @@ export class InstructorDashboardComponent implements OnInit {
   statusBadge: any;
   userEmail : string;
   activeAssignments: ActiveAssignment[];
-  classroom:Classroom;
+  classroom:Classroom={title:'',slug:'',enrolledUsers:[],instructors:[],ownerEmail:'',ownerName:''};
   
   @ViewChild('myModal') public myModal: ModalDirective;
   @ViewChild('myModal1') public myModal1: ModalDirective;
@@ -161,13 +163,19 @@ export class InstructorDashboardComponent implements OnInit {
     this.classroomservice.getClassroomDetails(slug).subscribe(
       res=>{
         this.classroom=res
-        // if(res.ownerEmail===this.userEmail||res.instructors.includes(this.userEmail)){
-        //   this.isInstructor=true
-        // }
-        this.isInstructor=true;
-        console.log(res)
+         if(res.ownerEmail===this.userEmail||this.checkUserInInstructors(this.userEmail,res.instructors)){
+           this.isInstructor=true
+         }
       }
     )
+  }
+  checkUserInInstructors(username:String,instructors:ClassroomUserDetails[]):boolean{
+    instructors.forEach(instructor=>{
+      if(instructor.email==username){
+        return true;
+      }
+    })
+    return false;
   }
   onAddInstructor():void{
     const invitesend = this.addInstructorForm.get('email').value;
@@ -176,13 +184,23 @@ export class InstructorDashboardComponent implements OnInit {
     const instructorEmails=invitesend.split(',');
     this.classroomsService.addInstructor(this.classroomSlug,instructorEmails).subscribe(res=>{ 
       this.myModal.hide();
+      this.getClassroomDetails();
     },err=>{
       console.log(err);
     });
   }
   onEnrollUser():void{
     const enrollUsers= this.userEnrollForm.get('email').value;
+    const userEmails=enrollUsers.split(',');
     console.log(enrollUsers.split(','));
+    this.classroomsService.enrollUser(this.classroomSlug,userEmails).subscribe(
+      res=>{
+        this.myModal1.hide();
+        this.getClassroomDetails();
+      },err=>{
+        console.log(err);
+      }
+    )
     
   }
 

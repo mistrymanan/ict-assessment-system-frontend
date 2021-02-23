@@ -27,10 +27,14 @@ export class AddClassroomComponent implements OnInit {
   onSubmit():void{  
     
     const newClassroom = this.classroomForm.get('name').value;
-    this.classroomsService.createClassroom(newClassroom).subscribe(
+    const emails=this.classroomForm.get('email').value;
+    console.log(emails)
+    const instructorsEmail=emails.split(',');
+    console.log(instructorsEmail);
+    this.classroomsService.createClassroom(newClassroom,instructorsEmail).subscribe(
       res => {
         console.log('Classroom created');
-        // this.router.navigate(['instructor-dashboard', res.slug]);
+        this.router.navigate(['classrooms',res.slug,'instructor-dashboard']);
     },error => { 
       if (error.status==409){this.is409=true}
        console.log(status);

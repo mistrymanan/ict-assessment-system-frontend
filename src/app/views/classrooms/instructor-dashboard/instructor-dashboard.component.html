@@ -108,17 +108,11 @@
                                     <tr *ngFor="let instructor of classroom.instructors">
                                         <td class="text-center">
                                             <div class="avatar">
-                                                <img alt="admin@bootstrapmaster.com" class="img-avatar" src="{{instructor.picture}}">
-                                                <span class="avatar-status badge-success">
-                                
-                                                </span>
+                                                <img alt="{{instructor.name}}'s profile pic" class="img-avatar" referrerPolicy="no-referrer" src="{{instructor.picture}}">
                                             </div>
                                         </td>
                                         <td >
                                             <div>{{instructor.name}}</div>
-                                            <div class="small text-muted">
-                                                <span>New</span> 
-                                                | Registered: Jan 1, 2015 </div>
                                             </td>   
                                                 
                                             <td></td></tr>
@@ -158,19 +152,11 @@
                                     <tr *ngFor="let students of classroom.enrolledUsers">
                                         <td class="text-center">
                                             <div class="avatar">
-                                                <img alt="admin@bootstrapmaster.com" class="img-avatar" src="{{students.picture}}">
-                                                <span class="avatar-status badge-success">
-                                
-                                                </span>
+                                                <img alt="{{students.name}}'s profile pic" class="img-avatar" referrerPolicy="no-referrer" src="{{students.picture}}">
                                             </div>
                                         </td>
                                         <td>
-                                            <div>{{students.name}}</div>
-                                            <div class="small text-muted">
-                                                <span>New</span> 
-                                                | Registered: Jan 1, 2015 </div>
-                                            </td>   
-                                                
+                                            <div>{{students.name}}</div>                                                
                                             <td>
                                               <button class=" btn btn-primary btn-sm btn-pill">
                                                 <i class="fa fa-book"></i>
@@ -214,7 +200,7 @@
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" (click)="myModal.hide()">Cancle</button>
-                  <button type="button" class="btn btn-primary">Send</button>
+                  <button type="button" class="btn btn-primary" (click)="onAddInstructor()" >Send</button>
                 </div>
               </div><!-- /.modal-content -->
             </div><!-- /.modal-dialog -->
@@ -236,7 +222,7 @@
                     <input type="text" id="email" name="email" class="form-control" placeholder="Invite Students"  formControlName="email" [class.is-valid]= "userEnrollForm.controls['email'].valid && userEnrollForm.controls['email'].dirty" [class.is-invalid]= "userEnrollForm.controls['email'].invalid && userEnrollForm.controls['email'].dirty">
                     <div *ngIf="userEnrollForm.controls['email'].invalid && (userEnrollForm.controls['email'].dirty || userEnrollForm.controls['email'].touched)" class="text-danger">
                       <div *ngIf="userEnrollForm.controls['email'].errors.pattern">
-                        Please provide a valid email address, You can add more co-instructors by giving the comma separated emails.
+                        Please provide a valid email address, You can add more students by giving the comma separated emails.
                       </div>
                     </div> 
                     <span class="help-block">Please enter your email</span>   
@@ -247,7 +233,7 @@
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" (click)="myModal1.hide()">Cancle</button>
-                  <button type="button" class="btn btn-primary">Send</button>
+                  <button type="button" class="btn btn-primary" (click)="onEnrollUser()" >Send</button>
                 </div>
               </div><!-- /.modal-content -->
             </div><!-- /.modal-dialog -->

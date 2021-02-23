@@ -53,6 +53,7 @@ export class DefaultLayoutComponent {
   logout() {
     this.authService.logout().subscribe(() => {
       this.router.navigate(['login']);
+      window.location.reload();
     })    
   }
 

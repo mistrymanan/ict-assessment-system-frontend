@@ -22,7 +22,7 @@
                   </div>
                   
                   <div class="card-body pt-5">
-                      <img src="https://randomuser.me/api/portraits/men/64.jpg" alt="profile-image" class="profile"/>
+                      <img src="{{classroom.ownerPicture}}" alt="profile-image" class="profile"/>
                       <h5 class="card-title">{{ classroom.classroomTitle}}</h5>
                       <p class="card-text">{{ classroom.ownerName}}</p>
                       <button type="button" class="btn btn-primary" (click)="openClassroom(classroom.classroomSlug)"
@@ -42,7 +42,7 @@
                               <img class="img-fluid"  src="assets/img/avatars/9.jpg" alt="Card image cap">
                           </div>
                           <div class="card-body pt-5">
-                              <img src="https://randomuser.me/api/portraits/men/64.jpg" alt="profile-image" class="profile"/>
+                              <img src="{{classroom.ownerPicture}}" alt="profile-image" class="profile"/>
                               <h5 class="card-title">{{ classroom.classroomTitle}}</h5>
                               <p class="card-text">{{ classroom.ownerName}}</p>
                               <button type="button" class="btn btn-primary" (click)="openClassroom(classroom.classroomSlug)"

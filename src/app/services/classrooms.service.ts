@@ -21,11 +21,12 @@ export class ClassroomsService {
   }
 
 
-  createClassroom(titleValue:string){
-    const data={title:titleValue}
-    return this.http.post(
+  createClassroom(titleValue:string,instructorsEmail:string[]){
+    const data={title:titleValue,instructors:instructorsEmail}
+    console.log(data);
+    return this.http.post<Classroom>(
       `http://${config.host}/${config.endpoints.classroom}`,
-       data,{
+        data,{
         headers: new HttpHeaders({
           'Content-Type': 'application/json',
         })

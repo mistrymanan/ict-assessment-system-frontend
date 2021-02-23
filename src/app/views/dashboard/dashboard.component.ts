@@ -19,9 +19,8 @@ export class DashboardComponent implements OnInit {
   startAssignmentProcess: boolean = false;
   currentAssignment: ActiveAssignment;
   user: any={};
-  userClassroomsDetails: ClassroomUserResponse;
- 
-
+  userClassroomsDetails: ClassroomUserResponse={instructClassrooms:[],enrolledClassrooms:[]};
+  
   constructor(
     private authService: AuthService,
     private assignmentsService: AssignmentsService,

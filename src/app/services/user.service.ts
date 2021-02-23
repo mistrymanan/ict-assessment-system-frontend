@@ -26,11 +26,11 @@ export class UserService {
 
 patch(emailId:String){
   return this.http.patch<User>(
-    `http://${config.host}/${config.endpoints.users}/${emailId}`,NONE_TYPE)
+    `http://${config.host}/${config.endpoints.users}/${emailId}/`,NONE_TYPE)
 }
 getRequest(emailID:String){
   return this.http.get<User>(
-    `http://${config.host}/${config.endpoints.users}/${emailID}`
+    `http://${config.host}/${config.endpoints.users}/${emailID}/`
   )
 }
 
