@@ -31,6 +31,7 @@ export class AddQuestionComponent implements OnInit, AfterViewInit {
   compileErrorMessage: string;
   classroomSlug: string;
   testOutputs;
+  is409: boolean;
   @ViewChildren(AceEditorComponent) editors: QueryList<AceEditorComponent>;
 
   constructor(
@@ -41,7 +42,8 @@ export class AddQuestionComponent implements OnInit, AfterViewInit {
     private location: Location,
     private fb: FormBuilder,
     private dataService: DataService
-  ) {
+  ) { 
+    this.is409 = false,
     this.questionForm = fb.group({
       'title': ['',Validators.required],
       'allowedLanguages': ['',Validators.required],
@@ -184,15 +186,23 @@ export class AddQuestionComponent implements OnInit, AfterViewInit {
           console.log(this.questionForm.value);
           this.router.navigate(['classrooms',this.classroomSlug,'assignments', this.assignment.slug]);
         }
-        ,
-        console.error
+        ,error => { 
+          if (error.status==409){this.is409=true}
+           console.log(status);
+          }
+        
+        // console.error
       );
     } else {
       this.assignmentService.addQuestionToAssignment(this.assignment.slug, this.questionForm.value,this.classroomSlug).subscribe(
         (res) => {
           this.router.navigate(['classrooms',this.classroomSlug,'assignments', this.assignment.slug]);
-        },
-        console.error
+        },error => { 
+          if (error.status==409){this.is409=true}
+           console.log(status);
+          }
+        
+        // console.error
       );
     }
   }

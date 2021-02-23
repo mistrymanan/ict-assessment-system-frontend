@@ -17,6 +17,7 @@ export class CreateAssignmentComponent implements OnInit {
   assignmentForm: FormGroup;
   isUpdateMode: boolean = false;
   assignmentID: string;
+  is409: boolean;
   error:any={isError:false,errorMessage:''};
     // @ViewChild('markdownEditor') markdownEditor: AceEditorComponent;
 
@@ -30,8 +31,7 @@ export class CreateAssignmentComponent implements OnInit {
               private route: ActivatedRoute,
               public location: Location,
               private dataService: DataService
-              ) {
-  }
+              )  { this.is409=false }
 
   ngOnInit(): void {
     this.classroomSlug=this.route.snapshot.params.classroomSlug;
@@ -94,7 +94,10 @@ export class CreateAssignmentComponent implements OnInit {
       this.assignmentsService.updateAssignment(this.assignmentID, assignment,this.classroomSlug).subscribe(
         (res: any) => {
           this.router.navigate(['classrooms',this.classroomSlug,'assignments', res.slug]);
-        }
+        },error => { 
+          if (error.status==409){this.is409=true}
+           console.log(status);
+          }
       )
     }
     else{
@@ -103,8 +106,12 @@ export class CreateAssignmentComponent implements OnInit {
       res => {
         console.log('Assignment created');
         this.router.navigate(['classrooms',this.classroomSlug,'assignments', res.slug]);
-    },
-    console.error
+    },error => { 
+      if (error.status==409){this.is409=true}
+       console.log(status);
+      }
+    
+    // console.error
     );
     }
   }
