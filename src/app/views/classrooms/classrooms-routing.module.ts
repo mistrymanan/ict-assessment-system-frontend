@@ -5,18 +5,19 @@ import { InstructorDashboardComponent } from './instructor-dashboard/instructor-
 
 
 const routes: Routes = [
-  {
-    path: '',
-    data: {
-      title: 'Classroom'
-    },
-    children:[
-      {path:'add',
+  {path:'add',
       component:AddClassroomComponent,
       data: {
         title: 'Add'
       }},
-      {path:':classroomSlug/instructor-dashboard',
+  {
+    path: '',
+    // data: {
+    //   title: 'Classroom'
+    // },
+    //component: InstructorDashboardComponent,
+    children:[
+      {path:':classroomSlug',
       component:InstructorDashboardComponent,
       data: {
         title: 'Instructor-Dashboard'

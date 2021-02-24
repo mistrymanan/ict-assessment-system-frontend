@@ -34,7 +34,7 @@ export class AddClassroomComponent implements OnInit {
     this.classroomsService.createClassroom(newClassroom,instructorsEmail).subscribe(
       res => {
         console.log('Classroom created');
-        this.router.navigate(['classrooms',res.slug,'instructor-dashboard']);
+        this.router.navigate(['classrooms',res.slug]);
     },error => { 
       if (error.status==409){this.is409=true}
        console.log(status);

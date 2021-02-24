@@ -125,7 +125,7 @@
                   <div> {{response.title}} </div>
                 </td>
                 <td class="text-center">
-                  04/10/2020
+                  {{response.time | date:'medium'}}
                   <!--                            {{response.time|date:'short'}}-->
                 </td>
                 <!--                          <td class="text-center" >-->
@@ -167,6 +167,9 @@
                           type="button">View
                   </button>
                 </td>
+              </tr>
+              <tr *ngIf="submissions.questionEntities.length==0">
+                <td scope="row" colspan="6" class="text-center"> No Content</td>
               </tr>
               <!--                        <tr>-->
   

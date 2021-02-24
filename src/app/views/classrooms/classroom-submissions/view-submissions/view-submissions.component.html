@@ -74,6 +74,9 @@
                                 <button aria-pressed="true" class="btn btn-pill btn-sm btn-primary" type="button" (click)="openAnswers(submission.email)" ><i class="fa fa-eye"></i> View</button>
                             </td>
                         </tr>
+                        <tr *ngIf="submissions.length==0">
+                          <td scope="row" colspan="7" class="text-center"> No Submissions</td>
+                        </tr>
                         <!--                        <tbody>-->
                         <!--                        <tr>-->
                         <!--                            <td class="text-center">-->

@@ -7,6 +7,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InstructorDashboardComponent } from './instructor-dashboard/instructor-dashboard.component';
 import { TabsModule } from 'ngx-bootstrap/tabs'
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { SpinnerComponent } from '../spinner/spinner.component';
 
 @NgModule({
   declarations: [AddClassroomComponent, InstructorDashboardComponent],

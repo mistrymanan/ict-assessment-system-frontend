@@ -40,7 +40,7 @@ export class InstructorDashboardComponent implements OnInit {
   
   @ViewChild('myModal') public myModal: ModalDirective;
   @ViewChild('myModal1') public myModal1: ModalDirective;
-  assignments: Assignment[] = [];
+  assignments: Assignment[];
   
   
   
@@ -58,7 +58,7 @@ export class InstructorDashboardComponent implements OnInit {
     private classroomservice: ClassroomsService,
     private classroomsService: ClassroomsService,
   ) { this.statusBadge = GlobalConstants.statusBadge;
-  
+    this.assignments=new Array();
    this.router.events
    .pipe(
     filter(event => event instanceof NavigationEnd)
@@ -201,7 +201,10 @@ export class InstructorDashboardComponent implements OnInit {
         console.log(err);
       }
     )
-    
   }
+  // unEnrollUser(username:String){
+  //   //console.log(username);
+  //   this.classroomsService.unrollUser(this.classroomSlug,username).subscribe();
+  // }
 
 }

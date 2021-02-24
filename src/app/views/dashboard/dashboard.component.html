@@ -1,4 +1,4 @@
-<div class="card" *ngIf=true>
+<div class="card" *ngIf="userClassroomsDetails.instructClassrooms.length==0 && userClassroomsDetails.enrolledClassrooms.length==0">
   <div class="card-body">
     <div class="row">
       <div class="col-md-12">
@@ -6,40 +6,19 @@
         <div class="notfound">
           <div>
             <div></div>
-            <div></div>
-            <div></div>
           </div>
           <h1>oops!</h1>
           <h2>Classrooms Not Available!</h2>
-          <a href="#">Create Classroom</a>
+          <!-- <a href="#">Create Classroom</a> -->
           
         </div>
       </div>
       </div>
       </div>
       </div>
-
-
 </div>
-
-
-<!-- <div class="card" *ngIf="userClassroomsDetails.instructClassrooms?.length == 0">
-  <div class="card-body">
-    <div class="row">
-      <span class="search_no_results">
-        Classes Not Available 
-     </span>
-      </div>
-      </div>
-
-
-</div> -->
-
-
-
-
 <!-- <section> -->
-  <div class="card">
+  <div class="card" *ngIf="userClassroomsDetails.instructClassrooms.length>=1 ||  userClassroomsDetails.enrolledClassrooms.length>=1">
     <!-- <div class="card-header"> 
       your Classrooms
       <div class="card-header-actions mr-md-5" fxLayoutGap="20px" fxLayoutAlign="center center">

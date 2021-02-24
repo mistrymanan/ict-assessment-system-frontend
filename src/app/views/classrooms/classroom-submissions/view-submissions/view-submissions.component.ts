@@ -12,7 +12,7 @@ import {Assignment} from '../../../../models/assignment';
   styleUrls: ['./view-submissions.component.css']
 })
 export class ViewSubmissionsComponent implements OnInit {
-  submissions: SubmissionDetailsResponse[] = [];
+  submissions: SubmissionDetailsResponse[];
   totalPoints: number;
   assignment: Assignment;
   assignmentId: string;
@@ -25,6 +25,7 @@ export class ViewSubmissionsComponent implements OnInit {
     private assignmentsService: AssignmentsService,
     private router: Router
   ) {
+    this.submissions=new Array();
   }
 
   ngOnInit(): void {

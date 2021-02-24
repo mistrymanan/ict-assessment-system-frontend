@@ -86,14 +86,14 @@ export class DefaultLayoutComponent {
         for (const value of this.userClassroomsDetails.instructClassrooms) {
           const temp=new NavChild();
             temp.name=value.classroomTitle
-            temp.url='/classrooms/'+value.classroomSlug+'/instructor-dashboard'
+            temp.url='/classrooms/'+value.classroomSlug
             temp.icon='fa fa-tasks'
             instructClass.push(temp);
         }
         for (const value of this.userClassroomsDetails.enrolledClassrooms) {
           const temp=new NavChild();
             temp.name=value.classroomTitle
-            temp.url='/classrooms/'+value.classroomSlug+'/instructor-dashboard'
+            temp.url='/classrooms/'+value.classroomSlug
             temp.icon='fa fa-tasks'
             enrolledClass.push(temp);
         }
