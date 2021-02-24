@@ -43,7 +43,7 @@ export class AddClassroomComponent implements OnInit {
     
   }
 
-   openInstructordashboard(slug: string){
-     this.router.navigate(['/classrooms',slug,'instructor-dashboard']);
-   }
+  //  openInstructordashboard(slug: string){
+  //    this.router.navigate(['/classrooms',slug,'instructor-dashboard']);
+  //  }
 }
