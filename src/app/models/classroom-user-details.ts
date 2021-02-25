@@ -1,5 +1,5 @@
 export class ClassroomUserDetails{
-    email:string;
+    emailId:string;
     name:string;
     picture:string;
 }

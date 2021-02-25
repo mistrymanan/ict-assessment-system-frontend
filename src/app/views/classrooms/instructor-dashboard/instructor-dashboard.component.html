@@ -116,7 +116,7 @@
                                         <th>Teachers</th>
                                         
                                         <th>
-                                            <div class="col-6 col-sm-4 col-md-3"  [hidden]="!isInstructor">
+                                            <div class="col-6 col-sm-4 col-md-3"  *ngIf="isInstructor">
                                                 <button class="btn btn-outline-dark" tooltip="Add Instructors" (click)="myModal.show()"><i
                                                     class="fa fa-user-plus" aria-hidden="true"  ></i></button>
         
@@ -160,7 +160,7 @@
                                         <th>Students</th>
                                         <!-- <th>Submissions</th> -->
                                         <th>
-                                            <div class="col-6 col-sm-4 col-md-3" [hidden]="!isInstructor">
+                                            <div class="col-6 col-sm-4 col-md-3" *ngIf="isInstructor">
                                                   <button class="btn btn-outline-dark" tooltip="Add Students" (click)="myModal1.show()"><i
                                                     class="fa fa-user-plus" aria-hidden="true"></i></button>
         
@@ -280,7 +280,7 @@
          
          
       </tab>
-      <tab>
+      <tab *ngIf="isInstructor" >
         <ng-template tabHeading><i class="fa fa-tasks"></i> View Assignment</ng-template>
         <div class="animated fadeIn">
           <div class="row">

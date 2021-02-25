@@ -41,7 +41,7 @@ export class InstructorDashboardComponent implements OnInit {
   @ViewChild('myModal') public myModal: ModalDirective;
   @ViewChild('myModal1') public myModal1: ModalDirective;
   assignments: Assignment[];
-  
+  errorOnStartModal:string;
   
   
   classroomSlug: string;
@@ -129,7 +129,7 @@ export class InstructorDashboardComponent implements OnInit {
       () => {
         this.startAssignmentProcess = false;
         console.log('assignment cannot be started');
-        this.modalRef.hide();
+        //this.modalRef.hide();
       }
     );
   }
@@ -163,19 +163,24 @@ export class InstructorDashboardComponent implements OnInit {
     this.classroomservice.getClassroomDetails(slug).subscribe(
       res=>{
         this.classroom=res
+        console.log("checking access details")
          if(res.ownerEmail===this.userEmail||this.checkUserInInstructors(this.userEmail,res.instructors)){
+           console.log("giving the access")
            this.isInstructor=true
          }
       }
     )
   }
   checkUserInInstructors(username:String,instructors:ClassroomUserDetails[]):boolean{
-    instructors.forEach(instructor=>{
-      if(instructor.email==username){
-        return true;
+    console.log("i am being called.")
+    let ans =false
+    instructors.forEach(inst=>{
+      if(inst.emailId===username){
+        console.log("found the user's email in instructors");
+        ans=true
       }
     })
-    return false;
+    return ans;
   }
   onAddInstructor():void{
     const invitesend = this.addInstructorForm.get('email').value;
