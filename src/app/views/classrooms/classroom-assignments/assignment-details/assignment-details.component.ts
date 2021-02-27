@@ -4,6 +4,7 @@ import {AssignmentsService} from '../../../../services/assignments.service';
 import {Assignment} from '../../../../models/assignment';
 import {DataService} from '../../../../services/data.service';
 import {Question} from '../../../../models/question';
+import {Location} from '@angular/common';
 
 @Component({
   templateUrl: './assignment-details.component.html',
@@ -16,6 +17,7 @@ export class AssignmentDetailsComponent implements OnInit {
     private route: ActivatedRoute,
     private assignmentService: AssignmentsService,
     private router: Router,
+    public location: Location,
     private dataService: DataService
   ) {
     this.assignment = new Assignment();
@@ -73,4 +75,7 @@ export class AssignmentDetailsComponent implements OnInit {
     const questionSlug = this.assignment.questions[index].slug;
     this.router.navigate([questionSlug, 'edit'], {relativeTo: this.route});
   }
+  backButton(){
+    this.location.back()
+}
 }
