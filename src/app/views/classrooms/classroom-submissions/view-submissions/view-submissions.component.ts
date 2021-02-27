@@ -4,6 +4,7 @@ import {AssignmentsService} from '../../../../services/assignments.service';
 import {SubmissionService} from '../../../../services/submission.service';
 import {SubmissionDetailsResponse} from '../../../../models/submissionDetails-response';
 import {Observable} from 'rxjs';
+import {Location} from '@angular/common';
 import {Assignment} from '../../../../models/assignment';
 
 @Component({
@@ -23,6 +24,7 @@ export class ViewSubmissionsComponent implements OnInit {
     private route: ActivatedRoute,
     private submissionService: SubmissionService,
     private assignmentsService: AssignmentsService,
+    public location: Location,
     private router: Router
   ) {
     this.submissions=new Array();
@@ -68,4 +70,7 @@ export class ViewSubmissionsComponent implements OnInit {
   openAnswers(email: string) {
     this.router.navigate(['classrooms',this.classroomSlug,'submissions', this.assignmentSlug, 'answers'], {queryParams : {'email': email}});
   }
+  backButton(){
+    this.location.back()
+}
 }
