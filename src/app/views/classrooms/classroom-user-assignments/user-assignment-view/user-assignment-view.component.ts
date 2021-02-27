@@ -3,6 +3,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {ActiveAssignmentDetails} from '../../../../models/active-assignment-details';
 import {AssignmentsService} from '../../../../services/assignments.service';
 import {GlobalConstants} from '../../../../global-constants';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-user-assignment-view',
@@ -17,6 +18,7 @@ classroomSlug:string;
     private assignmentService: AssignmentsService,
     private router: Router,
     private route: ActivatedRoute,
+    public location: Location
   ) {
   }
 
@@ -42,5 +44,7 @@ classroomSlug:string;
   removeUnderScore(str: string) {
     return str.split('_').join(' ');
   }
-
+  backButton(){
+    this.location.back()
+}
 }
