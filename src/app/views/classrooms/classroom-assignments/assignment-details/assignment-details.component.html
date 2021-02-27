@@ -125,7 +125,8 @@
         </table>
       </div>
       <div class="card-footer">
-        <button type="button" routerLink="./add-question" class="btn btn-primary btn-pill"><i class="fa fa-plus"></i> Add
+        <button type="button" class="btn btn-primary btn-pill pull-left" (click)="backButton()"><i class="fa fa-back"></i> Back </button>
+        <button type="button" routerLink="./add-question" class="btn btn-primary btn-pill pull-right"><i class="fa fa-plus"></i> Add
           Question
         </button>
       </div>
