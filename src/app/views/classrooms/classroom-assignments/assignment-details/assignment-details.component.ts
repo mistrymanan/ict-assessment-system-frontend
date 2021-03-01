@@ -51,7 +51,7 @@ export class AssignmentDetailsComponent implements OnInit {
   deleteAssignment(): void {
     this.assignmentService.deleteAssignment(this.assignment.id,this.classroomSlug).subscribe(
       () => {
-        this.router.navigate(["classrooms",this.classroomSlug,"instructor-dashboard"])
+        this.router.navigate(["classrooms",this.classroomSlug])
       },
       console.error
     );
