@@ -1,13 +1,12 @@
 export const environment = {
   production: true,
   firebaseConfig: {
-    apiKey: 'AIzaSyDOWIShs-32Ny4wDr_C_qwEHeFLxGJX8g0',
-    authDomain: 'assessment-system-auth.firebaseapp.com',
-    databaseURL: 'https://assessment-system-auth.firebaseio.com',
-    projectId: 'assessment-system-auth',
-    storageBucket: 'assessment-system-auth.appspot.com',
-    messagingSenderId: '505198983151',
-    appId: '1:505198983151:web:e4323c08f9f46da013a81a',
-    measurementId: 'G-621W08XW9C'
+    apiKey: "AIzaSyBaDFvzgFQve1NYWMXBdNyUdxcZLiYUyYU",
+    authDomain: "assessment-system-ff99e.firebaseapp.com",
+    projectId: "assessment-system-ff99e",
+    storageBucket: "assessment-system-ff99e.appspot.com",
+    messagingSenderId: "136556520699",
+    appId: "1:136556520699:web:0c21e8e4f20880ecd7fc5e",
+    measurementId: "G-49H29RFTJ9"
   }
 };
