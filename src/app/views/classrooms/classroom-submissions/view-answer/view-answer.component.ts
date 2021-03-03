@@ -9,6 +9,7 @@ import {BuildService} from '../../../../services/build.service';
 import {SubmissionDetailsResponse} from '../../../../models/submissionDetails-response';
 import {Assignment} from '../../../../models/assignment';
 import {Build} from '../../../../models/build';
+import { Location } from '@angular/common';
 import {SubmissionQuestionDetailsResponse} from '../../../../models/submissionQuestionDetails-response';
 @Component({
   selector: 'app-view-answer',
@@ -37,7 +38,8 @@ export class ViewAnswerComponent implements OnInit {
     private submissionService: SubmissionService,
     private assignmentsService: AssignmentsService,
     private buildService: BuildService,
-    private router: Router
+    private router: Router,
+    public location: Location
   ) {
     this.text = `## Fibonacci Series
 ---
@@ -108,6 +110,8 @@ __Sample Output__
   statusToInt(test): number {
     return test.status === 'PASSED' ? 1 : 0;
   }
-
+  backButton(){ 
+    this.location.back()
+}
 
 }
