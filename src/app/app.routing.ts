@@ -9,6 +9,7 @@ import {P500Component} from './views/error/500.component';
 import {AuthComponent} from './views/auth/auth.component';
 import {AngularFireAuthGuard, redirectUnauthorizedTo} from '@angular/fire/auth-guard';
 import { SpinnerComponent } from './views/spinner/spinner.component';
+import { mainModule } from 'process';
 //import { TempComponent } from './views/classroom/temp/temp.component';
 
 const redirectToLogin = () => redirectUnauthorizedTo(['login'])
@@ -74,6 +75,11 @@ export const routes: Routes = [
         loadChildren: () => import('./views/classrooms/classrooms.module').then(m => m.ClassroomsModule)
       },
     
+      {
+        path: 'admin',
+        loadChildren: ()=> import('./views/admin/admin.module').then(m=>m.AdminModule)
+      }
+      ,
       //{
       //   path: 'classroom/temp',
       //   component: TempComponent,
