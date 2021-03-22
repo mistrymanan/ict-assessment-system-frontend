@@ -6,6 +6,7 @@ import {SubmissionDetailsResponse} from '../../../../models/submissionDetails-re
 import {Observable} from 'rxjs';
 import {Location} from '@angular/common';
 import {Assignment} from '../../../../models/assignment';
+import { GetSubmissionDetailsResponse } from '../../../../models/GetSubmissionDetailsResponse';
 
 @Component({
   selector: 'app-view-submissions',
@@ -13,7 +14,8 @@ import {Assignment} from '../../../../models/assignment';
   styleUrls: ['./view-submissions.component.css']
 })
 export class ViewSubmissionsComponent implements OnInit {
-  submissions: SubmissionDetailsResponse[];
+  submissionDetails:GetSubmissionDetailsResponse;
+  due: string[];
   totalPoints: number;
   assignment: Assignment;
   assignmentId: string;
@@ -27,7 +29,7 @@ export class ViewSubmissionsComponent implements OnInit {
     public location: Location,
     private router: Router
   ) {
-    this.submissions=new Array();
+    //this.submissionDetails=new GetSubmissionDetailsResponse();
   }
 
   ngOnInit(): void {
@@ -46,8 +48,8 @@ export class ViewSubmissionsComponent implements OnInit {
         this.submissionService
           .submissionDetails(this.assignmentId,this.classroomSlug)
           .subscribe(submissions => {
-            console.log(submissions);
-            this.submissions = submissions;
+            console.log(submissions)
+            this.submissionDetails=submissions;
           } );
       }
     );

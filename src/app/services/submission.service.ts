@@ -9,6 +9,7 @@ import {SubmitCodeResponse} from '../models/submit-code-response';
 import {SubmissionDetailsResponse} from '../models/submissionDetails-response';
 import {Question} from '../models/question';
 import {SubmissionQuestionDetailsResponse} from '../models/submissionQuestionDetails-response';
+import { GetSubmissionDetailsResponse } from '../models/GetSubmissionDetailsResponse';
 
 
 @Injectable({
@@ -44,7 +45,7 @@ export class SubmissionService {
   }
 
 
-  submissionDetails(assignmentId: string,classroomSlug:string): Observable<SubmissionDetailsResponse []> {
+  submissionDetails(assignmentId: string,classroomSlug:string): Observable<GetSubmissionDetailsResponse> {
 return this.http.get<any>(
   `http://${config.host}/${config.apiVersion.submissionServiceVersion}/submissions/${classroomSlug}/${assignmentId}/`);
   }
