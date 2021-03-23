@@ -194,7 +194,7 @@
                                             </td> -->
                                            <td>
                                             <div class="col-6 col-sm-4 col-md-3" *ngIf="isInstructor">
-                                              <button class=" btn btn-danger btn-sm btn-pill" tooltip="Unenroll Students" (click)="unEnrollUser()">
+                                              <button class=" btn btn-danger btn-sm btn-pill" tooltip="Unenroll Students" (click)="unEnrollUser(students.emailId)">
                                             <i class="fa fa-close"></i>
                                             Unroll
                                           </button>
