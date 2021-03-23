@@ -10,6 +10,7 @@ import {AuthComponent} from './views/auth/auth.component';
 import {AngularFireAuthGuard, redirectUnauthorizedTo} from '@angular/fire/auth-guard';
 import { SpinnerComponent } from './views/spinner/spinner.component';
 import { mainModule } from 'process';
+import { AdminAssignmentTableComponent } from './views/admin/admin-assignments/admin-assignment-table/admin-assignment-table.component';
 //import { TempComponent } from './views/classroom/temp/temp.component';
 
 const redirectToLogin = () => redirectUnauthorizedTo(['login'])
