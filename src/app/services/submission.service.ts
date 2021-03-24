@@ -60,5 +60,10 @@ return this.http.get<SubmissionQuestionDetailsResponse>(
 );
 }
 
+// getUserResponseUsingSlug(assignmentSlug: string, questionSlug: string, email: string,classroomSlug:string): Observable<SubmissionQuestionDetailsResponse>{
+//   return this.http.get<SubmissionQuestionDetailsResponse>(
+//     `http://${config.host}/${config.apiVersion.submissionServiceVersion}/submissions/${classroomSlug}/${assignmentSlug}/${questionSlug}?email=${email}`
+//   );
+//   }
 
 }

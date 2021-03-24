@@ -1,5 +1,5 @@
 class TestCaseResult {
-  id: string;
+  id: string|number;
   status: string;
   reason: string;
 }

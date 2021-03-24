@@ -167,6 +167,9 @@
             class="fa fa-{{testCase.status == 'PASSED' ? 'check' : 'close'}} mr-2"></i> Test Case {{testCase.id}}</div>
         </div>
       </div>
+      <div class="card-footer">
+        <button type="button" class="btn btn-primary btn-pill pull-left" (click)="backButton()"><i class="fa fa-back"></i> Back </button>
+      </div>      
     </div>
   </div>
   

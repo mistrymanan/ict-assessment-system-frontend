@@ -11,11 +11,11 @@ export const navItems: INavData[] = [
     url: '/code-editor',
     icon: 'fa fa-code',
   },
-  {
-    name: 'Add Classroom',
-    url: '/classrooms/add',
-    icon: 'fa fa-plus mr-1',
-  },
+  // {
+  //   name: 'Add Classroom',
+  //   url: '/classrooms/add',
+  //   icon: 'fa fa-plus mr-1',
+  // },
   // {
   //   name: 'Instructor Dashboard',
   //   url: '/classrooms/instructor-dashboard',
