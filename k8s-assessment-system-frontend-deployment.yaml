@@ -15,6 +15,6 @@ spec:
     spec:
       containers:
         - name: assessment-system-frontend
-          image: mananmistry/assessment-system-frontend:latest
+          image: mananmistry/assessment-system-frontend:v2.3
           ports:
             - containerPort: 80
