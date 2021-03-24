@@ -5,6 +5,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {SubmissionService} from '../../../../services/submission.service';
 import {AssignmentsService} from '../../../../services/assignments.service';
 import {GlobalConstants} from '../../../../global-constants';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-view-submissions-answers',
@@ -25,6 +26,7 @@ export class ViewSubmissionsAnswersComponent implements OnInit {
     private route: ActivatedRoute,
     private submissionService: SubmissionService,
     private assignmentsService: AssignmentsService,
+    public location: Location,
     private router: Router
   ) {
   }
@@ -70,4 +72,7 @@ export class ViewSubmissionsAnswersComponent implements OnInit {
   removeUnderScore(str: string) {
     return str.split('-').join(' ');
   }
+  backButton(){
+   this.location.back();
+}
 }

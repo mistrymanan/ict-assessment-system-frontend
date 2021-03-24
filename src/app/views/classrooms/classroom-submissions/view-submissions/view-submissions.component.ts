@@ -40,6 +40,7 @@ export class ViewSubmissionsComponent implements OnInit {
 
     this.assignmentsService.getAssignmentBySlug(this.assignmentSlug,this.classroomSlug).subscribe(
       assignment => {
+        this.assignment=assignment;
         this.assignmentName = assignment.title;
         this.assignmentId = assignment.id;
         // const question = assignment.questions.find(res => res.slug === this.questionSlug);

@@ -68,7 +68,7 @@
                             <td class="text-center" >
                                 <div class="small text-value">
                                 </div>
-                              {{submission.currentScore}}/{{submission.assignmentScore}}
+                              {{submission.currentScore}}/{{this.assignment.totalPoints}}
                             </td>
                             <td class="text-center" >
                                 <button aria-pressed="true" class="btn btn-pill btn-sm btn-primary" type="button" (click)="openAnswers(submission.email)" ><i class="fa fa-eye"></i> View</button>
