@@ -9,6 +9,7 @@ import { AdminUser } from '../models/admin-user';
   providedIn: 'root'
 })
 export class UserService {
+  patchClassroomCreation: any;
 
   constructor(private http:HttpClient) { }
   createUser(email:String){
@@ -41,4 +42,16 @@ getadminUser(){
 
   )
 }
+
+patchAdminAccess(emailId:String){
+  return this.http.patch(
+    `http://${config.host}/${config.endpoints.users}/${emailId}/adminAccess`,NONE_TYPE)
+  }
+
+  patchClassroomCreationAccess(emailId:String){
+    return this.http.patch(
+      `http://${config.host}/${config.endpoints.users}/${emailId}/createClassroomAccess`,NONE_TYPE)
+    }
+
+
 }

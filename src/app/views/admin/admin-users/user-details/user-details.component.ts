@@ -25,4 +25,22 @@ getAdminUser(){
     }
   )
 }
+
+toggleAdminAccess(user:AdminUser): void {
+  this.adminuserservice.patchAdminAccess(user.emailId).subscribe(
+    () => {
+      const current = user.isAdmin;
+      user.isAdmin =! current;
+    }
+  );
+}
+
+toggleClassroomCreation(user:AdminUser): void {
+  this.adminuserservice.patchClassroomCreationAccess(user.emailId).subscribe(
+    () => {
+      const current = user.allowedClassroomCreation;
+      user.allowedClassroomCreation =! current;
+    }
+  );
+}
 }

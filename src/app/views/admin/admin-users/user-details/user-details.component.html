@@ -19,17 +19,20 @@
   </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let User of adminuser; let i=index">
+    <tr *ngFor="let user of adminuser; let i=index">
       <th scope="row" class="text-center">
           {{i+1}}
       </th>
     
-   
-    <td class="text-center">
-        {{adminuser.name}}
+  
+      <td class="text-center">
+        <div class="avatar">
+          <img alt="{{user.name}}'s profile pic" class="img-avatar" referrerPolicy="no-referrer" src="{{user.picture!=null ? user.picture : 'assets/img/avatars/generic avtar.png'}}">
+        </div>
+        {{user.name}}
     </td>
     <td class="text-center">
-      {{adminuser.emailId}}
+      {{user.emailId}}
   </td>
 
     <td class="text-center">
@@ -48,8 +51,8 @@
       </label>
       <input type="checkbox" class="custom-control-input" id="customSwitch2">
     </div>  -->
- <div>
-    {{adminuser.isAdmin}}
+ <!-- <div>
+    Access:
     <label class="switch">
       <input type="checkbox" checked>
       <span class="slider round"></span>
@@ -57,13 +60,33 @@
     </div>
 <hr/>
 <div>
-    {{adminuser.allowedClassroomCreations}}
+    ClassroomCreations:
     <label class="switch">
       <input type="checkbox" checked>
       <span class="slider round"></span>
     </label>
-    </div> 
+    </div>  -->
+<div>
+    <div for="type">Access:</div>
+    <div class="form-check form-check-inline mr-3">
+      <label class="switch switch-3d switch-primary mb-0">
+        <input type="checkbox" class="switch-input form-check-input" id="type"
+               [checked]="user.isAdmin" (change)="toggleAdminAccess(user)">
+        <span class="switch-slider"></span>
+      </label>
+    </div>
+    </div>
 
+    <div>
+      <div for="type">ClassroomCreations:</div>
+      <div class="form-check form-check-inline mr-3">
+        <label class="switch switch-3d switch-primary mb-0">
+          <input type="checkbox" class="switch-input form-check-input" id="type"
+                 [checked]="user.allowedClassromCreation" (change)="toggleClassroomCreation(user)">
+          <span class="switch-slider"></span>
+        </label>
+      </div>
+    </div>
    
       </td>
 
