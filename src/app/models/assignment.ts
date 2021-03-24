@@ -9,6 +9,7 @@ export class Assignment {
   hasDeadline: boolean;
   startTime: string;
   deadline: string;
+  totalPoints:number;
   timed: boolean;
   questions: Question[];
 }
