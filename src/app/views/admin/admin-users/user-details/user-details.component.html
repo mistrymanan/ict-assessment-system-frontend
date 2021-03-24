@@ -1,1 +1,82 @@
-<p>user-details works!</p>
+<div class="col-md-12 mb-4">
+<div class="card">
+    <div class="card-header">
+             <div>User details</div>
+      </div>
+<div class="card-body">
+    <div class="animated fadeIn">
+<table class="table table-bordered table-striped">
+  <thead>
+  <tr>
+    <th class=" text-center w-auto "><i class="fa fa-hashtag"></i></th>
+    <th class=" text-center w-25 ">
+      <i class="icon-people"></i> Users
+    </th>
+    <th class="text-center w-auto ">Email-Id</th>
+    <th class="text-center w-auto">Rights</th>
+
+   
+  </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let User of adminuser; let i=index">
+      <th scope="row" class="text-center">
+          {{i+1}}
+      </th>
+    
+   
+    <td class="text-center">
+        {{adminuser.name}}
+    </td>
+    <td class="text-center">
+      {{adminuser.emailId}}
+  </td>
+
+    <td class="text-center">
+    
+     <!-- <div class="custom-control custom-switch">
+     
+      <input type="checkbox" class="custom-control-input" id="customSwitch1">
+      <label class="custom-control-label" for="customSwitch1">
+          Admin Access
+      </label>
+    </div> 
+  
+    <div class="custom-control custom-switch">
+      <label class="custom-control-label" for="customSwitch2">
+          Classroom Creation
+      </label>
+      <input type="checkbox" class="custom-control-input" id="customSwitch2">
+    </div>  -->
+ <div>
+    {{adminuser.isAdmin}}
+    <label class="switch">
+      <input type="checkbox" checked>
+      <span class="slider round"></span>
+    </label>
+    </div>
+<hr/>
+<div>
+    {{adminuser.allowedClassroomCreations}}
+    <label class="switch">
+      <input type="checkbox" checked>
+      <span class="slider round"></span>
+    </label>
+    </div> 
+
+   
+      </td>
+
+  </tr>
+  <tr>
+    <td scope="row" colspan="7" class="text-center">
+        
+    </td>
+  </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+

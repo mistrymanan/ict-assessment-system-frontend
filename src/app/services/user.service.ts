@@ -3,6 +3,7 @@ import {config} from '../config';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import { User } from '../models/user';
 import { NONE_TYPE } from '@angular/compiler';
+import { AdminUser } from '../models/admin-user';
 
 @Injectable({
   providedIn: 'root'
@@ -34,4 +35,10 @@ getRequest(emailID:String){
   )
 }
 
+getadminUser(){
+  return this.http.get<AdminUser[]>(
+    `http://${config.host}/${config.endpoints.users}/admin`
+
+  )
+}
 }
