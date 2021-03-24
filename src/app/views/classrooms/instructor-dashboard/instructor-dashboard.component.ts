@@ -209,7 +209,12 @@ export class InstructorDashboardComponent implements OnInit {
   }
   unEnrollUser(username:String){
     console.log(username);
-    this.classroomsService.unrollUser(this.classroomSlug,username).subscribe();
+    this.classroomsService.unrollUser(this.classroomSlug,username).subscribe(
+      res=>{
+        this.getClassroomDetails();
+      }
+    );
+    
   }
 
 }

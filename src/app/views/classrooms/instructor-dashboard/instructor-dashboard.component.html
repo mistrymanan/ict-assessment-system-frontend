@@ -159,7 +159,7 @@
                                         </th>
                                         <th>Students</th>
                                         <!-- <th>Submissions</th> -->
-                                        <th>
+                                        <th class="text-center" >
                                             <div class="col-6 col-sm-4 col-md-3" *ngIf="isInstructor">
                                                   <button class="btn btn-outline-dark" tooltip="Add Students" (click)="myModal1.show()"><i
                                                     class="fa fa-user-plus" aria-hidden="true"></i></button>
@@ -193,10 +193,9 @@
                                               
                                             </td> -->
                                            <td>
-                                            <div class="col-6 col-sm-4 col-md-3" *ngIf="isInstructor">
+                                            <div class="col-6" *ngIf="isInstructor">
                                               <button class=" btn btn-danger btn-sm btn-pill" tooltip="Unenroll Students" (click)="unEnrollUser(students.emailId)">
-                                            <i class="fa fa-close"></i>
-                                            Unroll
+                                            <i class="fa fa-close"></i> Unroll
                                           </button>
                                         </div></td>
                                           </tr>
