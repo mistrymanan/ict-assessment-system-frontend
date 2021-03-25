@@ -28,12 +28,19 @@
           <div class="card profile-card-2">
                   <div class="card-img-block">      
                       <img class="img-fluid"  src="assets/img/avatars/9.jpg" alt="Card image cap">
-                      
+                      <div class="dropdown-container" tabindex="-1">
+                        <div class="three-dots"></div>
+                        <div class="dropdown">
+                          <a href="#"><div>Remove</div></a>
+                          <a href="#"><div>Edit</div></a>
+                        </div>
+                      </div>
                   </div>
 
                   
                   
                   <div class="card-body pt-5">
+                    
                     <img src="{{classroom.ownerPicture}}" alt="profile-image" class="profile"/>
                       <h5 class="card-title">{{ classroom.classroomTitle}}</h5>
                       <p class="card-text">{{ classroom.ownerName}}</p>
@@ -41,42 +48,11 @@
                     [disabled]="startAssignmentProcess">
               Open
             </button>
-
+           
             
                   </div>
-
-                  <div class="container">
-                    <div class="more">
-                        <button id="more-btn" class="more-btn">
-                            <span class="more-dot"></span>
-                            <span class="more-dot"></span>
-                            <span class="more-dot"></span>
-                        </button>
-                        <div class="more-menu">
-                            <div class="more-menu-caret">
-                                <div class="more-menu-caret-outer"></div>
-                                <div class="more-menu-caret-inner"></div>
-                            </div>
-                            <ul class="more-menu-items" tabindex="-1" role="menu" aria-labelledby="more-btn" aria-hidden="true">
-                                <li class="more-menu-item" role="presentation">
-                                    <button type="button" class="more-menu-btn" role="menuitem">Share</button>
-                                </li>
-                                <li class="more-menu-item" role="presentation">
-                                    <button type="button" class="more-menu-btn" role="menuitem">Copy</button>
-                                </li>
-                                <li class="more-menu-item" role="presentation">
-                                    <button type="button" class="more-menu-btn" role="menuitem">Embed</button>
-                                </li>
-                                <li class="more-menu-item" role="presentation">
-                                    <button type="button" class="more-menu-btn" role="menuitem">Block</button>
-                                </li>
-                                <li class="more-menu-item" role="presentation">
-                                    <button type="button" class="more-menu-btn" role="menuitem">Report</button>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+                 
+                 
                   
               </div>
               
@@ -86,6 +62,13 @@
                   <div class="card profile-card-2">
                           <div class="card-img-block">
                               <img class="img-fluid"  src="assets/img/avatars/9.jpg" alt="Card image cap">
+                              <div class="dropdown-container" tabindex="-1">
+                                <div class="three-dots"></div>
+                                <div class="dropdown">
+                                  <a href="#"><div>Remove</div></a>
+                                  <a href="#"><div>Edit</div></a>
+                                </div>
+                              </div>
                           </div>
                           <div class="card-body pt-5">
                               <img src="{{classroom.ownerPicture}}" alt="profile-image" class="profile"/>
@@ -95,41 +78,7 @@
                               [disabled]="startAssignmentProcess">
                         Open
                       </button>
-                          </div>
-
-                          <div class="container">
-                            <div class="more">
-                                <button id="more-btn" class="more-btn">
-                                    <span class="more-dot"></span>
-                                    <span class="more-dot"></span>
-                                    <span class="more-dot"></span>
-                                </button>
-                                <div class="more-menu">
-                                    <div class="more-menu-caret">
-                                        <div class="more-menu-caret-outer"></div>
-                                        <div class="more-menu-caret-inner"></div>
-                                    </div>
-                                    <ul class="more-menu-items" tabindex="-1" role="menu" aria-labelledby="more-btn" aria-hidden="true">
-                                        <li class="more-menu-item" role="presentation">
-                                            <button type="button" class="more-menu-btn" role="menuitem">Share</button>
-                                        </li>
-                                        <li class="more-menu-item" role="presentation">
-                                            <button type="button" class="more-menu-btn" role="menuitem">Copy</button>
-                                        </li>
-                                        <li class="more-menu-item" role="presentation">
-                                            <button type="button" class="more-menu-btn" role="menuitem">Embed</button>
-                                        </li>
-                                        <li class="more-menu-item" role="presentation">
-                                            <button type="button" class="more-menu-btn" role="menuitem">Block</button>
-                                        </li>
-                                        <li class="more-menu-item" role="presentation">
-                                            <button type="button" class="more-menu-btn" role="menuitem">Report</button>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                          
+                          </div>   
                       </div>
                       
               </div>
