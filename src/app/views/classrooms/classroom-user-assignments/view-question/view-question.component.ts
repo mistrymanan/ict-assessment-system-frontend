@@ -9,8 +9,17 @@ import {RunCodeRequest} from '../../../../models/run-code-request';
 import {RunCodeResponse} from '../../../../models/run-code-response';
 import {SubmitCodeRequest} from '../../../../models/submit-code-request';
 import {SubmitCodeResponse} from '../../../../models/submit-code-response';
-import {Location} from '@angular/common';
 
+import {Location} from '@angular/common';
+import { AuthService } from '../../../../services/auth.service';
+import { BuildService } from '../../../../services/build.service';
+import { ThemeService } from 'ng2-charts';
+
+class TestCaseResult {
+  id: string|number;
+  status: string;
+  reason: string;
+}
 
 @Component({
   selector: 'app-view-question',
@@ -29,9 +38,12 @@ export class ViewQuestionComponent implements OnInit, AfterViewInit {
   allowedLanguages;
   langMap;
   assignmentId: string;
+  questionId:string;
   input: string;
+  emailId:string;
   runRodeResponse: RunCodeResponse = new RunCodeResponse();
   submitCodeResponse: SubmitCodeResponse;
+  testResults: TestCaseResult[];
   showAssessmentResults: boolean = false;
   currentQuestion: UserQuestion = new UserQuestion();
   runCodeProcess: boolean = false;
@@ -49,6 +61,8 @@ export class ViewQuestionComponent implements OnInit, AfterViewInit {
     private router: Router,
     private route: ActivatedRoute,
     public location: Location
+    private authService:AuthService,
+    private buildService:BuildService
   ) {
     this.hideOutput = true;
     this.hideInput = true;
@@ -89,6 +103,10 @@ __Sample Output__
     this.classroomSlug=this.route.snapshot.params.classroomSlug;
     const assignmentSlug = this.route.snapshot.params.assignmentSlug;
     const questionSlug = this.route.snapshot.params.questionSlug;
+    this.authService.user$.subscribe((data)=>{
+      this.emailId=data.email;
+      console.log(this.emailId);
+    })
     this.assignmentsService.getUserQuestion(assignmentSlug, questionSlug,this.classroomSlug).subscribe(
       (question) => {
         this.allowedLanguages = [];
@@ -105,7 +123,62 @@ __Sample Output__
     this.assignmentsService.getActiveAssignmentBySlug(assignmentSlug,this.classroomSlug)
       .subscribe((assignment) => {
         this.assignmentId = assignment.id;
+        assignment.questions.forEach((question)=>{
+          if(question.slug===questionSlug){
+              this.questionId=question.id;
+          }
+        })
+        this.submissionService.getUserResponse(this.assignmentId, this.questionId, this.emailId,this.classroomSlug)
+        .subscribe(
+          res => {
+            //this.question = res;
+          this.submitCodeResponse=new SubmitCodeResponse();
+          this.submitCodeResponse.score=res.score;
+          this.submitCodeResponse.status=res.resultStatus;
+        this.buildService.getBuild(res.buildId).subscribe(
+            build => {
+                this.currentLanguage = build.language;
+                  this.sourceCode = build.sourceCode;
+                  this.submitCompileError = false;
+                  this.showAssessmentResults = true;
+                  if(build.status==='COMPILE_ERROR'){
+                    this.submitCompileError = true;
+                  }else{
+                    this.totalPassed = res.testResults.map(this.statusToInt).reduce((a, b) => a + b);
+                    console.log("Total Passed"+res.testResults);
+                    this.submitCodeResponse.testResults=res.testResults;
+                    this.totalFailed = res.testResults.length - this.totalPassed;        
+                  }
+                  // this.submissionService.submitCode(request,this.classroomSlug)
+                  //   .subscribe((response) => {
+                  //       this.submitCodeResponse = response;
+                  //       console.log(response);
+                  //       if (response.status === 'COMPILE_ERROR') {
+                  //         this.submitCompileError = true;
+                  //       } else {
+                  //         this.totalPassed = response.testResults.map(this.statusToInt).reduce((a, b) => a + b);
+                  //         this.totalFailed = response.testResults.length - this.totalPassed;
+                  //       }
+                  //       this.submitProcess = false;
+                  //       this.showAssessmentResults = true;
+                  //     },
+                  //     (error) => {
+                  //       console.log(error);
+                  //       this.submitProcess = false;
+                  //     });
+
+          }
+        );
+            //console.log(this.question);
+          }
+        );
       });
+
+   
+    
+
+
+
     // this.runRodeResponse = {
     //   input: '2',
     //   output: '4',
@@ -147,6 +220,7 @@ __Sample Output__
     this.submissionService.submitCode(request,this.classroomSlug)
       .subscribe((response) => {
           this.submitCodeResponse = response;
+          this.testResults=response.testResults;
           console.log(response);
           if (response.status === 'COMPILE_ERROR') {
             this.submitCompileError = true;

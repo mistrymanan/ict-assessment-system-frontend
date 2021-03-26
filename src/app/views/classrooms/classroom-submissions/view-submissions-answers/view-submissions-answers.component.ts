@@ -7,7 +7,6 @@ import {AssignmentsService} from '../../../../services/assignments.service';
 import {GlobalConstants} from '../../../../global-constants';
 import {Location} from '@angular/common';
 
-
 @Component({
   selector: 'app-view-submissions-answers',
   templateUrl: './view-submissions-answers.component.html',
@@ -28,8 +27,8 @@ export class ViewSubmissionsAnswersComponent implements OnInit {
     private route: ActivatedRoute,
     private submissionService: SubmissionService,
     private assignmentsService: AssignmentsService,
-    private router: Router,
     public location: Location,
+    private router: Router
   ) {
   }
 
@@ -76,5 +75,6 @@ export class ViewSubmissionsAnswersComponent implements OnInit {
   }
   backButton(){
     this.location.back()
+
 }
 }

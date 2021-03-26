@@ -159,7 +159,7 @@
                                         </th>
                                         <th>Students</th>
                                         <!-- <th>Submissions</th> -->
-                                        <th>
+                                        <th class="text-center" >
                                             <div class="col-6 col-sm-4 col-md-3" *ngIf="isInstructor">
                                                   <button class="btn btn-outline-dark" tooltip="Add Students" (click)="myModal1.show()"><i
                                                     class="fa fa-user-plus" aria-hidden="true"></i></button>
@@ -186,11 +186,18 @@
                                                 View
                                               </button>
                                             </td> -->
-                                            <td></td>
-                                          <!-- <td> <button class=" btn btn-danger btn-sm btn-pill" (click)="unEnrollUser(students.emailId)">
-                                            <i class="fa fa-close"></i>
-                                            Unroll
-                                          </button></td> -->
+                                           
+                                            <!-- <td>
+                                              <button class="btn btn-outline-dark" tooltip="Unenroll Students"><i
+                                                class="fa fa-trash" aria-hidden="true"></i></button>
+                                              
+                                            </td> -->
+                                           <td>
+                                            <div class="col-6" *ngIf="isInstructor">
+                                              <button class=" btn btn-danger btn-sm btn-pill" tooltip="Unenroll Students" (click)="unEnrollUser(students.emailId)">
+                                            <i class="fa fa-close"></i> Unroll
+                                          </button>
+                                        </div></td>
                                           </tr>
                                             <tr *ngIf="classroom.enrolledUsers.length==0">
                                               <td scope="row" colspan="7" class="text-center"> No Students have been enrolled.</td>

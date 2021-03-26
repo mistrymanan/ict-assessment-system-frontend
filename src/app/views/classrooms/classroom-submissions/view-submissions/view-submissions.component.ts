@@ -7,6 +7,7 @@ import {Observable} from 'rxjs';
 import {Location} from '@angular/common';
 import {Assignment} from '../../../../models/assignment';
 import { emailVerified } from '@angular/fire/auth-guard';
+import { GetSubmissionDetailsResponse } from '../../../../models/GetSubmissionDetailsResponse';
 
 @Component({
   selector: 'app-view-submissions',
@@ -14,7 +15,8 @@ import { emailVerified } from '@angular/fire/auth-guard';
   styleUrls: ['./view-submissions.component.css']
 })
 export class ViewSubmissionsComponent implements OnInit {
-  submissions: SubmissionDetailsResponse[];
+  submissionDetails:GetSubmissionDetailsResponse;
+  due: string[];
   totalPoints: number;
   assignment: Assignment;
   assignmentId: string;
@@ -29,7 +31,7 @@ export class ViewSubmissionsComponent implements OnInit {
     public location: Location,
     private router: Router
   ) {
-    this.submissions=new Array();
+    //this.submissionDetails=new GetSubmissionDetailsResponse();
   }
 
   ngOnInit(): void {
@@ -40,6 +42,7 @@ export class ViewSubmissionsComponent implements OnInit {
       
     this.assignmentsService.getAssignmentBySlug(this.assignmentSlug,this.classroomSlug).subscribe(
       assignment => {
+        this.assignment=assignment;
         this.assignmentName = assignment.title;
         this.assignmentId = assignment.id;
         // const question = assignment.questions.find(res => res.slug === this.questionSlug);
@@ -50,7 +53,7 @@ export class ViewSubmissionsComponent implements OnInit {
           .subscribe(submissions => {
             console.log(submissions);
             this.submissions = submissions;
-            
+
           } );
       }
     );
