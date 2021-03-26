@@ -9,6 +9,8 @@ import {RunCodeRequest} from '../../../../models/run-code-request';
 import {RunCodeResponse} from '../../../../models/run-code-response';
 import {SubmitCodeRequest} from '../../../../models/submit-code-request';
 import {SubmitCodeResponse} from '../../../../models/submit-code-response';
+import {Location} from '@angular/common';
+
 
 @Component({
   selector: 'app-view-question',
@@ -45,7 +47,8 @@ export class ViewQuestionComponent implements OnInit, AfterViewInit {
     private assignmentsService: AssignmentsService,
     private submissionService: SubmissionService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    public location: Location
   ) {
     this.hideOutput = true;
     this.hideInput = true;
@@ -172,4 +175,7 @@ __Sample Output__
     return test.status === 'PASSED' ? 1 : 0;
   }
 
+  backButton(){
+    this.location.back()
+}
 }
