@@ -22,6 +22,7 @@ export class ViewSubmissionsAnswersComponent implements OnInit {
   classroomSlug:string;
   statusBadge;
 
+
   constructor(
     private route: ActivatedRoute,
     private submissionService: SubmissionService,
@@ -73,6 +74,7 @@ export class ViewSubmissionsAnswersComponent implements OnInit {
     return str.split('-').join(' ');
   }
   backButton(){
-   this.location.back();
+    this.location.back()
+
 }
 }

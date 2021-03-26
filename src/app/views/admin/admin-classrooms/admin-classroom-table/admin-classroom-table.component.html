@@ -1,1 +1,43 @@
-<p>admin-classroom-table works!</p>
+<div class="col-lg">
+    <div class="card">
+      <div class="card-header">
+        <i class="fa fa-align-justify"></i> Classroom List
+      </div>
+      <div class="card-body">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th scope="col" class="text-center w-auto"><i class="fa fa-hashtag"></i></th> 
+              <th scope="col" class="text-center w-25">Classroom Name</th>
+              <!-- <th scope="col" class="text-center w-5"><i class="icon-people"></i></th> -->
+              <th scope="col" class="text-center w-30">Owner</th>
+              <th scope="col" class="text-center w-10"><i class="fa fa-hashtag"></i> Instructors</th>
+              <th scope="col" class="text-center w-10"><i class="fa fa-hashtag"></i> Students</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let classroom of adminclassroomdetails; let i=index">
+              <th scope="row" class="text-center">
+                  {{i+1}}
+              </th> 
+                <td class="text-center">
+                  <div> <a [routerLink]="['../'+classroomSlug]" [state]="{title: classroom.title}">{{classroom.title}}</a></div>
+                </td>
+              <td class="text-center">
+                <div class="avatar">
+                  <img alt="{{classroom.ownerName}}'s profile pic" class="img-avatar" referrerPolicy="no-referrer" src="{{classroom.ownerPicture!=null ? classroom.ownerPicture : 'assets/img/avatars/generic avtar.png'}}">
+                </div>
+                {{classroom.ownerName}}
+            </td>
+              <td class="text-center">
+                {{classroom.totalInstructors}}
+              </td>
+              <td class="text-center">
+                {{classroom.totalStudents}}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
