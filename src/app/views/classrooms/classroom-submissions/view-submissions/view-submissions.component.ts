@@ -52,8 +52,7 @@ export class ViewSubmissionsComponent implements OnInit {
           .submissionDetails(this.assignmentId,this.classroomSlug)
           .subscribe(submissions => {
             console.log(submissions);
-            this.submissions = submissions;
-
+            this.submissionDetails = submissions;
           } );
       }
     );

@@ -60,7 +60,7 @@ export class ViewQuestionComponent implements OnInit, AfterViewInit {
     private submissionService: SubmissionService,
     private router: Router,
     private route: ActivatedRoute,
-    public location: Location
+    public location: Location,
     private authService:AuthService,
     private buildService:BuildService
   ) {
