@@ -26,6 +26,7 @@ export class CodeEditorComponent implements OnInit, AfterViewInit {
   THEMES;
   LANGUAGES;
   langModes: Map<string, string>;
+  
   // THEMES = [
   //   {name: 'Chrome', value: 'chrome'},
   //   {name: 'Eclipse', value: 'eclipse'},
@@ -100,6 +101,5 @@ export class CodeEditorComponent implements OnInit, AfterViewInit {
     // });
 
   }
-
 
 }
