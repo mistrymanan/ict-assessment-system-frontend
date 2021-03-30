@@ -9,6 +9,8 @@ import {RunCodeRequest} from '../../../../models/run-code-request';
 import {RunCodeResponse} from '../../../../models/run-code-response';
 import {SubmitCodeRequest} from '../../../../models/submit-code-request';
 import {SubmitCodeResponse} from '../../../../models/submit-code-response';
+
+import {Location} from '@angular/common';
 import { AuthService } from '../../../../services/auth.service';
 import { BuildService } from '../../../../services/build.service';
 import { ThemeService } from 'ng2-charts';
@@ -58,6 +60,7 @@ export class ViewQuestionComponent implements OnInit, AfterViewInit {
     private submissionService: SubmissionService,
     private router: Router,
     private route: ActivatedRoute,
+    public location: Location,
     private authService:AuthService,
     private buildService:BuildService
   ) {
@@ -246,4 +249,7 @@ __Sample Output__
     return test.status === 'PASSED' ? 1 : 0;
   }
 
+  backButton(){
+    this.location.back()
+}
 }
