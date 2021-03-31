@@ -17,6 +17,67 @@ h1 span{font-family: 'Libre Baskerville', serif; display:block; font-size:45px; 
 h1 a{color:#131313; font-weight:bold;} */
 
 /*Profile Card 1*/
+.menu-nav {
+  background-color: rgb(252, 252, 253);
+  border: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.menu-item {
+  color: rgb(15, 15, 15);
+  padding: 3px;
+}
+
+.three-dots:after {
+  position: right;
+  cursor: pointer;
+  color: rgb(8, 8, 8);
+   content: '\2807'; 
+  font-size: 30px;
+   padding: 0 300px;
+}
+
+a {
+  text-decoration: none;
+  color: rgb(12, 11, 11);
+}
+
+a div {
+  padding: 2px;
+}
+
+.dropdown {
+  position: absolute;
+  right: 10px;
+  background-color: rgb(252, 252, 253);
+  box-shadow: 0px 0px 3px 3px rgb(252, 252, 253);
+  border: 10px;
+  outline: none;
+  opacity: 0;
+  z-index: -1;
+  max-height: 0;
+  
+}
+
+.dropdown-container:focus {
+  outline: none;
+}
+
+.dropdown-container:focus .dropdown {
+  opacity: 1;
+  z-index: 100;
+  max-height: 100vh;
+  
+}
+
+
+
+
+
+
+
+
 .profile-card-1 {
   font-family: 'Open Sans', Arial, sans-serif;
   position: relative;
