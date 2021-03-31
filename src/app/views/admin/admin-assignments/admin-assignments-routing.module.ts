@@ -4,7 +4,7 @@ import { AdminAssignmentTableComponent } from './admin-assignment-table/admin-as
 
 
 const routes: Routes = [{
-  path: '',
+  path: ':assignmentSlug',
   component: AdminAssignmentTableComponent,
 }];
 

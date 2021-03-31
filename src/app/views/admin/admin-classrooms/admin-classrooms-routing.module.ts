@@ -11,9 +11,13 @@ const routes: Routes = [
      component:AdminClassroomTableComponent
   },
   {
-    path:'classroomslug',
-    component:ClassroomDetailsComponent
+    path: ':classroomSlug/assignments',
+    loadChildren: ()=>import('../admin-assignments/admin-assignments.module').then(m=>m.AdminAssignmentsModule)
   },
+  // {
+  //   path:'classroomslug',
+  //   component:ClassroomDetailsComponent
+  // },
   {
 // <<<<<<< remove-classroom
 //     path:'classroomslug',

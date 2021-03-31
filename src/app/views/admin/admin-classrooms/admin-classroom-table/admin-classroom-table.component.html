@@ -21,7 +21,8 @@
                   {{i+1}}
               </th> 
                 <td class="text-center">
-                  <div> <a [routerLink]="['../'+classroomSlug]" [state]="{title: classroom.title}">{{classroom.title}}</a></div>
+                  <div> <a [routerLink]="['../'+classroom.slug]" [state]="{title: classroom.title}">{{classroom.title}}</a></div>
+                
                 </td>
               <td class="text-center">
                 <div class="avatar">

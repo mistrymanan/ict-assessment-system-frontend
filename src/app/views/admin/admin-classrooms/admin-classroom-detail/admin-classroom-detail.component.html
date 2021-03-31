@@ -34,7 +34,7 @@
                             {{i+1}}
                         </th>
                         <td>
-                            <div> <a [routerLink]="['../'+classroomSlug+'/assignments/'+assignment.slug]" [state]="{title: assignment.title}">{{assignment.title}}</a></div>
+                            <div> <a [routerLink]="['./'+'/assignments/'+assignment.slug]" [state]="{title: assignment.title}">{{assignment.title}}</a></div>
                         </td>
                         <td class="text-center"><span
                             class="badge badge-{{assignment.status == 'ACTIVE'?'success':'danger'}}">{{assignment.status}}</span>

@@ -24,7 +24,7 @@ export class AdminAssignmentTableComponent implements OnInit {
 
   ngOnInit(): void {
     this.classroomSlug=this.route.snapshot.params.classroomSlug;
-    const slug = this.route.snapshot.params.slug;
+    const slug = this.route.snapshot.params.assignmentSlug;
     console.log(slug);
     this.adminassignmentService.getAssignmentBySlug(slug,this.classroomSlug).subscribe(
       (assignment) => {

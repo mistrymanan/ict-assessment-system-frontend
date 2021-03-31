@@ -1,6 +1,6 @@
 export class AdminClassroomDetails{
     id:String;
-    classroomSlug:String;
+    slug:String;
     classroomTitle:String;
     ownerEmail:String;
     ownerName:String;
