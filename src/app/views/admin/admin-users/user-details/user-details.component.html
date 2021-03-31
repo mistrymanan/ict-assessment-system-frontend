@@ -66,10 +66,11 @@
       <span class="slider round"></span>
     </label>
     </div>  -->
-<div>
-    <div for="type">Access:</div>
+<div class="text-left">
+    
     <div class="form-check form-check-inline mr-3">
-      <label class="switch switch-3d switch-primary mb-0">
+      <div for="type">Access:</div> &nbsp;&nbsp;
+      <label class="switch switch-3d switch-primary">
         <input type="checkbox" class="switch-input form-check-input" id="type"
                [checked]="user.isAdmin" (change)="toggleAdminAccess(user)">
         <span class="switch-slider"></span>
@@ -77,12 +78,12 @@
     </div>
     </div>
 
-    <div>
-      <div for="type">ClassroomCreations:</div>
+    <div class="text-left">
       <div class="form-check form-check-inline mr-3">
-        <label class="switch switch-3d switch-primary mb-0">
+        <div for="type">ClassroomCreations:</div> &nbsp;&nbsp;
+        <label class="switch switch-3d switch-primary">
           <input type="checkbox" class="switch-input form-check-input" id="type"
-                 [checked]="user.allowedClassromCreation" (change)="toggleClassroomCreation(user)">
+                 [checked]="user.allowedClassroomCreation" (change)="toggleClassroomCreation(user)">
           <span class="switch-slider"></span>
         </label>
       </div>

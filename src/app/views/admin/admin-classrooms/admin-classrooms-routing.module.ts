@@ -11,12 +11,14 @@ const routes: Routes = [
      component:AdminClassroomTableComponent
   },
   {
-
     path:'classroomslug',
     component:ClassroomDetailsComponent
   },
   {
-
+// <<<<<<< remove-classroom
+//     path:'classroomslug',
+//     component:ClassroomDetailsComponent
+// =======
     path:'',
     component:AdminClassroomTableComponent
   },
