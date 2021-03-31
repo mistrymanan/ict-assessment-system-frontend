@@ -48,7 +48,7 @@ export class ClassroomsService {
   
   unrollUser(ClassroomSlug:String, email:String){
     return this.http.delete(
-      `http://${config.host}/${config.endpoints.classroom}/${ClassroomSlug}/enroll?ClassroomSlug=${ClassroomSlug}&email=${email}`,
+      `http://${config.host}/${config.endpoints.classroom}/${ClassroomSlug}/enroll/${email}/`,
     );
   }
   

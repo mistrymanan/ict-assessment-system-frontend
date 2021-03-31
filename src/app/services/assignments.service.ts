@@ -13,6 +13,7 @@ import {Question} from '../models/question';
   providedIn: 'root'
 })
 export class AssignmentsService {
+  getadminAssignment: any;
 
   // private _assignments = new BehaviorSubject<Assignment[]>([]);
   // private assignments: Assignment[] = [];

@@ -1,56 +1,109 @@
-    <div class="card">
-        <div class="card-header">
-                 <div>Assignment details</div>
-          </div>
-    <div class="card-body">
-        <div class="animated fadeIn">
-    <table class="table table-bordered table-striped">
-      <thead>
-      <tr>
-        <th class=" text-center w-auto "><i class="fa fa-hashtag"></i></th>
-        <th class=" text-center w-25 ">Students</th>
-        <th class="text-center w-auto ">Status</th>
-        <th class=" text-center w-auto ">Marks Assigned</th>
-        <th class=" text-center w-auto ">View Submitted Code</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr >
-        <th scope="row" class="text-center">
-           
-        </th>
-        <td>
-         
-        </td>
-        <td class="text-center">
-            <div class="m-1" fxFlex>
-                <!-- <span
-                  class="badge badge-{{statusBadge[assignment.currentStatus]}}">{{removeUnderScore(assignment.currentStatus) | titlecase}}</span> -->
-              </div>
-        </td>
-        <td class="text-center">
-         
-         
-        </td>
-        <td class="text-center">
-            <button class=" btn btn-primary btn-sm btn-pill">
-                <i class="fa fa-file-code-o" aria-hidden="true"></i>
-                Click here!
-              </button>
-        </td>
+<div class="animated fadeIn">
+  <div class="card">
+    <div class="card-header">Assignment Details
+      <div class="card-header-actions mr-md-5" fxLayoutGap="20px" fxLayoutAlign="center center">
         
+        <!-- <span class="badge badge-success">{{assignment.status}}</span> -->
+        <button class=" btn btn-primary btn-sm btn-pill">
+          <i class="fa fa-book mr-1"></i>
+          View Submissions &nbsp;
+        </button>
        
-      </tr>
-      <tr>
-        <td scope="row" colspan="7" class="text-center">
-            
-        </td>
-      </tr>
-      </tbody>
-    </table>
+       
+      </div>
     </div>
-    </div>
-    </div>
+    <div class="card-body pl-5 pr-5">
+      <table class="table table-sm table-bordered ">
+        <tbody id="details">
+        <tr>
+          <th>Assignment Title :</th>
+          <td>{{adminassignment.title}}</td>
+        </tr>
+        <tr>
+          <th>Status :</th>
+          <td><span
+            class="badge badge-{{adminassignment.status == 'ACTIVE'?'success':'danger'}}">{{adminassignment.status}}</span></td>
+        </tr>
+        <tr>
+          <th>Assignment Type :</th>
+          <td><span *ngIf="adminassignment.timed; else anytime" class="badge badge-primary">
+                            <i class="fa fa-clock-o"></i>
+                            TIMED
+                          </span>
+            <ng-template #anytime>
+                            <span class="badge badge-primary">
+                            ANYTIME
+                          </span>
+            </ng-template>
+          </td>
+        </tr>
+        <tr>
+          <th>Duration :</th>
+          <td>{{adminassignment.duration ? adminassignment.duration + ' mins.' : 'No Time Limit'}} </td>
+        </tr>
+        <tr>
+          <th>Start Time :</th>
+          <td><span *ngIf="adminassignment.hasStartTime; else noStartTime">{{adminassignment.startTime|date:'short'}}</span>
+            <ng-template #noStartTime>
+              <span>No Start time</span>
+            </ng-template>
+          </td>
+        </tr>
+        <tr>
+          <th>Deadline :</th>
+          <td><span *ngIf="adminassignment.hasDeadline; else noDeadline">{{adminassignment.deadline|date:'short'}}</span>
+            <ng-template #noDeadline>
+              <span>No Deadline</span>
+            </ng-template>
+          </td>
+        </tr>
 
-    
+        </tbody>
+      </table>
+    </div>
+  </div>
 
+  <div class="card">
+    <div class="card-header">Questions</div>
+
+    <div class="card-body">
+      <table class="table table-bordered table-striped">
+        <thead>
+        <tr>
+          <th scope="col" class="w-auto"><i class="fa fa-hashtag"></i></th>
+          <th scope="col" class="w-50">Question</th>
+          <th scope="col" class="w-auto">Allowed Languages</th>
+          <th scope="col" class="w-auto"> Points</th>
+         
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let question of adminassignment.questions; let i = index;" >
+          <th scope="row">{{i + 1}}</th>
+          <td>{{question.title}}</td>
+          <td fxLayoutGap="10px">
+            <span *ngFor="let lang of question.allowedLanguages" class="badge badge-primary">{{lang}}</span>
+          </td>
+          <td>
+            {{question.totalPoints}}
+          </td>
+          <td fxLayoutAlign="space-around center">
+           
+
+          </td>
+        </tr>
+        <tr>
+          <td scope="row" colspan="5" class="text-center"> No Questions</td>
+        </tr>
+        <!-- <tr>
+          <th scope="row">2</th>
+          <td>Write to program for Bubble Sort</td>
+          <td><span class="badge badge-secondary">Not Completed</span></td>
+          <td>0/50</td>
+        </tr> -->
+        </tbody>
+      </table>
+    </div>
+   
+  </div>
+</div>

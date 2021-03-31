@@ -1,0 +1,268 @@
+<div class="col-md-12 mb-4">
+    <tabset>
+        <tab *ngIf="isInstructor" >
+            <ng-template tabHeading><i class="fa fa-tasks"></i> View Assignment</ng-template>
+            <div class="animated fadeIn">
+            <div class="row">
+                <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                    <!--          <div class="d-flex flex-row">-->
+                    <div>All Assignments</div>
+                    <!--            <div class="ml-auto p-3">-->
+                    <!--              <button aria-pressed="true" class="btn btn-block btn-success " type="button"><i class="fa fa-plus"></i>-->
+                    <!--                Create-->
+                    <!--              </button>-->
+                    <!--            </div>-->
+                    </div>
+                    <div class="card-body">
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                        <tr>
+                        <th class=" text-center w-auto "><i class="fa fa-hashtag"></i></th>
+                        <th class=" text-center w-25 ">Title</th>
+                        <th class="text-center w-auto ">Status</th>
+                        <th class=" text-center w-auto ">Type</th>
+                        <th class=" text-center w-auto ">Duration</th>
+                        <th class=" text-center w-auto ">Start Time</th>
+                        <th class="text-center w-auto ">Deadline</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr *ngFor="let assignment of assignments; let i=index">
+                        <th scope="row" class="text-center">
+                            {{i+1}}
+                        </th>
+                        <td>
+                            <div> <a [routerLink]="['../'+classroomSlug+'/assignments/'+assignment.slug]" [state]="{title: assignment.title}">{{assignment.title}}</a></div>
+                        </td>
+                        <td class="text-center"><span
+                            class="badge badge-{{assignment.status == 'ACTIVE'?'success':'danger'}}">{{assignment.status}}</span>
+                        </td>
+                        <td class="text-center">
+                            <span *ngIf="assignment.timed; else anytime" class="badge badge-primary">
+                            <i class="fa fa-clock-o"></i>
+                            TIMED
+                            </span>
+                            <ng-template #anytime>
+                            <span class="badge badge-primary">
+                            ANYTIME
+                            </span>
+                            </ng-template>
+                        </td>
+                        <td class="text-center">
+                            {{assignment.duration?assignment.duration + ' mins.': 'No Time Limit'}}
+                        </td>
+                        <td class="text-center">
+                            <span *ngIf="assignment.hasStartTime; else noStartTime">{{assignment.startTime|date:'short'}}</span>
+                            <ng-template #noStartTime>
+                            <span>No Start time</span>
+                            </ng-template>
+                        </td>
+                        <td class="text-center">
+                            <!--                                                           <i class="fa fa-cc-amex" style="font-size:24px"></i>-->
+                            <span *ngIf="assignment.hasDeadline; else noDeadline">{{assignment.deadline|date:'short'}}</span>
+                            <ng-template #noDeadline>
+                            <span>No Deadline</span>
+                            </ng-template>
+            
+                        </td>
+                        </tr>
+                        <tr *ngIf="assignments.length==0">
+                        <td scope="row" colspan="7" class="text-center"> No Assignments</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    </div>
+                </div>
+                </div><!--/.col-->
+            </div><!--/.row-->
+            </div>
+            
+        </tab>
+        <tab>
+            <ng-template tabHeading><i class="icon-people"></i> People</ng-template>
+            <div class="animated fadeIn">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card" >
+                            <div class="card-header">
+                                <i class="fa fa-align-justify"></i> Co-Instructors
+                            </div>
+                            
+                            <div class="card-body">
+                                <div >
+                                <table class="table table-responsive-sm table-hover table-outline mb-0" >
+                                    <thead class="thead-light">
+                                        <tr>
+                                            <th class="text-center">
+                                                <i class="icon-people"></i>
+                                            </th>
+                                            <th>Teachers</th>
+                                            
+                                            <!-- <th>
+                                                <div class="col-6 col-sm-4 col-md-3"  *ngIf="isInstructor">
+                                                    <button class="btn btn-outline-dark" tooltip="Add Instructors" (click)="myModal.show()"><i
+                                                        class="fa fa-user-plus" aria-hidden="true"  ></i></button>
+            
+                                                    </div>
+                                            </th> -->
+                                        </tr>
+                                    </thead>
+                                    
+                                    <tbody>
+                                        <tr *ngFor="let instructor of classroom.instructors">
+                                            <td class="text-center">
+                                                <div class="avatar">
+                                                    <img alt="{{instructor.name}}'s profile pic" class="img-avatar" referrerPolicy="no-referrer" src="{{instructor.picture!=null ? instructor.picture : 'assets/img/avatars/generic avtar.png'}}">
+                                                </div>
+                                            </td>
+                                            <td >
+                                                <div>{{instructor.name != null ? instructor.name : instructor.emailId}}</div>
+                                                <!-- <div *ngIf="instructor.name==null" class="small text-muted"><span>User has never Logged into the system.</span></div> -->
+                                                </td>   
+                                                <td></td></tr>
+                                    </tbody></table>
+                                    </div>
+                                    </div>
+                            </div>
+                            </div>
+                </div>
+            <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <i class="fa fa-align-justify"></i> Students
+                            </div>
+                            <div class="card-body">
+                                <div>
+                                <table class="table table-responsive-sm table-hover table-outline mb-0">
+                                    <thead class="thead-light">
+                                        <tr>
+                                            <th class="text-center">
+                                                <i class="icon-people"></i>
+                                            </th>
+                                            <th>Students</th>
+                                            <!-- <th>Submissions</th> -->
+                                            <!-- <th class="text-center" >
+                                                <div class="col-6 col-sm-4 col-md-3" *ngIf="isInstructor">
+                                                    <button class="btn btn-outline-dark" tooltip="Add Students" (click)="myModal1.show()"><i
+                                                        class="fa fa-user-plus" aria-hidden="true"></i></button>
+            
+                                                    </div>
+                                            </th> -->
+                                        </tr>
+                                    </thead>
+                                    
+                                    <tbody>
+                                        <tr *ngFor="let students of classroom.enrolledUsers">
+                                            <td class="text-center">
+                                                <div class="avatar">
+                                                    <img alt="{{students.emailId}}'s profile pic" class="img-avatar" referrerPolicy="no-referrer" src="{{students.picture!=null ? students.picture : 'assets/img/avatars/generic avtar.png'}}">
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div>{{students.name != null ? students.name : students.emailId}}</div>
+                                                <!-- <div *ngIf="students.name==null" class="small text-muted"><span>User has never Logged into the system.</span></div> -->
+                                            </td>    
+                                                <!-- <td>
+                                                <button class=" btn btn-primary btn-sm btn-pill">
+                                                    <i class="fa fa-book"></i>
+                                                    View
+                                                </button>
+                                                </td> -->
+                                            
+                                                <!-- <td>
+                                                <button class="btn btn-outline-dark" tooltip="Unenroll Students"><i
+                                                    class="fa fa-trash" aria-hidden="true"></i></button>
+                                                
+                                                </td> -->
+                                            <!-- <td>
+                                                <div class="col-6" *ngIf="isInstructor">
+                                                <button class=" btn btn-danger btn-sm btn-pill" tooltip="Unenroll Students" (click)="unEnrollUser(students.emailId)">
+                                                <i class="fa fa-close"></i> Unroll
+                                            </button>
+                                            </div></td> -->
+                                            </tr>
+                                                <tr *ngIf="classroom.enrolledUsers.length==0">
+                                                <td scope="row" colspan="7" class="text-center"> No Students.</td>
+                                                </tr>
+                                    </tbody>
+                                </table>
+                                    </div>
+                            </div>
+                            
+                            </div>
+                    </div>
+                </div> 
+            
+            </div>
+<!--             
+            <div bsModal #myModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h4 class="modal-title">Invite Instructors</h4>
+                    <button type="button" class="close" (click)="myModal.hide()" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    </div>
+                    <div class="modal-body">
+                    <form [formGroup]="addInstructorForm" (ngSubmit)="onAddInstructor()">
+                        <div class="form-group row"><label class="col-md-3 col-form-label" for="hf-email">Email</label>
+                        <div class="col-md-9">
+                        <input type="text" id="email" name="email" class="form-control" placeholder="Invite Instructors"  formControlName="email" [class.is-valid]= "addInstructorForm.controls['email'].valid && addInstructorForm.controls['email'].dirty" [class.is-invalid]= "addInstructorForm.controls['email'].invalid && addInstructorForm.controls['email'].dirty">
+                        <div *ngIf="addInstructorForm.controls['email'].invalid && (addInstructorForm.controls['email'].dirty || addInstructorForm.controls['email'].touched)" class="text-danger">
+                        <div *ngIf="addInstructorForm.controls['email'].errors.pattern">
+                            Please provide a valid email address, You can add more co-instructors by giving the comma separated emails.
+                        </div>
+                        </div> 
+                        <span class="help-block">Please enter your email</span>   
+                    </div>
+                        </div>
+                        
+                    </form>
+                    </div>
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" (click)="myModal.hide()">Cancle</button>
+                    <button type="button" class="btn btn-primary" (click)="onAddInstructor()" >Send</button>
+                    </div>
+                </div>
+                 </div> -->
+            <!-- </div>
+
+            <div bsModal #myModal1="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h4 class="modal-title">Invite Students</h4>
+                    <button type="button" class="close" (click)="myModal1.hide()" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    </div>
+                    <div class="modal-body">
+                    <form [formGroup]="userEnrollForm" (ngSubmit)="onEnrollUser()">
+                        <div class="form-group row"><label class="col-md-3 col-form-label" for="hf-email">Email</label>
+                        <div class="col-md-9">
+                        <input type="text" id="email" name="email" class="form-control" placeholder="Invite Students"  formControlName="email" [class.is-valid]= "userEnrollForm.controls['email'].valid && userEnrollForm.controls['email'].dirty" [class.is-invalid]= "userEnrollForm.controls['email'].invalid && userEnrollForm.controls['email'].dirty">
+                        <div *ngIf="userEnrollForm.controls['email'].invalid && (userEnrollForm.controls['email'].dirty || userEnrollForm.controls['email'].touched)" class="text-danger">
+                        <div *ngIf="userEnrollForm.controls['email'].errors.pattern">
+                            Please provide a valid email address, You can add more students by giving the comma separated emails.
+                        </div>
+                        </div> 
+                        <span class="help-block">Please enter your email</span>   
+                    </div>
+                        </div>
+                        
+                    </form>
+                    </div>
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" (click)="myModal1.hide()">Cancle</button>
+                    <button type="button" class="btn btn-primary" (click)="onEnrollUser()" >Send</button>
+                    </div>
+                </div>
+                </div>
+            </div>   -->
+        </tab>
+    </tabset>
+</div><!--/.col-->

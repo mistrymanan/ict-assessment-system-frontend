@@ -1,6 +1,7 @@
-import {Question} from './question';
-export class Assignment {
-  id: string;
+import { Question } from "./question";
+
+export class AdminAssignment{
+    id: string;
   title: string;
   slug: string;
   status: string;
@@ -9,7 +10,6 @@ export class Assignment {
   hasDeadline: boolean;
   startTime: string;
   deadline: string;
-  totalPoints:number;
   timed: boolean;
   questions: Question[];
 }

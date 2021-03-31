@@ -255,7 +255,7 @@
         </button>
   
   <!--      <button *ngIf="isUpdateMode" class="btn btn-secondary btn-pill pull-left" type="button" (click)="location.back()"><i class="fa fa-close"></i> Cancel</button>-->
-        <button type="submit" class="btn btn-primary btn-pill pull-right" [disabled]="!questionForm.valid"><i class="fa fa-{{isUpdateMode ? 'pencil':'plus'}}"></i> {{isUpdateMode ? 'Edit':'Add'}} Question
+        <button type="submit" class="btn btn-primary btn-pill pull-right" [disabled]="!questionForm.valid"><i class="fa fa-{{isUpdateMode ? 'edit':'plus'}}"></i> {{isUpdateMode ? 'Edit':'Add'}} Question
         </button>
       </div>
   <!--    {{questionForm.value | json}}-->
