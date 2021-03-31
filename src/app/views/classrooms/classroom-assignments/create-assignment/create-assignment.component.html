@@ -82,13 +82,25 @@
                 </div>          
               </div>  
             </div>
+            <div class="form-group row">
+              <label class="col-md-2 col-form-label">Late Submission</label>
+              <div class="col-md-2 col-form-label">
+                <div class="form-check form-check-inline mr-1">
+                  <label class="switch switch-text switch-pill switch-success">
+                    <input type="checkbox" class="switch-input" checked>
+                    <span class="switch-label" data-on="On" data-off="Off"></span>
+                    <span class="switch-handle"></span>
+                  </label>
+                </div> 
+              </div>  
+            </div>
           </div>
         </div>
   
         <div class="card-footer">
           <button type="button" *ngIf="!isUpdateMode" class="btn btn-primary btn-pill pull-left" (click)="backButton()"><i class="fa fa-back"></i> Back </button>
           <button *ngIf="isUpdateMode" class="btn btn-secondary btn-pill pull-left" type="button" (click)="location.back()"><i class="fa fa-close"></i> Cancel</button>
-          <button type="submit" class="btn btn-primary btn-pill pull-right" [disabled]="!assignmentForm.valid"><i class="fa fa-{{isUpdateMode ? 'pencil':'plus'}}"></i> {{isUpdateMode ? 'Edit':'Create'}} Assignment
+          <button type="submit" class="btn btn-primary btn-pill pull-right" [disabled]="!assignmentForm.valid"><i class="fa fa-{{isUpdateMode ? 'edit':'plus'}}"></i> {{isUpdateMode ? 'Edit':'Create'}} Assignment
           </button>
         </div>
       </div>

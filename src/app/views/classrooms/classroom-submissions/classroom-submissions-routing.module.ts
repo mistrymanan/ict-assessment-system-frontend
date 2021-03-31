@@ -24,7 +24,7 @@ const routes: Routes = [
     path: ':assignmentSlug/answers/user',
     component: ViewAnswerComponent,
     data: {
-      title: 'View Submission Answer'
+      title: 'View Answer'
     }
   }
 ];

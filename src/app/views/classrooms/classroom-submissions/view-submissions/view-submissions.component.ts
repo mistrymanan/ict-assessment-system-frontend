@@ -6,6 +6,8 @@ import {SubmissionDetailsResponse} from '../../../../models/submissionDetails-re
 import {Observable} from 'rxjs';
 import {Location} from '@angular/common';
 import {Assignment} from '../../../../models/assignment';
+import { emailVerified } from '@angular/fire/auth-guard';
+import { GetSubmissionDetailsResponse } from '../../../../models/GetSubmissionDetailsResponse';
 
 @Component({
   selector: 'app-view-submissions',
@@ -13,13 +15,15 @@ import {Assignment} from '../../../../models/assignment';
   styleUrls: ['./view-submissions.component.css']
 })
 export class ViewSubmissionsComponent implements OnInit {
-  submissions: SubmissionDetailsResponse[];
+  submissionDetails:GetSubmissionDetailsResponse;
+  due: string[];
   totalPoints: number;
   assignment: Assignment;
   assignmentId: string;
   assignmentName: string;
   assignmentSlug;
   classroomSlug:string;
+  submissionRecorded:Set<string>;
   constructor(
     private route: ActivatedRoute,
     private submissionService: SubmissionService,
@@ -27,7 +31,7 @@ export class ViewSubmissionsComponent implements OnInit {
     public location: Location,
     private router: Router
   ) {
-    this.submissions=new Array();
+    //this.submissionDetails=new GetSubmissionDetailsResponse();
   }
 
   ngOnInit(): void {
@@ -35,9 +39,10 @@ export class ViewSubmissionsComponent implements OnInit {
     this.assignmentSlug = this.route.snapshot.paramMap.get('assignmentSlug');
     // this.questionSlug = this.route.snapshot.paramMap.get('questionSlug');
 
-
+      
     this.assignmentsService.getAssignmentBySlug(this.assignmentSlug,this.classroomSlug).subscribe(
       assignment => {
+        this.assignment=assignment;
         this.assignmentName = assignment.title;
         this.assignmentId = assignment.id;
         // const question = assignment.questions.find(res => res.slug === this.questionSlug);
@@ -47,11 +52,10 @@ export class ViewSubmissionsComponent implements OnInit {
           .submissionDetails(this.assignmentId,this.classroomSlug)
           .subscribe(submissions => {
             console.log(submissions);
-            this.submissions = submissions;
+            this.submissionDetails = submissions;
           } );
       }
     );
-
 
 
     // this.assignmentsService.getQuestion(this.assignmentSlug, this.questionSlug).subscribe(
@@ -70,6 +74,7 @@ export class ViewSubmissionsComponent implements OnInit {
   openAnswers(email: string) {
     this.router.navigate(['classrooms',this.classroomSlug,'submissions', this.assignmentSlug, 'answers'], {queryParams : {'email': email}});
   }
+
   backButton(){
     this.location.back()
 }

@@ -8,6 +8,7 @@ import { ClassroomsService } from '../../services/classrooms.service';
 import { ClassroomUserResponse } from '../../models/ClassroomUserResponse';
 import { NavChild } from '../../models/nav-child';
 import { ClassroomDetails } from '../../models/classroom-details';
+import { idTokenResult } from '@angular/fire/auth-guard';
 
 @Component({
   selector: 'app-dashboard',
@@ -43,8 +44,15 @@ export class DefaultLayoutComponent {
     authService.user$.subscribe((user: User) => {
       this.user = user;
       console.log("User:"+this.user.email);
+      user.getIdTokenResult().then((idTokenResult)=>{
+        if(idTokenResult.claims.isAdmin){
+          this.addAdminPanelTag();
+        }
+        if(idTokenResult.claims.hasCreateClassroomRights){
+          this.addClassroomCreationTag();
+        }
+      })
     });
-    
     //this.getUserNavData();
     this.getUserNavData();
     
@@ -59,6 +67,22 @@ export class DefaultLayoutComponent {
 
   toggleMinimize(e) {
     this.sidebarMinimized = e;
+  }
+  addClassroomCreationTag(){
+    const classroomTag={
+        name: 'Add Classroom',
+        url: '/classrooms/add',
+        icon: 'fa fa-plus mr-1',
+    }
+    this.navItems.push(classroomTag);
+  }
+  addAdminPanelTag(){
+    const adminTag={
+      name: 'Admin Panel',
+      url: '/admin/classrooms',
+      icon: 'fas fa-toolbox mr-1',
+  }
+  this.navItems.push(adminTag);
   }
   getUserNavData(){
 //     this.navItems.forEach((navItem)=>{
