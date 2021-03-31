@@ -7,6 +7,10 @@ import { AdminClassroomTableComponent } from './admin-classroom-table/admin-clas
 
 import { AdminClassroomDetailComponent } from './admin-classroom-detail/admin-classroom-detail.component';
 
+import { AdminClassroomDetailComponent } from './admin-classroom-detail/admin-classroom-detail.component';
+
+
+
 @NgModule({
   declarations: [AdminClassroomTableComponent, AdminClassroomDetailComponent],
   imports: [
