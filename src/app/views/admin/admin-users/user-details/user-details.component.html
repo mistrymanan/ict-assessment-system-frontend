@@ -5,8 +5,8 @@
       </div>
 <div class="card-body">
     <div class="animated fadeIn">
-<table class="table table-bordered table-striped">
-  <thead>
+<table id="example" class="table table-bordered table-striped">
+        <thead>
   <tr>
     <th class=" text-center w-auto "><i class="fa fa-hashtag"></i></th>
     <th class=" text-center w-25 ">
@@ -19,7 +19,7 @@
   </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let user of adminuser; let i=index">
+    <tr *ngFor="let user of pagedItems; let i=index">
       <th scope="row" class="text-center">
           {{i+1}}
       </th>
@@ -99,8 +99,26 @@
   </tr>
   </tbody>
 </table>
-</div>
-</div>
-</div>
-</div>
+  <!-- <div *ngFor="let item of pagedItems">{{item.name}}</div> -->
 
+<ul *ngIf="pager.pages && pager.pages.length" class="pagination">
+  <li [ngClass]="{disabled:pager.currentPage === 1}" class="page-item">
+      <a (click)="setPage(1)" class="page-link">First</a>
+  </li>
+  <li [ngClass]="{disabled:pager.currentPage === 1}" class="page-item">
+      <a (click)="setPage(pager.currentPage - 1)" class="page-link">Previous</a>
+  </li>
+  <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}" class="page-item">
+      <a (click)="setPage(page)" class="page-link">{{page}}</a>
+  </li>
+  <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}" class="page-item">
+      <a (click)="setPage(pager.currentPage + 1)" class="page-link">Next</a>
+  </li>
+  <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}" class="page-item">
+      <a (click)="setPage(pager.totalPages)" class="page-link">Last</a>
+  </li>
+</ul>
+</div>
+</div>
+</div>
+</div>

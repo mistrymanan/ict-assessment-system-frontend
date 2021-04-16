@@ -88,12 +88,8 @@
           <td>
             {{question.totalPoints}}
           </td>
-          <td fxLayoutAlign="space-around center">
-           
-
-          </td>
         </tr>
-        <tr>
+        <tr *ngIf="!adminassignment.questions">
           <td scope="row" colspan="5" class="text-center"> No Questions</td>
         </tr>
         <!-- <tr>
