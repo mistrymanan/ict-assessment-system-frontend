@@ -24,6 +24,7 @@ export class ViewSubmissionsComponent implements OnInit {
   assignmentSlug;
   classroomSlug:string;
   submissionRecorded:Set<string>;
+   dtOptions: any = {};
   constructor(
     private route: ActivatedRoute,
     private submissionService: SubmissionService,
@@ -35,6 +36,15 @@ export class ViewSubmissionsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+   
+    this.dtOptions={
+      pagingType: 'full_numbers',
+      pageLength: 10,
+    lengthMenu : [5, 10, 25],
+      processing: true,
+      dom: 'lBfrtip',
+      buttons: ['copy', 'csv', 'excel', 'print']
+    };
     this.classroomSlug=this.route.snapshot.params.classroomSlug;
     this.assignmentSlug = this.route.snapshot.paramMap.get('assignmentSlug');
     // this.questionSlug = this.route.snapshot.paramMap.get('questionSlug');

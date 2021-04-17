@@ -6,18 +6,29 @@ import { AdminclassroomdetailsService } from '../../../../services/adminclassroo
 @Component({
   selector: 'app-admin-classroom-table',
   templateUrl: './admin-classroom-table.component.html',
-  styleUrls: ['./admin-classroom-table.component.css']
+  styleUrls: ['./admin-classroom-table.component.css', "../../../../../../node_modules/bootstrap/dist/css/bootstrap.min.css",]
 })
 export class AdminClassroomTableComponent implements OnInit {
   
-  adminclassroomdetails:AdminClassroomDetails[]
+  adminclassroomdetails:AdminClassroomDetails[];
+  dtOptions: any = {};
   constructor(
     private adminclassroomdetailsservice: AdminclassroomdetailsService,
     private route: ActivatedRoute,
   ) { }
 
   ngOnInit(): void {
+    this.dtOptions={
+      pagingType: 'full_numbers',
+      pageLength: 5,
+    lengthMenu : [5, 10, 25],
+      processing: true,
+      dom: 'lBfrtip',
+      buttons: ['copy', 'csv', 'excel', 'print']
+    };
+
   this.getAdminClassroomDetails();
+
   }
 
   getAdminClassroomDetails(){

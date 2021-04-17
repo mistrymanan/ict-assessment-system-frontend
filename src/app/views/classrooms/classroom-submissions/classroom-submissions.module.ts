@@ -12,13 +12,14 @@ import { MarkdownModule } from 'ngx-markdown';
 import { FormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
-
+import { DataTablesModule } from 'angular-datatables';
 
 
 @NgModule({
   declarations: [ViewSubmissionsAnswersComponent, ViewSubmissionsComponent, ViewAnswerComponent],
   imports: [
     CommonModule,
+    DataTablesModule,
     ClassroomSubmissionsRoutingModule,
     CodeEditorModule,
     CollapseModule,
