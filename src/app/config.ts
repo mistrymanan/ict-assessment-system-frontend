@@ -1,5 +1,5 @@
 export const config = {
-  host: 'ict.assessment-system.tech/api',
+  host: 'aas.ict.gnu.ac.in/api',
   apiVersion: {
     assignmentsServiceVersion:'v2',
     submissionServiceVersion:'v2'
@@ -27,6 +27,7 @@ export const config = {
     submission: '',
     builds: 'executions/builds',
     users: 'users',
-    classroom: 'classrooms'
+    classroom: 'classrooms',
+    plagiarisms:'plagiarisms'
   }
 };
