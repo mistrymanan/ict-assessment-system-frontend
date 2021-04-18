@@ -47,7 +47,7 @@ export class AssignmentDetailsComponent implements OnInit {
     this.dataService.data = this.assignment;
     this.router.navigate(['edit'], {relativeTo: this.route});
   }
-
+  
   deleteAssignment(): void {
     this.assignmentService.deleteAssignment(this.assignment.id,this.classroomSlug).subscribe(
       () => {
@@ -75,6 +75,13 @@ export class AssignmentDetailsComponent implements OnInit {
     const questionSlug = this.assignment.questions[index].slug;
     this.router.navigate([questionSlug, 'edit'], {relativeTo: this.route});
   }
+  plagiarismReport(index: number){
+    const assignmentId=this.assignment.id;
+    const questionId=this.assignment.questions[index].id;
+    this.router.navigate(["classrooms",this.classroomSlug,"submissions","plagiarisms",assignmentId,questionId]);
+  }
+
+
   backButton(){
     this.location.back()
 }

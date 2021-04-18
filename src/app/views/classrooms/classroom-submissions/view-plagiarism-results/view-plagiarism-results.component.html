@@ -1,0 +1,48 @@
+<div class="animated fadeIn">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    Plagiarism Report
+                </div>
+                <div class="card-body">
+                    <table *ngIf="plagiarism.results" class="table table-bordered table-striped" datatable [dtOptions]="dtOptions"  >
+                        <thead>
+                        <tr>
+            
+                            <th scope="col" class=" text-center w-25  "><i class="fa fa-hashtag"></i></th>
+                            <th scope="col" class="text-center w-auto" >Language</th>
+                            <th scope="col" class="text-center w-auto" >Result Link</th>
+                            <th scope="col" class="text-center w-auto ">View Graph</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr *ngFor="let result of plagiarism.results; let i=index">
+                            <th scope="row" class="text-center">
+                                <div class="small text-value">
+<!--                                                           <span class="number">1</span>-->
+                                    {{i+1}}
+                                </div>
+                            </th>
+                            <td class="text-center" >
+                                {{result.language}}
+                            </td>
+                          <td  class="text-center" >
+                          <a href="{{result.link}}"  target="_blank" >Moss Result</a>
+                            </td>
+                          
+                            <td class="text-center" >
+                                <button aria-pressed="true" class="btn btn-pill btn-sm btn-primary" type="button" (click)="openPlagiarismReport(plagiarism.id)" ><i class="fa fa-eye"></i> View</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                    </table>
+                </div>
+                <div class="card-footer">
+                  <button type="button" class="btn btn-primary btn-pill pull-left" (click)="backButton()"><i class="fa fa-back"></i> Back </button>
+                </div>        
+            </div>
+        </div><!--/.col-->
+    </div><!--/.row-->
+</div>
+

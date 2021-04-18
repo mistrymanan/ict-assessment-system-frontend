@@ -1,0 +1,76 @@
+<div class="animated fadeIn">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">Plagiarism Reports
+                    <div class="card-header-actions mr-md-5" fxLayoutGap="20px" fxLayoutAlign="center center">
+                      <!-- <span class="badge badge-success">{{assignment.status}}</span> -->
+                    
+                      <button class=" btn btn-warning btn-sm btn-pill" (click)="generateNewReport()">
+                        &nbsp;
+                        <i class="fa fa-edit"></i>
+                        Generate New Report &nbsp;
+                      </button>
+                    </div>
+                  </div>
+                <div class="card-body">
+                    <table *ngIf="plagiarisms" class="table table-bordered table-striped" datatable [dtOptions]="dtOptions"  >
+                        <thead>
+                        <tr>
+            
+                            <th scope="col" class=" text-center w-25  "><i class="fa fa-hashtag"></i></th>
+                            <th scope="col" class=" text-center w-25 " >Id</th>
+                            <th scope="col" class="text-center w-auto ">Status</th>
+                            <th scope="col" class="text-center w-auto ">Time</th>
+                            <th scope="col" class="text-center w-auto "># Submissions</th>
+                            <th scope="col" class="text-center w-auto ">View</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr *ngFor="let plagiarism of plagiarisms; let i=index">
+                            <th scope="row" class="text-center">
+                                <div class="small text-value">
+<!--                                                           <span class="number">1</span>-->
+                                    {{i+1}}
+                                </div>
+                            </th>
+                            <td class="text-center" >
+                                {{plagiarism.id}}
+                            </td>
+                          <td  class="text-center" >
+                                                        <ng-template [ngIf]="plagiarism.status==='PROCESSING'">
+                                                          <span [class.badge]="true"
+                                                                [class.badge-primary]="true"
+                                                                [hidden]="false">
+                                                              PROCESSING
+                                                          </span>
+                                                        </ng-template>
+                                                        <ng-template [ngIf]="plagiarism.status==='GENERATED'">
+                                                          <span [class.badge]="true"
+                                                                [class.badge-success]="true"
+                                                                [hidden]="false">
+                                                              Generated
+                                                          </span>
+                                                        </ng-template>
+                            </td>
+                            <td class="text-center" >
+                                {{plagiarism.time}}
+                            </td>
+                            <td class="text-center" >
+                                {{plagiarism.numberOfSubmissions}}
+                            </td>
+                            <td class="text-center" >
+                                <button aria-pressed="true" class="btn btn-pill btn-sm btn-primary" type="button" (click)="openPlagiarismReport(plagiarism.id)" ><i class="fa fa-eye"></i> View</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                    </table>
+                </div>
+                <div class="card-footer">
+                  <button type="button" class="btn btn-primary btn-pill pull-left" (click)="backButton()"><i class="fa fa-back"></i> Back </button>
+                </div>        
+            </div>
+        </div><!--/.col-->
+    </div><!--/.row-->
+</div>
+
