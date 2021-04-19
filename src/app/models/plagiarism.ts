@@ -7,6 +7,8 @@ export class Plagiarism{
     classroomSlug:String
     assignmentId:String
     questionId:String
+    time:String
+    numberOfSubmissions:Number;
     status:String
     results:PlagiarismResult
 }
