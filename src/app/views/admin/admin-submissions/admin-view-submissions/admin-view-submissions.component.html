@@ -1,0 +1,133 @@
+<div class="animated fadeIn">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    Submissions for {{assignmentName}}
+                </div>
+                <div class="card-body">
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                        <tr>
+                            <th scope="col" class=" text-center w-auto  "><i class="fa fa-hashtag"></i></th>
+                            <th scope="col" class=" text-center w-25 " >User</th>
+                            <th scope="col" class="text-center w-auto ">Started At</th>
+                            <th scope="col" class="text-center w-auto ">Completed At</th>
+                            <th scope="col" class="text-center w-auto ">Submission Status</th>
+                            <th scope="col" class="text-center w-auto ">Score</th>
+                            <th scope="col" class="text-center w-auto " >View</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr *ngFor="let submission of submissionDetails.recorded; let i=index">
+                            <th scope="row" class="text-center">
+                                <div class="small text-value">
+<!--                                                           <span class="number">1</span>-->
+                                    {{i+1}}
+                                </div>
+                            </th>
+                            <td>
+                                <div> {{submission.email}} </div>
+<!--                              Manan Mistry-->
+<!--                                                                                            <div class="small text-muted">-->
+<!--                                                                                                <span>Submitted On</span> |Jan 1, 2015-->
+<!--                                                                                            </div>-->
+<!--                                <div class="small text-muted">-->
+<!--                                    <span>On</span> | Submitted: {{submission.startOn|date:'short'}}-->
+<!--                                </div>-->
+                            </td>
+                            <td class="text-center">
+                              {{submission.startOn|date:'short'}}
+                            </td>
+                          <td class="text-center">
+                            {{submission.completedOn|date:'short'}}
+                          </td>
+                          <td  class="text-center" >
+                                                        <ng-template [ngIf]="submission.submissionStatus==='LATE_SUBMITTED'">
+                                                          <span [class.badge]="true"
+                                                                [class.badge-danger]="true"
+                                                                [hidden]="false">
+                                                              Late
+                                                          </span>
+                                                        </ng-template>
+                                                        <ng-template [ngIf]="submission.submissionStatus==='IN_PROGRESS'">
+                                                          <span [class.badge]="true"
+                                                                [class.badge-primary]="true"
+                                                                [hidden]="false">
+                                                              In Progress
+                                                          </span>
+                                                        </ng-template>
+                                                        <ng-template [ngIf]="submission.submissionStatus==='COMPLETED'">
+                                                          <span [class.badge]="true"
+                                                                [class.badge-success]="true"
+                                                                [hidden]="false">
+                                                              Completed
+                                                          </span>
+                                                        </ng-template>
+                            </td>
+                            <td class="text-center" >
+                                <div class="small text-value">
+                                </div>
+                              {{submission.currentScore}}/{{this.assignment.totalPoints}}
+                            </td>
+                            <td class="text-center" >
+                                <button aria-pressed="true" class="btn btn-pill btn-sm btn-primary" type="button" (click)="openAnswers(submission.email)" ><i class="fa fa-eye"></i> View</button>
+                            </td>
+                        </tr>
+                        <tr *ngIf="submissionDetails.recorded.length==0">
+                          <td scope="row" colspan="7" class="text-center"> No Submissions</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card-footer">
+                  <button type="button" class="btn btn-primary btn-pill pull-left" (click)="backButton()"><i class="fa fa-back"></i> Back </button>
+                </div>        
+            </div>
+            <div class="card">
+              <div class="card-header">
+                  Due Submissions                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+              </div>
+              <div class="card-body">
+                  <table class="table table-bordered table-striped">
+                      <thead>
+                      <tr>
+                          <th scope="col" class=" text-center w-auto  "><i class="fa fa-hashtag"></i></th>
+                          <th scope="col" class=" text-center w-75 " >User</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr *ngFor="let email of submissionDetails.due; let i=index">
+                          <th scope="row" class="text-center">
+                              <div class="small text-value">
+<!--                                                           <span class="number">1</span>-->
+                                  {{i+1}}
+                              </div>
+                          </th>
+                          <td>
+                              <div> {{email}} </div>
+<!--                              Manan Mistry-->
+<!--                                                                                            <div class="small text-muted">-->
+<!--                                                                                                <span>Submitted On</span> |Jan 1, 2015-->
+<!--                                                                                            </div>-->
+<!--                                <div class="small text-muted">-->
+<!--                                    <span>On</span> | Submitted: {{submission.startOn|date:'short'}}-->
+<!--                                </div>-->
+                          </td>
+
+                      </tr>
+                      <tr *ngIf="submissionDetails.due.length==0">
+                        <td scope="row" colspan="2" class="text-center"> No Due</td>
+                      </tr>
+                      </tbody>
+                  </table>
+              </div>
+              <div class="card-footer">
+                <button type="button" class="btn btn-primary btn-pill pull-left" (click)="backButton()"><i class="fa fa-back"></i> Back </button>
+              </div>        
+          </div>
+        </div><!--/.col-->
+    </div><!--/.row-->
+</div>
+
+

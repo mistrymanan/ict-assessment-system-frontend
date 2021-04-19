@@ -11,7 +11,7 @@ import { ClassroomUserResponse } from '../../models/ClassroomUserResponse';
 import { DataService } from '../../services/data.service';
 @Component({
   templateUrl: 'dashboard.component.html',
-  styleUrls: ['./dashboard.component.css']
+  styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
   statusBadge: Map<string, string>;

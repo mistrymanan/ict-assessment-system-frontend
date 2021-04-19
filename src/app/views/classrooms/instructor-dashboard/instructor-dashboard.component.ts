@@ -23,7 +23,7 @@ import { error } from 'protractor';
 @Component({
   selector: 'app-instructor-dashboard',
   templateUrl: './instructor-dashboard.component.html',
-  styleUrls: ['./instructor-dashboard.component.css']
+  styleUrls: ['./instructor-dashboard.component.scss']
 })
 export class InstructorDashboardComponent implements OnInit {
   addInstructorForm: FormGroup;
