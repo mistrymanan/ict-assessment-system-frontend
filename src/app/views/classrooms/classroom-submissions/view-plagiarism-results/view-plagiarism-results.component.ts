@@ -13,6 +13,7 @@ export class ViewPlagiarismResultsComponent implements OnInit {
   dtOptions: any = {};
   plagiarismId:string;
   refresh:boolean;
+  languageValue={java:"JAVA",c:"C",cpp:"CPP"};
   constructor(private plagiarismService:PlagiarismService,
     private route: ActivatedRoute,
     private router: Router) { }
@@ -43,6 +44,12 @@ export class ViewPlagiarismResultsComponent implements OnInit {
         this.refresh=false;
       }
     });
+  }
+  openGraph(id:string,language:string){
+    console.log(this.languageValue[language]);
+    const graphUrl="http://aas.ict.gnu.ac.in/api/plagiarisms/public/"+id+"/results/"+this.languageValue[language];
+    window.open("http://data2graph.assessment-system.tech?graph_url="
+    +encodeURIComponent(graphUrl),"_blank");
   }
 
 }
