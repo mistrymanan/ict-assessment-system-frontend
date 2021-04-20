@@ -14,6 +14,11 @@ const routes: Routes = [
     path: ':classroomSlug/assignments',
     loadChildren: ()=>import('../admin-assignments/admin-assignments.module').then(m=>m.AdminAssignmentsModule)
   },
+  {
+    path: ':classroomSlug/submissions',
+    loadChildren: ()=>import('../admin-submissions/admin-submissions.module').then(m=>m.AdminSubmissionsModule)
+  },
+
   // {
   //   path:'classroomslug',
   //   component:ClassroomDetailsComponent
