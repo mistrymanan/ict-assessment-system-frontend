@@ -15,6 +15,6 @@ spec:
     spec:
       containers:
         - name: assessment-system-frontend
-          image: mananmistry/ict-assessment-system-frontend:v3
+          image: mananmistry/ict-assessment-system-frontend:v4
           ports:
             - containerPort: 80
