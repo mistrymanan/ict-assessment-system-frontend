@@ -3,6 +3,10 @@ import { Routes, RouterModule } from '@angular/router';
 import { ViewSubmissionsAnswersComponent } from './view-submissions-answers/view-submissions-answers.component';
 import { ViewSubmissionsComponent } from './view-submissions/view-submissions.component';
 import {ViewAnswerComponent} from './view-answer/view-answer.component';
+import { ViewPlagiarismsComponent } from './view-plagiarisms/view-plagiarisms.component';
+import { data } from 'jquery';
+import { match } from 'assert';
+import { ViewPlagiarismResultsComponent } from './view-plagiarism-results/view-plagiarism-results.component';
 
 
 const routes: Routes = [
@@ -13,6 +17,21 @@ const routes: Routes = [
       title: 'View Submissions'
     }
   },
+  {
+    path: 'plagiarisms/:assignmentId/:questionId',
+    component: ViewPlagiarismsComponent,
+    data:{
+      title: 'Plagiarism Reports'
+    },
+  },
+  {
+    path: 'plagiarisms/:plagiarismId',
+    component: ViewPlagiarismResultsComponent,
+    data: {
+      title: 'Plagiarism Report'
+    }
+  }
+  ,
   {
     path: ':assignmentSlug/answers',
     component: ViewSubmissionsAnswersComponent,

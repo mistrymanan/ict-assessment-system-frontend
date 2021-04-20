@@ -5,7 +5,7 @@
       </div>
 <div class="card-body">
     <div class="animated fadeIn">
-<table class="table table-bordered table-striped">
+  <table *ngIf="adminuser" class="table table-bordered table-striped" datatable [dtOptions]="dtOptions" >
   <thead>
   <tr>
     <th class=" text-center w-auto "><i class="fa fa-hashtag"></i></th>
@@ -69,7 +69,7 @@
 <div class="text-left">
     
     <div class="form-check form-check-inline mr-3">
-      <div for="type">Access:</div> &nbsp;&nbsp;
+      <div for="type">Admin Access:</div> &nbsp;&nbsp;
       <label class="switch switch-3d switch-primary">
         <input type="checkbox" class="switch-input form-check-input" id="type"
                [checked]="user.isAdmin" (change)="toggleAdminAccess(user)">
@@ -80,7 +80,7 @@
 
     <div class="text-left">
       <div class="form-check form-check-inline mr-3">
-        <div for="type">ClassroomCreations:</div> &nbsp;&nbsp;
+        <div for="type">Classroom Creations:</div> 
         <label class="switch switch-3d switch-primary">
           <input type="checkbox" class="switch-input form-check-input" id="type"
                  [checked]="user.allowedClassroomCreation" (change)="toggleClassroomCreation(user)">
@@ -91,11 +91,6 @@
    
       </td>
 
-  </tr>
-  <tr>
-    <td scope="row" colspan="7" class="text-center">
-        
-    </td>
   </tr>
   </tbody>
 </table>

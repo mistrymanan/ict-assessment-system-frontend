@@ -8,12 +8,21 @@ import { UserService } from '../../../../services/user.service';
   styleUrls: ['./user-details.component.css']
 })
 export class UserDetailsComponent implements OnInit {
-  adminuser: AdminUser[]
+  adminuser: AdminUser[];
+  dtOptions: any = {};
   constructor(private adminuserservice:UserService) {
 
    }
-
   ngOnInit(): void {
+    this.dtOptions={
+      pagingType: 'full_numbers',
+      pageLength: 5,
+    lengthMenu : [5, 10, 25],
+      processing: true,
+      dom: 'lBfrtip',
+      buttons: ['copy', 'csv', 'excel', 'print']
+    };
+
     this.getAdminUser();
   
   }

@@ -12,13 +12,16 @@ import { MarkdownModule } from 'ngx-markdown';
 import { FormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
-
+import { DataTablesModule } from 'angular-datatables';
+import { ViewPlagiarismsComponent } from './view-plagiarisms/view-plagiarisms.component';
+import { ViewPlagiarismResultsComponent } from './view-plagiarism-results/view-plagiarism-results.component';
 
 
 @NgModule({
-  declarations: [ViewSubmissionsAnswersComponent, ViewSubmissionsComponent, ViewAnswerComponent],
+  declarations: [ViewSubmissionsAnswersComponent, ViewSubmissionsComponent, ViewAnswerComponent, ViewPlagiarismsComponent, ViewPlagiarismResultsComponent],
   imports: [
     CommonModule,
+    DataTablesModule,
     ClassroomSubmissionsRoutingModule,
     CodeEditorModule,
     CollapseModule,

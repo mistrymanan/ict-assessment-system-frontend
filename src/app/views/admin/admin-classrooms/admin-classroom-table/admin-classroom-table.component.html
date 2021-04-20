@@ -4,7 +4,7 @@
         <i class="fa fa-align-justify"></i> Classroom List
       </div>
       <div class="card-body">
-        <table class="table table-bordered">
+        <table *ngIf="adminclassroomdetails"  class="table table-bordered  table-striped " datatable [dtOptions]="dtOptions" >
           <thead>
             <tr>
               <th scope="col" class="text-center w-auto"><i class="fa fa-hashtag"></i></th> 
@@ -21,7 +21,7 @@
                   {{i+1}}
               </th> 
                 <td class="text-center">
-                  <div> <a [routerLink]="['../'+classroom.slug]" [state]="{title: classroom.title}">{{classroom.title}}</a></div>
+                  <div> <a [routerLink]="[classroom.slug]" [state]="{title: classroom.title}">{{classroom.title}}</a></div>
                 
                 </td>
               <td class="text-center">

@@ -4,7 +4,7 @@ metadata:
   name: assessment-system-frontend
 build:
   artifacts:
-  - image: us.gcr.io/my-project-1529917597814/assessment-system-frontend
+  - image: mananmistry/ict-assessment-system-frontend
 deploy:
   kubectl:
     manifests:
