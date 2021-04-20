@@ -4,7 +4,7 @@ export const navItems: INavData[] = [
   {
     name: 'Dashboard',
     url: '/dashboard',
-    icon: 'icon-speedometer',
+    icon: 'fas fa-columns',
   },
   {
     name: 'Code Editor',

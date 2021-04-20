@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Plagiarism } from '../../../../models/plagiarism';
 import { PlagiarismService } from '../../../../services/plagiarism.service';
-
+import { Location } from '@angular/common';
 @Component({
   selector: 'app-view-plagiarism-results',
   templateUrl: './view-plagiarism-results.component.html',
@@ -16,7 +16,8 @@ export class ViewPlagiarismResultsComponent implements OnInit {
   languageValue={java:"JAVA",c:"C",cpp:"CPP"};
   constructor(private plagiarismService:PlagiarismService,
     private route: ActivatedRoute,
-    private router: Router) { }
+    private router: Router,
+    private location:Location) { }
 
   ngOnInit(): void {
     this.dtOptions={
@@ -51,5 +52,7 @@ export class ViewPlagiarismResultsComponent implements OnInit {
     window.open("http://data2graph.assessment-system.tech?graph_url="
     +encodeURIComponent(graphUrl),"_blank");
   }
-
+  backButton(){
+    this.location.back();
+  }
 }

@@ -79,8 +79,20 @@ export class DefaultLayoutComponent {
   addAdminPanelTag(){
     const adminTag={
       name: 'Admin Panel',
-      url: '/admin/classrooms',
+      url: '',
       icon: 'fas fa-toolbox mr-1',
+      children:[
+          {
+          name:"Classrooms",
+          url:"/admin/classrooms",
+          icon:"fas fa-chalkboard-teacher"
+        },
+        {
+          name:"Users",
+          url:"/admin/users",
+          icon:"fas fa-users-cog"
+        }
+      ]
   }
   this.navItems.push(adminTag);
   }

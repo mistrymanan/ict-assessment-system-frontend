@@ -5,7 +5,7 @@
       <div class="card-header-actions mr-md-5" fxLayoutGap="20px" fxLayoutAlign="center center">
         
         <!-- <span class="badge badge-success">{{assignment.status}}</span> -->
-        <button class=" btn btn-primary btn-sm btn-pill" routerLink="../../submissions/{{assignmentslug}}">
+        <button class=" btn btn-primary btn-sm btn-pill" routerLink="../../submissions/{{adminassignment.slug}}">
           <i class="fa fa-book mr-1"></i>
           View Submissions &nbsp;
         </button>
@@ -88,13 +88,9 @@
           <td>
             {{question.totalPoints}}
           </td>
-          <td fxLayoutAlign="space-around center">
-           
-
-          </td>
         </tr>
         <tr>
-          <td scope="row" colspan="5" class="text-center"> No Questions</td>
+          <td *ngIf="adminassignment.questions.length===0"  scope="row" colspan="4" class="text-center"> No Questions</td>
         </tr>
         <!-- <tr>
           <th scope="row">2</th>

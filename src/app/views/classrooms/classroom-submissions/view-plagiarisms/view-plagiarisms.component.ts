@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Plagiarism } from '../../../../models/plagiarism';
 import { PlagiarismService } from '../../../../services/plagiarism.service';
-
+import { Location } from '@angular/common';
 @Component({
   selector: 'app-view-plagiarisms',
   templateUrl: './view-plagiarisms.component.html',
@@ -17,7 +17,8 @@ export class ViewPlagiarismsComponent implements OnInit {
   constructor(
     private plagiarismService:PlagiarismService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    public location: Location
     ) { }
 
   ngOnInit(): void {
@@ -49,5 +50,7 @@ export class ViewPlagiarismsComponent implements OnInit {
     openPlagiarismReport(id:string){
       this.router.navigate(["classrooms",this.classroomSlug,"submissions","plagiarisms",id]);
     }
-
+    backButton(){
+      this.location.back();
+    }
 }
